@@ -123,11 +123,10 @@
             <img class="header-arrow-down" src="../static/images/arrows.png" />
           </div>
           <div class="header-nav-item-list">
-            <a
-              target="_blank"
-              href="/subscription"
+            <nuxt-link
+              to="/subscription"
               class="header-nav-item-list-item"
-              >订阅首页</a
+              >订阅首页</nuxt-link
             >
             <a
               target="_blank"
