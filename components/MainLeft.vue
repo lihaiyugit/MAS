@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     oNitem(index, item) {
+      document.body.scrollTop = 0;
       this.current = index;
       console.log(index, "---");
       if (index == 1 || index == 2 || index == 3) {
@@ -104,13 +105,13 @@ export default {
     .active {
       background: linear-gradient(90deg, #f34250 0%, #f28a51 81%, #ff7d3b 100%);
       border-radius: 3px;
-      border-bottom: 0px;
+      border-bottom: 1px solid transparent;
       color: #ffffff;
     }
     li:hover {
       background: linear-gradient(90deg, #f34250 0%, #f28a51 81%, #ff7d3b 100%);
       border-radius: 3px;
-      border-bottom: 0px;
+      border-bottom: 1px solid transparent;
       color: #ffffff;
     }
   }

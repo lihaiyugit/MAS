@@ -1,8 +1,8 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
     <div class="header-container" :style="'width:' + $store.state.headerWidth">
       <div class="header-nav-wrapper">
-        <a target="_blank" href="/" class="header-nav-home">MAS</a>
+        <a href="/" class="header-nav-home">MAS</a>
         <div class="header-nav-item-wrapper">
           <div class="header-nav-item-entry">
             <span>企业服务</span>
@@ -10,108 +10,69 @@
           </div>
           <ul class="header-nav-item-list">
             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
-              >
+              <a target="_blank" href="" class="header-nav-item-list-item">
                 <span>大咖工作坊</span>
                 <img src="../static/images/left.png" alt="" />
               </a>
               <ul class="header-nav-item-list">
                 <li>
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>大咖一</span></a
                   >
                 </li>
                 <li>
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>线下公开课报名链接</span></a
                   >
                 </li>
               </ul>
             </li>
             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
-              >
+              <a target="_blank" href="" class="header-nav-item-list-item">
                 <span>市场活动</span>
               </a>
             </li>
             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
-              >
+              <a target="_blank" href="" class="header-nav-item-list-item">
                 <span>学术研究</span>
                 <img src="../static/images/left.png" alt="" />
               </a>
               <ul class="header-nav-item-list">
                 <li class="header-list-item">
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>大咖一</span></a
                   >
                 </li>
                 <li class="header-list-item">
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>直播回放</span></a
                   >
                 </li>
                 <li class="header-list-item">
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>上直播报名链接</span></a
                   >
                 </li>
                 <li class="header-list-item">
-                  <a
-                    target="_blank"
-                    href=""
-                    class="header-nav-item-list-item"
+                  <a target="_blank" href="" class="header-nav-item-list-item"
                     ><span>线下公开课报名链接</span></a
                   >
                 </li>
               </ul>
             </li>
-             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
+            <li class="header-list-item">
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 ><span>市场活动</span></a
               >
             </li>
             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 ><span>案例包装</span></a
               >
             </li>
 
             <li class="header-list-item">
-              <a
-                target="_blank"
-                href=""
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 ><span>更多产品</span></a
               >
             </li>
@@ -119,49 +80,38 @@
         </div>
         <div class="header-nav-item-wrapper">
           <div class="header-nav-item-entry">
-            <span>订阅</span>
-            <img class="header-arrow-down" src="../static/images/arrows.png" />
-          </div>
-          <div class="header-nav-item-list">
-            <nuxt-link
-              to="/subscription"
-              class="header-nav-item-list-item"
-              >订阅首页</nuxt-link
-            >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
-              >学术研究</a
-            >
-          </div>
-        </div>
-        <div class="header-nav-item-wrapper">
-          <div class="header-nav-item-entry">
-            <span>课程研究</span>
-            <img class="header-arrow-down" src="../static/images/arrows.png" />
-          </div>
-          <div class="header-nav-item-list">
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
-              >学术研究</a
-            >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
-              >案例包装</a
-            >
-          </div>
-        </div>
-        <div class="header-nav-item-wrapper">
-          <div class="header-nav-item-entry">
-            <span>活动</span>
+            <nuxt-link to="/subscription">订阅</nuxt-link>
             <!-- <img class="header-arrow-down" src="../static/images/arrows.png" /> -->
           </div>
-
+          <!-- <div class="header-nav-item-list">
+            <nuxt-link to="/subscription" class="header-nav-item-list-item"
+              >订阅首页</nuxt-link
+            >
+            <a target="_blank" href="" class="header-nav-item-list-item"
+              >学术研究</a
+            >
+          </div> -->
+        </div>
+        <div class="header-nav-item-wrapper">
+          <div class="header-nav-item-entry">
+            <nuxt-link to="/projectStudy">课程研究</nuxt-link>
+            <!-- <img class="header-arrow-down" src="../static/images/arrows.png" /> -->
+          </div>
+          <!-- :to="{name:'catalogue-id',params:{id:index+1,type:item}}" -->
+          <!-- <div class="header-nav-item-list">
+            <nuxt-link to="/projectStudy" class="header-nav-item-list-item"
+              >课程成果</nuxt-link
+            >
+            <a target="_blank" href="" class="header-nav-item-list-item"
+              >案例包装</a
+            >
+          </div> -->
+        </div>
+        <div class="header-nav-item-wrapper">
+          <div class="header-nav-item-entry">
+            <nuxt-link to="/activity">活动</nuxt-link>
+            <!-- <img class="header-arrow-down" src="../static/images/arrows.png" /> -->
+          </div>
         </div>
         <div class="header-nav-item-wrapper">
           <div class="header-nav-item-entry">
@@ -169,60 +119,37 @@
             <img class="header-arrow-down" src="../static/images/arrows.png" />
           </div>
           <div class="header-nav-item-list">
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >更多会员</a
             >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >商家社区</a
             >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >帮助中心</a
             >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >服务支持</a
             >
-
           </div>
         </div>
         <div class="header-nav-item-wrapper">
           <div class="header-nav-item-entry">
-            <span>作业服务</span>
-            <img class="header-arrow-down" src="../static/images/arrows.png" />
+            <nuxt-link to="/authorSrervices">作者服务</nuxt-link>
+            <!-- <img class="header-arrow-down" src="../static/images/arrows.png" /> -->
           </div>
-          <div class="header-nav-item-list">
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+          <!-- <div class="header-nav-item-list">
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >更多会员</a
             >
 
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >帮助中心</a
             >
-            <a
-              target="_blank"
-              href=""
-              class="header-nav-item-list-item"
+            <a target="_blank" href="" class="header-nav-item-list-item"
               >服务支持</a
             >
-
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="header-info-wrapper">
@@ -241,41 +168,23 @@
               />
             </div>
             <div class="header-nav-item-list">
-              <a
-                target="_blank"
-                href="/center/my-apps"
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 >个人信息</a
               >
-              <a
-                target="_blank"
-                href="/center/my-coupons"
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 >更换头像</a
               >
-              <a
-                target="_blank"
-                href="/center/my-orders"
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 >兴趣标签</a
               >
-              <a
-                target="_blank"
-                href="/center/my-mp"
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 >订单中心</a
               >
-              <a
-                target="_blank"
-                href="/notice-center"
-                class="header-nav-item-list-item"
+              <a target="_blank" href="" class="header-nav-item-list-item"
                 >我的订阅</a
               >
 
-              <a
-                href="javascript:void()"
-                class="header-nav-item-list-item"
-                id="log-out-button"
+              <a href="" class="header-nav-item-list-item" id="log-out-button"
                 >退出登录</a
               >
             </div>
@@ -292,14 +201,61 @@ export default {
     return {};
   },
   created() {},
+  mounted() {
+    // 开启滚动监听
+    window.addEventListener("scroll", this.handleScroll);
+  },
+
+  methods: {
+    // 滚动监听  滚动触发的效果写在这里
+    handleScroll() {
+      // 页面滚动高度
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // console.log(scrollTop);
+      // 可视区域高度
+      let clientHeight = document.documentElement.clientHeight;
+      // console.log(clientHeight);
+      // 距离至页面顶部的距离
+      // let offsetTop = document.querySelector('.details-info').offsetTop;
+      // console.log(offsetTop)
+      // let info = document.querySelector('.details-info').offsetHeight + 'px';
+      // console.log(info)
+      if (scrollTop >= clientHeight / 2) {
+        // this.isFixed = true;
+        // this.marginTop = document.querySelector('#fixedBar').offsetHeight + 'px';
+        this.$refs.header["style"].top = -37 + "px";
+        this.$refs.header["style"].transition = "all 1s ease 0s";
+        // this.$refs.header["className"] = "topHight";
+      } else {
+        // this.isFixed = false;
+        // this.marginTop = 0;
+        this.$refs.header["style"].top = 0 + "px";
+        //  this.$refs.header["className"] = "";
+        this.$refs.header["style"].transition = "all 0.8s ease 0s";
+      }
+    },
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
+  },
 };
 </script>
 <style scoped>
+.nuxt-link-active {
+  text-decoration: none;
+  color: #ed6d38;
+}
 .header {
-  position: relative;
-  background-color: #f2f3f5;
+  /* position: relative; */
+  width: 100%;
+  background: #f2f3f5;
   z-index: 1000;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
+  position: fixed;
+  top: 0px;
+  left: 0px;
 }
 
 .header .header-container {
@@ -327,7 +283,7 @@ export default {
   display: flex;
   height: 100%;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.65);
   font-weight: 400;
 }
 
@@ -344,12 +300,12 @@ export default {
   height: 37px;
   text-decoration: none;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.85);
   font-weight: 600;
 }
 
 .header .header-container .header-nav-wrapper .header-nav-home:hover {
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .header .header-container .header-info-wrapper {
@@ -477,7 +433,7 @@ export default {
   font-family: PingFangSC, PingFangSC-Regular;
   font-size: 12px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.85);
   line-height: 18px;
   text-decoration: none;
   white-space: nowrap;
@@ -528,7 +484,7 @@ export default {
   .header-nav-item-wrapper
   .header-nav-item-list
   .header-nav-item-list-item:hover {
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.85);
   background: #f0f0f0;
 }
 
@@ -543,7 +499,7 @@ export default {
   .header-container
   .header-nav-item-wrapper:hover
   .header-nav-item-entry {
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .header .hide {

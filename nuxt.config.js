@@ -13,28 +13,40 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: '/css/reset.css' },// 引入
+      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css' },
     ],
+    script: [
+      { src: '/js/qrcode.min.js' },
+      { src: 'https://code.jquery.com/jquery-3.6.0.min.js' },
+      // { src: '/js/lazyload.js' },
+    ]
 
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/static/css/reset.css',
     '@/static/css/common.less', // 全局样式添加在此处
     "element-ui/lib/theme-chalk/index.css",
-    '@/node_modules/vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css',
+    'swiper/css/swiper.css',
+
   ],
   //自定义进度条颜色
   loading: { color: '#ed6d38', height: '2px' }, // loading:false,//禁用
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "@/plugins/axios.js", // api请求封装
+
     // '@/plugins/router',//全局路由守卫配置
     // { src: '@plugins/lib-flexible.js', ssr: false },
-    { src: '@plugins/aos.js', ssr: false },
+    { src: "@/plugins/axios.js" }, // api请求封装
+    { src: '@/plugins/aos.js', ssr: false },
     { src: "@/plugins/vue-swiper.js", ssr: false },
-    { src: '@/plugins/element-ui.js', ssr: true }
+    { src: '@/plugins/element-ui.js', ssr: true },
+    { src: '@/plugins/vue-social-share', ssr: false },
+    { src: '@/plugins/filters.js', ssr: true },
+    { src: '@/plugins/lazyload', ssr: true },
+    { src: '@/plugins/pdf.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,16 +69,16 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     // 服务端访问前缀
-    // baseURL: "http://testapi.xuexiluxian.cn/",
+    // baseURL: """,
     // 客户端访问前缀
-    // browserBaseURL: "http://testapi.xuexiluxian.cn/",
+    // browserBaseURL: "",
     proxy: true,//是否允许跨域 开启代理
     prefix: '/', //表示给请求url加个前缀 /api
     credentials: true,// 表示跨域请求时是否需要使用凭证
   },
   proxy: {
     // '/api': {
-    //   target: 'http://testapi.xuexiluxian.cn/', // 目标服务器ip
+    //   target: '', // 目标服务器ip
     //   changeOrigin: true, // 表示是否跨域
     //   pathRewrite: {
     //     '^/api': '/',// 把 /api 替换成 /
@@ -75,6 +87,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [/^element-ui/],
     vendor: ['element-ui'],
     babel: {
       plugins: [
@@ -88,31 +101,49 @@ export default {
       ],
       comments: true
     },
+    extend(config, ctx) {
+      config.output.globalObject = 'this'
+      config.module.rules.push(
+        {
+          test: /\.pdf$/,
+          loader: 'url-loader'
+        }
+      )
+    }
+
+
 
     /**
       * 图片 进行 url 的打包
       */
-    loader: [
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: "url-loader",
-        query: {
-          limit: 10000,
-          name: "img/[name].[hash].[ext]"
-        }
-      },
-      {
-        test: /\.(ogg|mp3|mp4|wav|mpe?g)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
-      },
-      {
-        test: /\.less$/,
-        loaders: "style-loader!css-loader!less-loader"
-      }
-    ],
+    // loader: [
+    //   {
+    //     test: /\.(png|jpg|gif|svg)$/,
+    //     exclude: /node_modules/,
+    //     use: {
+    //       loader: 'url-loader',
+    //       options: {
+    //         limit: 10 * 1024,
+    //         outputPath: 'images',//决定打包出来的文件的路径 在 dist 下的路径
+    //         publicPath: '/images',//决定引用的文件的路径 publicPath+name = css中引用的url的路径
+    //         name: '[name].[ext]', //文件的名字
+    //       }
+    //     }
+
+
+    //   },
+    //   {
+    //     test: /\.(ogg|mp3|mp4|wav|mpe?g)$/i,
+    //     loader: 'file-loader',
+    //     options: {
+    //       name: '[path][name].[ext]'
+    //     }
+    //   },
+    //   {
+    //     test: /\.less$/,
+    //     loaders: "style-loader!css-loader!less-loader"
+    //   }
+    // ],
     // postcss:[
     //   require('postcss-px2rem')({
     //     remUnit:192 // 之所以写192 是因为设了pc最大宽度1920px
@@ -132,8 +163,17 @@ export default {
     //     );
     //   }
     // },
+  },
+  server: {
+    port: 3000,
+    host: '127.0.0.1'
+  },
+  router: {
+    // mode: 'hash',
+    // base: '/static/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
+    // middleware:'auth'//全局生效
+    scrollBehavior(to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
   }
-  // router:{
-  //   middleware:'auth'//全局生效
-  // }
 }

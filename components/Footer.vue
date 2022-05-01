@@ -20,7 +20,7 @@
             <li>
               <a>关于MAS</a>
             </li>
-            <li><a href="/about">关于我们</a></li>
+            <li><a href="">关于我们</a></li>
             <li><a>联系方式：400-819-1255</a></li>
           </ul>
         </div>
@@ -40,11 +40,11 @@
     <div class="footer-base">
       <div class="banxin footerB">
         <p>
-          <a href="/flsm" class="flsm">法律声明</a
-          ><a href="/yszc" class="flsm">隐私政策</a
+          <a href="" class="flsm">法律声明</a
+          ><a href="" class="flsm">隐私政策</a
           >北京元年诺亚舟咨询有限公司版权所有<a
             style="margin-left: 10px"
-            href="https://beian.miit.gov.cn/"
+            href=""
             class="record flsm"
             >京ICP备17056011号-2</a
           >京公网安备11010802027279

@@ -1,753 +1,864 @@
 <template>
-  <div class="content-container">
-    <div class="banxin content-container-main">
-      <div class="content-container-main-left">
-        <div class="banner">
-          <img src="@/static/images/way/dy-banner.png" alt="" />
-        </div>
-        <div class="subscription">
-          <ul class="ul">
-            <li
-              v-for="(item, index) in typeList"
-              :key="index"
-              v-on:click="typeClass(index)"
-              :class="{ active: index == typeCurrent }"
-            >
-              {{ item }}
-            </li>
-          </ul>
-          <div v-if="typeCurrent == 0">
-            <div class="ul-content">
-              <h1>文章订阅</h1>
-              <p>
-                CMAS文章阅读，有关注行业发展的热点资讯、有企业管理升级的工具、方法推荐，有行业专家观点看法，有成功企业的精益实践案例分享。完整的企业管理转型内容体系，助您读懂新形式下的企业管理。文章可统一购买，畅阅各模块及专题文章，也可通过各模块、专题单独订阅。
-              </p>
-              <div class="base">
-                <div class="base-l">
-                  <span>套餐版本：</span>
-                  <button
-                    class="month"
-                    v-for="(item, index) in priceList"
-                    :class="idx == index ? 'clickbtn' : ''"
-                    :key="index"
-                    @click="onSelect(index)"
-                  >
-                    <span>{{ item }}</span>
-                    <img
-                      src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                      alt=""
-                    />
-                  </button>
-                  <!-- <button class="month">
-                    <span>168/年</span>
-                    <img
-                      src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                      alt=""
-                    />
-                  </button> -->
-                </div>
-                <div class="base-r">
-                  <button class="subscribe">立即订阅</button>
-                </div>
-              </div>
-            </div>
-            <ul class="ul-content-ul">
-              <li
-                v-for="(item, index) in modulesList"
-                :key="index"
-                v-on:click="modulesClass(index)"
-                :class="{ 'content-active': index == modulesCurrent }"
-              >
-                {{ item }}
-              </li>
-            </ul>
-            <div class="ul-content">
-              <ul>
-                <li>
-                  <h1>学案例</h1>
-                  <p>
-                    CMAS平台汇聚了多位企业大咖，带来企业精益实践分享，关注不同行业成功企业精益管理要点，为您开展企业的精益管理提供参考。
-                  </p>
-                  <div class="base">
-                    <div class="base-l">
-                      <span>套餐版本：</span>
-                      <button class="year">
-                        <span>58/年</span>
-                        <img
-                          src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div class="base-r">
-                      <button class="subscribe">立即订阅</button>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <h1>找方法</h1>
-                  <p>
-                    新形势下，企业管理面临诸多挑战，如何找到符合企业管理升级路径，顺利实现企业管理转型，CMAS平台分享前沿理论、方法，新技术体系等，支持企业管理模式的探索与改进。
-                  </p>
-                  <div class="base">
-                    <div class="base-l">
-                      <span>套餐版本：</span>
-                      <button class="year">
-                        <span>88/年</span>
-                        <img
-                          src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div class="base-r">
-                      <button class="subscribe">立即订阅</button>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <h1>见大咖</h1>
-                  <p>
-                    CMAS专家观点输出各行业领袖、专家学者对于新形势下企业发展、企业管理的看法与建议，为各行业的发展建言献策。
-                  </p>
-                  <div class="base">
-                    <div class="base-l">
-                      <span>套餐版本：</span>
-                      <button class="year">
-                        <span>68/年</span>
-                        <img
-                          src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div class="base-r">
-                      <button class="subscribe">立即订阅</button>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <h1>淘资讯</h1>
-                  <p>
-                    CMAS聚焦企业管理，分享行业资讯，关注各行业发展的政策热点话题，深刻理解政策导向，清晰了解行业的发展动向。
-                  </p>
-                  <div class="base">
-                    <div class="base-l">
-                      <span>套餐版本：</span>
-                      <button class="year">
-                        <span>免费</span>
-                        <img
-                          src="https://img.alicdn.com/tfs/TB1VKCSehz1gK0jSZSgXXavwpXa-30-31.png"
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div class="base-r">
-                      <button class="subscribe">立即订阅</button>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="magazine" v-if="typeCurrent == 1">
-            <p class="describe">
-              《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章，专注数字技术驱动业财融合、企业转型的发展趋势，用案例启迪管理智慧。为您的企业管理、转型提供深刻、全面的借鉴与指导。
-            </p>
-            <div class="magazine-title">
-              <h2>管理会计研究</h2>
-              <div class="more-btn">查看更多</div>
-            </div>
-            <div class="magazine-gather">
-              <dl>
-                <nuxt-link :to="{ name: 'catalogue-zz' }">
-                  <dt>
-                    <div class="dt-img">
-                      <div class="cj"></div>
-                      <img src="@/static/images/zz.png" alt="" />
-                    </div>
-                    <h4>2022年第一期 总第22期</h4>
-                    <p>重塑核心能力</p>
-                  </dt>
-                  <dd>
-                    <a class="type" href="">平装</a>
-                    <a class="type" href="">电子刊</a>
-                  </dd>
-                </nuxt-link>
-              </dl>
-              <dl>
-                <nuxt-link :to="{ name: 'catalogue-zz' }">
-                  <dt>
-                    <div class="dt-img">
-                      <div class="cj"></div>
-                      <img src="@/static/images/zz.png" alt="" />
-                    </div>
-                    <h4>2022年第一期 总第22期</h4>
-                    <p>重塑核心能力</p>
-                  </dt>
-                  <dd>
-                    <a class="type" href="">平装</a>
-                    <a class="type" href="">电子刊</a>
-                  </dd>
-                </nuxt-link>
-              </dl>
-              <dl>
-                <nuxt-link :to="{ name: 'catalogue-zz' }">
-                  <dt>
-                    <div class="dt-img">
-                      <div class="cj"></div>
-                      <img src="@/static/images/zz.png" alt="" />
-                    </div>
-                    <h4>2022年第一期 总第22期</h4>
-                    <p>重塑核心能力</p>
-                  </dt>
-                  <dd>
-                    <a class="type" href="">平装</a>
-                    <a class="type" href="">电子刊</a>
-                  </dd>
-                </nuxt-link>
-              </dl>
-            </div>
-            <div class="magazine-title">
-              <h2>其他杂志s</h2>
-              <div class="more-btn">查看更多</div>
-            </div>
-            <div class="magazine-gather">
-              <dl>
-                <dt>
-                  <div class="dt-img">
-                    <div class="cj"></div>
-                    <img src="@/static/images/zz.png" alt="" />
-                  </div>
-                  <h4>2022年第一期 总第22期</h4>
-                  <p>重塑核心能力</p>
-                </dt>
-                <dd>
-                  <a class="type" href="">平装</a>
-                  <a class="type" href="">电子刊</a>
-                </dd>
-              </dl>
-              <dl>
-                <dt>
-                  <div class="dt-img">
-                    <div class="cj"></div>
-                    <img src="@/static/images/zz.png" alt="" />
-                  </div>
-                  <h4>2022年第一期 总第22期</h4>
-                  <p>重塑核心能力</p>
-                </dt>
-                <dd>
-                  <a class="type" href="">平装</a>
-                  <a class="type" href="">电子刊</a>
-                </dd>
-              </dl>
-              <dl>
-                <dt>
-                  <div class="dt-img">
-                    <div class="cj"></div>
-                    <img src="@/static/images/zz.png" alt="" />
-                  </div>
-                  <h4>2022年第一期 总第22期</h4>
-                  <p>重塑核心能力</p>
-                </dt>
-                <dd>
-                  <a class="type" href="">平装</a>
-                  <a class="type" href="">电子刊</a>
-                </dd>
-              </dl>
-            </div>
-          </div>
+  <div class="content-container banxin">
+    <div class="banner">
+      <div class="banner-main">
+        <div class="logo">M A S</div>
+        <img
+          src="../../static/images/way/book-icon.png"
+          class="book-icon"
+          alt=""
+        />
+        <h2>“阅”享，读懂企业管理</h2>
+        <p>新形式下的企业管理，深度文章、杂志，您想看的都在这里！</p>
+        <div class="send">
+          <span>我要投稿</span>
+          <img src="../../static/images/way/Outlined.png" alt="" />
         </div>
       </div>
-      <div class="content-container-main-right">
-        <div class="hot-recommend">
-          <h3>热点推荐</h3>
+    </div>
+    <div class="module">
+      <div class="module-title">
+        <h2>“阅享”文章订阅</h2>
+        <p>
+          CMAS文章阅读，有关注行业发展的热点资讯、有企业管理升级的工具、方法推荐，有行业专家观点看法，有成功企业的精益实践案例分享。完整的企业管理转型内容体系，助您读懂新形式下的企业管理。文章可统一购买，畅阅各模块及专题文章，也可通过各模块、专题单独订阅
+        </p>
+      </div>
+      <div class="article">
+        <div class="article-l">
+          <dl class="common-dl">
+            <dt>
+              <img src="../../static/images/way/book-l.png" alt="" />
+            </dt>
+            <dd>
+              <h6>看原创</h6>
+              <p>
+                企业管理的资讯、观点、案例、企业转型内容体系、管理升级工具方法，一键购买，一手掌握！打包拆分两种途径，满足不同文章订阅需求。
+              </p>
+              <el-radio-group v-model="radio">
+                <el-radio label="1"
+                  ><span>￥<span class="price">16.8</span>/月</span></el-radio
+                >
+                <el-radio label="2"
+                  ><span>￥<span class="price">168</span>/年</span></el-radio
+                >
+              </el-radio-group>
+              <button @click="buyFn()">立即订阅</button>
+            </dd>
+          </dl>
+        </div>
+        <div class="article-r">
           <ul>
-            <li v-for="(item, index) in recommend" :key="index">
-              <a href="">
-                <span
-                  v-if="index + 1 == 1"
-                  :style="`${index + 1 == 1 ? 'background: #ea3a3a' : ''}`"
-                  >{{ index + 1 }}</span
-                >
-                <span
-                  v-else-if="index + 1 == 2"
-                  :style="`${index + 1 == 2 ? 'background: #ed6d38' : ''}`"
-                  >{{ index + 1 }}</span
-                >
-                <span
-                  v-else-if="index + 1 == 3"
-                  :style="`${index + 1 == 3 ? 'background: #f4a74d' : ''}`"
-                  >{{ index + 1 }}</span
-                >
-                <span v-else>{{ index + 1 }}</span>
-                <p class="oneline">{{ item.title }}</p>
-              </a>
+            <li :style="{ 'background-image': 'url(' + img1 + ')' }">
+              <div class="title">
+                <h6>学案例</h6>
+                <a href="" class="more">查看更多</a>
+              </div>
+
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>跨越数十个热门行业</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>汇集数百位一流企业大咖</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
+            </li>
+            <li :style="{ 'background-image': 'url(' + img2 + ')' }">
+              <div class="title">
+                <h6>找方法</h6>
+                <a href="" class="more">查看更多</a>
+              </div>
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>寻转型方法</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>学新技术体系</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
+            </li>
+            <li :style="{ 'background-image': 'url(' + img3 + ')' }">
+              <div class="title">
+                <h6>淘咨询</h6>
+                <a href="" class="more">查看更多</a>
+              </div>
+
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>深刻理解政策导向</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>精准洞悉行业趋势</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
+            </li>
+            <li :style="{ 'background-image': 'url(' + img4 + ')' }">
+              <div class="title">
+                <h6>见大咖</h6>
+                <a href="" class="more">查看更多</a>
+              </div>
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>新时代的管理会计如何承担新使命</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>管理会计基础价值</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
+            </li>
+            <li :style="{ 'background-image': 'url(' + img5 + ')' }">
+              <div class="title">
+                <h6>数字化转型</h6>
+                <nuxt-link to="/digitization" class="more">查看更多</nuxt-link>
+              </div>
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>助力企业弄潮数字时代</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>直击数字化转型落地执行</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
+            </li>
+            <li :style="{ 'background-image': 'url(' + img6 + ')' }">
+              <div class="title">
+                <h6>管理会计</h6>
+                <nuxt-link to="/managerial" class="more">查看更多</nuxt-link>
+              </div>
+              <div class="info">
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>新时代的管理会计如何承担新使命</span>
+                </p>
+                <p>
+                  <img src="../../static/images/way/check.png" alt="" />
+                  <span>管理会计基础价值</span>
+                </p>
+              </div>
+              <div class="li-base">
+                <div class="price">
+                  <span class="icon">￥</span><span class="num">58</span>/年
+                </div>
+                <button @click="buyFn()">立即订阅</button>
+              </div>
             </li>
           </ul>
         </div>
-        <div class="sub-selections">
-          <div class="title">
-            <h3>杂志</h3>
-            <a href="" class="more">查看更多</a>
+      </div>
+    </div>
+    <div class="advert">
+      <img src="../../static/images/way/vip-advert.png" alt="" />
+    </div>
+    <div class="module" >
+      <div class="module-title">
+        <h2>“阅享”杂志订阅</h2>
+        <p>
+          《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章，专注数字技术驱动业财融合、企业转型的发展趋势，用案例启迪管理智慧。为您的企业管理、转型提供深刻、全面的借鉴与指导。
+        </p>
+      </div>
+      <div class="introduce">
+        <dl class="common-dl">
+          <dt>
+            <img src="../../static/images/way/book1.png" alt="" />
+          </dt>
+          <dd>
+            <h6>杂志订阅</h6>
+            <p>
+              CMAS文章阅读，有关注行业发展的热点资讯、有企业管理升级的工具、方法推荐，有行业专家观点看法，有成功企业的精益实践案例分享。完整的企业管理转型内容体系，助您读懂新形式下的企业管理。文章可统一购买，畅阅各模块及专题文章，也可通过各模块、专题单独订阅。
+            </p>
+            <div class="base">
+              <el-radio-group v-model="radio1">
+                <el-radio label="1"
+                  ><span>￥<span class="price">16.8</span>/月</span></el-radio
+                >
+                <el-radio label="2"
+                  ><span>￥<span class="price">168</span>/年</span></el-radio
+                >
+              </el-radio-group>
+              <button @click="buyFn()">立即订阅</button>
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div class="magazine" data-aos="fade-up">
+        <div class="magazine-title">
+          <h2>管理会计研究</h2>
+          <div class="more-btn">
+            <span>查看更多</span>
+            <img src="../../static/images/arrows-left.png" alt="" />
           </div>
-          <div class="magazine-img">
-            <img src="../../static/images/way/zz.png" alt="" />
-            <div class="point">新书</div>
+        </div>
+        <div class="magazine-gather">
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz01.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz02.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz03.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="magazine-title">
+          <h2>其他杂志</h2>
+          <div class="more-btn">
+            <span>查看更多</span>
+            <img src="../../static/images/arrows-left.png" alt="" />
           </div>
-          <div class="headline">2022年第一期｜总第567期</div>
-          <div class="contribute">我要投稿</div>
+        </div>
+        <div class="magazine-gather">
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz01.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz02.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz03.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-const recommend = [
-  { title: "疫情之下，企业如何应对？" },
-  { title: "基于“鲸鱼曲线”思想的全面预算管理" },
-  { title: "财务共享服务中心（FSSC）项目实施" },
-  { title: "践行管理会计 促进价值提升" },
-  { title: "苏宁和蒙牛:新零售的商业模式特征" },
-  { title: "基于“鲸鱼曲线”思想的全面预算管理" },
-  { title: "财务共享服务中心（FSSC）项目实施" },
-];
-const major = [
-  "成本管理",
-  "绩效管理",
-  "预算管理",
-  "财务管理",
-  "管理会计",
-  "人工智能",
-  "人工智能",
-];
-const typeList = ["文章订阅", "杂志订阅"];
-const modulesList = ["模块订阅", "专题订阅"];
+import AOS from 'aos';
 const priceList = ["16.8/月", "168/年"];
 export default {
   data() {
     return {
-      recommend,
-      major, //专业
-      current: 0, //专业默认索引
-      industryCurrent: 0, //行业默认索引
-      majorHeight: "40px", //专业默认高
-      industryHeight: "40px", //行业默认高
-      typeName: this.$route.query.type, //页面标题
-      typeList,
-      typeCurrent: 0,
-      modulesCurrent: 0,
-      modulesList,
-      idx: "0",
       priceList,
+      radio: "1",
+      radio1: "1",
+      img1: require("@/static/images/way/al.png"),
+      img2: require("@/static/images/way/way.png"),
+      img3: require("@/static/images/way/zx.png"),
+      img4: require("@/static/images/way/dk.png"),
+      img5: require("@/static/images/way/szh.png"),
+      img6: require("@/static/images/way/kj.png"),
     };
   },
   asyncData({ query, params }) {
     // this.$route.params.id
     // let res= await ArticleIdApi({id:query.id})
   },
+  mounted() {
+    AOS.init({
+      once: false,
+    });
+  },
   methods: {
-    //点击专业每一项
-    oNitem(index) {
-      this.current = index;
+    //点击立即订阅
+    buyFn() {
+      this.$router.push({
+        name: "subscription-pay",
+      });
     },
-    //点击行业每一项
-    industryItem(index) {
-      this.industryCurrent = index;
-    },
-    //点击专业全部
-    allFn() {
-      this.majorHeight = "auto";
-    },
-    //点击行业全部
-    industryAllFn() {
-      this.industryHeight = "auto";
-    },
-    modulesClass(index) {
-      this.modulesCurrent = index;
-    },
-    typeClass(index) {
-      this.typeCurrent = index;
-    },
-    onSelect(index) {
-      this.idx = index;
+    //点击杂志每一个
+    details() {
+      this.$router.push({
+        name: "catalogue-zz",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
+      });
     },
   },
 };
 </script>
 <style lang="less" scoped>
 .content-container {
-  margin: 18px 0px 40px 0px;
-  .content-container-main {
-    display: flex;
-    justify-content: space-between;
-    h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: rgba(0, 0, 0, 0.85);
-      line-height: 22px;
-    }
-    .content-container-main-left {
-      width: 715px;
-      .banner {
-        width: 100%;
-        height: 302px;
+  padding: 23px 0px 40px;
+  .banner {
+    width: 1100px;
+    height: 392px;
+    background-image: url(@/static/images/way/zz-bg.png);
+    background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
+    margin-bottom: 14px;
+    .banner-main {
+      padding-top: 52px;
+      .logo {
+        width: 55px;
+        height: 14px;
+        font-size: 14px;
+        font-family: ArialMT, ArialMT-Regular;
+        font-weight: 400;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 14px;
+        margin-left: 98px;
+        position: relative;
+        &:after {
+          content: "";
+          display: inline-block;
+          width: 72px;
+          height: 3px;
+          background: #0a0803;
+          position: absolute;
+          bottom: -8px;
+          left: 2px;
+        }
       }
-      .subscription {
-        width: 647px;
+      .book-icon {
+        width: 88px;
+        height: 25px;
+        margin: 38px 0px 7px 102px;
+      }
+      h2 {
+        font-size: 38px;
+        font-weight: 600;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 40px;
+        margin-left: 81px;
+        letter-spacing: 1px;
+        // font-family: PingFangSC, PingFangSC-Semibold;
+      }
+      p {
+        width: 530px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 24px;
+        margin: 23px 0px 60px 97px;
+      }
+      .send {
+        width: 122px;
+        height: 38px;
+        line-height: 37px;
         background: #ffffff;
-        border-radius: 6px;
-        margin-top: 22px;
-        padding: 36px 35px 2px 33px;
-        .ul {
-          display: flex;
-          align-items: center;
-          padding-bottom: 22px;
-          border-bottom: 1px solid #e7e7e7;
-          li {
-            border-radius: 2px;
-            font-size: 14px;
-            font-weight: 400;
-            text-align: center;
-            color: rgba(0, 0, 0, 0.85);
-            line-height: 22px;
-            margin-right: 32px;
-          }
-          .active {
-            padding: 5px 16px;
-            background: #ed6d38;
-            color: #ffffff;
+        border-radius: 19px;
+        display: flex;
+        justify-content: center;
+        margin-left: 94px;
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.85);
+        }
+        img {
+          width: 16px;
+          height: 16px;
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+  .module {
+    .common-dl {
+      dt {
+        height: 332px;
+        img {
+          border-radius: 0px;
+        }
+      }
+      dd {
+        background: linear-gradient(
+          324deg,
+          #ff7d3b 0%,
+          #f28a51 49%,
+          #f34250 130%
+        );
+        border-radius: 0px 0px 6px 6px;
+        padding: 35px 28px 22px;
+        h6 {
+          font-size: 24px;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 24px;
+        }
+        p {
+          height: 94px;
+          font-size: 14px;
+          font-weight: 400;
+          color: #ffffff;
+          line-height: 22px;
+          padding: 22px 0px 10px;
+          opacity: 0.9;
+        }
+        /deep/.el-radio__inner {
+          width: 14px;
+          height: 14px;
+          border: 2px solid #ffffff;
+          border-radius: 50%;
+          background-color: transparent;
+        }
+        /deep/.el-radio__inner::after {
+          width: 6px;
+          height: 6px;
+        }
+        /deep/.el-radio__label {
+          font-size: 10px;
+          padding-left: 6px;
+        }
+        /deep/.el-radio__input {
+          vertical-align: bottom;
+        }
+        span {
+          color: #ffffff;
+          font-weight: 400;
+        }
+        .price {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 22px;
+          letter-spacing: 1.2px;
+        }
+        button {
+          width: 88px;
+          height: 32px;
+          border-radius: 2px;
+          background: #ffffff;
+          font-size: 14px;
+          font-weight: 400;
+          color: #ed6d38;
+          line-height: 22px;
+          border: none;
+          margin-top: 37px;
+          display: block;
+        }
+      }
+    }
+    .module-title {
+      padding: 72px 0px 72px;
+      h2 {
+        font-size: 32px;
+        font-weight: 600;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 24px;
+        padding-bottom: 30px;
+      }
+      p {
+        width: 810px;
+        font-size: 13px;
+        font-weight: 400;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.45);
+        line-height: 20px;
+        margin: 0 auto;
+      }
+    }
+    .article {
+      display: flex;
+      .article-l {
+        min-width: 398px;
+        .common-dl {
+          dt {
+            height: 332px;
+            img {
+              border-radius: 0px;
+            }
           }
         }
-        .ul-content {
-          h1 {
-            font-size: 24px;
-            font-weight: 600;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.85);
-            line-height: 32px;
-            padding: 32px 0px 14px 0px;
+      }
+      .article-r {
+        ul {
+          display: flex;
+          flex-direction: row;
+          flex-flow: wrap;
+          li {
+            width: 284px;
+            height: 154px;
+            box-shadow: 0px 2px 14px 0px rgba(195, 195, 195, 0.29);
+            background-size: cover;
+            background-position: top left;
+            background-repeat: no-repeat;
+            margin: 0px 0px 16px 16px;
+            padding: 25px 18px 20px 28px;
+            border-radius: 6px;
+            .title {
+              display: flex;
+              justify-content: space-between;
+              h6 {
+                font-size: 20px;
+                font-weight: 600;
+                color: rgba(0, 0, 0, 0.85);
+                line-height: 24px;
+              }
+              .more {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.45);
+                display: none;
+              }
+            }
+            .info {
+              height: 84px;
+              margin: 10px 0px 5px;
+              p {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.45);
+                line-height: 28px;
+                img {
+                  width: 12px;
+                  height: 9px;
+                }
+              }
+            }
+
+            .li-base {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .price {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.85);
+                .icon {
+                  color: #ed6d38;
+                }
+                .num {
+                  font-size: 20px;
+                  color: #ed6d38;
+                  line-height: 22px;
+                  letter-spacing: 1.33px;
+                  margin-left: -3px;
+                }
+              }
+              button {
+                width: 88px;
+                height: 32px;
+                background: #ed6d38;
+                border-radius: 2px;
+                border: none;
+                font-size: 14px;
+                font-weight: 400;
+                color: #ffffff;
+                line-height: 22px;
+              }
+            }
+            &:hover .more {
+              display: block;
+            }
           }
+        }
+      }
+    }
+    .introduce {
+      margin-bottom: 74px;
+      .common-dl {
+        height: 250px;
+        display: flex;
+        dt {
+          width: 504px;
+          height: 100%;
+          img {
+            border-radius: 6px 0px 0px 6px;
+          }
+        }
+        dd {
+          background: linear-gradient(
+            268deg,
+            #ff7d3b 0%,
+            #f28a51 82%,
+            #f34250 140%
+          );
+          border-radius: 0px 6px 6px 0px;
           p {
-            font-size: 13px;
-            font-weight: 400;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.45);
-            line-height: 20px;
+            width: 551px;
           }
           .base {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding-top: 22px;
-            button {
-              padding: 5px 16px;
-              font-size: 14px;
-              font-weight: 400;
-              border-radius: 2px;
-              cursor: pointer;
-            }
-            .month {
-              background: #ffffff;
-              border: 1px solid #d9d9d9;
-              color: rgba(0, 0, 0, 0.65);
-              margin-right: 10px;
-              position: relative;
-              transition: all 0.3s ease !important;
-              img {
-                width: 16px;
-                height: 16px;
-                border-radius: 0px;
-                display: none;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-              }
-              &:hover {
-                background: #f0f0f0;
-                border: 1px solid rgba(0, 0, 0, 0.05);
-                color: #ed6d38;
-              }
-            }
-            .clickbtn {
-              border: 1px solid #ed6d38;
-              color: #ff6a00;
-              img {
-                display: block;
-              }
-            }
-            .year {
-              background: #ffffff;
-              border: 1px solid #ed6d38;
-              color: #ed6d38;
-              position: relative;
-              transition: all 0.3s ease !important;
-              img {
-                width: 16px;
-                height: 16px;
-                border-radius: 0px;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-              }
-            }
-            .base-l {
-              span {
-                font-size: 13px;
-                font-weight: 400;
-                text-align: left;
-                color: rgba(0, 0, 0, 0.65);
-                line-height: 20px;
-              }
-            }
-            .base-r {
-              .subscribe {
-                background: #ea3a3a;
-                color: #fff;
-                border: none;
-              }
-            }
+            margin-top: 10px;
           }
-          ul {
-            li {
-              width: 602px;
-              height: 213px;
-              border: 1px solid rgba(0, 0, 0, 0.1);
-              margin-bottom: 22px;
-              padding: 0px 22px;
-              .base {
-                padding-top: 30px;
-              }
-              &:last-child {
-                margin-bottom: 36px;
-              }
-            }
-          }
-        }
-        .ul-content-ul {
-          display: flex;
-          align-items: center;
-          margin: 56px 0px 30px;
-          li {
-            margin-right: 16px;
-            font-size: 14px;
-            font-weight: 400;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.45);
-            line-height: 24px;
-            padding-bottom: 5px;
-          }
-          .content-active {
-            font-weight: 600;
-            color: #ed6d38;
-            border-bottom: 2px solid #ed6d38;
-          }
-        }
-        .magazine {
-          .describe {
-            font-size: 13px;
-            font-weight: 400;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.45);
-            line-height: 20px;
-            padding: 36px 0px 56px;
-            border-top: 1px solid #e7e7e7;
-          }
-          .magazine-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            h2 {
-              font-size: 24px;
-              font-weight: 600;
-              color: rgba(0, 0, 0, 0.85);
-              line-height: 22px;
-            }
-            .more-btn {
-              width: 88px;
-              height: 32px;
-              background: #ffffff;
-              border: 1px solid #d9d9d9;
-              border-radius: 2px;
-              font-size: 14px;
-              font-weight: 400;
-              text-align: center;
-              color: rgba(0, 0, 0, 0.65);
-              line-height: 30px;
-              cursor: pointer;
-              &:hover {
-                background: #f2f4f5;
-                border: 1px solid #e4e6e7;
-                border-radius: 2px;
-                color: rgba(0, 0, 0, 0.85);
-              }
-            }
-          }
-          .magazine-gather {
-            display: flex;
-            dl {
-              width: 176px;
-              margin: 35px 57px 55px 0px;
-              dt {
-                .dt-img {
-                  width: 154px;
-                  height: 203px;
-                  border: 1px solid #eaeaea;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  position: relative;
-                  img {
-                    width: 152px;
-                    height: 198px;
-                    border-radius: 0px;
-                  }
-                }
-                h4 {
-                  font-size: 16px;
-                  font-weight: 600;
-                  text-align: left;
-                  color: rgba(0, 0, 0, 0.85);
-                  line-height: 24px;
-                  margin: 16px 0px 6px;
-                }
-                p {
-                  font-size: 13px;
-                  font-weight: 400;
-                  text-align: left;
-                  color: rgba(0, 0, 0, 0.45);
-                  line-height: 20px;
-                }
-              }
-              dd {
-                margin-top: 30px;
-                .type {
-                  padding: 0px 8px;
-                  background: #fafafa;
-                  border: 1px solid #d9d9d9;
-                  border-radius: 2px;
-                  font-size: 12px;
-                  font-weight: 400;
-                  text-align: center;
-                  color: rgba(0, 0, 0, 0.65);
-                  line-height: 20px;
-                  display: inline-block;
-                  &:nth-child(1) {
-                    margin-right: 10px;
-                  }
-                  &:hover {
-                    background: #ed6d38;
-                    border: 1px solid #ed6d38;
-                    color: #fff;
-                  }
-                }
-              }
-              &:hover .cj {
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.25);
-                position: absolute;
-                left: 0;
-                top: 0;
-                z-index: 99;
-              }
-              &:nth-child(3n) {
-                margin-right: 0px;
-              }
-            }
+          button {
+            margin-top: 0px;
+            display: initial;
           }
         }
       }
     }
-    .content-container-main-right {
-      width: 346px;
-      .title {
+    .magazine {
+      .magazine-title {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        .more {
-          font-size: 14px;
-          font-weight: 400;
-          color: rgba(0, 0, 0, 0.45);
-          line-height: 22px;
+        align-items: center;
+        h2 {
+          font-size: 24px;
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.85);
+          line-height: 24px;
         }
-      }
-      .hot-recommend {
-        width: 306px;
-        height: 262px;
-        background: #ffffff;
-        border-radius: 6px;
-        padding: 20px;
-        ul {
-          margin-top: 16px;
-          li a {
-            display: flex;
-            margin-bottom: 18px;
-            span {
-              display: inline-block;
-              min-width: 16px;
-              height: 16px;
-              background: #bfbfbf;
-              border-radius: 2px;
-              font-size: 14px;
-              font-weight: 400;
-              text-align: center;
-              color: #ffffff;
-              line-height: 16px;
-            }
-            p {
-              width: 271px;
-              font-size: 14px;
-              font-weight: 400;
-              color: rgba(0, 0, 0, 0.85);
-              line-height: 14px;
-              margin-left: 7px;
-            }
-          }
-          li:nth-last-child(1) {
-            margin-bottom: 0px;
-          }
-        }
-      }
-
-      .sub-selections {
-        width: 306px;
-        height: 311px;
-        background: #ffffff;
-        border-radius: 6px;
-        padding: 20px;
-        margin-top: 22px;
-        .magazine-img {
-          margin: 22px 0px;
-          width: 305px;
-          height: 146px;
-          position: relative;
-        }
-        .headline {
+        .more-btn {
+          display: flex;
+          align-items: center;
           font-size: 14px;
           font-weight: 400;
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
-          line-height: 28px;
+          line-height: 22px;
+          cursor: pointer;
+          img {
+            width: 13px;
+            height: 8px;
+            margin-left: 5px;
+          }
         }
-        .contribute {
-          width: 306px;
-          height: 32px;
-          border: 1px solid #ed6d38;
-          border-radius: 2px;
-          font-size: 14px;
-          font-weight: 400;
-          text-align: center;
-          color: #ed6d38;
-          line-height: 30px;
-          margin-top: 28px;
-        }
-        .contribute:hover {
-          background: #ed6d38;
-          color: #fff;
+      }
+
+      .magazine-gather {
+        display: flex;
+        dl {
+          width: 178px;
+          margin: 46px 52px 68px 0px;
+          dt {
+            .dt-img {
+              width: 100%;
+              height: 178px;
+              img {
+                border-radius: 0px;
+              }
+            }
+            h4 {
+              width: 100%;
+              font-size: 16px;
+              font-weight: 600;
+              text-align: left;
+              color: rgba(0, 0, 0, 0.85);
+              line-height: 24px;
+              margin: 20px 0px 6px;
+            }
+            p {
+              font-size: 13px;
+              font-weight: 400;
+              text-align: left;
+              color: rgba(0, 0, 0, 0.45);
+              line-height: 20px;
+            }
+          }
+          dd {
+            margin-top: 36px;
+            .type {
+              padding: 0px 8px;
+              background: #fafafa;
+              border: 1px solid #d9d9d9;
+              border-radius: 2px;
+              font-size: 12px;
+              font-weight: 400;
+              text-align: center;
+              color: rgba(0, 0, 0, 0.65);
+              line-height: 20px;
+              display: inline-block;
+              margin-right: 10px;
+            }
+            .price {
+              font-size: 20px;
+              font-weight: 400;
+              text-align: left;
+              color: #ed6d38;
+              line-height: 22px;
+              letter-spacing: 1.33px;
+              padding-top: 20px;
+              .price-icon {
+                font-size: 14px;
+              }
+              span:nth-child(2) {
+                margin-left: -4px;
+              }
+            }
+          }
+          &:nth-child(5n) {
+            margin-right: 0px;
+          }
         }
       }
     }
+  }
+  .advert {
+    height: 86px;
+    margin-top: 19px;
   }
 }
 </style>

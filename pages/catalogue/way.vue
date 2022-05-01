@@ -238,7 +238,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  margin: 18px 0px 40px 0px;
+  padding: 18px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;

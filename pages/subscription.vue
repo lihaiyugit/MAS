@@ -13,3 +13,10 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.main_container {
+  background-color: #fff;
+   min-height: 346px;
+}
+</style>
+

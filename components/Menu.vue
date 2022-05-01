@@ -131,37 +131,37 @@
             <div class="header-nav-item-list">
               <a
                 target="_blank"
-                href="/center/my-apps"
+                href=""
                 class="header-nav-item-list-item"
                 >个人信息</a
               >
               <a
                 target="_blank"
-                href="/center/my-coupons"
+                href=""
                 class="header-nav-item-list-item"
                 >更换头像</a
               >
               <a
                 target="_blank"
-                href="/center/my-orders"
+                href=""
                 class="header-nav-item-list-item"
                 >兴趣标签</a
               >
               <a
                 target="_blank"
-                href="/center/my-mp"
+                href=""
                 class="header-nav-item-list-item"
                 >订单中心</a
               >
               <a
                 target="_blank"
-                href="/notice-center"
+                href=""
                 class="header-nav-item-list-item"
                 >我的订阅</a
               >
 
               <a
-                href="javascript:void()"
+                href=""
                 class="header-nav-item-list-item"
                 id="log-out-button"
                 >退出登录</a
@@ -269,7 +269,6 @@ export default {
   position: relative;
   background-color: #f2f3f5;
   z-index: 1000;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
 .header .header-container {

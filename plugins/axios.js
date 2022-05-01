@@ -1,14 +1,18 @@
 import config from '@/config';
-export default ({ $axios,store
-}) =>{
-  $axios.defaults.timeout = 500000;
-  $axios.defaults.headers['Content-Type'] = 'application/json';
+export default ({ app, $axios, store, redirect }, inject) => {
+  //项目地址
   $axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
   console.log($axios.defaults.baseURL, '$axios.defaults.baseURL')
-  // Request拦截器：设置Token
+  $axios.defaults.timeout = 500000;
+  $axios.defaults.withCredentials = true;
+  $axios.defaults.headers['Content-Type'] = 'application/json';
+  // Request请求拦截器：设置Token
   $axios.onRequest((config) => {
     // TODO 使用Vuex存储Token，并做持久化处理
     // config.headers['X-Token'] = store.state.token
+    // 本项目token 存储在vuex里面
+    // const token = store.state.user.token
+    // if (token) config.headers.token = token
   })
   // // Error拦截器：出现错误的时候被调用，根据状态码做对应判断并显示全局Message
   $axios.onError((error) => {

@@ -63,8 +63,7 @@
           <div class="more-btn">查看更多</div>
         </div>
         <div class="magazine-gather">
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -77,10 +76,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -93,10 +90,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -109,10 +104,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -125,17 +118,15 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
+            </dl>
         </div>
         <div class="clear"></div>
-        <div class="magazine-title">
+        <div class="magazine-title" data-aos="fade-up">
           <h2>其他杂志</h2>
           <div class="more-btn">查看更多</div>
         </div>
-        <div class="magazine-gather">
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+        <div class="magazine-gather" data-aos="fade-up">
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -148,10 +139,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -164,10 +153,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -180,10 +167,8 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
-          <dl>
-            <nuxt-link :to="{ name: 'catalogue-zz' }">
+            </dl>
+            <dl @click="details">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -196,8 +181,7 @@
                 <a class="type" href="">平装</a>
                 <a class="type" href="">电子刊</a>
               </dd>
-            </nuxt-link>
-          </dl>
+            </dl>
         </div>
         <div class="clear"></div>
       </div>
@@ -240,6 +224,15 @@ export default {
     // let res= await ArticleIdApi({id:query.id})
   },
   methods: {
+    details() {
+      this.$router.push({
+        name: "catalogue-zz",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
+      });
+    },
     //点击专业每一项
     oNitem(index) {
       this.current = index;
@@ -261,7 +254,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  margin: 18px 0px 40px 0px;
+  padding: 18px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;

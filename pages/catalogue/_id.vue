@@ -15,15 +15,15 @@
               src="../../static/images/way/case_banner.png"
               alt=""
             />
-             <img
+            <img
               v-else-if="$route.query.id == 3"
               src="../../static/images/way/master.png"
               alt=""
             />
             <img v-else src="../../static/images/way/case_banner.png" alt="" />
           </div>
-          <div class="list-box">
-            <div class="major-container"  v-if="$route.query.id != 3">
+          <div class="list-box" >
+            <div class="major-container" v-if="$route.query.id != 3">
               <span class="major-container-left">专业：</span>
               <ul
                 class="major-container-mid oneline"
@@ -38,7 +38,7 @@
                   {{ item }}
                 </li>
               </ul>
-              <span class="major-container-right" @click="allFn">全部</span>
+              <span class="major-container-right" @click.stop="allFn">全部</span>
             </div>
             <div class="major-container industry" v-if="$route.query.id != 3">
               <span class="major-container-left">行业：</span>
@@ -48,7 +48,7 @@
               >
                 <li
                   v-for="(item, index) in major"
-                  @click="industryItem(index)"
+                  @click="industryItem.prevent(index)"
                   :key="index"
                   :class="industryCurrent == index ? 'checked' : ''"
                 >
@@ -162,8 +162,8 @@
           <div class="hot-recommend">
             <h3>热点推荐</h3>
             <ul>
-              <li v-for="(item, index) in recommend" :key="index">
-                <a href="">
+              <li v-for="(item, index) in recommend" :key="index" >
+                <a @click="goDetail(index+1)">
                   <span
                     v-if="index + 1 == 1"
                     :style="`${index + 1 == 1 ? 'background: #ea3a3a' : ''}`"
@@ -255,6 +255,12 @@ export default {
     // let res= await ArticleIdApi({id:query.id})
   },
   methods: {
+    //跳转到文章详情
+    goDetail(id){
+      this.$router.push({
+        path:`/subscription/${id}`
+      })
+    },
     //点击专业每一项
     oNitem(index) {
       this.current = index;
@@ -265,18 +271,27 @@ export default {
     },
     //点击专业全部
     allFn() {
-      this.majorHeight = "auto";
+      if(this.majorHeight == "auto"){
+        this.majorHeight='40px'
+      }else{
+        this.majorHeight = "auto"
+      }
     },
     //点击行业全部
     industryAllFn() {
-      this.industryHeight = "auto";
+      if(this.industryHeight == "auto"){
+        this.industryHeight='40px'
+        console.log('==')
+      }else{
+        this.industryHeight = "auto"
+      }
     },
   },
 };
 </script>
 <style lang="less" scoped>
 .content-container {
-  margin: 18px 0px 40px 0px;
+  padding: 18px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;
@@ -305,7 +320,7 @@ export default {
           text-align: left;
           line-height: 22px;
           border-bottom: 1px dashed #e9e9e9;
-          padding-top:24px;
+          padding-top: 24px;
           .major-container-left {
             min-width: 42px;
             color: rgba(0, 0, 0, 0.85);
@@ -539,7 +554,6 @@ export default {
           width: 305px;
           height: 146px;
           position: relative;
-
         }
         .headline {
           font-size: 14px;

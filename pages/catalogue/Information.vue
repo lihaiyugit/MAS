@@ -185,11 +185,11 @@
               </ul>
             </div>
           </div>
-          <div class="three-advert">
+          <div class="three-advert" data-aos="fade-up">
             <div class="advert-box-left"></div>
             <div class="advert-box-right"></div>
           </div>
-          <div class="policy">
+          <div class="policy" data-aos="fade-up">
             <div class="title-box">
               <div class="top">
                 <h2>政策解读</h2>
@@ -229,7 +229,7 @@
               </ul>
             </div>
           </div>
-          <div class="master">
+          <div class="master" data-aos="fade-up">
             <div class="title-box">
               <div class="top">
                 <h2>大咖</h2>
@@ -304,7 +304,7 @@
             <h3>热点推荐</h3>
             <ul>
               <li v-for="(item, index) in recommend" :key="index">
-                <a href="">
+                <a @click="goDetail(index + 1)">
                   <span
                     v-if="index + 1 == 1"
                     :style="`${index + 1 == 1 ? 'background: #ea3a3a' : ''}`"
@@ -343,7 +343,6 @@
                   </dt>
                   <dd>数字化企业与管理会计体系转型研讨会</dd>
                 </dl>
-
               </a>
               <a href="https://www.chinamas.cn/hd/16">
                 <dl>
@@ -369,7 +368,7 @@
               </a>
             </div>
           </div>
-          <div class="sub-selections">
+          <div class="sub-selections" data-aos="fade-up">
             <div class="title">
               <h3>杂志</h3>
               <a href="" class="more">查看更多</a>
@@ -422,6 +421,12 @@ export default {
     // let res= await ArticleIdApi({id:query.id})
   },
   methods: {
+    //跳转到文章详情
+    goDetail(id) {
+      this.$router.push({
+        path: `/subscription/${id}`,
+      });
+    },
     //点击专业每一项
     oNitem(index) {
       this.current = index;
@@ -443,7 +448,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  margin: 18px 0px 40px 0px;
+  padding: 18px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;
@@ -482,7 +487,8 @@ export default {
         }
         .line {
           width: 82px;
-          border: 1px solid #ed6d38;
+          height: 2px;
+          background: #ed6d38;
           margin-top: -2px;
         }
       }

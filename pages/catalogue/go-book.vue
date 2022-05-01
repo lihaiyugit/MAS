@@ -57,334 +57,346 @@
           <h2>管理类</h2>
         </div>
         <div class="magazine-gather">
-          <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrapper">
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-          </swiper>
-          <!-- Optional controls -->
-          <div class="btn-left">
-            <img
-              class="left01"
-              src="../../static/images/way/left01.png"
-              alt=""
-            />
-            <img class="left1" src="../../static/images/way/left1.png" alt="" />
-          </div>
-          <div class="btn-right">
-            <img
-              class="right02"
-              src="../../static/images/way/right02.png"
-              alt=""
-            />
-            <img
-              class="right2"
-              src="../../static/images/way/right2.png"
-              alt=""
-            />
-          </div>
+            <swiper
+              :options="swiperOption"
+              ref="mySwiper"
+              class="swiper-wrapper"
+            >
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+            </swiper>
+            <!-- Optional controls -->
+            <div class="btn-left">
+              <img
+                class="left01"
+                src="../../static/images/way/left01.png"
+                alt=""
+              />
+              <img
+                class="left1"
+                src="../../static/images/way/left1.png"
+                alt=""
+              />
+            </div>
+            <div class="btn-right">
+              <img
+                class="right02"
+                src="../../static/images/way/right02.png"
+                alt=""
+              />
+              <img
+                class="right2"
+                src="../../static/images/way/right2.png"
+                alt=""
+              />
+            </div>
         </div>
         <div class="clear"></div>
-        <div class="magazine-title">
+        <div class="magazine-title" data-aos="fade-up">
           <h2>技术类</h2>
         </div>
-        <div class="magazine-gather">
-          <swiper
-            :options="swiperTwoOption"
-            ref="myTwoSwiper"
-            class="swiper-wrapper"
-          >
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl>
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-          </swiper>
-          <!-- Optional controls -->
-          <div class="btn-left-two">
-            <img
-              class="left01"
-              src="../../static/images/way/left01.png"
-              alt=""
-            />
-            <img class="left1" src="../../static/images/way/left1.png" alt="" />
-          </div>
-          <div class="btn-right-two">
-            <img
-              class="right02"
-              src="../../static/images/way/right02.png"
-              alt=""
-            />
-            <img
-              class="right2"
-              src="../../static/images/way/right2.png"
-              alt=""
-            />
-          </div>
+        <div class="magazine-gather" data-aos="fade-up">
+            <swiper
+              :options="swiperTwoOption"
+              ref="myTwoSwiper"
+              class="swiper-wrapper"
+            >
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+              <swiper-slide>
+                <dl>
+                  <dt>
+                    <img
+                      class="dt-img"
+                      src="@/static/images/way/book.png"
+                      alt=""
+                    />
+                    <span>￥ 45</span>
+                    <h4>智能管理会计</h4>
+                    <p>作者：韩向东</p>
+                  </dt>
+                  <dd>
+                    <span>出版社：xxxxxxxx</span>
+                  </dd>
+                </dl>
+              </swiper-slide>
+            </swiper>
+            <!-- Optional controls -->
+            <div class="btn-left-two">
+              <img
+                class="left01"
+                src="../../static/images/way/left01.png"
+                alt=""
+              />
+              <img
+                class="left1"
+                src="../../static/images/way/left1.png"
+                alt=""
+              />
+            </div>
+            <div class="btn-right-two">
+              <img
+                class="right02"
+                src="../../static/images/way/right02.png"
+                alt=""
+              />
+              <img
+                class="right2"
+                src="../../static/images/way/right2.png"
+                alt=""
+              />
+            </div>
         </div>
         <div class="clear"></div>
       </div>
@@ -392,6 +404,7 @@
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 const recommend = [
   { title: "疫情之下，企业如何应对？疫情之下，企业如何应对？", price: "50" },
   { title: "疫情之下，企业如何应对？", price: "40" },
@@ -457,7 +470,10 @@ export default {
       isShow: true, //是否展示更多按钮
     };
   },
-
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   asyncData({ query, params }) {
     // this.$route.params.id
     // let res= await ArticleIdApi({id:query.id})
@@ -466,13 +482,13 @@ export default {
     };
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    },
+    // swiper() {
+    //   return this.$refs.mySwiper.swiper;
+    // },
   },
   mounted() {
     // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
-    console.log("this is current swiper instance object", this.swiper);
+    // console.log("this is current swiper instance object", this.swiper);
     // this.swiper.slideTo(3, 1000, false);
   },
   methods: {
@@ -502,7 +518,7 @@ export default {
 </script>
 <style lang="less">
 .content-container {
-  margin: 18px 0px 40px 0px;
+  padding: 18px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;
@@ -772,7 +788,7 @@ export default {
         position: absolute;
         top: 28%;
         left: 0px;
-        z-index: 999;
+        z-index: 997;
       }
       .btn-right,
       .btn-right-two {

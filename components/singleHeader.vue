@@ -1,13 +1,19 @@
 
-
-
 <template>
-  <div class="sub-header">
+  <div class="sub-header" ref="sigleheader">
     <div class="banxin sub-header-main">
       <div class="sub-header-main-left">
-        <img src="@/static/images/logo.png" alt="" />
+        <nuxt-link to="/">
+          <img src="@/static/images/logo.png" alt="" />
+        </nuxt-link>
         <ul>
-          <li v-for="item in tabList" :key="item">{{ item }}</li>
+          <li
+            v-for="(item, index) in tabList"
+            :key="item"
+            @click="oNitem(index, item)"
+          >
+            {{ item }}
+          </li>
         </ul>
       </div>
       <div class="sub-header-main-right">
@@ -25,32 +31,119 @@ const tabList = [
   "听课程",
   "找方法",
   "学案例",
-  "淘咨讯",
   "见大咖",
   "读杂志",
+  "逛书店",
+  "淘资讯",
   "看专题",
 ];
 export default {
   data() {
     return {
       tabList,
+      current: 0,
     };
   },
   watch: {},
+  mounted() {
+    // 开启滚动监听
+    window.addEventListener("scroll", this.handleScroll);
+  },
+
   methods: {
+    // 滚动监听  滚动触发的效果写在这里
+    handleScroll() {
+      // 页面滚动高度
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // 可视区域高度
+      let clientHeight = document.documentElement.clientHeight;
+      if (scrollTop >= clientHeight / 2) {
+        // this.defaultStyle = this.fixed;
+        this.$refs.sigleheader["style"].top = 0 + "px";
+        this.$refs.sigleheader["style"].transition = "all 0.8s ease 0s";
+      } else {
+        // this.defaultStyle = this.isfixed;
+        this.$refs.sigleheader["style"].top = 37 + "px";
+        this.$refs.sigleheader["style"].transition = "all 0.8s ease 0s";
+      }
+    },
     onSearch(value) {
       console.log(value, "value");
     },
+    oNitem(index, item) {
+      document.body.scrollTop = 0;
+      this.current = index;
+      console.log(index, "---");
+      if (index == 0) {
+        this.$router.push({
+          name: "index",
+          // query: { id: index, type: item },
+          // params: {
+          //   type: item,
+          // },
+        });
+      } else if (index == 1 || index == 2 || index == 3) {
+        // this.$router.push("/home/way");
+        this.$router.push({
+          name: "catalogue-id",
+          query: { id: index, type: item },
+          // params: {
+          //   type: item,
+          // },
+        });
+      } else if (index == 4) {
+        this.$router.push({
+          name: "catalogue-magazines",
+          query: { id: index, type: item },
+          // params: {
+          //   type: item,
+          // },
+        });
+      } else if (index == 5) {
+        this.$router.push({
+          name: "catalogue-go-book",
+          query: { id: index, type: item },
+          // params: {
+          //   type: item,
+          // },
+        });
+      } else if (index == 6) {
+        this.$router.push({
+          name: "catalogue-Information",
+          query: { id: index, type: item },
+          // params: {
+          //   type: item,
+          // },
+        });
+      }
+      // if (index == 2) {
+      //   this.$router.push("/home/case");
+      // }
+      // if (index == 3) {
+      //   this.$router.push("/home/master");
+      // }
+    },
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>
 <style lang="less" scoped>
 .sub-header {
+  width: 100%;
   height: 84px;
   background: #ffffff;
-  border-top: 1px solid #e7e7e7;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 37px;
+  left: 0px;
+  z-index: 998;
   .sub-header-main {
     display: flex;
     justify-content: space-between;

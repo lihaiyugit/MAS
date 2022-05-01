@@ -1,6 +1,12 @@
 <template>
   <div class="main_container">
     <singleHeader :typeName="typeName" />
+    <div class="crumbs">
+      <div class="banxin crumbs-item">
+        首页 > 订阅 > 杂志订阅 >
+        <span>《管理会计研究》2021年第一二期合刊 总第16/17期</span>
+      </div>
+    </div>
     <div class="content-container">
       <div class="banxin content-container-main">
         <div class="zz-info">
@@ -13,9 +19,13 @@
                   class="swiper-wrapper gallery-top"
                 >
                   <swiper-slide v-for="(item, index) in imgList" :key="index">
-                    <img :src="item.img" alt="" />
+                    <img :src="item.img" alt="" class="swiper-img" />
                   </swiper-slide>
                 </swiper>
+                <div class="tryRead" v-if="current == 1" @click="tryRead()">
+                  <img src="../../static/images/mini-read.png" alt="" />
+                  <p>试读</p>
+                </div>
               </div>
               <div class="zz-infoL-l-base">
                 <swiper
@@ -46,10 +56,6 @@
                   <dt>{{ item.type }}</dt>
                   <dd>¥ {{ item.price }}</dd>
                 </dl>
-                <!-- <dl>
-                  <dt>电子刊</dt>
-                  <dd>¥ 60.00</dd>
-                </dl> -->
               </div>
               <div class="details_Number">
                 <span class="Subscribe">订阅数量：</span>
@@ -71,36 +77,41 @@
                   class="join"
                   :disabled="dis"
                   :class="{ disabled: dis == false }"
+                  v-if="current!= 1"
                 >
                   加入购物车
                 </button>
+                <button v-else class="freeTry" @click="tryRead()">免费试读</button>
               </div>
-              <div class="order-info">
-                <div class="more">
-                  <span>更多订阅： </span>
-                  <p>下单日即为起订日，起订期刊为起订日后的最新一期杂志。</p>
+              <div class="order-info" v-if="current!= 1">
+                <div class="subscription-box">
+                  <div class="more">
+                    <span>更多订阅： </span>
+                    <p>下单日即为起订日，起订期刊为起订日后的最新一期杂志。</p>
+                  </div>
+                  <!-- disabled="disabled" -->
+                  <div class="SubscribeMoreP">
+                    <input
+                      type="checkbox"
+                      id="1"
+                      title="半年/3期"
+                      value="150"
+                      name="test"
+                      @click="checkedThis(150)"
+                    />
+                    <span>半年/3期</span><span class="price">¥150.00</span>
+                    <input
+                      type="checkbox"
+                      id="2"
+                      title=" 全年 / 共6期 "
+                      value="300"
+                      name="test"
+                      @click="checkedThis(300)"
+                    />
+                    <span>全年 / 共6期</span><span class="price">¥300.00</span>
+                  </div>
                 </div>
-                <!-- disabled="disabled" -->
-                <div class="SubscribeMoreP">
-                  <input
-                    type="checkbox"
-                    id="1"
-                    title="半年/3期"
-                    value="150"
-                    name="test"
-                    @click="checkedThis(150)"
-                  />
-                  <span>半年/3期</span><span class="price">¥150.00</span>
-                  <input
-                    type="checkbox"
-                    id="2"
-                    title=" 全年 / 共6期 "
-                    value="300"
-                    name="test"
-                    @click="checkedThis(300)"
-                  />
-                  <span>全年 / 共6期</span><span class="price">¥300.00</span>
-                </div>
+
                 <div class="tips">
                   会员购买全年纸质期刊，同时获得免费阅读历史过刊、每期新刊电子刊的权益。注册成为会员，有机会享受折扣优惠
                 </div>
@@ -112,35 +123,7 @@
             </div>
           </div>
           <div class="zz-infoR">
-            <div class="zz-infoR-advert">
-              <!-- <img src="https://www.chinamas.cn/static/img/guanG.png" alt="" /> -->
-              <swiper
-                :options="sidebarOption"
-                ref="sidebarSwiper"
-                class="swiper-wrapper"
-              >
-                <swiper-slide>
-                  <img
-                    src="https://www.chinamas.cn/static/img/guanG.png"
-                    alt=""
-                  />
-                </swiper-slide>
-                <swiper-slide>
-                  <img
-                    src="https://www.chinamas.cn/static/img/guanG.png"
-                    alt=""
-                  />
-                </swiper-slide>
-                <swiper-slide>
-                  <img
-                    src="https://www.chinamas.cn/static/img/guanG.png"
-                    alt=""
-                  />
-                </swiper-slide>
-              </swiper>
-            </div>
-            <div class="contact-way">杂志投稿：400-819-1255</div>
-            <div class="contact-way">edit@chinamas.cn</div>
+            <img src="../../static/images/press.png" alt="" />
           </div>
         </div>
         <div class="clear"></div>
@@ -148,39 +131,33 @@
           <div class="section_introduceL">
             <h6>杂志推荐</h6>
             <div class="section_introduceLD">
-              <a href="/zz/31">
-                <dl id="m_id15">
-                  <dt>
-                    <img
-                      src="https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg"
-                      alt=""
-                    />
-                  </dt>
-                  <dd>2022年 第2期总第23期</dd>
-                </dl>
-              </a>
-              <a href="/zz/29">
-                <dl id="m_id15">
-                  <dt>
-                    <img
-                      src="https://www.chinamas.cn/upload/img/2021/11/22/96bf6f043922dc0fda07b3b27c0dbd46.jpg"
-                      alt=""
-                    />
-                  </dt>
-                  <dd>2021年 第6期 总第21期</dd>
-                </dl>
-              </a>
-              <a href="/zz/28">
-                <dl id="m_id15">
-                  <dt>
-                    <img
-                      src="https://www.chinamas.cn/upload/img/2021/09/27/0e86b81ed731d9bb6876702ff22ef38d.jpg"
-                      alt=""
-                    />
-                  </dt>
-                  <dd>2021年 第五期 总第20期</dd>
-                </dl>
-              </a>
+              <dl>
+                <dt>
+                  <img
+                    src="https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg"
+                    alt=""
+                  />
+                </dt>
+                <dd>2022年 第2期总第23期</dd>
+              </dl>
+              <dl>
+                <dt>
+                  <img
+                    src="https://www.chinamas.cn/upload/img/2021/11/22/96bf6f043922dc0fda07b3b27c0dbd46.jpg"
+                    alt=""
+                  />
+                </dt>
+                <dd>2021年 第6期 总第21期</dd>
+              </dl>
+              <dl>
+                <dt>
+                  <img
+                    src="https://www.chinamas.cn/upload/img/2021/09/27/0e86b81ed731d9bb6876702ff22ef38d.jpg"
+                    alt=""
+                  />
+                </dt>
+                <dd>2021年 第五期 总第20期</dd>
+              </dl>
               <div class="clear"></div>
             </div>
           </div>
@@ -238,23 +215,19 @@
                 <div class="div div2" v-if="tabCurrent == 1">
                   <div class="comments_mod_v1">
                     <!-- 没有登陆提示登录后评论 -->
-                    <div class="post-comment" v-if="commentStatus == 1">
+                    <div class="post-comment">
                       <h6 class="total_num">暂无评价</h6>
                       <div class="login-tip">
                         <p>
                           您需要登录后才可以评论
-                          <a class="login" href="/loadLogin" target="_blank"
-                            >登录</a
-                          >
+                          <a class="login" href="" target="_blank">登录</a>
                           |
-                          <a class="login" href="/loadLogin" target="_blank"
-                            >立即注册</a
-                          >
+                          <a class="login" href="" target="_blank">立即注册</a>
                         </p>
                       </div>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="post-comment" v-else-if="commentStatus == 2">
+                    <div class="post-comment">
                       <h6 class="total_num">暂无评价</h6>
                       <el-input
                         type="textarea"
@@ -264,7 +237,7 @@
                       </el-input>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="comment-list" v-else>
+                    <div class="comment-list">
                       <ul>
                         <li>
                           <div class="li-l">
@@ -392,11 +365,9 @@
                         <div class="login-tip">
                           <p>
                             您需要登录后才可以评论
-                            <a class="login" href="/loadLogin" target="_blank"
-                              >登录</a
-                            >
+                            <a class="login" href="" target="_blank">登录</a>
                             |
-                            <a class="login" href="/loadLogin" target="_blank"
+                            <a class="login" href="" target="_blank"
                               >立即注册</a
                             >
                           </p>
@@ -449,6 +420,7 @@
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 const tabList = ["杂志简介", "杂志评论", "订阅须知"];
 const selectList = [
   {
@@ -460,36 +432,17 @@ const selectList = [
     price: "60.00",
   },
 ];
-const swiperOption = {
-  spaceBetween: 10, // 在slide之间设置距离
-  loop: true,
-  loopedSlides: 5, // looped slides should be the same
-  centeredSlides: true,
-};
-const swiperTwoOption = {
-  spaceBetween: 8, // 在slide之间设置距离
-  slidesPerView: 3, //同时显示的数量
-  grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状
-  loop: true,
-  loopedSlides: 5, // looped slides should be the same
-  centeredSlides: false,
-  slideToClickedSlide: true,
-};
-const sidebarOption = {
-  loop: true,
-  autoplay: true,
-  speed: 1000,
-  slidesPerView: 1, //同时显示的数量
-  grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状
-};
+
 export default {
+  name: "swiper-example-thumbs-gallery",
+  title: "Thumbs gallery with Two-way control",
   data() {
     return {
       total: 1,
       page: 1,
       limit: 10,
       selectList, //购买类型
-      current: 0,
+      current: 0, //购买类型索引
       imgList: [
         {
           img: "https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg",
@@ -501,11 +454,25 @@ export default {
           img: "https://www.chinamas.cn/upload/img/2021/09/27/0e86b81ed731d9bb6876702ff22ef38d.jpg",
         },
       ],
-      swiperOption,
-      swiperTwoOption,
-      sidebarOption,
+      swiperOption: {
+        slidesPerView: 1, //同时显示的数量
+        spaceBetween: 10, // 在slide之间设置距离
+        loop: true,
+        loopedSlides: 5, // looped slides should be the same
+        centeredSlides: true,
+      },
+      swiperTwoOption: {
+        spaceBetween: 10, // 在slide之间设置距离
+        slidesPerView: 3, //同时显示的数量
+        grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状
+        loop: true,
+        loopedSlides: 5, // looped slides should be the same
+        centeredSlides: false,
+        slideToClickedSlide: true,
+      },
+
       tabList, //tab列表
-      tabCurrent: 1, //默认选中
+      tabCurrent: 0, //默认选中
       typeName: "逛书店", //页面标题
       counter_num: "1", // 计数
       min_num: 1, // 设定最小值
@@ -515,23 +482,25 @@ export default {
       textarea: "",
     };
   },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   asyncData({ query, params }) {
     // this.$route.params.id
     // let res= await ArticleIdApi({id:query.id})
   },
   watch: {
     counter_num(newVal) {
-      console.log(newVal);
       this.counter_num = newVal;
-      console.log(this.counter_num);
     },
   },
   computed: {
     mySwiper() {
-      return this.$refs.mySwiper.swiper;
+      return this.$refs.mySwiper.$swiper;
     },
     swiperThumbs() {
-      return this.$refs.swiperThumbs.swiper;
+      return this.$refs.swiperThumbs.$swiper;
     },
   },
   mounted() {
@@ -541,10 +510,22 @@ export default {
     });
   },
   methods: {
+     //点击试读
+    tryRead() {
+      this.$router.push({
+        name: "journal",
+        query: { id: 30 },
+        // params: {
+        //   type: item,
+        // },
+      });
+    },
     getList() {},
+    //点击tab栏每一项
     oNitem(index) {
       this.tabCurrent = index;
     },
+    //点击购买类型
     onSelect(index) {
       this.current = index;
     },
@@ -576,48 +557,94 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.crumbs {
+  width: 100%;
+  height: 48px;
+  background: #f7f7f7;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 48px;
+  span {
+    color: rgba(0, 0, 0, 0.85);
+  }
+}
 .content-container {
-  padding: 40px 0px;
+  padding: 35px 0px 40px;
   background-color: #fff;
   box-shadow: 0 2px 8px 0 rgba(114, 76, 76, 0.1);
   .content-container-main {
     .zz-info {
       .zz-infoL {
         float: left;
-        width: 856px;
+        width: 922px;
         .zz-infoL-l {
-          width: 370px;
+          width: 343px;
           float: left;
           .zz-infoL-l-top {
-            width: 368px;
-            height: 405px;
+            width: 343px;
+            height: 407px;
             border: 1px solid rgba(0, 0, 0, 0.05);
-            margin-bottom: 25px;
+            margin-bottom: 16px;
+            position: relative;
             .swiper-slide {
               display: flex;
               justify-content: center;
               align-items: center;
             }
-            img {
-              width: 304px;
-              height: 401px;
+            .swiper-img {
+              width: 261px;
+              height: 344px;
+              border: 1px solid #e5e5e5;
+              padding: 5px;
+              border-radius: 0px;
+            }
+            .tryRead {
+              position: absolute;
+              bottom: 15px;
+              right: 20px;
+              width: 50px;
+              height: 50px;
+              background: #bc996d;
+              border-radius: 25px;
+              text-align: center;
+              z-index: 997;
+              cursor: pointer;
+              img {
+                width: 21px;
+                height: 16px;
+                margin-top: 9px;
+                border-radius: 0px;
+              }
+              p {
+                font-size: 12px;
+                font-weight: 500;
+                color: #ffffff;
+                line-height: 8px;
+              }
             }
           }
           .zz-infoL-l-base {
             .swiper-slide {
-              width: 116px !important;
-              height: 129px;
-              border: 1px solid rgba(0, 0, 0, 0.05);
               display: flex;
               justify-content: center;
               align-items: center;
+
               img {
                 width: 97px;
                 height: 127px;
+                padding: 0px 4px;
+                border-radius: 0px;
+                border: 1px solid rgba(0, 0, 0, 0.05);
               }
             }
             .swiper-slide-active {
+              width: 104px !important;
               border: 2px solid #ea3a3a;
+              img {
+                border: none;
+              }
             }
           }
           .collect {
@@ -640,14 +667,15 @@ export default {
         }
         .zz-infoL-r {
           float: left;
-          width: 420px;
-          margin-left: 33px;
+          width: 529px;
+          margin-left: 44px;
           h1 {
-            font-size: 24px;
+            font-size: 23px;
             font-weight: 600;
             text-align: left;
             color: rgba(0, 0, 0, 0.85);
             line-height: 32px;
+            margin-left: -12px;
           }
           h6 {
             font-size: 14px;
@@ -655,10 +683,12 @@ export default {
             text-align: left;
             color: #ea3a3a;
             line-height: 20px;
-            margin: 20px 0px;
+            margin: 13px 0px 26px;
           }
           .select {
             display: flex;
+            padding-bottom: 28px;
+            border-bottom: 1px dashed #e7e7e7;
             dl {
               display: flex;
               flex-direction: column;
@@ -736,16 +766,14 @@ export default {
           }
           .buy-btn {
             display: flex;
-            padding: 22px 0px;
-            border-top: 1px solid #e7e7e7;
-            border-bottom: 1px solid #e7e7e7;
             button {
-              width: 148px;
+              width: 170px;
               height: 48px;
               font-size: 18px;
               font-weight: 600;
               text-align: center;
               line-height: 48px;
+              cursor: pointer;
             }
             .immediately {
               background: linear-gradient(
@@ -755,16 +783,14 @@ export default {
                 #ff7d3b 100%
               );
               color: #ffffff;
-              border: none;
-              cursor: pointer;
+              border: 1px solid transparent;
+              margin-right: 20px;
             }
             .join {
               background: #fff5f1;
               border: 1px solid #ed6d38;
               box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
               color: #ed6d38;
-              margin-left: 16px;
-              cursor: pointer;
             }
             .disabled {
               background: rgb(234, 234, 234) !important;
@@ -772,86 +798,99 @@ export default {
               border: none !important;
               cursor: default !important;
             }
+            .freeTry {
+              background: #fff;
+              border: 1px solid #bc996d;
+              box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+              color: #bc996d;
+            }
           }
           .order-info {
-            .more {
-              margin: 22px 0px;
-              font-size: 12px;
-              font-weight: 400;
-              text-align: left;
-              color: rgba(0, 0, 0, 0.45);
-              display: flex;
-              align-items: center;
-              span {
+            .subscription-box {
+              padding: 20px 16px;
+              background: #f7f7f7;
+              margin-top: 22px;
+              .more {
+                font-size: 12px;
+                font-weight: 400;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.45);
+                display: flex;
+                align-items: center;
+                padding-bottom: 18px;
+                span {
+                  font-size: 13px;
+                  font-weight: 600;
+                  text-align: left;
+                  color: rgba(0, 0, 0, 0.85);
+                }
+              }
+              .SubscribeMoreP {
                 font-size: 13px;
                 font-weight: 600;
-                text-align: left;
                 color: rgba(0, 0, 0, 0.85);
-              }
-            }
-            .SubscribeMoreP {
-              font-size: 13px;
-              font-weight: 600;
-              color: rgba(0, 0, 0, 0.85);
-              display: flex;
-              align-items: center;
-              .price {
-                font-size: 14px;
-                color: #ea3a3a;
-                margin: 0px 20px 0px 12px;
-              }
-              input {
-                margin-right: 10px;
-              }
+                display: flex;
+                align-items: center;
+                .price {
+                  font-size: 14px;
+                  color: #ea3a3a;
+                  margin: 0px 20px 0px 12px;
+                }
+                input {
+                  margin-right: 10px;
+                }
 
-              input[type="checkbox"] {
-                cursor: pointer;
-                position: relative;
-              }
-              input[type="checkbox"]::after {
-                position: absolute;
-                top: 0;
-                background-color: #fff;
-                color: #fff;
-                width: 14px;
-                height: 14px;
-                display: inline-block;
-                visibility: visible;
-                padding-left: 0px;
-                text-align: center;
-                content: " ";
-                border-radius: 2px;
-                box-sizing: border-box;
-                border: 1px solid #ddd;
-              }
+                input[type="checkbox"] {
+                  cursor: pointer;
+                  position: relative;
+                }
+                input[type="checkbox"]::after {
+                  position: absolute;
+                  top: 0;
+                  background-color: #fff;
+                  color: #fff;
+                  width: 14px;
+                  height: 14px;
+                  display: inline-block;
+                  visibility: visible;
+                  padding-left: 0px;
+                  text-align: center;
+                  content: " ";
+                  border-radius: 2px;
+                  box-sizing: border-box;
+                  border: 1px solid #ddd;
+                }
 
-              input[type="checkbox"]:checked::after {
-                content: "";
-                background-color: #ea3a3a;
-                border-color: #ea3a3a;
-                background-color: #ea3a3a;
-              }
+                input[type="checkbox"]:checked::after {
+                  content: "";
+                  background-color: #ea3a3a;
+                  border-color: #ea3a3a;
+                  background-color: #ea3a3a;
+                }
 
-              input[type="checkbox"]:checked::before {
-                content: "";
-                position: absolute;
-                top: 1px;
-                left: 5px;
-                width: 3px;
-                height: 8px;
-                border: solid white;
-                border-width: 0 2px 2px 0;
-                transform: rotate(45deg);
-                z-index: 1;
+                input[type="checkbox"]:checked::before {
+                  content: "";
+                  position: absolute;
+                  top: 1px;
+                  left: 5px;
+                  width: 3px;
+                  height: 8px;
+                  border: solid white;
+                  border-width: 0 2px 2px 0;
+                  transform: rotate(45deg);
+                  z-index: 1;
+                }
               }
             }
 
             .tips {
+              background: #fff9ee;
               font-size: 12px;
               font-weight: 400;
-              color: rgba(0, 0, 0, 0.85);
+              color: #ed6d38;
               line-height: 16px;
-              padding: 20px 0px;
+              padding: 10px 8px 10px 16px;
+              margin: 20px 0px 18px 0px;
             }
             .register {
               display: inline-block;
@@ -874,23 +913,10 @@ export default {
       }
       .zz-infoR {
         float: right;
-        width: 239px;
-        .zz-infoR-advert {
-          width: 234px;
-          height: 375px;
-          margin: 0 auto;
-          margin-bottom: 30px;
-        }
-        .contact-way {
-          margin-bottom: 15px;
+        width: 120px;
+        img {
           width: 100%;
-          height: 48px;
-          background: #f7f7f7;
-          font-size: 16px;
-          font-weight: 600;
-          text-align: center;
-          color: rgba(0, 0, 0, 0.85);
-          line-height: 48px;
+          height: 74px;
         }
       }
     }
@@ -917,7 +943,7 @@ export default {
           dl {
             width: 100%;
             border-bottom: 1px dashed #e7e7e7;
-            &:last-child {
+            &:nth-last-child(1) {
               border-bottom: none;
             }
             dt {
@@ -1113,25 +1139,7 @@ export default {
                     }
                   }
                 }
-                /deep/.el-pagination {
-                  display: flex;
-                  justify-content: center;
-                  margin: 50px;
-                }
-                /deep/.el-pagination.is-background
-                  .el-pager
-                  li:not(.disabled).active {
-                  background-color: #ed6d38;
-                }
-                /deep/.el-input.is-active .el-input__inner,
-                /deep/.el-input__inner:focus {
-                  border-color: #ed6d38;
-                }
 
-                /deep/.el-select .el-input__inner:focus,
-                /deep/.el-select .el-input__inner:hover {
-                  border-color: #ed6d38;
-                }
                 .post-comment {
                   padding-top: 0px;
                 }

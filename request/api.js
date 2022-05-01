@@ -25,3 +25,9 @@ export const login = ($axios,params)=> {
 //     return fetch.fetchPost('/march/admin/login', params);
 //   },
 // }
+// export default axios => ({
+//   // signIn 登陆
+//   signIn(data) {
+//     return axios.post(`/sign_in`, data)
+//   }
+// })

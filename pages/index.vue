@@ -2,14 +2,14 @@
   <div class="main_container">
     <SubHeader />
     <div class="banxin layout-container">
-      <div class="layout-left">
+      <div class="layout-left" ref="leftTab">
         <MainLeft />
       </div>
       <div class="layout-right">
         <div class="advert">
           <img src="@/static/images/advert01.png" alt="" />
         </div>
-        <div class="two-advert" data-aos="fade-up">
+        <div class="two-advert">
           <img src="@/static/images/advert02.png" alt="" />
         </div>
         <div class="main-container" data-aos="fade-up">
@@ -39,9 +39,9 @@
                   <h5>财务共享中心的功能定位、成功因素与未来趋势探讨</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                     <span class="right">刘勤</span>
@@ -51,9 +51,9 @@
                   <h5>财务共享中心的功能定位、成功因素与未来趋势探讨</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                     <span class="right">刘勤</span>
@@ -63,9 +63,9 @@
                   <h5>财务共享中心的功能定位、成功因素与未来趋势探讨</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                     <span class="right">刘勤</span>
@@ -106,9 +106,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -124,9 +124,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -142,9 +142,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                   </p>
                   <div class="skip-box">
                     <span>阅读详情</span>
-                    <img src="../static/images/arrows-left.png" alt="" />
+                    <img src="/images/arrows-left.png" alt="" />
                   </div>
                 </li>
               </ul>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="advert-box">
                   <div class="img">
-                    <img src="@/static/images/sub-advert01.png" alt="" />
+                    <img src="/images/sub-advert01.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="advert-box">
                   <div class="img">
-                    <img src="@/static/images/sub-advert02.png" alt="" />
+                    <img src="/images/sub-advert02.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -199,7 +199,7 @@
                 </div>
                 <div class="advert-box">
                   <div class="img">
-                    <img src="@/static/images/way/zz.png" alt="" />
+                    <img src="/images/way/zz.png" alt="" />
                     <div class="point">新书</div>
                   </div>
                 </div>
@@ -224,7 +224,7 @@
               <ul class="two-ul">
                 <li>
                   <div class="li-left">
-                    <img src="@/static/images/sub-advert06.png" alt="" />
+                    <img src="/images/sub-advert06.png" alt="" />
                     <div class="point">推荐</div>
                   </div>
                   <div class="li-right">
@@ -233,11 +233,7 @@
                     </h5>
                     <div class="base">
                       <div class="left">
-                        <img
-                          class="icon"
-                          src="@/static/images/time.png"
-                          alt=""
-                        />
+                        <img class="icon" src="/images/time.png" alt="" />
                         <span>JULY 1, 2019</span>
                       </div>
                     </div>
@@ -247,9 +243,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -258,9 +254,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -298,9 +294,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -309,9 +305,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -362,7 +358,7 @@
           </div>
         </div>
         <div class="four-advert" data-aos="fade-up">
-          <img src="@/static/images/advert03.png" alt="" />
+          <img src="/images/advert03.png" alt="" />
         </div>
         <div class="main-container" data-aos="fade-up">
           <div class="container-two">
@@ -377,7 +373,7 @@
               <ul class="two-ul">
                 <li>
                   <div class="li-left">
-                    <img src="@/static/images/sub-advert06.png" alt="" />
+                    <img src="/images/sub-advert06.png" alt="" />
                     <div class="point">推荐</div>
                   </div>
                   <div class="li-right">
@@ -386,11 +382,7 @@
                     </h5>
                     <div class="base">
                       <div class="left">
-                        <img
-                          class="icon"
-                          src="@/static/images/time.png"
-                          alt=""
-                        />
+                        <img class="icon" src="/images/time.png" alt="" />
                         <span>JULY 1, 2019</span>
                       </div>
                     </div>
@@ -400,9 +392,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -411,9 +403,9 @@
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
-                      <img class="icon" src="@/static/images/time.png" alt="" />
+                      <img class="icon" src="/images/time.png" alt="" />
                       <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="@/static/images/chat.png" alt="" />
+                      <img class="icon" src="/images/chat.png" alt="" />
                       <span>3</span>
                     </div>
                   </div>
@@ -432,14 +424,14 @@
               </div>
               <div class="two-content-mid">
                 <div class="img-box">
-                  <img src="@/static/images/sub-advert05.png" alt="" />
+                  <img src="/images/sub-advert05.png" alt="" />
                 </div>
                 <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                 <div class="base">
                   <div class="left">
-                    <img class="icon" src="@/static/images/time.png" alt="" />
+                    <img class="icon" src="/images/time.png" alt="" />
                     <span>DECEMBER 30, 2016</span>
-                    <img class="icon" src="@/static/images/chat.png" alt="" />
+                    <img class="icon" src="/images/chat.png" alt="" />
                     <span>3</span>
                   </div>
                 </div>
@@ -458,7 +450,7 @@
               <ul class="two-content-right">
                 <li>
                   <div class="img">
-                    <img src="@/static/images/sub-advert02.png" alt="" />
+                    <img src="/images/sub-advert02.png" alt="" />
                     <div class="point">了解详情</div>
                   </div>
                   <div class="img-base">
@@ -468,7 +460,7 @@
                 </li>
                 <li>
                   <div class="img">
-                    <img src="@/static/images/sub-advert04.png" alt="" />
+                    <img src="/images/sub-advert04.png" alt="" />
                   </div>
                   <div class="img-base">
                     <span>社交营销</span>
@@ -488,19 +480,26 @@
       </ul> -->
       </div>
     </div>
+    <!-- <span>{{create_time| timeAgo}}</span> -->
+    <!-- <pdf :src="src" v-for="i in numPages" :key="i" :page="i"></pdf> -->
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import { getSliders } from "../request/api";
-// import AOS from "aos";
 export default {
   // middleware:'auth', //局部中间件
   name: "IndexPage",
   data() {
     return {
       list: [],
+      isFixed: false, //左侧是否固定
+      create_time: "2027-08-01 21:55:28",
+      pdfUrl: "",
+      numPages: 0,
+      src: "",
+      vuePdf: null,
     };
   },
   head() {
@@ -522,6 +521,7 @@ export default {
       ],
     };
   },
+
   // computed:{
   //   ...mapState(['userName'])
   // },
@@ -531,23 +531,73 @@ export default {
     }),
   },
   async asyncData({ $axios }) {
-    let res = await getSliders($axios);
-    //  let res =await $axios.get('http://testapi.xuexiluxian.cn/api/slider/getSliders');
+    // let res = await getSliders($axios);
+    //  let res =await $axios.get('https://v2.chinamas.cn/api/slider/getSliders');
     // console.log(res.data.list);
     // asyncData 中没有this
-    return { list: res.list };
+    // return { list: res.list };
   },
   created() {
     this.$store.commit("setHeaderWidth", "1200px");
+  },
+  mounted() {
+    // if (process.client) {
+    //   this.vuePdf = require("vue-pdf");
+    //   this.pdfLoadTask();
+    // }
+    // this.pdfUrl = this.$pdf.createLoadingTask(
+    //   "https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
+    // );
+    // console.log(this.pdfUrl, "pdfUrl");
+
+    // 开启滚动监听
+    window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
     ...mapMutations({
       changePassword: "user/changePassword",
     }),
+    // pdfLoadTask() {
+    //   this.src = this.vuePdf.default.createLoadingTask(
+    //     "https://www.chinamas.cn/static/img/1.pdf"
+    //   );
+    //   this.src.promise.then((pdf) => {
+    //     this.numPages = pdf.numPages;
+    //   });
+    // },
+
+    // 滚动监听  滚动触发的效果写在这里
+    handleScroll() {
+      // 页面滚动高度
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // 可视区域高度
+      let clientHeight = document.documentElement.clientHeight;
+      // 中间内容框高度
+      let rightHight = document.querySelector(".layout-right").offsetHeight;
+      // 二级菜单栏高度
+      let subHight = document.querySelector(".sub-header").offsetHeight;
+      let subTop = document.querySelector(".sub-header").offsetTop;
+      // 总高度
+      let allHeight = rightHight - subHight - 295; //295 底部高度
+      var headerTop = document.querySelector(".header").offsetHeight;
+      if (scrollTop >= clientHeight / 5 && scrollTop < allHeight) {
+        this.$refs.leftTab["style"].position = "fixed";
+        this.$refs.leftTab["style"].top = 189 + "px";
+      } else if (scrollTop > allHeight) {
+        this.$refs.leftTab["style"].position = "absolute";
+        this.$refs.leftTab["style"].top = allHeight + "px";
+      } else {
+        this.$refs.leftTab["style"].position = "absolute";
+        this.$refs.leftTab["style"].top = 22 + "px";
+      }
+    },
   },
-  mounted() {},
   destroyed() {
     this.$store.commit("setHeaderWidth", "1100px");
+    window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>
@@ -556,10 +606,20 @@ export default {
 /deep/.banxin {
   width: 1200px !important;
 }
+.main_container {
+  padding-top: 204px !important;
+}
+
 .layout-container {
   display: flex;
+  justify-content: space-between;
   padding: 22px 0px;
+  position: relative;
+  .layout-left {
+    position: absolute;
+  }
   .layout-right {
+    margin-left: 210px;
     .advert {
       width: 1002px;
       height: 404px;
@@ -664,7 +724,8 @@ export default {
         }
         .line {
           width: 82px;
-          border: 1px solid #ed6d38;
+          height: 2px;
+          background: #ed6d38;
           margin-top: -2px;
         }
       }
@@ -819,7 +880,6 @@ export default {
             .img-box {
               width: 149px;
               height: 164px;
-              background: #e06412;
               margin: 67px auto;
             }
           }
@@ -828,7 +888,6 @@ export default {
               .img {
                 width: 242px;
                 height: 116px;
-                background: #e06412;
                 position: relative;
               }
               .img-base {

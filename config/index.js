@@ -18,10 +18,10 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'http://testapi.xuexiluxian.cn/',
-    // browserDev: 'http://testapi.xuexiluxian.cn/',
-    pro: 'http://testapi.xuexiluxian.cn/',
-    // browserPro: 'http://testapi.xuexiluxian.cn/',
+    dev: 'https://v2.chinamas.cn/',
+    // browserDev: 'https://v2.chinamas.cn/',
+    pro: 'https://v2.chinamas.cn/',
+    // browserPro: 'https://v2.chinamas.cn/',
   },
 
 

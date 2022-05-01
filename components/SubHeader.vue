@@ -1,8 +1,8 @@
 <template>
-  <div class="sub-header">
+  <div class="sub-header" ref="subHeader">
     <div class="banxin container">
       <div class="content-top">
-        <img src="@/static/images/logo.png" alt="" />
+        <img :src="require('@/static/images/logo.png')" alt="" />
         <div class="search-box">
           <div class="select-group">
             <div class="input-group" @click="selectClick">
@@ -40,12 +40,12 @@
           <span>管理会计研究</span>
           <span>开讲啦</span>
           <span>精品课程</span>
-          <img src="@/static/images/giftbag.png" alt="" />
+          <img src="/images/giftbag.png" alt="" />
         </div>
         <div class="base-right">
-          <img src="@/static/images/pen.png" alt="" />
+          <img src="/images/pen.png" alt="" />
           <span class="one-span">我要投稿</span>
-          <img src="@/static/images/bag.png" alt="" />
+          <img src="/images/bag.png" alt="" />
           <span>购买杂志</span>
         </div>
       </div>
@@ -61,10 +61,34 @@ export default {
       typeData: ["应用", "模板", "应用", "模板模板"],
       selectList: false, //先将下拉框隐藏
       current: "-1", //下拉默认选中项
+
     };
   },
   watch: {},
+  mounted() {
+    // 开启滚动监听
+    window.addEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    // 滚动监听  滚动触发的效果写在这里
+    handleScroll() {
+      // 页面滚动高度
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // 可视区域高度
+      let clientHeight = document.documentElement.clientHeight;
+      if (scrollTop >= clientHeight / 2) {
+        // this.defaultStyle = this.fixed;
+        this.$refs.subHeader["style"].top = 0 + "px";
+        this.$refs.subHeader["style"].transition = "all 0.8s ease 0s";
+      } else {
+        // this.defaultStyle = this.isfixed;
+        this.$refs.subHeader.style.top = 37 + "px";
+        this.$refs.subHeader["style"].transition = "all 0.8s ease 0s";
+      }
+    },
     onSearch(value) {
       console.log(value, "value");
     },
@@ -78,12 +102,20 @@ export default {
       this.current = index;
     },
   },
+   destroyed() {
+    window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
+  },
 };
 </script>
 <style lang="less" scoped>
 .sub-header {
+  width: 100%;
   height: 167px;
+  position: fixed;
+  top: 37px;
+  left: 0px;
   background: #ffffff;
+  z-index: 998;
   .container {
     padding-top: 38px;
     .content-top {
