@@ -5,7 +5,7 @@
     </div>
     <div class="tabbar">
       <span class="screen">活动筛选：</span>
-      <div class="select-group">
+      <div class="select-group" v-close>
         <div class="input-group" @click="selectClick">
           <span class="title">{{ defaultValue }}</span>
           <img
@@ -25,7 +25,7 @@
           </li>
         </ul>
       </div>
-      <div class="select-group">
+      <div class="select-group" v-closeType>
         <div class="input-group" @click="typeClick">
           <span class="title">{{ typeValue }}</span>
           <img
@@ -59,7 +59,7 @@
           <div class="dd-base">
             <div class="left state-one">报名中</div>
             <div class="right">
-              <img class="time" src="../../static/images/time.png" alt="" />
+              <img class="time" src="@/static/images/time.png" alt="" />
               <span>2022-03-14</span>
               <img class="online" src="../../static/images/online.png" alt="" />
               <span>线上</span>
@@ -79,7 +79,7 @@
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
-              <img class="time" src="../../static/images/time.png" alt="" />
+              <img class="time" src="@/static/images/time.png" alt="" />
               <span>2022-03-14</span>
               <img class="map" src="../../static/images/map.png" alt="" />
               <span>北京</span>
@@ -99,7 +99,7 @@
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
-              <img class="time" src="../../static/images/time.png" alt="" />
+              <img class="time" src="@/static/images/time.png" alt="" />
               <span>2022-03-14</span>
               <img class="map" src="../../static/images/map.png" alt="" />
               <span>北京</span>
@@ -119,7 +119,7 @@
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
-              <img class="time" src="../../static/images/time.png" alt="" />
+              <img class="time" src="@/static/images/time.png" alt="" />
               <span>2022-03-14</span>
               <img class="map" src="../../static/images/map.png" alt="" />
               <span>北京</span>
@@ -133,6 +133,7 @@
 </template>
 <script>
 export default {
+  scrollToTop: true,
   data() {
     return {
       timeData: ["全部时间", "本周", "本月"], //时间下拉菜单
@@ -148,6 +149,27 @@ export default {
       pageIndex: 1, //当前页
       pageSize: 3, //当前页
     };
+  },
+    //点击空白处关闭下拉框
+  directives: {
+    close: {
+      inserted(el, binding, vnode) {
+        window.addEventListener("click", (e) => {
+          if (!el.contains(e.target)) {
+            vnode.context.selectList = false;
+          }
+        });
+      },
+    },
+    closeType:{
+      inserted(el, binding, vnode) {
+        window.addEventListener("click", (e) => {
+          if (!el.contains(e.target)) {
+            vnode.context.typeShow = false;
+          }
+        });
+      },
+    }
   },
   asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     //请求接口总数
@@ -217,9 +239,10 @@ export default {
       padding: 0px 34px 0px 46px;
     }
     .select-group {
+      width: 96px;
       height: 100%;
       cursor: pointer;
-      margin-right: 48px;
+      margin-right: 30px;
       .input-group {
         display: flex;
         align-items: center;

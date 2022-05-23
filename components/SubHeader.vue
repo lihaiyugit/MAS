@@ -4,7 +4,7 @@
       <div class="content-top">
         <img :src="require('@/static/images/logo.png')" alt="" />
         <div class="search-box">
-          <div class="select-group">
+          <div class="select-group" v-close>
             <div class="input-group" @click="selectClick">
               <span class="title">{{ defaultValue }}</span>
               <img
@@ -25,21 +25,20 @@
             </ul>
           </div>
           <span class="line">|</span>
-          <input placeholder="输入搜索的内容" />
-          <div class="search">搜索</div>
+          <input placeholder="输入搜索的内容" v-model="searchValue" />
+          <div class="search" @click="onSearch">搜索</div>
         </div>
         <p>
-          <span>9.9会员</span>
-          <span>大数据</span>
-          <span>企业管理</span>
-          <span>财务管理</span>
+          <span @click="onItem(1,'站内热词')">站内热词</span>
+          <span @click="onItem(2,'站内热词')">站内热词</span>
+          <span @click="onItem(3,'站内热词')">站内热词</span>
+          <span @click="onItem(4,'站内热词')">站内热词</span>
         </p>
       </div>
       <div class="content-base">
         <div class="base-left">
-          <span>管理会计研究</span>
-          <span>开讲啦</span>
-          <span>精品课程</span>
+          <nuxt-link to="/kzt/zghx" class="span">中国化学专题</nuxt-link>
+          <nuxt-link to="/kzt/zsh" class="span">中国石油专题</nuxt-link>
           <img src="/images/giftbag.png" alt="" />
         </div>
         <div class="base-right">
@@ -61,8 +60,20 @@ export default {
       typeData: ["应用", "模板", "应用", "模板模板"],
       selectList: false, //先将下拉框隐藏
       current: "-1", //下拉默认选中项
-
+      searchValue: "", //搜索词
     };
+  },
+  //点击空白处关闭下拉框
+  directives: {
+    close: {
+      inserted(el, binding, vnode) {
+        window.addEventListener("click", (e) => {
+          if (!el.contains(e.target)) {
+            vnode.context.selectList = false;
+          }
+        });
+      },
+    },
   },
   watch: {},
   mounted() {
@@ -89,8 +100,31 @@ export default {
         this.$refs.subHeader["style"].transition = "all 0.8s ease 0s";
       }
     },
-    onSearch(value) {
-      console.log(value, "value");
+    //点击搜索跳转
+    onSearch() {
+      if (this.searchValue != "") {
+        console.log('===')
+        this.$router.push({
+          name: "search",
+          // path: "/search",
+          query: { keyword: this.searchValue },
+          // params: {
+          //   keyword: this.searchValue,
+          // },
+        });
+      }else{
+         this.$message.error("请输入搜索词");
+      }
+    },
+    //点击站内热词
+     onItem(index,val) {
+       this.$router.push({
+          path: "/search",
+          query: { keyword: val ,index:index,},
+          // params: {
+          //   type: item,
+          // },
+        });
     },
     selectClick() {
       this.selectList = !this.selectList; //点击显示或隐藏下拉框
@@ -102,7 +136,7 @@ export default {
       this.current = index;
     },
   },
-   destroyed() {
+  destroyed() {
     window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
   },
 };
@@ -259,7 +293,7 @@ export default {
         margin-bottom: 0px;
 
         span {
-          margin-right: 23px;
+          margin-right: 25px;
         }
       }
     }
@@ -273,7 +307,7 @@ export default {
         height: 47px;
         display: flex;
         align-items: center;
-        span {
+        .span {
           font-size: 14px;
           font-family: PingFangSC, PingFangSC-Regular;
           font-weight: 400;

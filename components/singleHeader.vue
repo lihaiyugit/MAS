@@ -18,8 +18,8 @@
       </div>
       <div class="sub-header-main-right">
         <div class="search-box">
-          <input placeholder="输入搜索的内容" />
-          <div class="search">搜索</div>
+          <input placeholder="输入搜索的内容" v-model="searchValue" />
+          <div class="search" @click="onSearch">搜索</div>
         </div>
       </div>
     </div>
@@ -40,6 +40,7 @@ const tabList = [
 export default {
   data() {
     return {
+      searchValue: "",
       tabList,
       current: 0,
     };
@@ -70,53 +71,57 @@ export default {
         this.$refs.sigleheader["style"].transition = "all 0.8s ease 0s";
       }
     },
-    onSearch(value) {
-      console.log(value, "value");
+    //点击搜索跳转
+    onSearch() {
+      console.log(this.searchValue);
+      if (this.searchValue != "") {
+        console.log('===')
+        this.$router.push({
+          name: "search",
+          // path: "/search",
+          query: { keyword: this.searchValue },
+          // params: {
+          //   keyword: this.searchValue,
+          // },
+        });
+      }else{
+         this.$message.error("请输入搜索词");
+      }
     },
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
-      console.log(index, "---");
-      if (index == 0) {
+      if (index == 1) {
         this.$router.push({
-          name: "index",
-          // query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "zff",
         });
-      } else if (index == 1 || index == 2 || index == 3) {
-        // this.$router.push("/home/way");
+      } else if (index == 2) {
         this.$router.push({
-          name: "catalogue-id",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "xal",
+        });
+      } else if (index == 3) {
+        this.$router.push({
+          name: "jdk",
         });
       } else if (index == 4) {
         this.$router.push({
-          name: "catalogue-magazines",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "zz",
         });
       } else if (index == 5) {
         this.$router.push({
-          name: "catalogue-go-book",
-          query: { id: index, type: item },
+          name: "gsd",
+          // query: { id: index, type: item },
           // params: {
           //   type: item,
           // },
         });
       } else if (index == 6) {
         this.$router.push({
-          name: "catalogue-Information",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "tzx",
+        });
+      } else if (index == 7) {
+        this.$router.push({
+          name: "kzt",
         });
       }
       // if (index == 2) {
@@ -165,6 +170,9 @@ export default {
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
+          &:nth-child(1) {
+            display: none;
+          }
         }
       }
     }

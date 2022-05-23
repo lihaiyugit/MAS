@@ -13,11 +13,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css' },
+      // { rel: 'stylesheet', href: 'https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css' },
     ],
     script: [
       { src: '/js/qrcode.min.js' },
-      { src: 'https://code.jquery.com/jquery-3.6.0.min.js' },
+      { src: '/js/jquery.js' },
       // { src: '/js/lazyload.js' },
     ]
 
@@ -171,9 +171,9 @@ export default {
   router: {
     // mode: 'hash',
     // base: '/static/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
-    // middleware:'auth'//全局生效
-    scrollBehavior(to, from, savedPosition) {
-      return { x: 0, y: 0 }
-    }
+    // middleware:'midd',//全局生效
+    // scrollBehavior(to, from, savedPosition) {
+    //   return { x: 0, y: 0 }
+    // }
   }
 }

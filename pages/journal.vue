@@ -599,8 +599,9 @@ export default {
     //跳转到详情
     detailsFn() {
       this.$router.push({
-        name: "catalogue-zz",
-        query: { id: this.magazineId },
+        path: `/zz/${1}`,
+        // name: "catalogue-zz",
+        // query: { id: this.magazineId },
         // params: {
         //   type: item,
         // },

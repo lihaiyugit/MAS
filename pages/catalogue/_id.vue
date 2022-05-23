@@ -22,7 +22,17 @@
             />
             <img v-else src="../../static/images/way/case_banner.png" alt="" />
           </div>
-          <div class="list-box" >
+          <div class="list-box">
+            <ul class="tabs"  v-if="$route.query.id == 1">
+              <li
+                :class="tabActive == index ? 'tabActive' : ''"
+                v-for="(item, index) in tabs"
+                :key="index"
+                @click="onTab(index)"
+              >
+                {{ item }}
+              </li>
+            </ul>
             <div class="major-container" v-if="$route.query.id != 3">
               <span class="major-container-left">专业：</span>
               <ul
@@ -38,7 +48,9 @@
                   {{ item }}
                 </li>
               </ul>
-              <span class="major-container-right" @click.stop="allFn">全部</span>
+              <span class="major-container-right" @click.stop="allFn"
+                >全部</span
+              >
             </div>
             <div class="major-container industry" v-if="$route.query.id != 3">
               <span class="major-container-left">行业：</span>
@@ -158,77 +170,14 @@
             </div>
           </div>
         </div>
-        <div class="content-container-main-right">
-          <div class="hot-recommend">
-            <h3>热点推荐</h3>
-            <ul>
-              <li v-for="(item, index) in recommend" :key="index" >
-                <a @click="goDetail(index+1)">
-                  <span
-                    v-if="index + 1 == 1"
-                    :style="`${index + 1 == 1 ? 'background: #ea3a3a' : ''}`"
-                    >{{ index + 1 }}</span
-                  >
-                  <span
-                    v-else-if="index + 1 == 2"
-                    :style="`${index + 1 == 2 ? 'background: #ed6d38' : ''}`"
-                    >{{ index + 1 }}</span
-                  >
-                  <span
-                    v-else-if="index + 1 == 3"
-                    :style="`${index + 1 == 3 ? 'background: #f4a74d' : ''}`"
-                    >{{ index + 1 }}</span
-                  >
-                  <span v-else>{{ index + 1 }}</span>
-                  <p class="oneline">{{ item.title }}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="selections">
-            <div class="title">
-              <h3>荐读</h3>
-              <a href="" class="more">查看更多</a>
-            </div>
-            <ul>
-              <li class="twoline">
-                论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
-              </li>
-              <li class="twoline">
-                论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
-              </li>
-              <li class="twoline">
-                论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
-              </li>
-            </ul>
-          </div>
-          <div class="sub-selections">
-            <div class="title">
-              <h3>荐读</h3>
-              <a href="" class="more">查看更多</a>
-            </div>
-            <div class="magazine-img">
-              <img src="../../static/images/way/zz.png" alt="" />
-              <div class="point">新书</div>
-            </div>
-            <div class="headline">2022年第一期｜总第567期</div>
-            <div class="contribute">我要投稿</div>
-          </div>
-        </div>
+        <!-- 页面右侧内容 -->
+        <ColumnR/>
       </div>
     </div>
   </div>
 </template>
 <script>
-const recommend = [
-  { title: "疫情之下，企业如何应对？" },
-  { title: "基于“鲸鱼曲线”思想的全面预算管理" },
-  { title: "财务共享服务中心（FSSC）项目实施" },
-  { title: "践行管理会计 促进价值提升" },
-  { title: "苏宁和蒙牛:新零售的商业模式特征" },
-  { title: "基于“鲸鱼曲线”思想的全面预算管理" },
-  { title: "财务共享服务中心（FSSC）项目实施" },
-];
+
 const major = [
   "成本管理",
   "绩效管理",
@@ -241,13 +190,14 @@ const major = [
 export default {
   data() {
     return {
-      recommend,
       major, //专业
       current: 0, //专业默认索引
       industryCurrent: 0, //行业默认索引
       majorHeight: "40px", //专业默认高
       industryHeight: "40px", //行业默认高
       typeName: this.$route.query.type, //页面标题
+      tabs: ["案例", "观点", "方法"],
+      tabActive: 0,
     };
   },
   asyncData({ query, params }) {
@@ -256,14 +206,18 @@ export default {
   },
   methods: {
     //跳转到文章详情
-    goDetail(id){
+    goDetail(id) {
       this.$router.push({
-        path:`/subscription/${id}`
-      })
+        path: `/dy/${id}`,
+      });
     },
     //点击专业每一项
     oNitem(index) {
       this.current = index;
+    },
+    //点击tabs
+    onTab(index) {
+      this.tabActive = index;
     },
     //点击行业每一项
     industryItem(index) {
@@ -271,19 +225,19 @@ export default {
     },
     //点击专业全部
     allFn() {
-      if(this.majorHeight == "auto"){
-        this.majorHeight='40px'
-      }else{
-        this.majorHeight = "auto"
+      if (this.majorHeight == "auto") {
+        this.majorHeight = "40px";
+      } else {
+        this.majorHeight = "auto";
       }
     },
     //点击行业全部
     industryAllFn() {
-      if(this.industryHeight == "auto"){
-        this.industryHeight='40px'
-        console.log('==')
-      }else{
-        this.industryHeight = "auto"
+      if (this.industryHeight == "auto") {
+        this.industryHeight = "40px";
+        console.log("==");
+      } else {
+        this.industryHeight = "auto";
       }
     },
   },
@@ -313,6 +267,36 @@ export default {
         background: #ffffff;
         border-radius: 6px;
         padding: 0px 32px 24px;
+        .tabs {
+          padding-top: 10px;
+          height: 52px;
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid #e7e7e7;
+          li {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.65);
+            line-height: 22px;
+            margin-right: 36px;
+          }
+          .tabActive {
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.85);
+            position: relative;
+            &:after {
+              content: "";
+              position: absolute;
+              left: 50%;
+              bottom: -16px;
+              width: 36px;
+              height: 2px;
+              background: rgba(0,0,0,0.85);;
+              transform: translateX(-50%);
+              z-index: 100;
+            }
+          }
+        }
         .major-container {
           display: flex;
           font-size: 14px;
@@ -474,112 +458,7 @@ export default {
         }
       }
     }
-    .content-container-main-right {
-      width: 346px;
-      .title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .more {
-          font-size: 14px;
-          font-weight: 400;
-          color: rgba(0, 0, 0, 0.45);
-          line-height: 22px;
-        }
-      }
-      .hot-recommend {
-        width: 306px;
-        height: 262px;
-        background: #ffffff;
-        border-radius: 6px;
-        padding: 20px;
-        ul {
-          margin-top: 16px;
-          li a {
-            display: flex;
-            margin-bottom: 18px;
-            span {
-              display: inline-block;
-              min-width: 16px;
-              height: 16px;
-              background: #bfbfbf;
-              border-radius: 2px;
-              font-size: 14px;
-              font-weight: 400;
-              text-align: center;
-              color: #ffffff;
-              line-height: 16px;
-            }
-            p {
-              width: 271px;
-              font-size: 14px;
-              font-weight: 400;
-              color: rgba(0, 0, 0, 0.85);
-              line-height: 14px;
-              margin-left: 7px;
-            }
-          }
-          li:nth-last-child(1) {
-            margin-bottom: 0px;
-          }
-        }
-      }
-      .selections {
-        margin: 22px 0px;
-        width: 306px;
-        background: #ffffff;
-        border: 1px solid rgba(255, 255, 255, 0);
-        border-radius: 6px;
-        padding: 20px;
-        ul {
-          li {
-            margin-top: 18px;
-            font-size: 14px;
-            font-weight: 400;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.85);
-            line-height: 20px;
-          }
-        }
-      }
-      .sub-selections {
-        width: 306px;
-        height: 311px;
-        background: #ffffff;
-        border: 1px solid rgba(255, 255, 255, 0);
-        border-radius: 6px;
-        padding: 20px;
-        .magazine-img {
-          margin: 22px 0px;
-          width: 305px;
-          height: 146px;
-          position: relative;
-        }
-        .headline {
-          font-size: 14px;
-          font-weight: 400;
-          text-align: left;
-          color: rgba(0, 0, 0, 0.85);
-          line-height: 28px;
-        }
-        .contribute {
-          width: 306px;
-          height: 32px;
-          border: 1px solid #ed6d38;
-          border-radius: 2px;
-          font-size: 14px;
-          font-weight: 400;
-          text-align: center;
-          color: #ed6d38;
-          line-height: 30px;
-          margin-top: 28px;
-        }
-        .contribute:hover {
-          background: #ed6d38;
-          color: #fff;
-        }
-      }
-    }
+
   }
 }
 </style>

@@ -35,39 +35,37 @@ export default {
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
-      console.log(index, "---");
-      if (index == 1 || index == 2 || index == 3) {
-        // this.$router.push("/home/way");
+      if (index == 1) {
         this.$router.push({
-          name: "catalogue-id",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "zff",
         });
-      } else if (index == 4) {
+      } else if (index == 2) {
         this.$router.push({
-          name: "catalogue-magazines",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "xal",
+        });
+      }else if (index == 3) {
+        this.$router.push({
+          name: "jdk",
+        });
+      }else if (index == 4) {
+        this.$router.push({
+          name: "zz",
         });
       } else if (index == 5) {
         this.$router.push({
-          name: "catalogue-go-book",
-          query: { id: index, type: item },
+          name: "gsd",
+          // query: { id: index, type: item },
           // params: {
           //   type: item,
           // },
         });
       } else if (index == 6) {
         this.$router.push({
-          name: "catalogue-Information",
-          query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
+          name: "tzx",
+        });
+      }else if (index == 7) {
+        this.$router.push({
+          name: "kzt",
         });
       }
       // if (index == 2) {
@@ -86,7 +84,7 @@ export default {
   background: #ffffff;
   border-radius: 6px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
-  margin-right: 22px;
+  // margin-right: 22px;
   ul {
     padding: 10px 14px;
     li {
@@ -98,6 +96,9 @@ export default {
       text-align: center;
       color: rgba(0, 0, 0, 0.85);
       line-height: 47px;
+      &:nth-child(1){
+        display: none;
+      }
     }
     li:last-child {
       border-bottom: none;

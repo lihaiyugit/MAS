@@ -18,7 +18,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>大咖说</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -97,7 +97,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>荐读</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -165,7 +165,7 @@
                 <div class="title-box">
                   <div class="top">
                     <h2>课程推荐</h2>
-                    <span>查看更多</span>
+                    <span class="more">查看更多</span>
                   </div>
                   <div class="line"></div>
                 </div>
@@ -179,7 +179,7 @@
                 <div class="title-box">
                   <div class="top">
                     <h2>最新活动</h2>
-                    <span>查看更多</span>
+                    <nuxt-link to="/activity" class="more">查看更多</nuxt-link>
                   </div>
                   <div class="line"></div>
                 </div>
@@ -193,7 +193,7 @@
                 <div class="title-box">
                   <div class="top">
                     <h2>新一期杂志</h2>
-                    <span>查看更多</span>
+                    <nuxt-link to="/zz/list" class="more">查看更多</nuxt-link>
                   </div>
                   <div class="line"></div>
                 </div>
@@ -217,7 +217,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>淘咨讯</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -269,7 +269,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>找方法</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -320,7 +320,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>共创内容</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -366,7 +366,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>看专题</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -418,7 +418,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>逛书店</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -443,7 +443,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>投稿更多</h2>
-                  <span>查看更多</span>
+                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
@@ -620,12 +620,13 @@ export default {
   }
   .layout-right {
     margin-left: 210px;
+    width: 990px;
     .advert {
-      width: 1002px;
+      // width: 1002px;
       height: 404px;
     }
     .two-advert {
-      width: 1004px;
+      // width: 1002px;
       height: 130px;
       margin: 22px 0px;
     }
@@ -690,9 +691,9 @@ export default {
         }
       }
       .keyword_box {
-        margin: 20px 0px 14px;
+        margin: 20px 0px 10px;
         span {
-          padding: 2px 8px;
+          padding: 2px 7px;
           margin-right: 8px;
           margin-bottom: 8px;
           display: inline-block;
@@ -715,7 +716,7 @@ export default {
           border-bottom: 1px solid #e7e7e7;
           padding-bottom: 18px;
 
-          span {
+          .more {
             font-size: 14px;
             font-weight: 400;
             color: #787878;
@@ -731,8 +732,8 @@ export default {
       }
 
       .container-one {
-        width: 346px;
-        height: 717px;
+        width: 340px;
+        // height: 717px;
         background: linear-gradient(
           245deg,
           #e9ebf1 0%,
@@ -744,7 +745,7 @@ export default {
         box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
         margin-right: 14px;
         &:nth-child(3) {
-          width: 283px;
+          width: 282px;
           margin-right: 0px;
         }
 
@@ -816,14 +817,14 @@ export default {
       }
 
       .container-two {
-        width: 346px;
-        height: 462px;
+        width: 340px;
+        // height: 462px;
         background: #ffffff;
         border: 1px solid rgba(255, 255, 255, 0);
         border-radius: 6px;
         margin-right: 14px;
         &:nth-child(3) {
-          width: 284px;
+          width: 282px;
           margin-right: 0px;
         }
         .two-content {
@@ -920,14 +921,14 @@ export default {
       display: flex;
       margin: 25px 0px;
       .advert-box-left {
-        width: 838px;
+        width: 830px;
         height: 95px;
         background: #e47b38;
         border-top-left-radius: 6px;
         border-bottom-left-radius: 6px;
       }
       .advert-box-right {
-        width: 168px;
+        width: 160px;
         height: 95px;
         background: #4c4948;
         border-top-right-radius: 6px;
@@ -935,7 +936,7 @@ export default {
       }
     }
     .four-advert {
-      width: 1002px;
+      // width: 1002px;
       height: 92px;
       margin: 23px 0px;
     }
