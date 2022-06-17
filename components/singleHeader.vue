@@ -1,6 +1,6 @@
 
 <template>
-  <div class="sub-header" ref="sigleheader">
+  <div class="sub-header" ref="sigleheader" id="sub-header">
     <div class="banxin sub-header-main">
       <div class="sub-header-main-left">
         <nuxt-link to="/">
@@ -54,6 +54,7 @@ export default {
   methods: {
     // 滚动监听  滚动触发的效果写在这里
     handleScroll() {
+      var X = 0.8; //行高缩小比例
       // 页面滚动高度
       var scrollTop =
         window.pageYOffset ||
@@ -61,21 +62,21 @@ export default {
         document.body.scrollTop;
       // 可视区域高度
       let clientHeight = document.documentElement.clientHeight;
-      if (scrollTop >= clientHeight / 2) {
-        // this.defaultStyle = this.fixed;
-        this.$refs.sigleheader["style"].top = 0 + "px";
-        this.$refs.sigleheader["style"].transition = "all 0.8s ease 0s";
+      if (scrollTop >= 37) {
+        // this.$refs.sigleheader["style"].top = 0 + "px";
+        this.$refs.sigleheader["style"].transition = "all 0.5s ease";
+        $('.sub-header').addClass("middle-header");
       } else {
-        // this.defaultStyle = this.isfixed;
-        this.$refs.sigleheader["style"].top = 37 + "px";
-        this.$refs.sigleheader["style"].transition = "all 0.8s ease 0s";
+        // this.$refs.sigleheader["style"].top = 37 + "px";
+        // this.$refs.sigleheader["style"].height = `${84 - X * scrollTop}px`;
+        this.$refs.sigleheader["style"].transition = "all 0.5s ease";
+        $('.sub-header').removeClass("middle-header");
       }
     },
     //点击搜索跳转
     onSearch() {
       console.log(this.searchValue);
       if (this.searchValue != "") {
-        console.log('===')
         this.$router.push({
           name: "search",
           // path: "/search",
@@ -84,10 +85,11 @@ export default {
           //   keyword: this.searchValue,
           // },
         });
-      }else{
-         this.$message.error("请输入搜索词");
+      } else {
+        this.$message.error("请输入搜索词");
       }
     },
+    //点击每一项菜单
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
@@ -124,12 +126,6 @@ export default {
           name: "kzt",
         });
       }
-      // if (index == 2) {
-      //   this.$router.push("/home/case");
-      // }
-      // if (index == 3) {
-      //   this.$router.push("/home/master");
-      // }
     },
   },
   destroyed() {
@@ -138,9 +134,18 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.middle-header {
+  position: fixed;
+  top: 0px !important;
+  left: 0;
+  padding: 16px 0px !important;
+  z-index: 100000 !important;
+  transition: all 0.5s ease !important;
+  animation: fadeInDown 0.5s both 0.2s;
+}
 .sub-header {
   width: 100%;
-  height: 84px;
+  padding: 24px 0px;
   background: #ffffff;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -155,6 +160,9 @@ export default {
     .sub-header-main-left {
       display: flex;
       align-items: center;
+      a {
+        display: flex;
+      }
       img {
         width: 48px;
         height: 20px;
@@ -163,6 +171,7 @@ export default {
 
       ul {
         display: flex;
+        cursor: pointer;
         li {
           margin-left: 32px;
           font-size: 14px;
@@ -185,7 +194,7 @@ export default {
         display: flex;
         align-items: center;
         position: relative;
-
+        cursor: pointer;
         input {
           width: 176px;
           height: 36px;

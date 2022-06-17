@@ -1,8 +1,8 @@
 <template>
   <div class="wapper">
-    <!-- <Menu/> -->
     <Header/>
     <nuxt />
+    <BackTop/>
     <Footer />
   </div>
 </template>

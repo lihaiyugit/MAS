@@ -16,6 +16,7 @@
     "core-js": "^3.19.3",
     "element-ui": "^2.15.6",
     "file-saver": "^2.0.5",
+    "js-md5": "^0.7.3",
     "lib-flexible": "^0.3.2",
     "nuxt": "^2.15.8",
     "postcss-px2rem": "^0.3.0",

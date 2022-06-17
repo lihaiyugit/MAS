@@ -1,41 +1,46 @@
 <template>
   <div class="main_container">
-    <SubHeader />
+    <SubHeader v-bind:hotWord="indexData.hotWord" />
     <div class="banxin layout-container">
       <div class="layout-left" ref="leftTab">
         <MainLeft />
       </div>
       <div class="layout-right">
         <div class="advert">
-          <img src="@/static/images/advert01.png" alt="" />
+          <img :src="indexData.bannel[0].mas_banner_img" alt="" />
+          <!-- <img src="@/static/images/advert01.png" alt="" /> -->
         </div>
         <div class="two-advert">
-          <img src="@/static/images/advert02.png" alt="" />
+          <!-- <img src="@/static/images/advert02.png" alt="" /> -->
+          <img :src="indexData.advertising[0].mas_advertising_img" alt="" />
         </div>
         <div class="main-container" data-aos="fade-up">
           <div class="container-one">
             <div class="container-one-left">
               <div class="title-box">
                 <div class="top">
-                  <h2>大咖说</h2>
-                  <span class="more">查看更多</span>
+                  <h2>{{ indexData.master.title }}</h2>
+                  <nuxt-link to="/jdk" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="left-content">
-                <li>
-                  <h5>财务共享中心的功能定位、成功因素与未来趋势探讨</h5>
+                <li
+                  v-for="(item, index) in indexData.master.masterTheory"
+                  :key="index"
+                >
+                  <h5>{{ item.mas_master_list_title }}</h5>
                   <div class="base">
                     <div class="left">
                       <img class="icon" src="@/static/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
+                      <span>{{ item.mas_master_list_addtime }}</span>
                       <img class="icon" src="@/static/images/chat.png" alt="" />
-                      <span>3</span>
+                      <span>{{ item.commont_num }}</span>
                     </div>
-                    <span class="right">刘勤</span>
+                    <span class="right">{{ item.mas_master_user_name }}</span>
                   </div>
                 </li>
-                <li>
+                <!-- <li>
                   <h5>财务共享中心的功能定位、成功因素与未来趋势探讨</h5>
                   <div class="base">
                     <div class="left">
@@ -70,12 +75,16 @@
                     </div>
                     <span class="right">刘勤</span>
                   </div>
-                </li>
+                </li> -->
               </ul>
               <div class="middle-line"></div>
-              <h5>猜你想认识的大咖</h5>
+              <h5 style="height: auto">猜你想认识的大咖</h5>
               <div class="keyword_box">
-                <span>王军</span>
+                <span
+                  v-for="(item, index) in indexData.master.masterList"
+                  :key="index"
+                  >{{ item.mas_master_user_name }}</span
+                >
                 <span>于增彪</span>
                 <span>郝宇晓</span>
                 <span>叶康涛 </span>
@@ -83,13 +92,11 @@
                 <span>李连清</span>
                 <span>王秀明</span>
                 <span>冈野浩</span>
-                <span>杨良 </span>
-                <span>李守武</span>
               </div>
-              <div class="skip-box">
-                <span>阅读详情</span>
+              <nuxt-link to="/jdk" class="skip-box">
+                <span>查看更多</span>
                 <img src="../static/images/arrows-left.png" alt="" />
-              </div>
+              </nuxt-link>
             </div>
           </div>
           <div class="container-one">
@@ -97,30 +104,32 @@
               <div class="title-box">
                 <div class="top">
                   <h2>荐读</h2>
-                  <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="middle-content">
-                <li>
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
+                <li
+                  v-for="(jdItem, jdIndex) in indexData.recommend"
+                  :key="jdIndex"
+                >
+                  <h5>{{ jdItem.mas_article_title }}</h5>
                   <div class="base">
                     <div class="left">
                       <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
+                      <span>{{ jdItem.mas_article_addtime }}</span>
                       <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
+                      <span>{{ jdItem.commont_num }}</span>
                     </div>
                   </div>
-                  <p>
-                    企业财务人员不仅是企业的价值管理者，而且业财融合新模式正在赋予财务人员更多新角色。
+                  <p style="height: 40px">
+                    {{ jdItem.mas_article_introduce }}
                   </p>
                   <div class="skip-box">
                     <span>阅读详情</span>
                     <img src="../static/images/arrows-left.png" alt="" />
                   </div>
                 </li>
-                <li>
+                <!-- <li>
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
@@ -155,7 +164,7 @@
                     <span>阅读详情</span>
                     <img src="/images/arrows-left.png" alt="" />
                   </div>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -185,7 +194,8 @@
                 </div>
                 <div class="advert-box">
                   <div class="img">
-                    <img src="/images/sub-advert02.png" alt="" />
+                    <!-- <img src="/images/sub-advert02.png" alt="" /> -->
+                    <img :src="indexData.newActivity.mas_activity_img" alt="" />
                   </div>
                 </div>
               </div>
@@ -193,13 +203,17 @@
                 <div class="title-box">
                   <div class="top">
                     <h2>新一期杂志</h2>
-                    <nuxt-link to="/zz/list" class="more">查看更多</nuxt-link>
+                    <nuxt-link to="/zz" class="more">查看更多</nuxt-link>
                   </div>
                   <div class="line"></div>
                 </div>
                 <div class="advert-box">
                   <div class="img">
-                    <img src="/images/way/zz.png" alt="" />
+                    <!-- <img src="/images/way/zz.png" alt="" /> -->
+                    <img
+                      :src="indexData.newMagazine.mas_magazine_master_img"
+                      alt=""
+                    />
                     <div class="point">新书</div>
                   </div>
                 </div>
@@ -216,25 +230,28 @@
             <div class="two-content">
               <div class="title-box">
                 <div class="top">
-                  <h2>淘咨讯</h2>
-                  <span class="more">查看更多</span>
+                  <h2>淘资讯</h2>
+                  <nuxt-link to="/tzx" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
-                <li>
+                <li
+                  v-for="(tzItem, tzIndex) in indexData.articleTzx"
+                  :key="tzIndex"
+                >
                   <div class="li-left">
-                    <img src="/images/sub-advert06.png" alt="" />
+                    <img :src="tzItem.mas_article_img" alt="" />
                     <div class="point">推荐</div>
                   </div>
                   <div class="li-right">
                     <h5 class="reset twoline">
-                      36氪首发｜构建品牌东南亚出海高速路…
+                      {{ tzItem.mas_article_title }}
                     </h5>
                     <div class="base">
                       <div class="left">
                         <img class="icon" src="/images/time.png" alt="" />
-                        <span>JULY 1, 2019</span>
+                        <span>{{ tzItem.mas_article_addtime }}</span>
                       </div>
                     </div>
                   </div>
@@ -269,35 +286,31 @@
               <div class="title-box">
                 <div class="top">
                   <h2>找方法</h2>
-                  <span class="more">查看更多</span>
+                  <nuxt-link to="/zff" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
                 <li>
                   <div class="keyword_box">
-                    <span>预算</span>
-                    <span>管理会计</span>
-                    <span>数字化转型</span>
-                    <span>数字化转型 </span>
-                    <span>关键字</span>
-                    <span>管理会计</span>
-                    <span>数字化转型</span>
-                    <span>数字化转型</span>
-                    <span>关键字</span>
-                    <span>管理会计</span>
-                    <span>数字化转型</span>
-                    <span>数字化转型</span>
+                    <span
+                      v-for="(item, index) in indexData.articleZff.tag"
+                      :key="index"
+                      >{{ item.mas_tag_name }}</span
+                    >
                   </div>
                 </li>
-                <li>
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
+                <li
+                  v-for="(item, index) in indexData.articleZff.Zff"
+                  :key="index"
+                >
+                  <h5>{{ item.mas_article_title }}</h5>
                   <div class="base">
                     <div class="left">
                       <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
+                      <span>{{ item.mas_article_addtime }}</span>
                       <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
+                      <span>{{ item.commont_num }}</span>
                     </div>
                   </div>
                 </li>
@@ -366,7 +379,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>看专题</h2>
-                  <span class="more">查看更多</span>
+                  <nuxt-link to="kzt" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
@@ -418,19 +431,24 @@
               <div class="title-box">
                 <div class="top">
                   <h2>逛书店</h2>
-                  <span class="more">查看更多</span>
+                  <nuxt-link to="/gsd" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
-              <div class="two-content-mid">
+              <div class="two-content-mid" @click="details(1)">
                 <div class="img-box">
                   <img src="/images/sub-advert05.png" alt="" />
+                  <!-- <img :src="indexData.bookstoreList[0].mas_book_img" alt="" /> -->
                 </div>
-                <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
+                <h5>
+                  {{ indexData.bookstoreList[0].mas_book_name }}
+                </h5>
                 <div class="base">
                   <div class="left">
                     <img class="icon" src="/images/time.png" alt="" />
-                    <span>DECEMBER 30, 2016</span>
+                    <span>{{
+                      indexData.bookstoreList[0].mas_book_addtime
+                    }}</span>
                     <img class="icon" src="/images/chat.png" alt="" />
                     <span>3</span>
                   </div>
@@ -443,7 +461,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>投稿更多</h2>
-                  <span class="more">查看更多</span>
+                  <!-- <span class="more">查看更多</span> -->
                 </div>
                 <div class="line"></div>
               </div>
@@ -487,10 +505,10 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import { getSliders } from "../request/api";
+import { getSliders, notNeedlogin } from "@/request/api";
+import md5 from "js-md5";
 export default {
   // middleware:'auth', //局部中间件
-  name: "IndexPage",
   data() {
     return {
       list: [],
@@ -500,6 +518,7 @@ export default {
       numPages: 0,
       src: "",
       vuePdf: null,
+      indexData: "", //首页接口获取数据
     };
   },
   head() {
@@ -521,26 +540,37 @@ export default {
       ],
     };
   },
-
-  // computed:{
-  //   ...mapState(['userName'])
-  // },
   computed: {
+    // ...mapState(['userName'])
     ...mapState({
       password: (state) => state.user.password,
     }),
   },
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, route, store, env, params, query, error }) {
     // let res = await getSliders($axios);
     //  let res =await $axios.get('https://v2.chinamas.cn/api/slider/getSliders');
     // console.log(res.data.list);
     // asyncData 中没有this
     // return { list: res.list };
+    let timestamp = Date.parse(new Date());
+    let sign = md5(timestamp + store.state.secretKey);
+    let res = await notNeedlogin($axios, {
+      sign: sign,
+      timespan: timestamp,
+      className: "HomeController",
+      classMethod: "home",
+    });
+    if (res.bol) {
+      return { indexData: res.data };
+    }
   },
   created() {
     this.$store.commit("setHeaderWidth", "1200px");
+    this.$store.commit("setIsFixedHeader", true);
   },
   mounted() {
+    this.$store.commit("setIsFixedHeader", true);
+    console.log(this.indexData, "indexData");
     // if (process.client) {
     //   this.vuePdf = require("vue-pdf");
     //   this.pdfLoadTask();
@@ -577,26 +607,40 @@ export default {
       let clientHeight = document.documentElement.clientHeight;
       // 中间内容框高度
       let rightHight = document.querySelector(".layout-right").offsetHeight;
+      //一级菜单高度 22 间距
+      var headerTop = document.querySelector(".header").offsetHeight;
       // 二级菜单栏高度
       let subHight = document.querySelector(".sub-header").offsetHeight;
       let subTop = document.querySelector(".sub-header").offsetTop;
       // 总高度
-      let allHeight = rightHight - subHight - 295; //295 底部高度
-      var headerTop = document.querySelector(".header").offsetHeight;
-      if (scrollTop >= clientHeight / 5 && scrollTop < allHeight) {
+      let allHeight = rightHight - subHight - 327; //404 底部高度
+
+      if (scrollTop >= subHight && scrollTop < allHeight) {
         this.$refs.leftTab["style"].position = "fixed";
-        this.$refs.leftTab["style"].top = 189 + "px";
+        this.$refs.leftTab["style"].top = headerTop + subHight + 30 + "px";
       } else if (scrollTop > allHeight) {
         this.$refs.leftTab["style"].position = "absolute";
         this.$refs.leftTab["style"].top = allHeight + "px";
       } else {
         this.$refs.leftTab["style"].position = "absolute";
-        this.$refs.leftTab["style"].top = 22 + "px";
+        this.$refs.leftTab["style"].top = 30 + "px";
       }
+    },
+    //点击到详情
+    details(id) {
+      this.$router.push({
+        path: `/gsd/${id}`,
+        // name: "",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
+      });
     },
   },
   destroyed() {
     this.$store.commit("setHeaderWidth", "1100px");
+    this.$store.commit("setIsFixedHeader", false);
     window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
   },
 };
@@ -607,13 +651,12 @@ export default {
   width: 1200px !important;
 }
 .main_container {
-  padding-top: 204px !important;
+  padding-top: 168px !important;
 }
-
 .layout-container {
   display: flex;
   justify-content: space-between;
-  padding: 22px 0px;
+  padding: 30px 0px 50px 0px;
   position: relative;
   .layout-left {
     position: absolute;
@@ -633,23 +676,23 @@ export default {
     .main-container {
       display: flex;
       h2 {
-        font-size: 22px;
-        font-weight: 600;
-        text-align: left;
+        font-size: 18px;
+        font-weight: 500;
         color: rgba(0, 0, 0, 0.85);
         line-height: 22px;
       }
       h5 {
         font-size: 16px;
-        font-weight: 600;
-        text-align: left;
+        font-weight: 400;
         color: rgba(0, 0, 0, 0.85);
         line-height: 24px;
+        height: 48px;
       }
       .base {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        height: 22px;
         margin-top: 12px;
         .left {
           display: flex;
@@ -697,10 +740,10 @@ export default {
           margin-right: 8px;
           margin-bottom: 8px;
           display: inline-block;
-          background: #f3f3f3;
+          background: rgba(0, 0, 0, 0.02);
           font-size: 12px;
           font-weight: 400;
-          color: rgba(0, 0, 0, 0.65);
+          color: rgba(0, 0, 0, 0.45);
           line-height: 17px;
         }
         span:hover {
@@ -719,8 +762,9 @@ export default {
           .more {
             font-size: 14px;
             font-weight: 400;
-            color: #787878;
+            color: rgba(0, 0, 0, 0.35);
             line-height: 22px;
+            cursor: pointer;
           }
         }
         .line {
@@ -733,16 +777,9 @@ export default {
 
       .container-one {
         width: 340px;
-        // height: 717px;
-        background: linear-gradient(
-          245deg,
-          #e9ebf1 0%,
-          #f6f7f9 23%,
-          #ffffff 95%
-        );
-
+        background: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0);
         border-radius: 6px;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
         margin-right: 14px;
         &:nth-child(3) {
           width: 282px;
@@ -769,7 +806,7 @@ export default {
               width: 306px;
               margin-top: 26px;
               border-bottom: 1px dashed #e7e7e7;
-              padding-bottom: 25px;
+              padding-bottom: 13px;
               &:last-child {
                 border-bottom: none;
               }
@@ -781,11 +818,10 @@ export default {
                 font-weight: 400;
                 color: rgba(0, 0, 0, 0.45);
                 line-height: 20px;
-                margin-bottom: 15px;
+                margin-bottom: 18px;
               }
               .base {
-                margin-top: 12px;
-                margin-bottom: 15px;
+                margin-bottom: 13px;
               }
             }
           }
@@ -801,7 +837,7 @@ export default {
             opacity: 0.25;
             background: #d8d8d8;
             border-radius: 6px;
-            margin: 15px 0px;
+            margin: 18px 0px;
           }
 
           .advert-box {

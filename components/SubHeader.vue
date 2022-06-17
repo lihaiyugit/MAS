@@ -2,7 +2,9 @@
   <div class="sub-header" ref="subHeader">
     <div class="banxin container">
       <div class="content-top">
-        <img :src="require('@/static/images/logo.png')" alt="" />
+        <nuxt-link to="/">
+          <img :src="require('@/static/images/logo.png')" alt="" />
+        </nuxt-link>
         <div class="search-box">
           <div class="select-group" v-close>
             <div class="input-group" @click="selectClick">
@@ -29,10 +31,15 @@
           <div class="search" @click="onSearch">搜索</div>
         </div>
         <p>
-          <span @click="onItem(1,'站内热词')">站内热词</span>
-          <span @click="onItem(2,'站内热词')">站内热词</span>
-          <span @click="onItem(3,'站内热词')">站内热词</span>
-          <span @click="onItem(4,'站内热词')">站内热词</span>
+          <span
+            v-for="(item, index) in hotWord"
+            :key="index"
+            @click="onItem(item.mas_tag_id, item.mas_tag_name)"
+            >{{ item.mas_tag_name }}</span
+          >
+          <!-- <span @click="onItem(2, '站内热词')">站内热词</span>
+          <span @click="onItem(3, '站内热词')">站内热词</span>
+          <span @click="onItem(4, '站内热词')">站内热词</span> -->
         </p>
       </div>
       <div class="content-base">
@@ -43,9 +50,9 @@
         </div>
         <div class="base-right">
           <img src="/images/pen.png" alt="" />
-          <span class="one-span">我要投稿</span>
+          <nuxt-link to="/wytg" class="one-span">我要投稿</nuxt-link>
           <img src="/images/bag.png" alt="" />
-          <span>购买杂志</span>
+          <nuxt-link to="/zz">购买杂志</nuxt-link>
         </div>
       </div>
     </div>
@@ -54,6 +61,14 @@
 
 <script>
 export default {
+  props: {
+    hotWord: {
+      type: Array,
+      // default() {
+      //   return [];
+      // }
+    }, // 热词数据
+  },
   data() {
     return {
       defaultValue: "搜专业",
@@ -90,20 +105,21 @@ export default {
         document.body.scrollTop;
       // 可视区域高度
       let clientHeight = document.documentElement.clientHeight;
-      if (scrollTop >= clientHeight / 2) {
-        // this.defaultStyle = this.fixed;
-        this.$refs.subHeader["style"].top = 0 + "px";
-        this.$refs.subHeader["style"].transition = "all 0.8s ease 0s";
+      if (scrollTop >= 37) {
+        // this.$refs.subHeader["style"].top = 0 + "px";
+        this.$refs.subHeader["style"].transition = "all 0.5s ease";
+        $(".sub-header").addClass("sticky");
       } else {
-        // this.defaultStyle = this.isfixed;
-        this.$refs.subHeader.style.top = 37 + "px";
-        this.$refs.subHeader["style"].transition = "all 0.8s ease 0s";
+        // this.$refs.subHeader.style.top = 37 + "px";
+        this.$refs.subHeader["style"].transition = "all 0.5s ease";
+        $(".sub-header").removeClass("sticky");
+        console.log('===')
       }
     },
     //点击搜索跳转
     onSearch() {
       if (this.searchValue != "") {
-        console.log('===')
+        console.log("===");
         this.$router.push({
           name: "search",
           // path: "/search",
@@ -112,19 +128,19 @@ export default {
           //   keyword: this.searchValue,
           // },
         });
-      }else{
-         this.$message.error("请输入搜索词");
+      } else {
+        this.$message.error("请输入搜索词");
       }
     },
     //点击站内热词
-     onItem(index,val) {
-       this.$router.push({
-          path: "/search",
-          query: { keyword: val ,index:index,},
-          // params: {
-          //   type: item,
-          // },
-        });
+    onItem(index, val) {
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, index: index },
+        // params: {
+        //   type: item,
+        // },
+      });
     },
     selectClick() {
       this.selectList = !this.selectList; //点击显示或隐藏下拉框
@@ -142,31 +158,47 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 300000;
+  transition: all 0.5s ease;
+  animation: fadeInDown 0.5s both 0.2s;
+}
+.sticky .content-top {
+  padding: 14px 0px !important;
+}
+.sticky .content-base {
+  display: none !important;
+}
+
 .sub-header {
   width: 100%;
-  height: 167px;
+  //二级菜单固定
   position: fixed;
   top: 37px;
   left: 0px;
   background: #ffffff;
   z-index: 998;
   .container {
-    padding-top: 38px;
     .content-top {
       display: flex;
       align-items: center;
+      padding: 27px 0px 17px;
       img {
-        width: 84px;
-        height: 36px;
+        width: 62px;
+        height: 26px;
         border-radius: 0px;
       }
 
       .search-box {
-        width: 476px;
-        height: 46px;
-        background: #f2f3f5;
+        width: 422px;
+        height: 40px;
+        background: #f7f8fa;
         border-radius: 4px 0px 0px 4px;
-        margin: 0px 27px;
+        margin: 0px 27px 0px 30px;
         display: flex;
         align-items: center;
         position: relative;
@@ -176,8 +208,8 @@ export default {
           margin-top: -6px;
         }
         input {
-          width: 286px;
-          background-color: #f2f3f5;
+          width: 250px;
+          background: #f7f8fa;
           border: none;
           border-radius: 4px 0px 0px 4px;
           text-indent: 12px;
@@ -212,7 +244,7 @@ export default {
 
         .search {
           width: 87px;
-          height: 46px;
+          height: 40px;
           background: linear-gradient(
             90deg,
             #f34250 0%,
@@ -220,12 +252,12 @@ export default {
             #ff7d3b 100%
           );
           border-radius: 0px 4px 4px 0px;
-          font-size: 16px;
+          font-size: 14px;
           font-family: PingFangSC, PingFangSC-Regular;
           font-weight: 400;
           text-align: center;
           color: #ffffff;
-          line-height: 46px;
+          line-height: 40px;
           position: absolute;
           top: 0px;
           right: 0px;
@@ -237,19 +269,18 @@ export default {
         .input-group {
           display: flex;
           align-items: center;
-          height: 45px;
+          height: 40px;
           padding: 0px 12px 0px 15px;
           .title {
-            font-size: 16px;
-            font-family: PingFangSC, PingFangSC-Regular;
+            font-size: 14px;
             font-weight: 400;
             text-align: left;
             color: rgba(0, 0, 0, 0.85);
             line-height: 22px;
           }
           img {
-            width: 16px;
-            height: 16px;
+            width: 13px;
+            height: 7px;
             margin-left: 8px;
           }
           .select_img_rotate {
@@ -285,15 +316,14 @@ export default {
         }
       }
       p {
-        font-size: 14px;
-        font-family: PingFangSC, PingFangSC-Regular;
+        font-size: 13px;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.65);
-        line-height: 46px;
+        color: rgba(0, 0, 0, 0.55);
+        line-height: 22px;
         margin-bottom: 0px;
-
         span {
           margin-right: 25px;
+          cursor: pointer;
         }
       }
     }
@@ -301,19 +331,16 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 34px;
-
       .base-left {
         height: 47px;
         display: flex;
         align-items: center;
         .span {
           font-size: 14px;
-          font-family: PingFangSC, PingFangSC-Regular;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.85);
           line-height: 22px;
-          margin-right: 45px;
+          margin-right: 40px;
         }
         img {
           width: 126px;
@@ -323,13 +350,15 @@ export default {
       .base-right {
         display: flex;
         align-items: center;
+        cursor: pointer;
         img {
           width: 14px;
           height: 14px;
           margin-right: 4px;
           margin-top: 2px;
         }
-        span {
+        span,
+        a {
           font-size: 14px;
           font-family: PingFangSC, PingFangSC-Regular;
           font-weight: 400;

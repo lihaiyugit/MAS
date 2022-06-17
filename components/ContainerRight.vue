@@ -8,7 +8,7 @@
         <nuxt-link to="/activity" class="more">查看更多</nuxt-link>
       </div>
       <div class="selections-main">
-        <a href="https://www.chinamas.cn/hd/17">
+        <a href="">
           <dl>
             <dt>
               <img
@@ -20,7 +20,7 @@
             <dd>数字化企业与管理会计体系转型研讨会</dd>
           </dl>
         </a>
-        <a href="https://www.chinamas.cn/hd/16">
+        <a href="">
           <dl>
             <dt>
               <img
@@ -31,7 +31,7 @@
             <dd>数字化赋能产业互联</dd>
           </dl>
         </a>
-        <a href="https://www.chinamas.cn/hd/15">
+        <a href="">
           <dl>
             <dt>
               <img

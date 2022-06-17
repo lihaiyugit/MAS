@@ -6,26 +6,30 @@
         <div class="content-container-main-left">
           <div class="banner">
             <img src="../../static/images/way/kzt-banner.png" alt="" />
+            <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
           <div class="zt-list">
             <div class="list-title">
               <h2>MAS专题</h2>
-              <span>查看更多</span>
             </div>
             <div class="list-content">
               <dl class="dl">
                 <dt>
-                  <nuxt-link to="/szhzt">
+                  <nuxt-link to="/szhzx">
                     <img src="../../static/images/way/zt-1.png" alt="" />
                   </nuxt-link>
                 </dt>
                 <dd>
-                  <h5>数字化转型</h5>
+                  <nuxt-link to="/szhzx" class="h5-box">
+                    <h5>数字化转型</h5>
+                    <span class="into">进入专题</span>
+                  </nuxt-link>
+
                   <p>
                     在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…
                   </p>
                   <div class="share-l">
-                    <span>分享文章</span>
+                    <span>分享到</span>
                     <a
                       href="https://service.weibo.com/share/share.php?appkey=595885820&url=https://v2.chinamas.cn/szhzx&title=数字化转型"
                       target="_blank"
@@ -57,12 +61,15 @@
                   </nuxt-link>
                 </dt>
                 <dd>
-                  <h5>管理会计</h5>
+                  <nuxt-link to="/glkj" class="h5-box">
+                    <h5>管理会计</h5>
+                    <span class="into">进入专题</span>
+                  </nuxt-link>
                   <p>
                     在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…
                   </p>
                   <div class="share-l">
-                    <span>分享文章</span>
+                    <span>分享到</span>
                     <a
                       href="https://service.weibo.com/share/share.php?appkey=595885820&url=/glkj&title=管理会计"
                       target="_blank"
@@ -78,7 +85,10 @@
                         <div class="w_txt">微信扫码</div>
                       </div>
                     </div>
-                    <a href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/glkj&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…" target="_blank" deta-title="豆瓣分享"
+                    <a
+                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/glkj&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
+                      target="_blank"
+                      deta-title="豆瓣分享"
                       ><img src="../../static/images/db.png"
                     /></a>
                   </div>
@@ -89,7 +99,7 @@
           </div>
         </div>
         <!-- 左侧内容 -->
-        <ContainerRight/>
+        <ContainerRight />
       </div>
     </div>
   </div>
@@ -115,7 +125,7 @@ export default {
       background: "#f0f",
       foreground: "#ff0",
     });
-     // 生成二维码
+    // 生成二维码
     let qr1 = new QRCode("qrcode", {
       width: 88,
       height: 88, // 高度
@@ -126,7 +136,6 @@ export default {
     });
   },
   methods: {
-
     //分享的微博
     shareToSinaWB(event) {
       event.preventDefault();
@@ -170,6 +179,15 @@ export default {
       .banner {
         width: 100%;
         height: 302px;
+        position: relative;
+        .wytg {
+          position: absolute;
+          bottom: 24%;
+          left: 8%;
+          width: 122px;
+          height: 38px;
+          cursor: pointer;
+        }
       }
       .zt-list {
         width: 671px;
@@ -208,6 +226,7 @@ export default {
             font-weight: 400;
             color: rgba(0, 0, 0, 0.45);
             line-height: 22px;
+            cursor: pointer;
           }
         }
         .list-content {
@@ -224,6 +243,17 @@ export default {
             }
             dd {
               width: 420px;
+              .h5-box {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .into {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: rgba(0, 0, 0, 0.45);
+                  line-height: 14px;
+                }
+              }
               h5 {
                 font-size: 18px;
                 font-weight: 600;
@@ -242,9 +272,10 @@ export default {
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
+                cursor: pointer;
                 span {
                   display: inline-block;
-                  width: 77px;
+                  width: 63px;
                   height: 26px;
                   background: #f7f8fa;
                   border-radius: 2px;

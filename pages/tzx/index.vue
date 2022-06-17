@@ -746,22 +746,7 @@ export default {
           color: rgba(0, 0, 0, 0.85);
           line-height: 28px;
         }
-        .contribute {
-          width: 306px;
-          height: 32px;
-          border: 1px solid #ed6d38;
-          border-radius: 2px;
-          font-size: 14px;
-          font-weight: 400;
-          text-align: center;
-          color: #ed6d38;
-          line-height: 30px;
-          margin-top: 28px;
-        }
-        .contribute:hover {
-          background: #ed6d38;
-          color: #fff;
-        }
+
       }
     }
   }

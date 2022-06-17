@@ -287,7 +287,7 @@ export default {
     details(id) {
       this.$router.push({
         path: `/zz/${id}`,
-        // name: "catalogue-zz",
+        // name: "",
         // query: { id: index, type: item },
         // params: {
         //   type: item,

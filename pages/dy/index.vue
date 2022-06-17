@@ -10,10 +10,10 @@
         />
         <h2>“阅”享，读懂企业管理</h2>
         <p>新形式下的企业管理，深度文章、杂志，您想看的都在这里！</p>
-        <div class="send">
+        <nuxt-link to="/wytg" class="send">
           <span>我要投稿</span>
           <img src="../../static/images/way/Outlined.png" alt="" />
-        </div>
+        </nuxt-link>
       </div>
     </div>
     <div class="module">
@@ -52,7 +52,7 @@
               <img class="dy" src="../../static/images/dy.png" alt="" />
               <div class="title">
                 <h6>学案例</h6>
-                <a href="" class="more">查看更多</a>
+                <nuxt-link to="/xal" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -82,7 +82,7 @@
               <!-- <img class="dy" src="../../static/images/dy.png" alt="" /> -->
               <div class="title">
                 <h6>找方法</h6>
-                <a href="" class="more">查看更多</a>
+                <nuxt-link to="/zff" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -112,7 +112,7 @@
               <img class="dy" src="../../static/images/dy.png" alt="" />
               <div class="title">
                 <h6>淘咨询</h6>
-                <a href="" class="more">查看更多</a>
+                <nuxt-link to="/tzx" class="more">查看更多</nuxt-link>
               </div>
 
               <div class="info">
@@ -136,7 +136,7 @@
               <!-- <img class="dy" src="../../static/images/dy.png" alt="" /> -->
               <div class="title">
                 <h6>见大咖</h6>
-                <a href="" class="more">查看更多</a>
+                <nuxt-link to="/jdk" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -166,7 +166,7 @@
               <!-- <img class="dy" src="../../static/images/dy.png" alt="" /> -->
               <div class="title">
                 <h6>数字化转型</h6>
-                <nuxt-link to="/szhzt" class="more">查看更多</nuxt-link>
+                <nuxt-link to="/szhzx" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -257,7 +257,7 @@
         <div class="magazine-title">
           <h2>管理会计研究</h2>
           <div class="more-btn">
-            <span>查看更多</span>
+            <nuxt-link to="/zz/list">查看更多</nuxt-link>
             <img src="../../static/images/arrows-left.png" alt="" />
           </div>
         </div>
@@ -346,7 +346,7 @@
         <div class="magazine-title">
           <h2>其他杂志</h2>
           <div class="more-btn">
-            <span>查看更多</span>
+             <nuxt-link to="/zz/list">查看更多</nuxt-link>
             <img src="../../static/images/arrows-left.png" alt="" />
           </div>
         </div>
@@ -467,15 +467,15 @@ export default {
   methods: {
     //点击立即订阅
     buyFn() {
-      this.$router.push({
-        name: "by-pay",
+       this.$router.push({
+        name: "dy-pay",
       });
     },
     //点击杂志每一个
     details(id) {
       this.$router.push({
         path: `/zz/${id}`,
-        // name: "catalogue-zz",
+        // name: "",
         // query: { id: index, type: item },
         // params: {
         //   type: item,
@@ -487,7 +487,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  padding: 23px 0px 40px;
+  padding: 30px 0px 40px;
   .banner {
     width: 1100px;
     height: 392px;
@@ -641,6 +641,7 @@ export default {
           border: none;
           margin-top: 37px;
           display: block;
+          cursor: pointer;
         }
       }
     }
@@ -805,6 +806,7 @@ export default {
                 font-weight: 400;
                 color: #ffffff;
                 line-height: 22px;
+                cursor: pointer;
               }
             }
             &:hover .more {
@@ -861,7 +863,7 @@ export default {
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
         }
-        .more-btn {
+        .more-btn{
           display: flex;
           align-items: center;
           font-size: 14px;
@@ -870,6 +872,9 @@ export default {
           color: rgba(0, 0, 0, 0.85);
           line-height: 22px;
           cursor: pointer;
+          a{
+             color: rgba(0, 0, 0, 0.85);
+          }
           img {
             width: 13px;
             height: 8px;
@@ -883,6 +888,7 @@ export default {
         dl {
           width: 178px;
           margin: 46px 52px 68px 0px;
+          cursor: pointer;
           dt {
             .dt-img {
               width: 100%;

@@ -18,16 +18,14 @@
           “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
         </div>
         <div class="support-box">
-          <img class="triangle" src="../../static/images/triangle.png" alt="" />
-          <div class="login-info" style="display: none">
-            <div class="info-tip">
-              <p><span>登录</span> 后继续阅读文章</p>
-            </div>
-            <div class="vip-tip">MAS收费文章请订阅后查看全文</div>
-            <button class="upgrade-btn">订阅/升级会员</button>
-          </div>
-          <div class="login-info">
-            <div class="vip-tip">本文为付费文章，更多精彩内容可付费查看！</div>
+          <!-- v-if="isPay == 0" -->
+          <div style="border-bottom:1px solid #f00;">
+            <img
+              class="triangle"
+              src="../../static/images/triangle.png"
+              alt=""
+            />
+            <div class="info-tip">本文为付费文章，更多精彩内容可付费查看！</div>
             <div class="radio-group">
               <div class="radio-box">
                 <input
@@ -49,8 +47,38 @@
                 <label>10积分</label>
               </div>
             </div>
-            <button class="upgrade-btn">立即购买</button>
-            <button class="dy-btn">订阅/升级会员</button>
+            <button class="buy-btn" @click="goLogin">立即购买</button>
+            <div class="open-box">
+              <p>畅读学案例栏目所有内容！</p>
+              <div class="go-open">
+                去开通
+                <img src="../../static/images/light-arrow.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <!-- v-else-if="isPay == 1" -->
+          <div style="border-bottom:1px solid #f00;">
+            <div class="open-box">
+              <p>畅读学案例栏目所有内容！</p>
+              <div class="go-open">
+                去开通
+                <img src="../../static/images/light-arrow.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <!-- v-else -->
+          <div style="border-bottom:1px solid #f00;">
+            <div class="dy-tip">
+              <div class="dy-tip-l">
+                <img src="../../static/images/hy.png" alt="">
+                <span>您已订阅本文章所属栏目，可以畅读栏目所有付费文章，订阅剩余时长</span>
+                <span class="day">100天</span>
+              </div>
+              <div class="dy-tip-r">
+                <span>去续费</span>
+                <img src="../../static/images/way/right02.png" alt="">
+              </div>
+            </div>
           </div>
         </div>
         <!-- <share :config="config"></share> -->
@@ -249,6 +277,36 @@
       </div>
       <!-- 右侧文章相关部分 -->
       <articleModule />
+      <!-- 未登录未支付 -->
+      <el-dialog
+
+        :lock-scroll="false"
+        :visible.sync="loginVisible"
+        width="420px"
+        class="login-box"
+        center
+      >
+        <LoginBox/>
+      </el-dialog>
+      <!-- 已登录未支付 -->
+      <el-dialog
+        title="扫码订阅支付"
+        :lock-scroll="false"
+        :visible.sync="payVisible"
+        width="316px"
+        center
+      >
+       <div class="pay-box">
+         <p>扫码完成付费，可订阅本模块</p>
+         <div class="code-box">
+           <img src="	https://www.chinamas.cn/static/picImG/header-footer/footer.jpg" alt="">
+         </div>
+         <div class="base-tip">
+           <img src="../../static/images/weixin.png" alt="">
+           <span>扫码支付</span>
+         </div>
+       </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -263,6 +321,10 @@ export default {
       textarea: "",
       isFixed: false,
       isLogin: false,
+      isPay: 3, // 0未登录未付款状态 1已登录已支付未订阅
+      isLoginIsPay: 0, //0 未登录未付款状态 1已登录未付款
+      loginVisible: false, //未登录弹框
+      payVisible: false, //已登录未支付
       // config: {
       //   url: window.location.href, // 网址，默认使用 window.location.href
       //   source: "", // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
@@ -330,6 +392,14 @@ export default {
   },
 
   methods: {
+    //点击立即支付未登录状态
+    goLogin() {
+      if (this.isLoginIsPay == 0) {
+        this.loginVisible = true;
+      } else {
+        this.payVisible = true;
+      }
+    },
     // 滚动监听  滚动触发的效果写在这里
     handleScroll() {
       // 页面滚动高度
@@ -414,452 +484,5 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.content-container {
-  padding: 48px 0px 200px 0px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px 0 rgb(114 76 76 / 10%);
-  .article-main {
-    display: flex;
-    justify-content: space-between;
-    .article-main-left {
-      width: 696px;
-      .title {
-        font-size: 14px;
-        font-family: PingFang, PingFang-Regular;
-        font-weight: 400;
-        text-align: left;
-        color: rgba(0, 0, 0, 0.45);
-        line-height: 12px;
-        span {
-          color: rgba(0, 0, 0, 0.85);
-        }
-      }
-      h1 {
-        font-size: 34px;
-        font-family: PingFangSC, PingFangSC-Semibold;
-        font-weight: 600;
-        text-align: left;
-        color: rgba(0, 0, 0, 0.85);
-        line-height: 50px;
-        padding-top: 20px;
-      }
-      .details-info {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        font-weight: 400;
-        text-align: left;
-        color: rgba(0, 0, 0, 0.85);
-        line-height: 14px;
-        padding: 24px 0px 20px;
-        border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
-        .line {
-          width: 0px;
-          height: 18px;
-          border: 1px dashed rgba(0, 0, 0, 0.15);
-          margin: 0px 16px;
-        }
-        .type {
-          color: #ed6d38;
-        }
-        img {
-          width: 14px;
-          height: 14px;
-          border-radius: 0px;
-        }
-        span {
-          margin-left: 3px;
-        }
-      }
-      .content {
-        font-size: 16px;
-        font-weight: 400;
-        text-align: left;
-        color: rgba(0, 0, 0, 0.85);
-        line-height: 30px;
-        padding: 36px 0px 64px;
-      }
-      .support-box {
-        margin-bottom: 72px;
-        .triangle {
-          width: 20px;
-          height: 5px;
-          margin: 0 auto;
-          display: block;
-          margin-bottom: 30px;
-        }
-        .login-info {
-          .info-tip {
-            width: 100%;
-            height: 64px;
-            background: #f7f8fa;
-            margin-bottom: 47px;
-            p {
-              font-size: 16px;
-              font-weight: 500;
-              text-align: center;
-              line-height: 60px;
-              color: rgba(0, 0, 0, 0.65);
-              span {
-                color: #ea3a3a;
-                border-bottom: 1px solid #ea3a3a;
-              }
-            }
-          }
-          .vip-tip {
-            font-size: 16px;
-            font-weight: 500;
-            text-align: center;
-            color: #bc996d;
-            line-height: 22px;
-          }
-          .upgrade-btn {
-            display: block;
-            margin: 22px auto 27px;
-            width: 182px;
-            height: 44px;
-            background: linear-gradient(
-              90deg,
-              #f34250 0%,
-              #f28a51 81%,
-              #ff7d3b 100%
-            );
-            border-radius: 22px;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
-          }
-          .radio-group {
-            justify-content: center;
-            margin-top: 22px;
-          }
-          .dy-btn {
-            display: block;
-            margin: 0 auto;
-            width: 182px;
-            height: 44px;
-            border: 2px solid #ed6d38;
-            border-radius: 24px;
-            background: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            color: #ed6d38;
-          }
-        }
-      }
-      .share {
-        width: 644px;
-        height: 24px;
-        background: #fafbff;
-
-        padding: 20px 26px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .share-l {
-          display: flex;
-          align-items: center;
-          span {
-            font-size: 14px;
-            font-weight: 400;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.65);
-            line-height: 12px;
-          }
-
-          img {
-            width: 24px;
-            height: 24px;
-
-            border-radius: 0px;
-          }
-          a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 27px;
-            position: relative;
-          }
-          a[deta-title]:after {
-            content: attr(deta-title);
-            position: absolute;
-            left: 50%;
-            bottom: 100%;
-            transform: translate(-50%, 0);
-            width: 130px;
-            height: 80px;
-            background: url(https://www.tmtpost.com/public/img/common/bg_tips.png);
-            background-size: 100% 100%;
-            color: gray;
-            font-size: 14px;
-            line-height: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-          }
-          a[deta-title]:hover:after {
-            transition-delay: 100ms;
-            visibility: visible;
-            transform: translate(-50%, -6px);
-            opacity: 1;
-          }
-
-          .dropdown-menu-part {
-            position: relative;
-            white-space: normal;
-            i {
-              display: flex;
-              align-items: center;
-            }
-          }
-          .dropdown-menu {
-            padding: 15px 20px;
-            position: absolute;
-            top: 54px;
-            background: #fff;
-            border: 1px solid rgba(26, 53, 71, 0.12);
-            border-radius: 4px;
-            box-shadow: 0 1px 2px rgba(26, 53, 71, 0.1);
-            opacity: 0;
-            filter: alpha(opacity=0);
-            -ms-filter: alpha(opacity=0);
-            zoom: 1;
-            pointer-events: none;
-            transition: 0.25s cubic-bezier(0.3, 0, 0, 1.3);
-            &::before {
-              content: "";
-              position: absolute;
-              top: -7px;
-              right: calc(50% - 9px);
-              right: -webkit-calc(50% - 9px);
-              right: -moz-calc(50% - 9px);
-              width: 13px;
-              height: 7px;
-              z-index: 4;
-              background: url(https://www.tmtpost.com/public/css/img/dropdown-menu-arrow.svg);
-            }
-          }
-          .dropdown-menu.visible {
-            opacity: 1;
-            filter: alpha(opacity=100);
-            -ms-filter: alpha(opacity=100);
-            zoom: 1;
-            pointer-events: auto;
-            -webkit-transform: none;
-            transform: none;
-            z-index: 3;
-            display: none;
-          }
-          .dropdown-menu-part:hover .visible {
-            display: block;
-          }
-          .dropdown-menu:before {
-            transform: rotate(180deg);
-            bottom: -7px;
-            top: unset;
-          }
-          .dropdown-menu {
-            top: -164px;
-            left: -30px;
-          }
-
-          .dropdown-menu {
-          transform: scale(0.8) translateY(-30%);
-          }
-
-          .w_txt {
-            text-align: center;
-            font-size: 12px;
-          }
-          /deep/#qrcode {
-            img {
-              width: 88px;
-              height: 88px;
-              border-radius: 0px;
-            }
-          }
-        }
-        .share-r {
-          display: flex;
-          align-items: center;
-          .share-r-item {
-            margin-left: 22px;
-            display: flex;
-            align-items: center;
-            &:nth-child(1) img {
-              width: 20px;
-            }
-            img {
-              width: 16px;
-              border-radius: 0px;
-            }
-            span {
-              font-size: 14px;
-              font-weight: 400;
-              color: rgba(0, 0, 0, 0.65);
-              margin-left: 8px;
-              margin-top: -4px;
-            }
-          }
-        }
-      }
-      .fixedShare {
-        position: fixed;
-        bottom: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.15);
-        z-index: 999;
-        transition: all 0.3s ease;
-      }
-      .comment-box {
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 22px;
-        .comments_mod_v1 {
-          .comment {
-            padding: 5px 16px;
-            background: #ed6d38;
-            border-radius: 2px;
-            font-size: 14px;
-            font-weight: 400;
-            color: #ffffff;
-            border: none;
-            margin-top: 22px;
-          }
-          .post-comment {
-            padding-top: 22px;
-            h6 {
-              font-size: 13px;
-              font-weight: 400;
-              color: rgba(0, 0, 0, 0.45);
-              line-height: 20px;
-              margin-bottom: 24px;
-              text-align: center;
-            }
-            .login-tip {
-              height: 128px;
-              border: 4px solid #f7f7f7;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              p {
-                font-size: 14px;
-                font-weight: 400;
-                text-align: left;
-                color: rgba(0, 0, 0, 0.85);
-                line-height: 20px;
-                .login {
-                  color: #ed6d38;
-                }
-              }
-            }
-
-            /deep/.el-textarea__inner {
-              height: 124px;
-
-              border: 1px solid #e5e5e5;
-              color: rgba(0, 0, 0, 0.85);
-              font-size: 14px;
-            }
-            /deep/.el-textarea__inner:focus {
-              outline: none !important;
-              border: 1px solid #ed6d38;
-            }
-          }
-          .comment-list {
-            ul {
-              padding-top: 36px;
-              li {
-                display: flex;
-                align-items: flex-start;
-                margin-bottom: 36px;
-                .li-l {
-                  min-width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                }
-                .li-r {
-                  margin-left: 12px;
-                  padding-bottom: 32px;
-                  border-bottom: 1px solid #e5e5e5;
-                  .li-r-info {
-                    font-size: 14px;
-                    line-height: 20px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    h6 {
-                      font-weight: 400;
-                      color: rgba(0, 0, 0, 0.85);
-                    }
-                    span {
-                      margin-left: 10px;
-                      color: rgba(0, 0, 0, 0.45);
-                    }
-                  }
-                  .li-r-comment {
-                    font-size: 16px;
-                    font-weight: 400;
-                    text-align: left;
-                    color: rgba(0, 0, 0, 0.85);
-                    line-height: 24px;
-                    padding: 18px 0px;
-                  }
-                  .li-r-base {
-                    display: flex;
-                    align-items: center;
-                    img {
-                      width: 16px;
-                      height: 14px;
-                      border-radius: 0px;
-                    }
-
-                    span {
-                      font-size: 14px;
-                      font-weight: 400;
-                      color: rgba(0, 0, 0, 0.45);
-                      line-height: 20px;
-                      margin: 0px 22px 0px 6px;
-                    }
-                  }
-                }
-              }
-            }
-            .li-r-reply {
-              margin-top: 38px;
-              background: #f7f7f7;
-              ul {
-                padding: 22px;
-                li {
-                  margin-bottom: 22px;
-                  .li-l {
-                    min-width: 28px;
-                    height: 28px;
-                  }
-                  .li-r {
-                    width: 94%;
-                  }
-                  &:last-child {
-                    margin-bottom: 0px;
-                  }
-                  &:last-child .li-r {
-                    padding-bottom: 0px;
-                    border-bottom: none;
-                  }
-                }
-              }
-            }
-
-            .post-comment {
-              padding-top: 0px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+@import "@/static/css/page-css/article.less";
 </style>

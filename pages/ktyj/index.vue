@@ -38,7 +38,6 @@
                 </ul>
               </div>
             </div>
-            <div class="title-r">查看更多</div>
           </div>
           <div class="type-list">
             <swiper
@@ -63,8 +62,18 @@
                     <p><span>报告专家：</span>刘勤，韩向东，贾小强</p>
                     <p class="time"><span>发布时间：</span>2021年9月28日</p>
                     <div class="btn">
-                      <button @click="tryRead()">试读</button>
-                      <button>下载</button>
+                      <button
+                        :style="{
+                          backgroundColor: backgroundColor1,
+                          color: color1,
+                        }"
+                        @click="tryRead()"
+                      >
+                        试读
+                      </button>
+                      <button @mouseover="changeStyle1" @mouseout="restStyle1">
+                        下载
+                      </button>
                     </div>
                   </dd>
                 </dl>
@@ -86,8 +95,17 @@
                     <p><span>报告专家：</span>刘勤，韩向东，贾小强</p>
                     <p class="time"><span>发布时间：</span>2021年9月28日</p>
                     <div class="btn">
-                      <button>试读</button>
-                      <button>下载</button>
+                      <button
+                        :style="{
+                          backgroundColor: backgroundColor1,
+                          color: color1,
+                        }"
+                      >
+                        试读
+                      </button>
+                      <button @mouseover="changeStyle1" @mouseout="restStyle1">
+                        下载
+                      </button>
                     </div>
                   </dd>
                 </dl>
@@ -137,8 +155,19 @@
                   我们基于开放、分享、合作、共创的原则，现面向高等院校、企事业单位、学术机构、专业机构等单位和个人招募合作研究者，共同组建或参与数字化管理、业财融合、管理会计、数据分析、财务共享、新技术融合等相关课题的联合研究团队，共同推动以各方研究成果为基础的课题合作。我们将为学者老师提供课题指导、活动交流、成果数据分享、论文投稿推荐、出版专著推荐、成果发表等支持，赋能研究人员的课题研究工作。
                 </p>
                 <div class="btn">
-                  <button @click="JGVisible = true">机构合作</button>
-                  <button @click="personalVisible = true">个人合作</button>
+                  <button
+                    :style="{ backgroundColor: backgroundColor, color: color }"
+                    @click="JGVisible = true"
+                  >
+                    机构合作
+                  </button>
+                  <button
+                    @mouseover="changeStyle"
+                    @mouseout="restStyle"
+                    @click="personalVisible = true"
+                  >
+                    个人合作
+                  </button>
                 </div>
               </dd>
             </dl>
@@ -373,7 +402,7 @@ export default {
       current: "-1", //下拉默认选中项
       swiperOption: {
         watchOverflow: true, //当没有足够的slide切换时，例如只有1个slide（非loop），swiper会失效且隐藏导航。
-        grabCursor: true, //设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
+        // grabCursor: true, //设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
         effect: "slide", //切换效果：默认为“位移切换”
         loop: true, // 无限循环
         autoplay: false, //可选选项，自动滑动
@@ -410,9 +439,13 @@ export default {
         email: "",
         direction: "数字化",
       }, //个人表单
+      backgroundColor: "",
+      color: "",
+      backgroundColor1: "",
+      color1: "",
     };
   },
-    //点击空白处关闭下拉框
+  //点击空白处关闭下拉框
   directives: {
     close: {
       inserted(el, binding, vnode) {
@@ -460,6 +493,22 @@ export default {
       this.selectList = false;
       this.defaultValue = item;
       this.current = index;
+    },
+    changeStyle() {
+      this.backgroundColor = "#fff";
+      this.color = "#ed6d38";
+    },
+    restStyle() {
+      this.backgroundColor = "#ed6d38";
+      this.color = "#fff";
+    },
+    changeStyle1() {
+      this.backgroundColor1 = "#fff";
+      this.color1 = "#ed6d38";
+    },
+    restStyle1() {
+      this.backgroundColor1 = "#ed6d38";
+      this.color1 = "#fff";
     },
   },
 };
@@ -643,23 +692,30 @@ export default {
               }
               .btn {
                 button {
+                  cursor: pointer;
                   padding: 5px 16px;
                   border: 1px solid #ed6d38;
+                  border-radius: 2px;
                   font-size: 14px;
                   font-weight: 400;
-                  color: #ffffff;
                   line-height: 22px;
                   &:nth-child(1) {
+                    color: #ffffff;
                     background: #ed6d38;
-                    border-radius: 2px;
                   }
                   &:nth-child(2) {
                     background: #fff;
-
-                    border-radius: 2px;
                     color: #ed6d38;
                     margin-left: 32px;
+                    &:hover {
+                      color: #ffffff;
+                      background: #ed6d38;
+                    }
                   }
+                  // &:nth-child(2):hover + &:nth-child(1) {
+                  //   background: #fff;
+                  //   color: #ed6d38;
+                  // }
                 }
               }
             }
@@ -690,6 +746,7 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
             img {
               width: 8px;
               height: 14px;

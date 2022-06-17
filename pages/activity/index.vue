@@ -1,7 +1,7 @@
 <template>
   <div class="activity-container banxin">
     <div class="banner">
-      <img src="../../static/images/ad-banner.png" alt="" />
+      <img src="../../static/images/hd-banner.png" alt="" />
     </div>
     <div class="tabbar">
       <span class="screen">活动筛选：</span>
@@ -47,15 +47,14 @@
       </div>
     </div>
     <div class="list">
-      <dl>
+      <dl @click="details(1)">
         <dt>
           <img src="../../static/images/ad-img.png" alt="" />
         </dt>
         <dd>
-          <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <p class="twoline">
-            《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章…
-          </p>
+          <h5>
+            数字化企业与管理会计体系转型研讨会数字化企业与管理会计体系转型研讨会
+          </h5>
           <div class="dd-base">
             <div class="left state-one">报名中</div>
             <div class="right">
@@ -67,15 +66,12 @@
           </div>
         </dd>
       </dl>
-      <dl>
+      <dl @click="details(2)">
         <dt>
           <img src="../../static/images/ad-img.png" alt="" />
         </dt>
         <dd>
           <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <p class="twoline">
-            《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章…
-          </p>
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
@@ -87,15 +83,12 @@
           </div>
         </dd>
       </dl>
-      <dl>
+      <dl @click="details(3)">
         <dt>
           <img src="../../static/images/ad-img.png" alt="" />
         </dt>
         <dd>
           <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <p class="twoline">
-            《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章…
-          </p>
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
@@ -107,15 +100,46 @@
           </div>
         </dd>
       </dl>
-      <dl>
+      <dl @click="details(4)">
         <dt>
           <img src="../../static/images/ad-img.png" alt="" />
         </dt>
         <dd>
           <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <p class="twoline">
-            《管理会计研究》杂志的订阅既可以订阅电子刊也可以订阅纸质刊，也可以就杂志单篇文章订阅。该杂志以管理会计理论和实践创新为基础，通过专业的深度文章…
-          </p>
+          <div class="dd-base">
+            <div class="left state-two">已结束</div>
+            <div class="right">
+              <img class="time" src="@/static/images/time.png" alt="" />
+              <span>2022-03-14</span>
+              <img class="map" src="../../static/images/map.png" alt="" />
+              <span>北京</span>
+            </div>
+          </div>
+        </dd>
+      </dl>
+      <dl @click="details(4)">
+        <dt>
+          <img src="../../static/images/hd-rw.png" alt="" />
+        </dt>
+        <dd>
+          <h5>数字化企业与管理会计体系转型研讨会</h5>
+          <div class="dd-base">
+            <div class="left state-two">已结束</div>
+            <div class="right">
+              <img class="time" src="@/static/images/time.png" alt="" />
+              <span>2022-03-14</span>
+              <img class="map" src="../../static/images/map.png" alt="" />
+              <span>北京</span>
+            </div>
+          </div>
+        </dd>
+      </dl>
+      <dl @click="details(4)">
+        <dt>
+          <img src="../../static/images/hd-rw.png" alt="" />
+        </dt>
+        <dd>
+          <h5>数字化企业与管理会计体系转型研讨会</h5>
           <div class="dd-base">
             <div class="left state-two">已结束</div>
             <div class="right">
@@ -132,6 +156,8 @@
   </div>
 </template>
 <script>
+import { notNeedlogin } from "@/request/api";
+import md5 from "js-md5";
 export default {
   scrollToTop: true,
   data() {
@@ -150,7 +176,7 @@ export default {
       pageSize: 3, //当前页
     };
   },
-    //点击空白处关闭下拉框
+  //点击空白处关闭下拉框
   directives: {
     close: {
       inserted(el, binding, vnode) {
@@ -161,7 +187,7 @@ export default {
         });
       },
     },
-    closeType:{
+    closeType: {
       inserted(el, binding, vnode) {
         window.addEventListener("click", (e) => {
           if (!el.contains(e.target)) {
@@ -169,9 +195,21 @@ export default {
           }
         });
       },
-    }
+    },
   },
-  asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+  async asyncData({ $axios, store }) {
+    let timestamp = Date.parse(new Date());
+    let sign = md5(timestamp + store.state.secretKey);
+    let res = await notNeedlogin($axios, {
+      sign: sign,
+      timespan: timestamp,
+      className: "HomeController",
+      classMethod: "activityList",
+    });
+    // console.log(res, "res-活动列表");
+    if (res.bol) {
+      return { listData: res.data };
+    }
     //请求接口总数
     //  this.listData=res.data.task;
     // this.showData=res.data.task.slice((this.pageIndex-1) * this.pageSize, this.pageIndex * this.pageSize),
@@ -203,26 +241,32 @@ export default {
     },
     //点击查看更多
     moreFn() {
-    //   let that = this;
-    //   let pageIndex = that.pageIndex + 1;
-    //   if (that.listData.length / that.pageSize > that.pageIndex) {
-    //     that.showData = that.listData.slice(
-    //       (pageIndex - 1) * that.pageSize,
-    //       pageIndex * that.pageSize
-    //     );
-    //     that.pageIndex = pageIndex;
-    //   } else {
-    //     console.log("最后一页了哟！");
-    //   }
+      //   let that = this;
+      //   let pageIndex = that.pageIndex + 1;
+      //   if (that.listData.length / that.pageSize > that.pageIndex) {
+      //     that.showData = that.listData.slice(
+      //       (pageIndex - 1) * that.pageSize,
+      //       pageIndex * that.pageSize
+      //     );
+      //     that.pageIndex = pageIndex;
+      //   } else {
+      //     console.log("最后一页了哟！");
+      //   }
+    },
+    //点击到详情
+    details(id) {
+      this.$router.push({
+        path: `/activity/${id}`,
+      });
     },
   },
 };
 </script>
 <style lang="less" scoped>
 .activity-container {
-  padding: 20px 0px 40px;
+  padding: 30px 0px 40px;
   .banner {
-    height: 231px;
+    height: 160px;
   }
   .tabbar {
     height: 59px;
@@ -249,6 +293,7 @@ export default {
         height: 100%;
         padding: 0px 0px 0px 12px;
         .title {
+          font-size: 14px;
           font-weight: 500;
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
@@ -304,41 +349,37 @@ export default {
     display: flex;
     flex-wrap: wrap;
     dl {
-      width: 526px;
-      margin-right: 46px;
+      width: 346px;
+      margin-right: 28px;
       margin-bottom: 30px;
+      cursor: pointer;
       dt {
-        height: 316px;
+        height: 208px;
         img {
-          border-radius: 6px 6px 0px 0px;
+          border-radius: 0px;
         }
       }
       dd {
-        width: 484px;
-        height: 150px;
+        padding: 24px 0px 26px 0px;
+        width: 344px;
         border: 1px solid #eeeeee;
         border-radius: 0px 0px 6px 6px;
-        padding: 20px;
+        margin-top: -4px;
         h5 {
-          font-size: 18px;
+          height: 48px;
+          font-size: 16px;
           font-weight: 600;
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
+          padding: 0px 15px 25px 18px;
         }
-        p {
-          width: 471px;
-          font-size: 13px;
-          font-weight: 400;
-          color: rgba(0, 0, 0, 0.45);
-          line-height: 20px;
-          margin: 15px 0px;
-        }
+
         .dd-base {
           display: flex;
           justify-content: space-between;
           align-items: center;
           border-top: 1px dashed#eeeeee;
-          padding-top: 30px;
+          padding-top: 25px;
           .left {
             width: 56px;
             height: 22px;
@@ -348,6 +389,7 @@ export default {
             font-weight: 400;
             text-align: center;
             line-height: 21px;
+            margin-left: 20px;
           }
           .state-one {
             background: #ed6d38;
@@ -358,8 +400,9 @@ export default {
           .right {
             display: flex;
             align-items: center;
+            margin-right: 20px;
             img {
-              margin-top: 2px;
+              margin-top: 1px;
             }
             .time {
               width: 12px;
@@ -386,7 +429,7 @@ export default {
           }
         }
       }
-      &:nth-child(2n) {
+      &:nth-child(3n) {
         margin-right: 0px;
       }
     }
@@ -406,6 +449,12 @@ export default {
     justify-content: center;
     align-items: center;
     margin: 17px auto;
+    cursor: pointer;
+    &:hover {
+      background: #ed6d38;
+      color: #fff;
+      border: transparent;
+    }
   }
 }
 </style>

@@ -8,6 +8,7 @@
         @click="oNitem(index, item)"
       >
         {{ item }}
+        <!-- {{ item.mas_menu_name }} -->
         <!-- <nuxt-link :to="{name:'catalogue-id',params:{id:index+1,type:item}}">{{ item }}</nuxt-link> -->
       </li>
     </ul>
@@ -24,14 +25,35 @@ const list = [
   "淘资讯",
   "看专题",
 ];
+import { notNeedlogin } from "@/request/api";
+import md5 from "js-md5";
 export default {
   data() {
     return {
       list,
       current: 0,
+      listData: [],
     };
   },
+  async fetch() {
+    // let res = await axios.get('https://xuexiluxian.cn/');
+    let timestamp = Date.parse(new Date());
+    let sign = md5(timestamp + this.$store.state.secretKey);
+    let res = await notNeedlogin(this.$axios, {
+      sign: sign,
+      timespan: timestamp,
+      className: "NavigationController",
+      classMethod: "getLeftNavigation",
+    });
+    if (res.bol) {
+      return (this.listData = res.data);
+      // return { this.listData=res.data };
+    }
+  },
+  mounted() {},
+  created() {},
   methods: {
+    //点击每一个栏目
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
@@ -43,11 +65,11 @@ export default {
         this.$router.push({
           name: "xal",
         });
-      }else if (index == 3) {
+      } else if (index == 3) {
         this.$router.push({
           name: "jdk",
         });
-      }else if (index == 4) {
+      } else if (index == 4) {
         this.$router.push({
           name: "zz",
         });
@@ -63,7 +85,7 @@ export default {
         this.$router.push({
           name: "tzx",
         });
-      }else if (index == 7) {
+      } else if (index == 7) {
         this.$router.push({
           name: "kzt",
         });
@@ -84,36 +106,28 @@ export default {
   background: #ffffff;
   border-radius: 6px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
-  // margin-right: 22px;
   ul {
     padding: 10px 14px;
     li {
       width: 160px;
       height: 47px;
-      border-bottom: 1px solid#e7e7e7;
       font-size: 16px;
       font-weight: 400;
       text-align: center;
       color: rgba(0, 0, 0, 0.85);
       line-height: 47px;
-      &:nth-child(1){
+      cursor: pointer;
+      &:nth-child(1) {
         display: none;
       }
     }
     li:last-child {
       border-bottom: none;
     }
-    .active {
-      background: linear-gradient(90deg, #f34250 0%, #f28a51 81%, #ff7d3b 100%);
-      border-radius: 3px;
-      border-bottom: 1px solid transparent;
-      color: #ffffff;
-    }
     li:hover {
-      background: linear-gradient(90deg, #f34250 0%, #f28a51 81%, #ff7d3b 100%);
-      border-radius: 3px;
-      border-bottom: 1px solid transparent;
-      color: #ffffff;
+      background: #fff2ed;
+      border-radius: 6px;
+      color: #ed6d38;
     }
   }
 }

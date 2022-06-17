@@ -66,6 +66,7 @@ export default {
     padding: 20px;
     ul {
       margin-top: 16px;
+      cursor: pointer;
       li a {
         display: flex;
         margin-bottom: 18px;

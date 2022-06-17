@@ -5,7 +5,7 @@
     <div class="selections">
       <div class="title">
         <h3>荐读</h3>
-        <a href="" class="more">查看更多</a>
+        <!-- <a href="" class="more">查看更多</a> -->
       </div>
       <ul>
         <li class="twoline">

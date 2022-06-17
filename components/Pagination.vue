@@ -91,7 +91,7 @@ export default {
 };
 </script>
 
-<style lang="less" >
+<style lang="less" scoped>
 .pagination-container {
   background: #fff;
 }
@@ -99,25 +99,25 @@ export default {
   display: none;
 }
 
-.el-select-dropdown__item.selected {
+/deep/.el-select-dropdown__item.selected {
   color: #ed6d38 !important;
 }
-.el-pagination {
+/deep/.el-pagination {
   display: flex !important;
   justify-content: center !important;
   margin: 50px !important;
 }
-.el-pagination.is-background .el-pager li:not(.disabled).active {
+/deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #ed6d38 !important;
 }
-.el-input.is-active .el-input__inner,
+/deep/.el-input.is-active .el-input__inner,
 .el-input__inner:focus {
   border-color: #ed6d38 !important;
 }
-.el-select .el-input.is-focus .el-input__inner {
+/deep/.el-select .el-input.is-focus .el-input__inner {
   border-color: #ed6d38 !important;
 }
-.el-select .el-input__inner:focus,
+/deep/.el-select .el-input__inner:focus,
 .el-select .el-input__inner:hover {
   border-color: #ed6d38 !important;
 }

@@ -18,6 +18,8 @@ export default {
     script: [
       { src: '/js/qrcode.min.js' },
       { src: '/js/jquery.js' },
+      { src: "https://ssl.captcha.qq.com/TCaptcha.js" },
+      { src: '/js/wxLogin.js' }
       // { src: '/js/lazyload.js' },
     ]
 
@@ -32,8 +34,8 @@ export default {
 
   ],
   //自定义进度条颜色
-  loading: { color: '#ed6d38', height: '2px' }, // loading:false,//禁用
-
+  // loading: { color: '#ed6d38', height: '2px' }, // loading:false,//禁用
+  loading:false,
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
 
@@ -47,6 +49,7 @@ export default {
     { src: '@/plugins/filters.js', ssr: true },
     { src: '@/plugins/lazyload', ssr: true },
     { src: '@/plugins/pdf.js', ssr: false },
+    // { src: '@/plugins/map.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,26 +68,26 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  // const baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
+  // const baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     // 服务端访问前缀
-    // baseURL: """,
+    // baseURL: 'https://develop.chinamas.cn',
     // 客户端访问前缀
     // browserBaseURL: "",
     proxy: true,//是否允许跨域 开启代理
-    prefix: '/', //表示给请求url加个前缀 /api
+    // prefix: '/api', //表示给请求url加个前缀 /api
     credentials: true,// 表示跨域请求时是否需要使用凭证
   },
-  proxy: {
-    // '/api': {
-    //   target: '', // 目标服务器ip
-    //   changeOrigin: true, // 表示是否跨域
-    //   pathRewrite: {
-    //     '^/api': '/',// 把 /api 替换成 /
-    //   },
-    // }
-  },
+  // proxy: {
+  //   '/api': {
+  //     target: 'https://develop.chinamas.cn', // 目标服务器ip
+  //     changeOrigin: true, // 表示是否跨域
+  //     pathRewrite: {
+  //       '^/api': '/',// 把 /api 替换成 /
+  //     },
+  //   }
+  // },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
@@ -169,6 +172,8 @@ export default {
     host: '127.0.0.1'
   },
   router: {
+    linkActiveClass: 'nuxt-link-active',
+    linkExactActiveClass: 'nuxt-link-exact-active',
     // mode: 'hash',
     // base: '/static/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
     // middleware:'midd',//全局生效

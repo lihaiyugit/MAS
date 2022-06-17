@@ -41,7 +41,9 @@
               <h5>获得收益</h5>
             </dt>
             <dd>
-              <p>作者可通过撰写收费文章或以授课的方式，按照平台分成标准赚取收益。</p>
+              <p>
+                作者可通过撰写收费文章或以授课的方式，按照平台分成标准赚取收益。
+              </p>
             </dd>
           </dl>
           <dl>
@@ -174,30 +176,20 @@
           </div>
         </div>
       </div>
-      <div class="create banxin" data-aos="fade-up">
+      <div class="create banxin">
         <h2>创作学院</h2>
         <div class="create-main">
           <div class="frame create-main-left">
             <div class="left">
-              <video
-                ref="movie"
-                poster="https://www.chinamas.cn/upload/2021/01/14/16106158037960.jpg"
-                src="https://cmas-wendao-out.oss-cn-hangzhou.aliyuncs.com/Act-ss-mp4-hd/65bbef8bc28f4f0aa7c93f0f43166c42/%E9%97%AE%E9%81%932%E6%9C%9F%E8%A1%A5%E6%8B%8D5.0.mp4"
-                controls
-              ></video>
               <img
-                v-show="isplay"
+                src="https://www.chinamas.cn/upload/2021/01/14/16106158037960.jpg"
+                alt=""
+              />
+              <img
                 class="video-play"
                 src="../static/images/play.png"
                 alt=""
-                @click="handlePlay"
-              />
-              <img
-                v-show="!isplay"
-                class="video-pause"
-                src="../static/images/pause.png"
-                alt=""
-                @click="handlePause"
+                @click="videoPlay"
               />
             </div>
             <div class="right">
@@ -220,6 +212,34 @@
         </div>
       </div>
     </div>
+    <el-dialog
+      :visible.sync="videoVisible"
+      :before-close="handleClose"
+      width="700"
+    >
+      <div class="video-visible-box">
+        <video
+          ref="movie"
+          poster="https://www.chinamas.cn/upload/2021/01/14/16106158037960.jpg"
+          src="https://cmas-wendao-out.oss-cn-hangzhou.aliyuncs.com/Act-ss-mp4-hd/65bbef8bc28f4f0aa7c93f0f43166c42/%E9%97%AE%E9%81%932%E6%9C%9F%E8%A1%A5%E6%8B%8D5.0.mp4"
+          controls
+        ></video>
+        <img
+          v-show="isplay"
+          class="video-play"
+          src="../static/images/play.png"
+          alt=""
+          @click="handlePlay"
+        />
+        <img
+          v-show="!isplay"
+          class="video-pause"
+          src="../static/images/pause.png"
+          alt=""
+          @click="handlePause"
+        />
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -227,6 +247,7 @@ export default {
   data() {
     return {
       isplay: true,
+      videoVisible: false,
     };
   },
 
@@ -235,6 +256,17 @@ export default {
     // this.$refs.movie.addEventListener("pause", this.handlePause);
   },
   methods: {
+    //点击播放按钮
+    videoPlay() {
+      this.videoVisible = true;
+      setTimeout(() => {
+        this.handlePlay();
+      }, 500);
+    },
+    handleClose() {
+      this.videoVisible = false;
+      this.handlePause();
+    },
     //点击成为作者
     authorFn() {
       // this.$router.push({
@@ -251,38 +283,12 @@ export default {
       this.$refs.movie.pause();
       this.isplay = true;
     },
-
-    //播放组件
-    audioPlay() {
-      let that = this;
-      that.src =
-        "https://cmas-lis.oss-cn-hangzhou.aliyuncs.com/eded7683aa074000ba6a0dd1e26be901/TRANSCODE_1620640654182/gc-liuqin-all";
-      that.play();
-      //  this.dialogVisible = true;
-      // var audio = document.querySelector(".audio");
-      // console.log(audio)
-      // audio.autoplay = false;
-      // this.$refs.audio.play();
-    },
-    //播放
-    play() {
-      this.dialogVisible = true;
-      setTimeout(() => {
-        this.$refs.audio.play();
-      }, 500);
-    },
-    //音频暂停
-    stop() {
-      this.dialogVisible = false;
-      this.$refs.audio.pause();
-      this.$refs.audio.currentTime = 0;
-    },
   },
 };
 </script>
 <style lang="less" scoped>
 .digital-container {
-  padding: 50px 0px 60px;
+  padding: 30px 0px 50px;
   .banner {
     height: 240px;
   }
@@ -297,7 +303,13 @@ export default {
     line-height: 22px;
     border: none;
     display: block;
+    cursor: pointer;
   }
+
+  .default-btn:hover {
+    background: rgba(237, 109, 56, 0.8);
+  }
+
   .introduce {
     padding-top: 50px;
     .common-dl {
@@ -318,7 +330,7 @@ export default {
         h6 {
           font-size: 20px;
           font-weight: 500;
-          color: #000000;
+          color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
         }
         p {
@@ -327,7 +339,7 @@ export default {
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
           line-height: 20px;
-          padding: 24px 0px 30px;
+          padding: 15px 0px 30px;
         }
         .introduce-base {
           display: flex;
@@ -341,7 +353,7 @@ export default {
     font-size: 32px;
     font-weight: 600;
     text-align: center;
-    color: #232323;
+    color: rgba(0, 0, 0, 0.85);
     line-height: 32px;
     padding: 50px 0px;
   }
@@ -385,8 +397,8 @@ export default {
     }
   }
   .upgrade-plan {
-    height: 895px;
     background: #ffffff;
+    padding-bottom: 50px;
     .upgrade-plan-mian {
       margin-bottom: 52px;
       display: flex;
@@ -497,8 +509,8 @@ export default {
             }
           }
           &:nth-child(5) {
-            .one{
-               border-right: none;
+            .one {
+              border-right: none;
             }
             .three {
               height: 277px;
@@ -508,28 +520,33 @@ export default {
       }
     }
     .explain {
-      height: 237px;
       background: #f7f8fa;
       border-radius: 6px;
       .explain-main {
-        padding: 50px 110px 50px 36px;
+        padding: 30px 36px 32px 36px;
         h5 {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 600;
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
-          line-height: 40px;
+          line-height: 18px;
         }
         .info {
-          font-size: 18px;
+          padding-top: 24px;
+          font-size: 12px;
           font-weight: 400;
-          text-align: left;
           color: rgba(0, 0, 0, 0.65);
-          line-height: 27px;
-          padding-top: 16px;
+          line-height: 20px;
+          p {
+            padding-bottom: 12px;
+            &:last-child {
+              padding-bottom: 0px;
+            }
+          }
           span {
-            color: rgba(0, 0, 0, 0.85);
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.45);
           }
           .detial {
             color: #ed6d38;
@@ -566,7 +583,7 @@ export default {
           background: radial-gradient(rgba(0, 0, 0, 0), #000000);
           border-radius: 6px;
           position: relative;
-          video {
+          img:nth-child(1) {
             width: 100%;
             height: 100%;
             border-radius: 6px;
@@ -580,26 +597,16 @@ export default {
             top: 50%;
             transform: translate(-50%, -50%);
             cursor: pointer;
-            // opacity: 0.85;
-            &.video-pause {
-              opacity: 0;
-              transition: all 0.4s;
-            }
-          }
-          &:hover {
-            .video-pause {
-              opacity: 1;
-            }
           }
         }
         .right {
           margin-left: 20px;
           span {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 400;
             text-align: left;
             color: rgba(0, 0, 0, 0.85);
-            line-height: 17px;
+            line-height: 18px;
           }
           p {
             font-size: 12px;
@@ -607,7 +614,7 @@ export default {
             text-align: left;
             color: rgba(0, 0, 0, 0.45);
             line-height: 18px;
-            padding: 6px 0px 30px 0px;
+            padding: 6px 0px 32px 0px;
           }
         }
       }
@@ -615,6 +622,7 @@ export default {
         .img-box {
           display: flex;
           justify-content: space-between;
+          margin-top: 8px;
           .img {
             width: 236px;
             height: 125px;
@@ -641,6 +649,40 @@ export default {
           }
         }
       }
+    }
+  }
+}
+/deep/.el-dialog__header {
+  padding: 10px 20px 10px;
+}
+.video-visible-box {
+  width: 700px;
+  height: 400px;
+  position: relative;
+  video {
+    width: 96%;
+    height: 400px;
+    background: radial-gradient(rgba(0, 0, 0, 0), #000000);
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  img {
+    width: 82px;
+    height: 82px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    // opacity: 0.85;
+    &.video-pause {
+      opacity: 0;
+      transition: all 0.4s;
+    }
+  }
+  &:hover {
+    .video-pause {
+      opacity: 1;
     }
   }
 }

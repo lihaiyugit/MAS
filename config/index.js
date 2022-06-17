@@ -1,10 +1,10 @@
 export default {
   /**
-   * @description
+   * @description 项目名字
    */
-  platformName: 'CMAS官网',
+  platformName: 'MAS官网',
   /**
-   * @description
+   * @description token在Cookie中存储的天数，默认7天
    */
   cookieConfig: {
     path: '/',
@@ -18,10 +18,10 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'https://v2.chinamas.cn/',
-    // browserDev: 'https://v2.chinamas.cn/',
-    pro: 'https://v2.chinamas.cn/',
-    // browserPro: 'https://v2.chinamas.cn/',
+    dev: 'https://develop.chinamas.cn',
+    // browserDev: '',
+    pro: 'https://develop.chinamas.cn',
+    // browserPro: '',
   },
 
 

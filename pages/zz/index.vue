@@ -6,6 +6,7 @@
         <div class="content-container-main-left">
           <div class="banner">
             <img src="../../static/images/way/zz-banner.png" alt="" />
+            <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
         </div>
         <div class="content-container-main-right">
@@ -16,14 +17,16 @@
       <div class="magazine-list banxin">
         <div class="magazine-title">
           <h2>管理会计研究</h2>
-          <nuxt-link to="/zz/list" class="more-btn">查看更多</nuxt-link>
+          <nuxt-link to="/zz/list" class="more-btn"
+            >查看更多
+            <img src="../../static/images/arrows-left.png" alt="" />
+          </nuxt-link>
         </div>
         <div class="magazine-gather">
           <dl @click="details(1)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz01.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -31,13 +34,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(2)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz02.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -45,13 +50,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(3)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz03.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -59,13 +66,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(4)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz04.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -73,20 +82,41 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details(5)">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
         </div>
         <div class="clear"></div>
         <div class="magazine-title" data-aos="fade-up">
           <h2>其他杂志</h2>
-          <nuxt-link to="/zz/list" class="more-btn">查看更多</nuxt-link>
+          <nuxt-link to="/zz/list" class="more-btn"
+            >查看更多
+            <img src="../../static/images/arrows-left.png" alt="" />
+          </nuxt-link>
         </div>
         <div class="magazine-gather" data-aos="fade-up">
-          <dl @click="details(1)">
+          <dl @click="details(5)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz01.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -94,13 +124,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(5)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz02.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -108,13 +140,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(3)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz03.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -122,13 +156,15 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
-          <dl @click="details(1)">
+          <dl @click="details(3)">
             <dt>
               <div class="dt-img">
-                <div class="cj"></div>
-                <img src="@/static/images/zz.png" alt="" />
+                <img src="../../static/images/way/zz04.png" alt="" />
               </div>
               <h4>2022年第一期 总第22期</h4>
               <p>重塑核心能力</p>
@@ -136,6 +172,25 @@
             <dd>
               <a class="type" href="">平装</a>
               <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
+            </dd>
+          </dl>
+          <dl @click="details(3)">
+            <dt>
+              <div class="dt-img">
+                <img src="../../static/images/way/zz04.png" alt="" />
+              </div>
+              <h4>2022年第一期 总第22期</h4>
+              <p>重塑核心能力</p>
+            </dt>
+            <dd>
+              <a class="type" href="">平装</a>
+              <a class="type" href="">电子刊</a>
+              <div class="price">
+                <span class="price-icon">￥</span><span>58</span>
+              </div>
             </dd>
           </dl>
         </div>
@@ -184,7 +239,7 @@ export default {
     details(id) {
       this.$router.push({
         path: `/zz/${id}`,
-        // name: "catalogue-zz",
+        // name: "",
         // query: { id: index, type: item },
         // params: {
         //   type: item,
@@ -227,6 +282,15 @@ export default {
       .banner {
         width: 100%;
         height: 302px;
+        position: relative;
+        .wytg {
+          position: absolute;
+          bottom: 24%;
+          left: 8%;
+          width: 122px;
+          height: 38px;
+          cursor: pointer;
+        }
       }
       .magazine-box {
         padding: 45px 40px 0px;
@@ -289,7 +353,7 @@ export default {
     // height: 877px;
     background: #ffffff;
     border-radius: 6px;
-    padding: 45px 40px 0px;
+    padding: 50px 40px 0px;
     margin-top: 22px;
     .magazine-title {
       display: flex;
@@ -302,52 +366,39 @@ export default {
         line-height: 22px;
       }
       .more-btn {
-        width: 88px;
-        height: 32px;
-        background: #ffffff;
-        border: 1px solid #d9d9d9;
-        border-radius: 2px;
         font-size: 14px;
         font-weight: 400;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.65);
-        line-height: 30px;
+        color: rgba(0, 0, 0, 0.85);
+        line-height: 22px;
         cursor: pointer;
-        &:hover {
-          background: #f2f4f5;
-          border: 1px solid #e4e6e7;
-          border-radius: 2px;
-          color: rgba(0, 0, 0, 0.85);
+        img {
+          width: 13px;
+          height: 8px;
+          margin-left: 5px;
         }
       }
     }
     .magazine-gather {
+      display: flex;
       dl {
-        width: 186px;
-        float: left;
-        margin: 35px 75px 55px 0px;
+        width: 178px;
+        margin: 35px 30px 50px 0px;
         dt {
           .dt-img {
-            width: 154px;
-            height: 203px;
-            border: 1px solid #eaeaea;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            width: 100%;
+            height: 178px;
             img {
-              width: 152px;
-              height: 198px;
               border-radius: 0px;
             }
           }
           h4 {
+            width: 100%;
             font-size: 16px;
             font-weight: 600;
             text-align: left;
             color: rgba(0, 0, 0, 0.85);
             line-height: 24px;
-            margin: 16px 0px 6px;
+            margin: 20px 0px 6px;
           }
           p {
             font-size: 13px;
@@ -358,7 +409,7 @@ export default {
           }
         }
         dd {
-          margin-top: 30px;
+          margin-top: 36px;
           .type {
             padding: 0px 8px;
             background: #fafafa;
@@ -370,30 +421,25 @@ export default {
             color: rgba(0, 0, 0, 0.65);
             line-height: 20px;
             display: inline-block;
-            &:nth-child(1) {
-              margin-right: 10px;
+            margin-right: 10px;
+          }
+          .price {
+            font-size: 20px;
+            font-weight: 400;
+            text-align: left;
+            color: #ed6d38;
+            line-height: 22px;
+            letter-spacing: 1.33px;
+            padding-top: 20px;
+            .price-icon {
+              font-size: 14px;
             }
-
-            &:hover {
-              background: #ed6d38;
-              border: 1px solid #ed6d38;
-              color: #fff;
+            span:nth-child(2) {
+              margin-left: -4px;
             }
           }
         }
-        &:hover .cj {
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.25);
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 99;
-        }
-        &:nth-child(1) {
-          margin-left: 25px;
-        }
-        &:nth-child(4n) {
+        &:nth-child(5n) {
           margin-right: 0px;
         }
       }

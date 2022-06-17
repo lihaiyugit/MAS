@@ -1,371 +1,351 @@
 <template>
-<div>
-  <Header/>
-  <div class="main_container">
-    <singleHeader />
-    <div class="wapper">
-      <div class="banner">
-        <div class="banner_main">
-          <div class="banner_main-left">
-            <img src="@/static/images/zsh-img/zh-banner-text.png" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="introduce">
-        <div class="title_box">
-          <img src="@/static/images/zsh-img/h2-l.png" alt="" />
-          <h2>中国化学全面深化改革 激发企业高质量发展的“动力源”</h2>
-          <img src="@/static/images/zsh-img/h2-r.png" alt="" />
-        </div>
-        <div class="introduce_main">
-          <div class="introduce_main_l">
-            <h2>中国化学工程集团有限公司 (简称中国化学)</h2>
-            <p class="english">
-              China National Chemical Engineering Group Corporation
-              Ltd.简称CNCEC
-            </p>
-            <p class="info">
-              国务院国资委直接监管的大型工程建设企业集团公布的全球最大的250家承包商,在全球
-              油气行业工程建设公司排名中名列第二位。
-            </p>
-            <div class="video-box">
-              <div class="video-main">
-                <video
-                  :poster="require('@/static/images/zsh-img/zh-video.png')"
-                  ref="movie"
-                  src="https://cmas-dkt-out.oss-cn-hangzhou.aliyuncs.com/Act-ss-mp4-ld/3345ae7060e94d9ba38fc17771ecdbec/zghx20211206.mp4?versionId=CAEQUxiBgIDO_an9hhgiIGIzMTAyMDZkYWQ2OTQ3Yzc4Mzg4ZTQ1ZjZhOTAyM2Jm"
-                  controls
-                ></video>
-                <img
-                  v-show="isplay"
-                  @click="handlePlay"
-                  class="video-play"
-                  src="@/static/images/zsh-img/play.png"
-                  alt=""
-                />
-                <img
-                  v-show="!isplay"
-                  @click="handlePause"
-                  class="video-pause"
-                  src="@/static/images/zsh-img/pause.png"
-                  alt=""
-                />
-              </div>
-              <div class="point">8分钟了解中国石化</div>
+  <div>
+    <Header />
+    <div class="main_container">
+      <singleHeader />
+      <div class="wapper">
+        <div class="banner">
+          <div class="banner_main">
+            <div class="banner_main-left">
+              <img src="@/static/images/zsh-img/zh-banner-text.png" alt="" />
             </div>
           </div>
-          <div class="introduce_main_r">
-            <p class="p">实施国企改革三年行动，坚持改革创新“双轮驱动”。</p>
-            <ul>
-              <li>
-                <img src="@/static/images/zsh-img/icon-1.png" alt="" />
-                <p>抓改革</p>
-              </li>
-              <li>
-                <img src="@/static/images/zsh-img/icon-2.png" alt="" />
-                <p>降成本</p>
-              </li>
-              <li>
-                <img src="@/static/images/zsh-img/icon-3.png" alt="" />
-                <p>增效益</p>
-              </li>
-              <li>
-                <img src="@/static/images/zsh-img/icon-4.png" alt="" />
-                <p>抓创新</p>
-              </li>
-              <li>
-                <img src="@/static/images/zsh-img/icon-5.png" alt="" />
-                <p>促转型</p>
-              </li>
-              <li>
-                <img src="@/static/images/zsh-img/icon-6.png" alt="" />
-                <p>谋发展</p>
-              </li>
-            </ul>
-            <p class="p">
-              企业高质量发展动 力强劲，成效突出，“十三五”各项
-              主要经济指标连创新高，新签合同额 五年翻两番，营业收入、利润总额、
-              净利润、资产总额均实现翻番！！！
-            </p>
+        </div>
+        <div class="introduce">
+          <div class="title_box">
+            <img src="@/static/images/zsh-img/h2-l.png" alt="" />
+            <h2>中国化学全面深化改革 激发企业高质量发展的“动力源”</h2>
+            <img src="@/static/images/zsh-img/h2-r.png" alt="" />
+          </div>
+          <div class="introduce_main">
+            <div class="introduce_main_l">
+              <h2>中国化学工程集团有限公司 (简称中国化学)</h2>
+              <p class="english">
+                China National Chemical Engineering Group Corporation
+                Ltd.简称CNCEC
+              </p>
+              <p class="info">
+                国务院国资委直接监管的大型工程建设企业集团公布的全球最大的250家承包商,在全球
+                油气行业工程建设公司排名中名列第二位。
+              </p>
+              <div class="video-box">
+                <div class="video-main">
+                  <video
+                    :poster="require('@/static/images/zsh-img/zh-video.png')"
+                    ref="movie"
+                    src="https://cmas-dkt-out.oss-cn-hangzhou.aliyuncs.com/Act-ss-mp4-ld/3345ae7060e94d9ba38fc17771ecdbec/zghx20211206.mp4?versionId=CAEQUxiBgIDO_an9hhgiIGIzMTAyMDZkYWQ2OTQ3Yzc4Mzg4ZTQ1ZjZhOTAyM2Jm"
+                    controls
+                  ></video>
+                  <img
+                    v-show="isplay"
+                    @click="handlePlay"
+                    class="video-play"
+                    src="@/static/images/zsh-img/play.png"
+                    alt=""
+                  />
+                  <img
+                    v-show="!isplay"
+                    @click="handlePause"
+                    class="video-pause"
+                    src="@/static/images/zsh-img/pause.png"
+                    alt=""
+                  />
+                </div>
+                <div class="point">8分钟了解中国石化</div>
+              </div>
+            </div>
+            <div class="introduce_main_r">
+              <p class="p">实施国企改革三年行动，坚持改革创新“双轮驱动”。</p>
+              <ul>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-1.png" alt="" />
+                  <p>抓改革</p>
+                </li>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-2.png" alt="" />
+                  <p>降成本</p>
+                </li>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-3.png" alt="" />
+                  <p>增效益</p>
+                </li>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-4.png" alt="" />
+                  <p>抓创新</p>
+                </li>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-5.png" alt="" />
+                  <p>促转型</p>
+                </li>
+                <li>
+                  <img src="@/static/images/zsh-img/icon-6.png" alt="" />
+                  <p>谋发展</p>
+                </li>
+              </ul>
+              <p class="p">
+                企业高质量发展动 力强劲，成效突出，“十三五”各项
+                主要经济指标连创新高，新签合同额
+                五年翻两番，营业收入、利润总额、
+                净利润、资产总额均实现翻番！！！
+              </p>
+              <img
+                class="video-sj"
+                src="@/static/images/zsh-img/icon-sj.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="related_info">
+          <div class="related_info_main">
+            <div class="related_info_main_top">
+              <div class="title">《管理会计研究》2022年第1期 ></div>
+            </div>
+            <div class="related_list">
+              <div class="related_list_l">
+                <div class="related_list_title">
+                  <img src="@/static/images/zsh-img/logo.png" alt="" />
+                  <span>专业文章</span>
+                </div>
+                <div class="related_list_content">
+                  <dl>
+                    <dt>
+                      <h5>
+                        中国化学刘东进：大智移动云雾科技革命 重塑财务新职能
+                        引领财务新变革
+                      </h5>
+                      <p>财务是企业的中枢神经、生命血脉和管理核心</p>
+                    </dt>
+                    <dd>
+                      <a
+                        href="https://www.chinamas.cn/gc/list/584"
+                        >阅读详情</a
+                      >
+                      <img
+                        src="@/static/images/zsh-img/arrow-left.png"
+                        alt=""
+                      />
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      <h5>中国化学宋志鹏：从BSC模型中感悟人生之路</h5>
+                      <p>
+                        本文用管理会计学中平衡计分卡的思维模式巧妙对照、感悟人生，既有助于浅显易懂地理解平衡计分卡，又从“战略”高度启发人生之路
+                      </p>
+                    </dt>
+                    <dd>
+                      <a
+                        href="https://www.chinamas.cn/gd/list/572"
+                        >阅读详情</a
+                      >
+                      <img
+                        src="@/static/images/zsh-img/arrow-left.png"
+                        alt=""
+                      />
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+              <div class="related_list_l">
+                <div class="related_list_title">
+                  <img
+                    class="zx-img"
+                    src="@/static/images/zsh-img/zh-logo-2.png"
+                    alt=""
+                  />
+                  <span>企业资讯</span>
+                </div>
+                <div class="related_list_content">
+                  <dl>
+                    <dt>
+                      <h5>中国化学召开2022年度财务工作会</h5>
+                      <p>4月12日，中国化学通过视频形式召开2022年度财务工作会</p>
+                    </dt>
+                    <dd>
+                      <a
+                        href="https://cncec.cn/articledetail/125548"
+                        >阅读详情</a
+                      >
+                      <img
+                        src="@/static/images/zsh-img/arrow-left.png"
+                        alt=""
+                      />
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt>
+                      <h5>中国化学多个境外工程项目荣获鲁班奖</h5>
+                      <p>
+                        本报讯
+                        近年来，中国化学以习近平新时代中国特色社会主义思想为指导，践行新发展理念，深入贯彻落实中共中央国务院《关于开展质量提升行动的指导意见》
+                      </p>
+                    </dt>
+                    <dd>
+                      <a
+                        href="https://cncec.cn/articledetail/125568"
+                        >阅读详情</a
+                      >
+                      <img
+                        src="@/static/images/zsh-img/arrow-left.png"
+                        alt=""
+                      />
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="data_box">
+          <div class="data_main">
+            <div class="title_p">
+              <div class="line"></div>
+              中国化学财务数字化，以建设世界一流财务管理体系为统领，全力推进
+              <div class="tip">“一平台、三驱动、四架构”</div>
+              , 的数字化规划实施
+            </div>
+            <div class="explain_box">
+              <div class="explain_box_p">
+                <div class="p-line">
+                  <div class="tip">“一个平台”</div>
+                  以财务智能化为核心打造数字化财务云平台;
+                </div>
+                <div class="p-line">
+                  <div class="tip">“三擎驱动”</div>
+                  包括数据驱动、技术驱动和管理驱动:以业财融合大数据支撑经营管理决策，以信息技术驱动财务管理智能化、智慧化，以管理提升驱动信息化迭代;
+                </div>
+                <div class="p-line">
+                  <div class="tip">“四大架构”</div>
+                  包括应用架构、集成架构、数据架构、基础设施。助推企业数字化转型，争当数智财务先行者，为支持企业高质量发展做出贡献。
+                </div>
+              </div>
+            </div>
             <img
-              class="video-sj"
-              src="@/static/images/zsh-img/icon-sj.png"
+              class="data_info"
+              src="@/static/images/zsh-img/zh-data.png"
               alt=""
             />
           </div>
         </div>
-        <div class="clear"></div>
-      </div>
-      <div class="clear"></div>
-      <div class="related_info">
-        <div class="related_info_main">
-          <div class="related_info_main_top">
-            <div class="title">《管理会计研究》2022年第1期 ></div>
+        <div class="behavior">
+          <div class="title_box">
+            <img src="@/static/images/zsh-img/h2-l.png" alt="" />
+            <h2>中国化学在行动</h2>
+            <img src="@/static/images/zsh-img/h2-r.png" alt="" />
           </div>
-          <div class="related_list">
-            <div class="related_list_l">
-              <div class="related_list_title">
-                <img src="@/static/images/zsh-img/logo.png" alt="" />
-                <span>专业文章</span>
-              </div>
-              <div class="related_list_content">
-                <dl>
-                  <dt>
-                    <h5>
-                      中国化学刘东进：大智移动云雾科技革命 重塑财务新职能
-                      引领财务新变革
-                    </h5>
-                    <p>财务是企业的中枢神经、生命血脉和管理核心</p>
-                  </dt>
-                  <dd>
-                    <a
-                      href="https://www.chinamas.cn/gc/list/584"
-                      target="_blank"
-                      >阅读详情</a
-                    >
-                    <img src="@/static/images/zsh-img/arrow-left.png" alt="" />
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <h5>中国化学宋志鹏：从BSC模型中感悟人生之路</h5>
-                    <p>
-                      本文用管理会计学中平衡计分卡的思维模式巧妙对照、感悟人生，既有助于浅显易懂地理解平衡计分卡，又从“战略”高度启发人生之路
-                    </p>
-                  </dt>
-                  <dd>
-                    <a
-                      href="https://www.chinamas.cn/gd/list/572"
-                      target="_blank"
-                      >阅读详情</a
-                    >
-                    <img src="@/static/images/zsh-img/arrow-left.png" alt="" />
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            <div class="related_list_l">
-              <div class="related_list_title">
-                <img
-                  class="zx-img"
-                  src="@/static/images/zsh-img/zh-logo-2.png"
-                  alt=""
-                />
-                <span>企业资讯</span>
-              </div>
-              <div class="related_list_content">
-                <dl>
-                  <dt>
-                    <h5>中国化学召开2022年度财务工作会</h5>
-                    <p>4月12日，中国化学通过视频形式召开2022年度财务工作会</p>
-                  </dt>
-                  <dd>
-                    <a
-                      href="https://cncec.cn/articledetail/125548"
-                      target="_blank"
-                      >阅读详情</a
-                    >
-                    <img src="@/static/images/zsh-img/arrow-left.png" alt="" />
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <h5>中国化学多个境外工程项目荣获鲁班奖</h5>
-                    <p>
-                      本报讯
-                      近年来，中国化学以习近平新时代中国特色社会主义思想为指导，践行新发展理念，深入贯彻落实中共中央国务院《关于开展质量提升行动的指导意见》
-                    </p>
-                  </dt>
-                  <dd>
-                    <a
-                      href="https://cncec.cn/articledetail/125568"
-                      target="_blank"
-                      >阅读详情</a
-                    >
-                    <img src="@/static/images/zsh-img/arrow-left.png" alt="" />
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="data_box">
-        <div class="data_main">
-          <div class="title_p">
-            <div class="line"></div>
-            中国化学财务数字化，以建设世界一流财务管理体系为统领，全力推进
-            <div class="tip">“一平台、三驱动、四架构”</div>
-            , 的数字化规划实施
-          </div>
-          <div class="explain_box">
-            <div class="explain_box_p">
-              <div class="p-line">
-                <div class="tip">“一个平台”</div>
-                以财务智能化为核心打造数字化财务云平台;
-              </div>
-              <div class="p-line">
-                <div class="tip">“三擎驱动”</div>
-                包括数据驱动、技术驱动和管理驱动:以业财融合大数据支撑经营管理决策，以信息技术驱动财务管理智能化、智慧化，以管理提升驱动信息化迭代;
-              </div>
-              <div class="p-line">
-                <div class="tip">“四大架构”</div>
-                包括应用架构、集成架构、数据架构、基础设施。助推企业数字化转型，争当数智财务先行者，为支持企业高质量发展做出贡献。
-              </div>
-            </div>
-          </div>
-          <img
-            class="data_info"
-            src="@/static/images/zsh-img/zh-data.png"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="behavior">
-        <div class="title_box">
-          <img src="@/static/images/zsh-img/h2-l.png" alt="" />
-          <h2>中国化学在行动</h2>
-          <img src="@/static/images/zsh-img/h2-r.png" alt="" />
-        </div>
-        <div class="behavior_main_box">
-          <swiper
-            :options="swiperOption"
-            ref="mySwiper"
-            class="behavior_main swiper swiper-container"
-          >
-            <swiper-slide>
-              <img src="@/static/images/zsh-img/lb-1.png" alt="" />
-              <p>举办国企改革典型专场媒体座谈会</p>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="@/static/images/zsh-img/lb-2.png" alt="" />
-              <p>刘东进总会计师莅临交建公司开展财务共享中心建设调研</p>
-            </swiper-slide>
-
-            <swiper-slide>
-              <img src="@/static/images/zsh-img/lb-3.png" alt="" />
-              <p>刘东进总会计师莅临天辰公司开展财会数字化工作调研</p>
-            </swiper-slide>
-
-            <swiper-slide>
-              <img src="@/static/images/zsh-img/lb-4.png" alt="" />
-              <p>开展全员竞聘上岗，对内公开选拔、对外公开招聘</p>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="@/static/images/zsh-img/lb-5.png" alt="" />
-              <p>积极稳妥推进混合所有制改革</p>
-            </swiper-slide>
-          </swiper>
-          <!-- <div class="behavior_main swiper swiper-container">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
+          <div class="behavior_main_box">
+            <swiper
+              :options="swiperOption"
+              ref="mySwiper"
+              class="behavior_main swiper swiper-container"
+            >
+              <swiper-slide>
                 <img src="@/static/images/zsh-img/lb-1.png" alt="" />
                 <p>举办国企改革典型专场媒体座谈会</p>
-              </div>
-              <div class="swiper-slide">
+              </swiper-slide>
+              <swiper-slide>
                 <img src="@/static/images/zsh-img/lb-2.png" alt="" />
                 <p>刘东进总会计师莅临交建公司开展财务共享中心建设调研</p>
-              </div>
-              <div class="swiper-slide">
+              </swiper-slide>
+
+              <swiper-slide>
                 <img src="@/static/images/zsh-img/lb-3.png" alt="" />
                 <p>刘东进总会计师莅临天辰公司开展财会数字化工作调研</p>
-              </div>
-              <div class="swiper-slide">
+              </swiper-slide>
+
+              <swiper-slide>
                 <img src="@/static/images/zsh-img/lb-4.png" alt="" />
                 <p>开展全员竞聘上岗，对内公开选拔、对外公开招聘</p>
-              </div>
-              <div class="swiper-slide">
+              </swiper-slide>
+              <swiper-slide>
                 <img src="@/static/images/zsh-img/lb-5.png" alt="" />
                 <p>积极稳妥推进混合所有制改革</p>
+              </swiper-slide>
+            </swiper>
+
+            <div class="swiper-button-left">
+              <img src="@/static/images/zsh-img/swiper-l.png" alt="" />
+            </div>
+            <div class="swiper-button-right">
+              <img src="@/static/images/zsh-img/swiper-r.png" alt="" />
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="exhibition">
+          <div class="title_box">
+            <img src="@/static/images/zsh-img/h2-l.png" alt="" />
+            <h2>更多企业巡展</h2>
+            <img src="@/static/images/zsh-img/h2-r.png" alt="" />
+          </div>
+          <div class="exhibition-content">
+            <div class="line-bg"></div>
+            <div class="exhibition_main">
+              <img src="@/static/images/zsh-img/zh-xz-img.png" alt="" />
+              <div class="content_info">
+                <h5>中国石油化工集团有限公司</h5>
+                <p>
+                  中国石油化工集团有限公司（以下简称公司）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，公司是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
+                </p>
+                <nuxt-link to="/kzt/zsh">了解更多</nuxt-link>
               </div>
             </div>
-          </div> -->
-          <div class="swiper-button-left">
-            <img src="@/static/images/zsh-img/swiper-l.png" alt="" />
-          </div>
-          <div class="swiper-button-right">
-            <img src="@/static/images/zsh-img/swiper-r.png" alt="" />
           </div>
         </div>
-        <div class="clear"></div>
-      </div>
-      <div class="exhibition">
-        <div class="title_box">
-          <img src="@/static/images/zsh-img/h2-l.png" alt="" />
-          <h2>更多企业巡展</h2>
-          <img src="@/static/images/zsh-img/h2-r.png" alt="" />
-        </div>
-        <div class="exhibition_main_bg">
-          <img
-            class="one"
-            src="@/static/images/zsh-img/exhibition-bg.png"
-            alt=""
-          />
-          <div class="exhibition_main"></div>
-          <div class="content">
-            <img src="@/static/images/zsh-img/zh-xz-img.png" alt="" />
-            <div class="content_info">
-              <h5>中国石油化工集团有限公司</h5>
-              <p>
-                国务院国资委直属的副部级中央企业，中国最大的成品油和石化产品供应商、世界第一大炼油公司。
-              </p>
-              <span>了解更多</span>
+        <div class="base_box">
+          <div class="base_box_main">
+            <div class="base_box_main_l">
+              <h5>欢迎更多优秀企业入驻企业数字化转型巡展</h5>
+              <p>联系方式：400-819-1255</p>
+              <p>邮箱：yangww@chinamas.cn</p>
+            </div>
+            <div class="base_box_main_r">
+              <img src="@/static/images/zsh-img/qx-code.png" alt="" />
+              <span>合作咨询</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="base_box">
-        <div class="base_box_main">
-          <div class="base_box_main_l">
-            <h5>欢迎更多优秀企业入驻企业数字化转型巡展</h5>
-            <p>联系方式：400-819-1255</p>
-            <p>邮箱：XXXXXXX@yuanian.com</p>
-          </div>
-          <div class="base_box_main_r">
-            <img src="" alt="" />
-            <span>企信二维码</span>
-          </div>
+      <div class="slide">
+        <div class="lx">
+          <img src="@/static/images/zsh-img/hz.png" />
+          <span>合作联系</span>
+        </div>
+        <div class="lx-info" style="">
+          <dl class="tel">
+            <dt>
+              <img src="@/static/images/zsh-img/tel.png" alt="" />
+            </dt>
+            <dd>
+              <p>手机号</p>
+              <p>186-1888-8888</p>
+              <span></span>
+            </dd>
+          </dl>
+          <dl class="tel">
+            <dt>
+              <img src="@/static/images/zsh-img/code.png" alt="" />
+            </dt>
+            <dd>
+              <p>个人二维码</p>
+              <div class="code">
+                <img src="@/static/images/zsh-img/qx-code.png" alt="" />
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
     </div>
-    <div class="slide">
-      <div class="lx">
-        <img src="@/static/images/zsh-img/hz.png" />
-        <span>合作联系</span>
-      </div>
-      <div class="lx-info" style="">
-        <dl class="tel">
-          <dt>
-            <img src="@/static/images/zsh-img/tel.png" alt="" />
-          </dt>
-          <dd>
-            <p>手机号</p>
-            <p>186-1888-8888</p>
-            <span></span>
-          </dd>
-        </dl>
-        <dl class="tel">
-          <dt>
-            <img src="@/static/images/zsh-img/code.png" alt="" />
-          </dt>
-          <dd>
-            <p>个人二维码</p>
-            <div class="code">
-              <img src="" alt="" />
-            </div>
-          </dd>
-        </dl>
-      </div>
-    </div>
+    <Footer />
   </div>
-  <Footer />
-</div>
-
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
-   layout: 'not',
+  layout: "not",
   data() {
     return {
       swiperOption: {
@@ -380,7 +360,6 @@ export default {
         },
       },
       isplay: true, //视频是否播放
-
     };
   },
   components: {
@@ -551,14 +530,9 @@ export default {
   cursor: pointer;
 }
 
-// .introduce_main_l .video-box .video-main img.video-play {
-//     display: block;
-// }
-
 .introduce_main_l .video-box .video-main img.video-pause {
   opacity: 0;
   transition: all 0.4s;
-  // display: none;
 }
 
 .introduce_main_l .video-box .video-main:hover .video-pause {
@@ -878,70 +852,73 @@ export default {
 }
 
 .exhibition .title_box {
-  padding: 60px 0px 80px 0px;
+    padding: 60px 0px 80px 0px;
 }
 
-.one {
-  width: 1200px;
-  height: 234px;
-  margin: 0 auto;
-  display: flex;
+.exhibition-content {
+    margin-top: 60px;
+}
+
+.line-bg {
+    width: 1360px;
+    height: 167px;
+    background: #f7f8fb;
+    display: flex;
+    margin: 0 auto;
 }
 
 .exhibition_main {
-  width: 1360px;
-  height: 157px;
-  background: #f7f8fb;
-  display: flex;
-  margin: 0 auto;
-  margin-top: -196px;
+    width: 1090px;
+    height: 300px;
+    background-image: url(@/static/images/zsh-img/exhibition-bg.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 50px 0px 60px;
+    margin-top: -228px
 }
 
-.content {
-  margin-top: -230px;
-  margin-left: 320px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.content img {
-  width: 296px;
-  height: 228px;
-  margin-right: 36px;
+.exhibition_main img {
+    width: 296px;
+    height: 228px;
 }
 
 .content_info h5 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #40424c;
-  line-height: 33px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #40424c;
+    line-height: 33px;
 }
 
 .content_info p {
-  width: 476px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #40424c;
-  line-height: 24px;
-  padding: 23px 0px 32px 0px;
+    width: 761px;
+    padding: 16px 0px 44px 0px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #40424c;
+    line-height: 24px;
 }
 
-.content_info span {
-  display: inline-block;
-  width: 88px;
-  height: 32px;
-  border: 1px solid #ed6d38;
-  border-radius: 2px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  color: #ed6d38;
-  line-height: 32px;
+.content_info span, .content_info a{
+    display: inline-block;
+    width: 88px;
+    height: 32px;
+    border: 1px solid #ed6d38;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #ed6d38;
+    line-height: 32px;
 }
 
 .base_box {
   background: #3d3e49;
-  margin-top: 116px;
+  margin-top: 80px;
 }
 
 .base_box_main {
@@ -1021,7 +998,7 @@ export default {
   vertical-align: top;
 }
 .lx-info {
-   display: none;
+  display: none;
   width: 150px;
   height: 145px;
   background: #ffffff;
@@ -1036,7 +1013,7 @@ export default {
 .lx-info .tel {
   position: relative;
   display: flex;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
 }
 
 .lx-info .tel dt {
@@ -1078,10 +1055,17 @@ export default {
 }
 
 .slide .lx-info .tel dd .code {
-  width: 61px;
-  height: 61px;
-  background: #a9abb8;
-  margin-top: 10px;
-  margin-left: 4px;
+    width: 70px;
+    height: 70px;
+    background: #f6f7ff;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide .lx-info .tel dd .code img {
+    width: 61px;
+    height: 61px;
 }
 </style>

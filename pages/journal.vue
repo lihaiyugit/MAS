@@ -600,7 +600,7 @@ export default {
     detailsFn() {
       this.$router.push({
         path: `/zz/${1}`,
-        // name: "catalogue-zz",
+        // name: "",
         // query: { id: this.magazineId },
         // params: {
         //   type: item,

@@ -1,7 +1,7 @@
-// import Vue from 'vue'
-// import BaiduMap from 'vue-baidu-map'
+import Vue from 'vue'
+import BaiduMap from 'vue-baidu-map'
 
-// Vue.use( BaiduMap, { ak : '这里放入上面生成的ak' } )
+Vue.use( BaiduMap, { ak : 'HQ878aCeCCFD4GPEFvaQOLANZSv8bKKw' } )
 
 
 // 使用
@@ -12,7 +12,7 @@
 //       this.map = map
 //       var point = new BMap.Point(108.910752, 34.237372)  //设置城市经纬度坐标
 //       map.centerAndZoom(point, 15)    //
-//       map.setCurrentCity('西安')   // 设置地图显示的城市 此项是必须设置的
+//       map.setCurrentCity('上海')   // 设置地图显示的城市 此项是必须设置的
 //       map.enableScrollWheelZoom(true)    //鼠标滚动缩放
 
 //       #for(var i in mapdata) {

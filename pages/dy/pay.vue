@@ -1,5 +1,9 @@
 <template>
   <div class="content-container">
+    <div class="mas-box">
+      <img src="../../static/images/diamond.png" alt="" />
+      <h5>MAS订阅</h5>
+    </div>
     <div class="pay-container banxin">
       <div class="pay-main">
         <div class="pay-main-l">
@@ -15,11 +19,9 @@
             </div>
           </div>
           <div class="pay-main-l-r">
-            <h6>请扫码订阅</h6>
-            <div class="tip">扫码直接订阅完成付费，可订阅学案例</div>
-            <div class="vip">
-              <p>升级会员订阅价格更优惠详看下侧订阅须</p>
-              <img src="../../static/images/down.png" alt="" />
+            <h6>您将订阅<span>看原创</span>专题</h6>
+            <div class="tip">
+              完成订阅服务您可以畅读栏目所有付费文章，为此您将节省 XXX 元。
             </div>
             <div class="price">
               <span>实付：</span>
@@ -40,8 +42,199 @@
       </div>
     </div>
     <div class="notice">
-      <div class="title">订阅须知</div>
+      <div class="type-box">
+        <div class="btn-left">
+          <img class="left01" src="@/static/images/way/left01.png" alt="" />
+          <img class="left1" src="@/static/images/way/left1.png" alt="" />
+        </div>
+        <!-- <div class="type-main">
+          <dl class="active">
+            <div class="mas-tip">推荐订阅</div>
+            <dt>
+              <h5>学案例</h5>
+              <div class="price-box">
+                <span class="icon">¥</span>
+                <span class="price">48.00</span>
+                <span class="icon">/月</span>
+              </div>
+            </dt>
+            <dd>
+              <p>学案例栏目所有付费文章免费阅读</p>
+              <img
+                class="mas-select"
+                src="../../static/images/mas-select.png"
+                alt=""
+              />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <h5>看原创</h5>
+              <div class="price-box">
+                <span class="icon">¥</span>
+                <span class="price">48.00</span>
+                <span class="icon">/月</span>
+              </div>
+            </dt>
+            <dd>
+              <p>MAS全站付费内容免费阅读</p>
+              <img
+                class="mas-select"
+                src="../../static/images/mas-select.png"
+                alt=""
+              />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <h5>见大咖</h5>
+              <div class="price-box">
+                <span class="icon">¥</span>
+                <span class="price">48.00</span>
+                <span class="icon">/月</span>
+              </div>
+            </dt>
+            <dd>
+              <p>见大咖栏目所有付费文章免费阅读</p>
+              <img
+                class="mas-select"
+                src="../../static/images/mas-select.png"
+                alt=""
+              />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <h5>淘资讯</h5>
+              <div class="price-box">
+                <span class="icon">¥</span>
+                <span class="price">48.00</span>
+                <span class="icon">/月</span>
+              </div>
+            </dt>
+            <dd>
+              <p>淘资讯栏目所有付费文章免费阅读</p>
+              <img
+                class="mas-select"
+                src="../../static/images/mas-select.png"
+                alt=""
+              />
+            </dd>
+          </dl>
+        </div> -->
+        <swiper :options="swiperOption" ref="mySwiper" class="type-main">
+          <swiper-slide>
+            <dl :class="activeIndex === 0 ? 'active' : ''" @click="activeFn(0)">
+              <div class="mas-tip">推荐订阅</div>
+              <dt>
+                <h5>学案例</h5>
+                <div class="price-box">
+                  <span class="icon">¥</span>
+                  <span class="price">48.00</span>
+                  <span class="icon">/月</span>
+                </div>
+              </dt>
+              <dd>
+                <p>学案例栏目所有付费文章免费阅读</p>
+                <img
+                  class="mas-select"
+                  src="../../static/images/mas-select.png"
+                  alt=""
+                />
+              </dd>
+            </dl>
+          </swiper-slide>
+          <swiper-slide>
+            <dl :class="activeIndex == 1 ? 'active' : ''" @click="activeFn(1)">
+              <dt>
+                <h5>看原创</h5>
+                <div class="price-box">
+                  <span class="icon">¥</span>
+                  <span class="price">48.00</span>
+                  <span class="icon">/月</span>
+                </div>
+              </dt>
+              <dd>
+                <p>MAS全站付费内容免费阅读</p>
+                <img
+                  class="mas-select"
+                  src="../../static/images/mas-select.png"
+                  alt=""
+                />
+              </dd>
+            </dl>
+          </swiper-slide>
+          <swiper-slide>
+            <dl :class="activeIndex == 2 ? 'active' : ''" @click="activeFn(2)">
+              <dt>
+                <h5>见大咖</h5>
+                <div class="price-box">
+                  <span class="icon">¥</span>
+                  <span class="price">48.00</span>
+                  <span class="icon">/月</span>
+                </div>
+              </dt>
+              <dd>
+                <p>见大咖栏目所有付费文章免费阅读</p>
+                <img
+                  class="mas-select"
+                  src="../../static/images/mas-select.png"
+                  alt=""
+                />
+              </dd>
+            </dl>
+          </swiper-slide>
+          <swiper-slide>
+            <dl :class="activeIndex == 3 ? 'active' : ''" @click="activeFn(3)">
+              <dt>
+                <h5>淘资讯</h5>
+                <div class="price-box">
+                  <span class="icon">¥</span>
+                  <span class="price">48.00</span>
+                  <span class="icon">/月</span>
+                </div>
+              </dt>
+              <dd>
+                <p>淘资讯栏目所有付费文章免费阅读</p>
+                <img
+                  class="mas-select"
+                  src="../../static/images/mas-select.png"
+                  alt=""
+                />
+              </dd>
+            </dl>
+          </swiper-slide>
+            <swiper-slide>
+            <dl :class="activeIndex == 4 ? 'active' : ''" @click="activeFn(4)">
+              <dt>
+                <h5>淘资讯</h5>
+                <div class="price-box">
+                  <span class="icon">¥</span>
+                  <span class="price">48.00</span>
+                  <span class="icon">/月</span>
+                </div>
+              </dt>
+              <dd>
+                <p>淘资讯栏目所有付费文章免费阅读</p>
+                <img
+                  class="mas-select"
+                  src="../../static/images/mas-select.png"
+                  alt=""
+                />
+              </dd>
+            </dl>
+          </swiper-slide>
+        </swiper>
+        <div class="btn-right">
+          <img class="right02" src="@/static/images/way/right02.png" alt="" />
+          <img class="right2" src="@/static/images/way/right2.png" alt="" />
+        </div>
+      </div>
+      <div class="mas-advert">
+        <a href=""></a>
+      </div>
       <div class="dy-main">
+        <div class="title">订阅须知</div>
         <ul>
           <li>
             <h6>1、订阅功能：</h6>
@@ -188,244 +381,54 @@
         </table>
         <div class="upgrade">
           <span>升级会员</span>
-          <img src="../../static/images/arrows-left.png" alt="" />
+          <img src="../../static/images/brown-arrow.png" alt="" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
+  scrollToTop: true,
   data() {
-    return {};
+    return {
+      activeIndex:0,//默认选中值
+      swiperOption: {
+        slidesPerView: 4, // 设置slider容器能够同时显示的slides数量(轮播模式)
+        spaceBetween: 24, // 在slide之间设置距离
+        // 如果需要前进后退按钮
+        navigation: {
+          //下一张
+          nextEl: ".btn-right", //下一张标签类名可以自定义
+          //上一张
+          prevEl: ".btn-left", //上一张标签类名可以自定义
+        },
+      },
+    };
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
   },
   methods: {
     //成功以后跳转页面
-    success(){
+    success() {
       this.$router.push({
-        name: "by-success",
+        name: "dy-success",
         // query: { id: index, type: item },
         // params: {
         //   type: item,
         // },
       });
+    },
+    //点击每一种类型
+    activeFn(val){
+      this.activeIndex=val;
     }
   },
 };
 </script>
 <style lang="less" scoped>
-.content-container {
-  padding: 23px 0px 40px;
-  height: 1310px;
-  background: #f7f8fa;
-  border-radius: 6px;
-  .pay-container {
-    height: 264px;
-    background: #ffffff;
-    border-radius: 8px;
-    .pay-main {
-      padding: 34px 52px 34px 45px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .pay-main-l {
-        display: flex;
-        .pay-main-l-l {
-          width: 168px;
-          height: 194px;
-          border: 1px solid #eeeeee;
-          border-radius: 8px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          .qrcode {
-            width: 138px;
-            height: 138px;
-            border-radius: 0;
-            margin: 14px 0px 8px;
-          }
-          .info {
-            display: flex;
-            align-items: center;
-            img {
-              width: 20px;
-              height: 20px;
-            }
-            span {
-              font-size: 16px;
-              font-weight: 400;
-              text-align: left;
-              color: rgba(0, 0, 0, 0.65);
-              margin-left: 6px;
-            }
-          }
-        }
-        .pay-main-l-r {
-          margin-left: 30px;
-          h6 {
-            font-size: 20px;
-            font-weight: 500;
-            text-align: left;
-            color: rgba(0, 0, 0, 0.85);
-            line-height: 24px;
-            margin-top: 14px;
-          }
-          .tip {
-            font-size: 14px;
-            font-weight: 400;
-            text-align: left;
-            color: #ed6d38;
-            line-height: 24px;
-            padding: 12px 0px;
-          }
-          .vip {
-            width: 270px;
-            height: 20px;
-            background: #f2f4f5;
-            border: 1px solid #e4e6e7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            p {
-              font-size: 13px;
-              font-weight: 400;
-              text-align: left;
-              color: rgba(0, 0, 0, 0.85);
-              line-height: 13px;
-            }
-            img {
-              width: 8px;
-              height: 10px;
-              margin: 2px 0px 0px 5px;
-            }
-          }
-          .price {
-            font-size: 14px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 0.65);
-            line-height: 24px;
-            margin-top: 30px;
-            .num {
-              font-size: 36px;
-              font-weight: 600;
-              color: #ed6d38;
-              line-height: 36px;
-              vertical-align: bottom;
-            }
-            .yuan {
-              color: #ed6d38;
-            }
-          }
-        }
-      }
-      .pay-main-r {
-        dl {
-          dt {
-            position: relative;
-            width: 305px;
-            height: 146px;
-          }
-          dd {
-            font-size: 14px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 0.85);
-            padding-top: 16px;
-            margin-left: 12px;
-          }
-        }
-      }
-    }
-  }
-  .notice {
-    width: 1100px;
-    height: 1028px;
-    background: #ffffff;
-    border-radius: 8px;
-    margin: 0 auto;
-    margin-top: 10px;
-  }
-  .title {
-    font-size: 18px;
-    font-family: PingFangSC, PingFangSC-Medium;
-    font-weight: 500;
-    text-align: left;
-    color: #ed6d38;
-    line-height: 24px;
-    padding: 26px 45px 20px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  .dy-main {
-    margin: 20px 0px 0px 45px;
-    .table {
-      width: 804px;
-      height: 378px;
-      text-align: center;
-      border: 1px solid #e8e8e8;
-
-      .title {
-        height: 53px;
-        line-height: 53px;
-        text-align: center;
-        background: #fafafa;
-        border: 1px solid #e8e8e8;
-        tr th {
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.85);
-          border: 1px solid #e8e8e8;
-          &:nth-child(2) {
-            text-align: left;
-            padding-left: 20px;
-            width: 177px;
-          }
-        }
-      }
-      tbody td {
-        height: 47px;
-        line-height: 47px;
-        border: 1px solid #e8e8e8;
-        font-size: 14px;
-        color: rgba(0, 0, 0, 0.65);
-      }
-      .left {
-        text-align: left;
-        padding-left: 20px;
-        width: 177px;
-      }
-      .one {
-        font-weight: 500;
-        color: #ed6d38;
-      }
-    }
-    ul {
-      font-size: 13px;
-      font-weight: 400;
-      text-align: left;
-      color: rgba(0, 0, 0, 0.85);
-      line-height: 24px;
-      padding-bottom: 12px;
-      li {
-        margin-bottom: 15px;
-        p {
-          font-size: 12px;
-          color: rgba(0, 0, 0, 0.45);
-        }
-      }
-    }
-    .upgrade {
-      padding-top: 25px;
-      display: flex;
-      align-items: center;
-      span {
-        font-size: 18px;
-        font-weight: 600;
-        color: #ed6d38;
-      }
-      img {
-        width: 18px;
-        height: 10px;
-        margin-left: 7px;
-      }
-    }
-  }
-}
+@import "@/static/css/page-css/pay-dy.less";
 </style>

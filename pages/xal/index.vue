@@ -6,6 +6,7 @@
         <div class="content-container-main-left">
           <div class="banner">
             <img src="../../static/images/way/case_banner.png" alt="" />
+             <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
           <div class="list-box">
             <div class="major-container">

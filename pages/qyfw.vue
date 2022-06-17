@@ -3,7 +3,9 @@
     <singleHeader />
     <div class="page-enterprise-service">
       <div class="banner banxin">
-        <img src="../static/images/qy/qy-banner.png" alt="" />
+        <!-- <img src="../static/images/qy/qy-banner.png" alt="" /> -->
+        <h2 class="banner-h2">企业服务</h2>
+        <p>MAS企业服务致力于企业、机构，提供品牌宣传、知识学习</p>
       </div>
       <div class="introduce banxin">
         <dl class="common-dl">
@@ -63,8 +65,8 @@
           </dl>
         </div>
       </div>
-      <div class="resource-pool" data-aos="fade-up">
-        <h2>MAS企业会员服务图谱（资源池）</h2>
+      <div class="resource-pool">
+        <h2>MAS企业会员服务图谱</h2>
         <div class="resource-pool-main banxin">
           <ul class="resourceTabs">
             <li
@@ -443,7 +445,7 @@
                   <h5>业界合作活动邀请</h5>
                   <p>推荐可以参加业界与MAS合作的活动（评选类活动参选除外）</p>
                 </dt>
-                <dd style="padding-top: 22px">
+                <dd>
                   <div class="dd-l"></div>
                   <img class="dd-r" src="../static/images/qy/zk4.png" alt="" />
                 </dd>
@@ -474,14 +476,13 @@
               <p>
                 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<br />XXXXXXXXXXXXXXXXXXXXXXXXXXXX
               </p>
-              <button style="background: #ed6d38; border: 1px solid #ed6d38">
-                立即咨询
-              </button>
+              <button class="join-btn">立即咨询</button>
             </dd>
           </dl>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -490,6 +491,7 @@ export default {
     return {
       resourceTabs: ["媒体资源", "活动资源", "培训资源", "智库资源"],
       resourceActive: 0, //默认选中
+
     };
   },
 
@@ -509,11 +511,34 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.main_container {
+  background-color: #fff;
+}
 .page-enterprise-service {
   width: 100%;
-  padding-top: 50px;
+  padding-top: 30px;
   .banner {
     height: 240px;
+    background-image: url(@/static/images/qy/qy-banner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .banner-h2 {
+      font-size: 38px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      text-align: left;
+      line-height: 40px;
+      margin-left: 87px;
+      padding-top: 80px;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: 24px;
+      padding-top: 24px;
+      margin-left: 87px;
+    }
   }
   .default-btn {
     width: 88px;
@@ -526,24 +551,29 @@ export default {
     line-height: 22px;
     border: none;
     display: block;
+    cursor: pointer;
+    &:hover {
+      background: rgba(237, 109, 56, 0.8);
+    }
   }
   .introduce {
-    padding: 50px 0px;
+    padding-top: 50px;
     .common-dl {
       height: 250px;
       display: flex;
+      justify-content: space-between;
+      background: linear-gradient(90deg, #fcfcfd, #f9fafb 94%, #f7f8fa);
+      border-radius: 0px 6px 6px 0px;
       dt {
-        min-width: 504px;
+        width: 483px;
         height: 100%;
         img {
           border-radius: 6px 0px 0px 6px;
         }
       }
       dd {
-        width: 551px;
-        background: #fff;
-        border-radius: 0px 6px 6px 0px;
-        padding: 30px 20px 27px 22px;
+        padding: 30px 28px 27px 0px;
+
         h6 {
           font-size: 20px;
           font-weight: 500;
@@ -552,11 +582,12 @@ export default {
         }
         p {
           width: 551px;
+          height: 107px;
           font-size: 13px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
           line-height: 20px;
-          padding: 24px 0px 30px;
+          padding: 15px 0px;
         }
         .introduce-base {
           display: flex;
@@ -568,12 +599,11 @@ export default {
   }
   h2 {
     font-size: 32px;
-    font-family: PingFangSC, PingFangSC-Semibold;
     font-weight: 600;
     text-align: center;
-    color: #232323;
+    color: rgba(0, 0, 0, 0.85);
     line-height: 32px;
-    padding-top: 70px;
+    padding-top: 50px;
   }
   .advantage {
     background-color: #fff;
@@ -616,47 +646,49 @@ export default {
     }
   }
   .resource-pool {
-    background: linear-gradient(90deg, #fcfcfd, #f9fafb 94%, #f7f8fa);
+    background: #f7f8fa;
     .resource-pool-main {
       display: flex;
       justify-content: space-between;
       padding: 50px 0px;
       .resourceTabs {
-        padding-top: 10px;
+        padding-top: 52px;
         li {
-          font-size: 20px;
+          font-size: 16px;
           font-weight: 400;
-          color: #818999;
-          line-height: 32px;
-          padding-bottom: 44px;
+          color: rgba(0, 0, 0, 0.55);
+          line-height: 18px;
+          padding-bottom: 58px;
+          cursor: pointer;
         }
         .active {
+          font-size: 18px;
           font-weight: 500;
           color: #ed6d38;
           position: relative;
           &:after {
             content: "";
             position: absolute;
-            left: 10px;
-            bottom: 38px;
-            width: 60px;
-            height: 4px;
+            left: 50%;
+            bottom: 50px;
+            width: 38px;
+            height: 2px;
             background: #ed6d38;
             border-radius: 2px;
-            // transform: translateX(-10px);
+            transform: translateX(-50%);
             z-index: 100;
           }
         }
       }
       .tabs-content {
         .media {
-          width: 900px;
+          width: 910px;
           background: #ffffff;
           border-radius: 6px;
           box-shadow: 0px 2px 14px 0px rgba(195, 195, 195, 0.29);
           display: flex;
           flex-wrap: wrap;
-          padding-left: 80px;
+          padding-left: 70px;
           padding-top: 50px;
           dl {
             width: 352px;
@@ -665,28 +697,27 @@ export default {
               width: auto !important;
             }
             dt {
-              width: 30px;
-              height: 30px;
+              width: 36px;
+              height: 36px;
               img {
                 border-radius: 0px;
               }
             }
             dd {
               h5 {
-                font-size: 24px;
-                font-weight: 500;
-                color: #262626;
+                font-size: 18px;
+                font-weight: 600;
+                color: rgba(0, 0, 0, 0.85);
                 line-height: 24px;
-                padding: 24px 0px 22px 0px;
+                padding: 20px 0px 12px 0px;
               }
               .abstract {
                 p {
                   font-size: 14px;
                   font-weight: 400;
-                  color: #8c8c8c;
+                  color: rgba(0, 0, 0, 0.45);
                   line-height: 22px;
                   padding-bottom: 6px;
-
                   img {
                     width: 12px;
                     height: 9px;
@@ -698,25 +729,28 @@ export default {
           }
         }
         .activity {
-          width: 1004px;
+          width: 908px;
+          padding: 58px 37px 40px 37px;
+          background: #ffffff;
+          border-radius: 6px;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           dl {
-            width: 334px;
-            height: 215px;
+            width: 290px;
+            height: 172px;
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            margin-top: -10px;
+            margin-bottom: 18px;
             dt {
-              font-size: 20px;
-              font-family: PingFangSC, PingFangSC-Medium;
+              font-size: 18px;
               font-weight: 500;
+              line-height: 36px;
               text-align: left;
               color: #ffffff;
               line-height: 36px;
-              padding: 24px 0px 0px 32px;
+              padding: 14px 0px 0px 22px;
             }
           }
         }
@@ -732,84 +766,86 @@ export default {
       img {
         width: 48px;
         height: 48px;
-        padding-top: 70px;
         margin-right: 16px;
+        margin-top: 50px;
       }
     }
     .discount-main {
-      padding-top: 62px;
+      padding-top: 80px;
       display: flex;
       justify-content: space-between;
       .discount-main-left {
-        width: 481px;
-        height: 773px;
-        background: #f7f8fa;
-        border-radius: 6px;
-        padding: 42px 30px 10px 30px;
+        width: 520px;
         .type-box {
-          padding-bottom: 32px;
           display: flex;
           align-items: center;
+          padding-bottom: 36px;
           img {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
           }
           span {
             display: block;
             font-size: 24px;
             font-weight: 600;
             color: #ed6d38;
-            line-height: 24px;
-            margin-left: 6px;
+            line-height: 32px;
+            margin-left: 8px;
           }
         }
         .type-content {
           dl {
-            width: 423px;
-            background: #ffffff;
+            width: 475px;
+            background: linear-gradient(
+              90deg,
+              #fcfcfd 0%,
+              #f9fafb 92%,
+              #f7f8fa 100%
+            );
             border-radius: 6px;
             box-shadow: 0px 4px 0px 0px #ed6d38 inset;
-            padding: 35px 30px 0px 27px;
-            margin-bottom: 20px;
+            padding: 35px 18px 0px 27px;
+            margin-bottom: 30px;
             dt {
               h5 {
-                font-size: 24px;
-                font-weight: 500;
-                color: #262626;
+                font-size: 18px;
+                font-weight: 600;
+                color: rgba(0, 0, 0, 0.85);
                 line-height: 24px;
               }
               p {
-                font-size: 14px;
+                height: 44px;
+                font-size: 13px;
                 font-weight: 400;
-                color: #8c8c8c;
+                color: rgba(0, 0, 0, 0.45);
                 line-height: 22px;
-                padding: 22px 0px 16px;
+                padding: 12px 0px 20px;
               }
             }
             dd {
               display: flex;
               justify-content: space-between;
-              align-items: center;
+              align-items: flex-start;
               .dd-l {
                 font-size: 14px;
                 font-weight: 400;
                 color: #ed6d38;
+                line-height: 16px;
                 display: flex;
                 align-items: flex-end;
                 .num {
-                  font-weight: 500;
-                  font-size: 24px;
-                  line-height: 22px;
-                  vertical-align: bottom;
-                  margin-left: -3px;
+                  font-size: 26px;
+                  font-weight: 600;
+                  color: #ed6d38;
+                  line-height: 23px;
                 }
                 .text {
-                  color: #333;
+                  color: rgba(0, 0, 0, 0.65);
                 }
               }
               .dd-r {
-                width: 68px;
-                height: 68px;
+                width: 59px;
+                height: 59px;
               }
             }
           }
@@ -823,7 +859,7 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 6px;
-      margin: 70px auto 100px;
+      margin: 20px auto 40px;
       padding: 40px 80px;
       display: flex;
       justify-content: space-between;
@@ -860,6 +896,14 @@ export default {
             font-weight: 400;
             color: #ffffff;
             line-height: 22px;
+          }
+          .join-btn {
+            background: #ed6d38;
+            border: 1px solid #ed6d38;
+          }
+          .join-btn:hover {
+            background: rgba(237, 109, 56, 0.8) !important;
+            border: 1px solid rgba(237, 109, 56, 0.8) !important;
           }
         }
       }

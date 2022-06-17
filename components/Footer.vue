@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container">
-    <div class="footer-top">
-      <div class="footerD">
+    <div class="footer-main" :style="'width:' + $store.state.headerWidth">
+      <div class="footer-top">
         <div class="footerLeft">
           <ul>
             <li><a>学术支持单位</a></li>
@@ -36,61 +36,82 @@
           </dl>
         </div>
       </div>
-    </div>
-    <div class="footer-base">
-      <div class="banxin footerB">
-        <p>
-          <a href="" class="flsm">法律声明</a
-          ><a href="" class="flsm">隐私政策</a
-          >北京元年诺亚舟咨询有限公司版权所有<a
-            style="margin-left: 10px"
-            href=""
-            class="record flsm"
-            >京ICP备17056011号-2</a
-          >京公网安备11010802027279
-        </p>
-        <p class="paragraph">
-          <span>地址：北京市海淀区知春路68号院1号楼三层301-12</span
-          ><span style="margin-left: 10px">电话：010-82252999</span>
-        </p>
+      <div class="footer-base">
+        <div class="footerB">
+          <p>
+            <a href="" class="flsm">法律声明</a
+            ><a href="" class="flsm">隐私政策</a
+            >北京元年诺亚舟咨询有限公司版权所有<a
+              style="margin-left: 10px"
+              class="record flsm"
+              >京ICP备17056011号-2</a
+            >京公网安备11010802027279
+          </p>
+          <p class="paragraph">
+            <span>地址：北京市海淀区知春路68号院1号楼三层301-12</span
+            ><span style="margin-left: 10px">电话：010-82252999</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { notNeedlogin } from "@/request/api";
+import md5 from "js-md5";
+export default {
+  data() {
+    return {};
+  },
+  async fetch() {
+    let timestamp = Date.parse(new Date());
+    let sign = md5(timestamp + this.$store.state.secretKey);
+    let res = await notNeedlogin(this.$axios, {
+      sign: sign,
+      timespan: timestamp,
+      className: "NavigationController",
+      classMethod: "getBottomNavigation",
+    });
+    // console.log(res,'res-底部导航')
+    // if (res.bol) {
+    // return this.meanList = res.data;
+    // }
+  },
+};
+</script>
 <style lang="less" scoped>
 .footer-container {
-  height: 404px;
-  background: #353535;
-  .footer-top {
-    height: 295px;
-    .footerD {
-      padding-top: 57px;
-      width: 1200px;
-      margin: 0 auto;
+  height: 327px;
+  background: #f2f3f5;
+  .footer-main {
+    margin: 0 auto;
+    .footer-top {
+      padding-top: 47px;
+      display: flex;
+      justify-content: space-between;
+      .footerLeft {
+        display: flex;
+      }
       .footerLeft ul {
-        float: left;
-        margin-right: 170px;
+        margin-right: 124px;
         li:nth-child(1) a {
-          color: #ffffff;
-          font-size: 18px;
-          font-weight: 500;
+          font-size: 16px;
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.85);
           line-height: 28px;
           margin-bottom: 16px;
-          display: block;
-          font-family: PingFangSC, PingFangSC-Medium;
+          display: inline-block;
         }
         li a {
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 400;
-          line-height: 30px;
-          color: #ffffff;
-          font-family: PingFangSC, PingFangSC-Regular;
+          color: rgba(0, 0, 0, 0.4);
+          line-height: 28px;
         }
       }
       .footerRight {
         width: 129px;
         height: 129px;
-        float: right;
         dl {
           width: 100%;
           text-align: center;
@@ -100,33 +121,30 @@
           }
           dd {
             font-size: 13px;
-            font-family: PingFangSC, PingFangSC-Regular;
             font-weight: 400;
-            color: #ffffff;
+            color: rgba(0,0,0,0.65);
             line-height: 30px;
           }
         }
       }
     }
-  }
-  .footer-base {
-    border-top: 1px solid #535353;
-    .footerB {
-      text-align: center;
-      padding-top: 33px;
-      p {
-        font-size: 13px;
-        font-family: PingFangSC, PingFangSC-Regular;
-        font-weight: 400;
-        color: #ffffff;
-        line-height: 22px;
-
-        .flsm {
-          margin-right: 10px;
-          color: #ffffff;
-        }
-        .record {
-          color: #ffffff;
+    .footer-base {
+      padding-top: 36px;
+      .footerB {
+        margin: 0 auto;
+        p {
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.4);
+          line-height: 22px;
+          text-align: center;
+          .flsm {
+            margin-right: 10px;
+            color: rgba(0, 0, 0, 0.4);
+          }
+          .record {
+            color: rgba(0, 0, 0, 0.4);
+          }
         }
       }
     }

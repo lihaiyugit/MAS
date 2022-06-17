@@ -85,7 +85,7 @@
                       </p>
                     </dt>
                     <dd>
-                      <a href="" target="_blank">阅读详情</a>
+                      <a href="">阅读详情</a>
                       <img
                         src="@/static/images/zsh-img/arrow-left.png"
                         alt=""
@@ -100,7 +100,7 @@
                       </p>
                     </dt>
                     <dd>
-                      <a href="" target="_blank">阅读详情</a>
+                      <a href="">阅读详情</a>
                       <img
                         src="@/static/images/zsh-img/arrow-left.png"
                         alt=""
@@ -125,7 +125,7 @@
                       <p>众力并则万钧举，人心齐则泰山移</p>
                     </dt>
                     <dd>
-                      <a href="" target="_blank">阅读详情</a>
+                      <a href="">阅读详情</a>
                       <img
                         src="@/static/images/zsh-img/arrow-left.png"
                         alt=""
@@ -141,7 +141,7 @@
                       </p>
                     </dt>
                     <dd>
-                      <a href="" target="_blank">阅读详情</a>
+                      <a href="">阅读详情</a>
                       <img
                         src="@/static/images/zsh-img/arrow-left.png"
                         alt=""
@@ -211,11 +211,11 @@
             <div class="base_box_main_l">
               <h5>欢迎更多优秀企业入驻企业数字化转型巡展</h5>
               <p>联系方式：400-819-1255</p>
-              <p>邮箱：XXXXXXX@yuanian.com</p>
+              <p>邮箱：yangww@chinamas.cn</p>
             </div>
             <div class="base_box_main_r">
-              <img src="" alt="" />
-              <span>企信二维码</span>
+              <img src="@/static/images/zsh-img/qx-code.png" alt="" />
+              <span>合作咨询</span>
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@
             <dd>
               <p>个人二维码</p>
               <div class="code">
-                <img src="" alt="" />
+                <img src="@/static/images/zsh-img/qx-code.png" alt="" />
               </div>
             </dd>
           </dl>
@@ -739,7 +739,7 @@ export default {
 
 .base_box {
   background: #3d3e49;
-  margin-top: 116px;
+  margin-top: 80px;
 }
 
 .base_box_main {
@@ -835,7 +835,7 @@ export default {
 .lx-info .tel {
   position: relative;
   display: flex;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
 }
 
 .lx-info .tel dt {
@@ -877,10 +877,17 @@ export default {
 }
 
 .slide .lx-info .tel dd .code {
-  width: 61px;
-  height: 61px;
-  background: #a9abb8;
-  margin-top: 10px;
-  margin-left: 4px;
+    width: 70px;
+    height: 70px;
+    background: #f6f7ff;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide .lx-info .tel dd .code img {
+    width: 61px;
+    height: 61px;
 }
 </style>

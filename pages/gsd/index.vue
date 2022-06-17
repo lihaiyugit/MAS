@@ -488,7 +488,7 @@ export default {
     details(id) {
       this.$router.push({
         path: `/gsd/${id}`,
-        // name: "catalogue-book-details",
+        // name: "",
         // query: { id: index, type: item },
         // params: {
         //   type: item,
@@ -521,6 +521,7 @@ export default {
       .banner {
         width: 100%;
         height: 302px;
+        cursor: pointer;
       }
       .magazine-box {
         padding: 45px 40px 0px;
@@ -550,6 +551,7 @@ export default {
           li a {
             display: flex;
             margin-bottom: 18px;
+            cursor: pointer;
             span {
               display: inline-block;
               min-width: 16px;
@@ -588,6 +590,7 @@ export default {
             height: 60px;
             margin-bottom: 12px;
             position: relative;
+            cursor: pointer;
             dt {
               width: 42px;
               height: 100%;
@@ -631,6 +634,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       li {
+        cursor: pointer;
         width: 166px;
         height: 54px;
         background: #ffffff;
@@ -686,6 +690,7 @@ export default {
         text-align: center;
         color: rgba(0, 0, 0, 0.65);
         line-height: 30px;
+        cursor: pointer;
         &:hover {
           height: 32px;
           background: #ed6d38;
@@ -700,6 +705,7 @@ export default {
         width: 152px;
         float: left;
         margin: 35px 95px 55px 0px;
+        cursor: pointer;
         dt {
           .dt-img {
             width: 152px;
@@ -753,6 +759,7 @@ export default {
       .btn-right,
       .btn-left-two,
       .btn-right-two {
+        cursor: pointer;
         width: 38px;
         height: 38px;
         background: #ffffff;

@@ -2,10 +2,8 @@ import config from '@/config';
 export default ({ app, $axios, store, redirect }, inject) => {
   //项目地址
   $axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
-  console.log($axios.defaults.baseURL, '$axios.defaults.baseURL')
   $axios.defaults.timeout = 500000;
-  $axios.defaults.withCredentials = true;
-  $axios.defaults.headers['Content-Type'] = 'application/json';
+  $axios.defaults.withCredentials = false;
   // Request请求拦截器：设置Token
   $axios.onRequest((config) => {
     // TODO 使用Vuex存储Token，并做持久化处理
@@ -13,9 +11,11 @@ export default ({ app, $axios, store, redirect }, inject) => {
     // 本项目token 存储在vuex里面
     // const token = store.state.user.token
     // if (token) config.headers.token = token
+    // return config;
   })
   // // Error拦截器：出现错误的时候被调用，根据状态码做对应判断并显示全局Message
   $axios.onError((error) => {
+    return error;
     // const code = parseInt(error.response && error.response.status)
     // switch (code) {
     //   // 未登录
@@ -30,7 +30,7 @@ export default ({ app, $axios, store, redirect }, inject) => {
   })
   // Response拦截器：对正常返回的数据进行处理
   $axios.onResponse((response) => {
-    return response.data
+    return response;
   })
   // fetchPost  请求方式 创建
   $axios.fetchPost = function (url, params, query) {
@@ -54,7 +54,6 @@ export default ({ app, $axios, store, redirect }, inject) => {
   }
   // GET 请求方式 查看
   $axios.fetchGet = function (url, params, header) {
-    console.log(url, '=====')
     return new Promise((resolve, reject) => {
       $axios.get(url, {
         params: params,
@@ -70,9 +69,7 @@ export default ({ app, $axios, store, redirect }, inject) => {
         });
     });
   }
-  // $axios.setHeader('Content-Type', 'application/json')
   // $axios.defaults.timeout = 500000;
-  // $axios.defaults.headers['Content-Type'] = 'application/json';
   // $axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
   // console.log($axios.defaults.baseURL, '$axios.defaults.baseURL')
   // 添加请求拦截器

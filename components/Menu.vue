@@ -11,8 +11,9 @@
           unique-opened
           router
           menu-trigger="click"
+          active-text-color="#ffd04b"
         >
-          <!-- <template v-for="item in items">
+          <template v-for="item in items">
             <template v-if="item.subs">
               <el-submenu :index="item.index" :key="item.index">
                 <template slot="title">
@@ -49,8 +50,8 @@
                 </template>
               </el-menu-item>
             </template>
-          </template> -->
-          <el-submenu index="1">
+          </template>
+          <!-- <el-submenu index="1">
             <template slot="title">企业服务</template>
             <el-submenu index="1-1">
               <template slot="title">大咖工作坊</template>
@@ -110,10 +111,10 @@
               <el-menu-item index="6-4-2">选项2</el-menu-item>
               <el-menu-item index="6-4-3">选项3</el-menu-item>
             </el-submenu>
-          </el-submenu>
+          </el-submenu> -->
         </el-menu>
       </div>
-      <div class="header-info-wrapper">
+      <!-- <div class="header-info-wrapper">
         <div class="header-info-entry-wrapper" v-if="$store.state.token">
           <span class="header-info-entry-login">登录</span>
           <span class="header-info-entry-separator">|</span>
@@ -169,77 +170,39 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
 const items = [
   {
-    index: "/dashboard",
-    title: "系统首页",
+    index: "/",
+    title: "首页",
   },
   {
-    index: "/table",
-    title: "基础表格",
+    index: "/qyfw",
+    title: "企业服务",
   },
   {
-    index: "/tabs",
-    title: "tab选项卡",
+    index: "/dy",
+    title: "订阅",
   },
   {
-    index: "3",
-    title: "表单相关",
-    subs: [
-      {
-        index: "/form",
-        title: "基本表单",
-      },
-      {
-        index: "/upload",
-        title: "文件上传",
-      },
-      {
-        index: "4",
-        title: "三级菜单",
-        subs: [
-          {
-            index: "/editor",
-            title: "富文本编辑器",
-          },
-        ],
-      },
-    ],
+    index: "/ktyj",
+    title: "课题研究",
   },
   {
-    index: "/icon",
-    title: "自定义图标",
+    index: "/activity",
+    title: "活动",
   },
   {
-    index: "/charts",
-    title: "schart图表",
+    index: "/hyfw",
+    title: "会员服务",
   },
   {
-    index: "/i18n",
-    title: "国际化功能",
-  },
-  {
-    index: "7",
-    title: "错误处理",
-    subs: [
-      {
-        index: "/permission",
-        title: "权限测试",
-      },
-      {
-        index: "/404",
-        title: "404页面",
-      },
-    ],
-  },
-  {
-    index: "/donate",
-    title: "支持作者",
+    index: "/zzfw",
+    title: "作者服务",
   },
 ];
 export default {
@@ -522,7 +485,7 @@ export default {
 
 .el-menu--horizontal .el-menu-item.is-active {
   border-bottom: none;
-  color: rgba(0, 0, 0, 0.65);
+  color: #ed6d38;
 }
 .el-menu-item {
   font-size: 12px;

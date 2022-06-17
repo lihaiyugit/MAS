@@ -45,7 +45,14 @@ ol, ul, dl,dd {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-
+.fourline {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
 .fifiveline {
   display: -webkit-box !important;
   overflow: hidden;
@@ -60,10 +67,13 @@ img {
   border-radius: 6px;
   object-fit: cover;
 }
+button{
+  cursor: pointer;
+}
 
 /* 页面渐入渐出动画 */
 .page-enter-active, .page-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity .5s;
 }
 
 .page-enter, .page-leave-active {
@@ -156,5 +166,32 @@ img {
       transform: rotate(45deg);
       z-index: 1;
     }
+  }
+}
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
   }
 }

@@ -9,7 +9,7 @@
       <div class="point">新书</div>
     </div>
     <div class="headline">2022年第一期｜总第567期</div>
-    <div class="contribute">我要投稿</div>
+    <nuxt-link to="/wytg" class="contribute">我要投稿</nuxt-link>
   </div>
 </template>
 <script>
@@ -27,6 +27,7 @@ export default {};
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
     .more {
       font-size: 14px;
       font-weight: 400;
@@ -48,6 +49,7 @@ export default {};
     line-height: 28px;
   }
   .contribute {
+    display: inline-block;
     width: 306px;
     height: 32px;
     border: 1px solid #ed6d38;
@@ -58,6 +60,7 @@ export default {};
     color: #ed6d38;
     line-height: 30px;
     margin-top: 28px;
+    cursor: pointer;
   }
   .contribute:hover {
     background: #ed6d38;

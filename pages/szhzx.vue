@@ -909,6 +909,7 @@ export default {
             line-height: 22px;
             border: none;
             display: block;
+            cursor: pointer;
           }
         }
       }
@@ -933,6 +934,7 @@ export default {
         font-weight: 400;
         color: rgba(0, 0, 0, 0.45);
         line-height: 22px;
+        cursor: pointer;
       }
     }
     .line {
@@ -1171,6 +1173,7 @@ export default {
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
+    cursor: pointer;
     .left {
       display: flex;
       align-items: center;
