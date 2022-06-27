@@ -685,7 +685,6 @@ export default {
           width: 910px;
           background: #ffffff;
           border-radius: 6px;
-          box-shadow: 0px 2px 14px 0px rgba(195, 195, 195, 0.29);
           display: flex;
           flex-wrap: wrap;
           padding-left: 70px;

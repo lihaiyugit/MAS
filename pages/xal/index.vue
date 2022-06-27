@@ -48,7 +48,7 @@
               >
             </div>
             <div class="content-container-list">
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <div class="top">
                     <h3 class="twoline">
@@ -85,7 +85,7 @@
                   <img src="../../static/images/way/list.png" alt="" />
                 </dd>
               </dl>
-              <dl>
+              <dl @click="details(2)">
                 <dt>
                   <div class="top">
                     <h3 class="twoline">
@@ -176,10 +176,15 @@ export default {
     industryAllFn() {
       if (this.industryHeight == "auto") {
         this.industryHeight = "40px";
-        console.log("==");
       } else {
         this.industryHeight = "auto";
       }
+    },
+    //点击到详情
+    details(id) {
+      this.$router.push({
+        path: `/xal/${id}`,
+      });
     },
   },
 };

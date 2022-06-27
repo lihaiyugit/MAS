@@ -7,6 +7,7 @@ export const state = () => ({
   userInfo: {},//用户信息
   isFixedHeader:false,//是否固定header头
   tabIndex:'',//tab菜单栏默认选中项
+  subTabIndex:'',//二级菜单默认选中项
 })
 export const mutations = {
   setToken(state, token) {
@@ -42,6 +43,10 @@ export const mutations = {
     state.tabIndex = data
     this.$cookies.set('tabIndex',data)
   },
+  setSubTabIndex(state, data) {
+    state.subTabIndex = data
+    this.$cookies.set('subTabIndex',data)
+  },
 }
 export const actions = {
   nuxtServerInit(store, content) {
@@ -49,6 +54,7 @@ export const actions = {
     // store.commit('setToken','admin');
     store.commit('getToken');
     store.commit('setTabIndex',this.$cookies.get('tabIndex'));
+    store.commit('setSubTabIndex',this.$cookies.get('subTabIndex'));
     store.commit('setUserInfo', this.$cookies.get('userInfo'));
     console.log(store.state.userInfo, 'nuxtServerInit')
   }

@@ -3,7 +3,8 @@
     <singleHeader />
     <div class="digital-container">
       <div class="banner banxin">
-        <img src="../static/images/way/fw-banner.png" alt="" />
+        <h2 class="banner-h2">专业共创，成就共享</h2>
+        <p>人人是读者，人人是作者，就在MAS！</p>
       </div>
       <div class="introduce banxin">
         <dl class="common-dl">
@@ -21,9 +22,9 @@
           </dd>
         </dl>
       </div>
-      <div class="author-equity banxin" data-aos="fade-up">
+      <div class="author-equity" data-aos="fade-up">
         <h2>作者权益</h2>
-        <div class="author-equity-main">
+        <div class="author-equity-main banxin">
           <dl>
             <dt>
               <img src="../static/images/way/fw-icon1.png" alt="" />
@@ -176,9 +177,9 @@
           </div>
         </div>
       </div>
-      <div class="create banxin">
+      <div class="create">
         <h2>创作学院</h2>
-        <div class="create-main">
+        <div class="create-main banxin">
           <div class="frame create-main-left">
             <div class="left">
               <img
@@ -287,10 +288,33 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.main_container{
+   background: #fff;
+}
 .digital-container {
-  padding: 30px 0px 50px;
+  padding: 30px 0px 0px;
   .banner {
     height: 240px;
+    background-image: url(@/static/images/way/fw-banner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .banner-h2 {
+      font-size: 38px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      text-align: left;
+      line-height: 40px;
+      margin-left: 87px;
+      padding: 80px 0px 0px 0px;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: 24px;
+      padding-top: 24px;
+      margin-left: 87px;
+    }
   }
   .default-btn {
     width: 88px;
@@ -311,7 +335,7 @@ export default {
   }
 
   .introduce {
-    padding-top: 50px;
+    padding: 50px 0px;
     .common-dl {
       height: 250px;
       display: flex;
@@ -324,9 +348,9 @@ export default {
       }
       dd {
         width: 551px;
-        background: #fff;
-        border-radius: 0px 6px 6px 0px;
         padding: 30px 20px 27px 22px;
+        background: linear-gradient(90deg, #fcfcfd, #f9fafb 94%, #f7f8fa);
+        border-radius: 0px 6px 6px 0px;
         h6 {
           font-size: 20px;
           font-weight: 500;
@@ -359,6 +383,7 @@ export default {
   }
   .author-equity {
     padding-bottom: 50px;
+    background: #f7f8fa;
     .author-equity-main {
       display: flex;
       justify-content: space-between;
@@ -486,7 +511,7 @@ export default {
             margin: 0 auto;
             padding: 23px 23px 0px;
             span {
-              color: rgba(0, 0, 0, 0.45);
+              color: rgba(0, 0, 0, 0.25);
               margin-left: -16px;
             }
             p {
@@ -556,6 +581,8 @@ export default {
     }
   }
   .create {
+    background: #f7f8fa;
+    padding-bottom: 50px;
     .create-main {
       display: flex;
       justify-content: space-between;
@@ -654,6 +681,10 @@ export default {
 }
 /deep/.el-dialog__header {
   padding: 10px 20px 10px;
+  .el-dialog__headerbtn:focus .el-dialog__close,
+  .el-dialog__headerbtn:hover .el-dialog__close {
+    color: #8c8c8c;
+  }
 }
 .video-visible-box {
   width: 700px;

@@ -71,7 +71,7 @@
                       >
                         试读
                       </button>
-                      <button @mouseover="changeStyle1" @mouseout="restStyle1">
+                      <button @mouseover="changeStyle1" @mouseout="restStyle1" @click="download">
                         下载
                       </button>
                     </div>
@@ -467,10 +467,11 @@ export default {
       this.$router.push({
         name: "journal",
         query: { id: 30 },
-        // params: {
-        //   type: item,
-        // },
       });
+    },
+    //点击下载
+    download(){
+
     },
     //单选按钮
     checkedThis(obj) {

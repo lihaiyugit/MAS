@@ -6,12 +6,13 @@
         <div class="content-container-main-left">
           <div class="banner">
             <img src="../../static/images/way/zx-banner.png" alt="" />
+            <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
           <div class="list-box">
             <div class="container-two">
               <div class="title-box">
                 <div class="top">
-                  <h2>淘咨讯</h2>
+                  <h2>新闻</h2>
                   <span>查看更多</span>
                 </div>
                 <div class="line"></div>
@@ -299,8 +300,8 @@
             </ul>
           </div>
         </div>
-      <!-- 左侧内容 -->
-        <ContainerRight/>
+        <!-- 左侧内容 -->
+        <ContainerRight />
       </div>
     </div>
   </div>
@@ -316,14 +317,12 @@ export default {
     // this.$route.params.id
     // let res= await ArticleIdApi({id:query.id})
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 <style lang="less" scoped>
 .content-container {
-  padding: 18px 0px 40px 0px;
+  padding: 30px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;
@@ -338,6 +337,15 @@ export default {
       .banner {
         width: 100%;
         height: 302px;
+         position: relative;
+        .wytg {
+          position: absolute;
+          bottom: 24%;
+          left: 8%;
+          width: 122px;
+          height: 38px;
+          cursor: pointer;
+        }
       }
       .title-box {
         .top {
@@ -347,17 +355,18 @@ export default {
           border-bottom: 1px solid #e7e7e7;
           padding-bottom: 18px;
           h2 {
-            font-size: 22px;
-            font-weight: 600;
-            text-align: left;
+            font-size: 18px;
+            font-weight: 500;
             color: rgba(0, 0, 0, 0.85);
             line-height: 22px;
           }
-          span {
+          span,
+          a {
             font-size: 14px;
             font-weight: 400;
-            color: rgba(0, 0, 0, 0.45);
+            color: rgba(0, 0, 0, 0.35);
             line-height: 22px;
+            cursor: pointer;
           }
         }
         .line {
@@ -422,7 +431,7 @@ export default {
                 justify-content: space-between;
                 h5 {
                   font-size: 16px;
-                  font-weight: 600;
+                 font-weight: 400;
                   text-align: left;
                   color: rgba(0, 0, 0, 0.85);
                   line-height: 24px;
@@ -508,8 +517,8 @@ export default {
                 padding: 0px 0px 20px 0px;
               }
               &:nth-child(1) P {
-                font-size: 18px;
-                font-weight: 600;
+                font-size: 16px;
+                font-weight: 400;
                 text-align: left;
                 color: rgba(0, 0, 0, 0.85);
                 line-height: 24px;
@@ -638,8 +647,9 @@ export default {
         .more {
           font-size: 14px;
           font-weight: 400;
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.35);
           line-height: 22px;
+          cursor: pointer;
         }
       }
       .hot-recommend {
@@ -746,7 +756,6 @@ export default {
           color: rgba(0, 0, 0, 0.85);
           line-height: 28px;
         }
-
       }
     }
   }

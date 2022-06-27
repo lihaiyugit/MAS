@@ -4,13 +4,14 @@
     <div class="banxin sub-header-main">
       <div class="sub-header-main-left">
         <nuxt-link to="/">
-          <img src="@/static/images/logo.png" alt="" />
+          <img src="@/static/images/logo.png" alt="" @click="tabIndex"/>
         </nuxt-link>
         <ul>
           <li
             v-for="(item, index) in tabList"
             :key="item"
             @click="oNitem(index, item)"
+            :class="current == index ? 'active' : ''"
           >
             {{ item }}
           </li>
@@ -42,7 +43,9 @@ export default {
     return {
       searchValue: "",
       tabList,
-      current: 0,
+      current: this.$store.state.subTabIndex
+        ? this.$store.state.subTabIndex
+        : -1,
     };
   },
   watch: {},
@@ -65,12 +68,12 @@ export default {
       if (scrollTop >= 37) {
         // this.$refs.sigleheader["style"].top = 0 + "px";
         this.$refs.sigleheader["style"].transition = "all 0.5s ease";
-        $('.sub-header').addClass("middle-header");
+        $(".sub-header").addClass("middle-header");
       } else {
         // this.$refs.sigleheader["style"].top = 37 + "px";
         // this.$refs.sigleheader["style"].height = `${84 - X * scrollTop}px`;
         this.$refs.sigleheader["style"].transition = "all 0.5s ease";
-        $('.sub-header').removeClass("middle-header");
+        $(".sub-header").removeClass("middle-header");
       }
     },
     //点击搜索跳转
@@ -93,6 +96,7 @@ export default {
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
+      this.$store.commit("setSubTabIndex", index);
       if (index == 1) {
         this.$router.push({
           name: "zff",
@@ -127,6 +131,10 @@ export default {
         });
       }
     },
+    //点击图标返回首页
+    tabIndex() {
+      this.$store.commit("setTabIndex", 0);
+    },
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
@@ -134,6 +142,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.active {
+  color: #ed6d38 !important;
+}
 .middle-header {
   position: fixed;
   top: 0px !important;
@@ -147,7 +158,7 @@ export default {
   width: 100%;
   padding: 24px 0px;
   background: #ffffff;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   position: fixed;
@@ -175,7 +186,7 @@ export default {
         li {
           margin-left: 32px;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 400;
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
@@ -198,7 +209,7 @@ export default {
         input {
           width: 176px;
           height: 36px;
-          background-color: #f2f3f5;
+          background: #f7f8fa;
           border: none;
           border-radius: 4px 0px 0px 4px;
           text-indent: 12px;
@@ -210,24 +221,29 @@ export default {
           border: none;
           box-shadow: none;
         }
+        input:focus {
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
         input::-webkit-input-placeholder {
           /* WebKit browsers */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input:-moz-placeholder {
           /* Mozilla Firefox 4 to 18 */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input::-moz-placeholder {
           /* Mozilla Firefox 19+ */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input:-ms-input-placeholder {
           /* Internet Explorer 10+ */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
 

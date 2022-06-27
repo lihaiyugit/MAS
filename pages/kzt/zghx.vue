@@ -7,7 +7,13 @@
         <div class="banner">
           <div class="banner_main">
             <div class="banner_main-left">
-              <img src="@/static/images/zsh-img/zh-banner-text.png" alt="" />
+              <img class="t1" src="@/static/images/zsh-img/zh-t1.png" alt="" />
+              <img class="t2" src="@/static/images/zsh-img/zh-t2.png" alt="" />
+              <ul>
+                <li>· 打造工业工程领域综合解决方案服务商</li>
+                <li>· 成为高端化学品和先进材料供应商</li>
+                <li>· 建设世界一流财务管理体系和加速财务数字化转型</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -25,9 +31,16 @@
                 Ltd.简称CNCEC
               </p>
               <p class="info">
-                国务院国资委直接监管的大型工程建设企业集团公布的全球最大的250家承包商,在全球
-                油气行业工程建设公司排名中名列第二位。
+                中国化学工程集团有限公司，是国务院国资委直接监管的大型工程建设企业集团，是我国工业工程领域资质最为齐全、功能最为完备、业务链最为完整、知识技术密集的工程公司,是我国石油和化学工业体系的缔造者，是先进工业综合解决方案的提供者，是工程建设体制机制改革的先行者，是共建“一带一路”的排头兵，是清洁能源工程领域的领军者，是建设美丽中国的实践者。
+                <span class="more">更多 > </span>
               </p>
+              <span class="triangle">
+                中国化学工程集团有限公司（China National Chemical Engineering
+                Group Corporation
+                Ltd.简称CNCEC）是国务院国资委直接监管的大型工程建设企业集团，是我国工业工程领域资质最为齐全、功能最为完备、业务链最为完整、知识技术密集的工程公司,是我国石油和化学工业体系的缔造者，是先进工业综合解决方案的提供者，是工程建设体制机制改革的先行者，是共建“一带一路”的排头兵，是清洁能源工程领域的领军者，是建设美丽中国的实践者。<br />
+                公司源自原国家重工业部1953年成立的重工业设计院和建设公司。1984年以中国化学工程总公司名义在国家工商行政管理局注册，2005年更名为中国化学工程集团公司。
+                公司是最早承接境外承包工程的中国企业，是实施走出去的先行者和排头兵。公司现拥有境外机构134个，分布在俄罗斯、印度尼西亚、马来西亚、阿联酋、沙特、巴基斯坦、哈萨克斯坦、土耳其、埃及等60多个国家和地区，境外业务占比近40%，在一带一路国家累计完成合同额超过300亿美元，为沿线国家经济整体水平的提高和人民福祉的提升做出了重要贡献。
+              </span>
               <div class="video-box">
                 <div class="video-main">
                   <video
@@ -51,11 +64,14 @@
                     alt=""
                   />
                 </div>
-                <div class="point">8分钟了解中国石化</div>
+                <div class="point">8分钟了解中国化学</div>
               </div>
             </div>
             <div class="introduce_main_r">
-              <p class="p">实施国企改革三年行动，坚持改革创新“双轮驱动”。</p>
+              <p class="p">
+                <span class="line"></span
+                >实施国企改革三年行动，坚持改革创新“双轮驱动”。
+              </p>
               <ul>
                 <li>
                   <img src="@/static/images/zsh-img/icon-1.png" alt="" />
@@ -83,8 +99,7 @@
                 </li>
               </ul>
               <p class="p">
-                企业高质量发展动 力强劲，成效突出，“十三五”各项
-                主要经济指标连创新高，新签合同额
+                企业高质量发展动力强劲，成效突出，“十三五”各项主要经济指标连创新高，新签合同额
                 五年翻两番，营业收入、利润总额、
                 净利润、资产总额均实现翻番！！！
               </p>
@@ -101,26 +116,33 @@
         <div class="related_info">
           <div class="related_info_main">
             <div class="related_info_main_top">
-              <div class="title">《管理会计研究》2022年第1期 ></div>
+              <a
+                href="https://www.chinamas.cn/gc/list/584"
+                target="_blank"
+                class="title"
+                >《管理会计研究》2022年第1期 ></a
+              >
             </div>
             <div class="related_list">
               <div class="related_list_l">
                 <div class="related_list_title">
                   <img src="@/static/images/zsh-img/logo.png" alt="" />
-                  <span>专业文章</span>
                 </div>
                 <div class="related_list_content">
                   <dl>
                     <dt>
                       <h5>
-                        中国化学刘东进：大智移动云雾科技革命 重塑财务新职能
+                        中国化学刘东进：大智移动云物科技革命 重塑财务新职能
                         引领财务新变革
                       </h5>
-                      <p>财务是企业的中枢神经、生命血脉和管理核心</p>
+                      <p>
+                        以“大智移云物区”为代表的新技术应用浪潮滚滚而来，不仅改变了传统商业模式，而且催生出新物种、新业态和新赛道，重新定义行业边界，重塑企业价值链，对企业竞争和发展战略带来深刻影响，数字化转型成为必然选择。
+                      </p>
                     </dt>
                     <dd>
                       <a
                         href="https://www.chinamas.cn/gc/list/584"
+                        target="_blank"
                         >阅读详情</a
                       >
                       <img
@@ -133,12 +155,13 @@
                     <dt>
                       <h5>中国化学宋志鹏：从BSC模型中感悟人生之路</h5>
                       <p>
-                        本文用管理会计学中平衡计分卡的思维模式巧妙对照、感悟人生，既有助于浅显易懂地理解平衡计分卡，又从“战略”高度启发人生之路
+                        本文用管理会计学中平衡计分卡的思维模式巧妙对照、感悟人生，既有助于浅显易懂地理解平衡计分卡，又从“战略”高度启发人生之路。
                       </p>
                     </dt>
                     <dd>
                       <a
                         href="https://www.chinamas.cn/gd/list/572"
+                        target="_blank"
                         >阅读详情</a
                       >
                       <img
@@ -161,12 +184,17 @@
                 <div class="related_list_content">
                   <dl>
                     <dt>
-                      <h5>中国化学召开2022年度财务工作会</h5>
-                      <p>4月12日，中国化学通过视频形式召开2022年度财务工作会</p>
+                      <h5>
+                        国务院安全生产委员会办公室《全国安全生产简报》刊发中国化学安全生产专项整治三年行动经验
+                      </h5>
+                      <p>
+                        中国化学深入贯彻习近平总书记关于安全生产的重要论述，坚决落实党中央、国务院安全生产重要决策部署，以防范化解重大安全风险为主线，扎实推进安全生产专项整治三年行动。
+                      </p>
                     </dt>
                     <dd>
                       <a
-                        href="https://cncec.cn/articledetail/125548"
+                        href="https://www.cncec.com.cn/articledetail/124427"
+                        target="_blank"
                         >阅读详情</a
                       >
                       <img
@@ -180,12 +208,13 @@
                       <h5>中国化学多个境外工程项目荣获鲁班奖</h5>
                       <p>
                         本报讯
-                        近年来，中国化学以习近平新时代中国特色社会主义思想为指导，践行新发展理念，深入贯彻落实中共中央国务院《关于开展质量提升行动的指导意见》
+                        近年来，中国化学以习近平新时代中国特色社会主义思想为指导，践行新发展理念，深入贯彻落实中共中央国务院《关于开展质量提升行动的指导意见》。
                       </p>
                     </dt>
                     <dd>
                       <a
                         href="https://cncec.cn/articledetail/125568"
+                        target="_blank"
                         >阅读详情</a
                       >
                       <img
@@ -205,7 +234,7 @@
               <div class="line"></div>
               中国化学财务数字化，以建设世界一流财务管理体系为统领，全力推进
               <div class="tip">“一平台、三驱动、四架构”</div>
-              , 的数字化规划实施
+              的数字化规划实施。
             </div>
             <div class="explain_box">
               <div class="explain_box_p">
@@ -290,7 +319,7 @@
                 <p>
                   中国石油化工集团有限公司（以下简称公司）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，公司是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
                 </p>
-                <nuxt-link to="/kzt/zsh">了解更多</nuxt-link>
+                <a href="#">了解更多</a>
               </div>
             </div>
           </div>
@@ -298,46 +327,18 @@
         <div class="base_box">
           <div class="base_box_main">
             <div class="base_box_main_l">
-              <h5>欢迎更多优秀企业入驻企业数字化转型巡展</h5>
-              <p>联系方式：400-819-1255</p>
-              <p>邮箱：yangww@chinamas.cn</p>
-            </div>
-            <div class="base_box_main_r">
               <img src="@/static/images/zsh-img/qx-code.png" alt="" />
               <span>合作咨询</span>
+            </div>
+            <div class="base_box_main_r">
+              <h5>企业数字化巡展合作</h5>
+              <p>联系方式：400-819-1255</p>
+              <p>邮箱：yangww@chinamas.cn</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="slide">
-        <div class="lx">
-          <img src="@/static/images/zsh-img/hz.png" />
-          <span>合作联系</span>
-        </div>
-        <div class="lx-info" style="">
-          <dl class="tel">
-            <dt>
-              <img src="@/static/images/zsh-img/tel.png" alt="" />
-            </dt>
-            <dd>
-              <p>手机号</p>
-              <p>186-1888-8888</p>
-              <span></span>
-            </dd>
-          </dl>
-          <dl class="tel">
-            <dt>
-              <img src="@/static/images/zsh-img/code.png" alt="" />
-            </dt>
-            <dd>
-              <p>个人二维码</p>
-              <div class="code">
-                <img src="@/static/images/zsh-img/qx-code.png" alt="" />
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
+      <Slide/>
     </div>
     <Footer />
   </div>
@@ -362,6 +363,25 @@ export default {
       isplay: true, //视频是否播放
     };
   },
+  head() {
+    //优化seo 动态设置title、keywprds和description
+    return {
+      title: "MAS企业数字化转型巡展_中国化学-管理会计研究",
+      meta: [
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: "MAS企业数字化转型巡展_中国化学-管理会计研究",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "打造工业工程领域综合解决方案服务商，成为高端化学品和先进材料供应商，建设世界一流财务管理体系和加速财务数字化转型。",
+        },
+      ],
+    };
+  },
   components: {
     Swiper,
     SwiperSlide,
@@ -370,11 +390,12 @@ export default {
     this.$store.commit("setHeaderWidth", "1200px");
   },
   mounted() {
-    $(".slide .lx").mouseenter(function () {
-      $(".slide .lx-info ").css("display", "block");
+
+      $(".introduce_main_l .info .more").mouseenter(function () {
+        $(".introduce_main_l .triangle").css("display", "block");
     });
-    $(".slide .lx").mouseleave(function () {
-      $(".slide .lx-info ").css("display", "none");
+    $(".introduce_main_l .info .more").mouseleave(function () {
+        $(".introduce_main_l .triangle").css("display", "none");
     });
     this.$refs.movie.addEventListener("play", this.handlePlay);
     this.$refs.movie.addEventListener("pause", this.handlePause);
@@ -400,17 +421,19 @@ export default {
 /deep/.banxin {
   width: 1200px !important;
 }
+.main_container {
+  background-color: #fff;
+}
 .wapper {
   width: 100%;
   height: 100%;
-  background-color: #fff;
 }
 
 .banner {
   width: 100%;
   height: 460px;
   background-image: url(@/static/images/zsh-img/zh-banner.png);
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -426,11 +449,26 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
 }
 
-.banner_main-left img {
-  /* width: 486px; */
-  height: 270px;
+.banner_main-left .t1 {
+  width: 390px;
+  height: 34px;
+}
+
+.banner_main-left .t2 {
+  width: 465px;
+  height: 47px;
+  margin: 20px 0px 36px;
+}
+
+.banner_main-left ul li {
+  font-size: 16px;
+  font-weight: 400;
+  color: #40424c;
+  line-height: 30px;
 }
 
 .introduce {
@@ -465,33 +503,53 @@ export default {
 .introduce_main_l {
   width: 634px;
   float: left;
+  position: relative;
 }
 
 .introduce_main_l h2 {
   font-size: 24px;
-  font-family: PingFangSC, PingFangSC-Semibold;
   font-weight: 600;
   color: #40424c;
   line-height: 33px;
 }
 
 .introduce_main_l .english {
-  opacity: 0.45;
   font-size: 16px;
-  font-family: PingFangSC, PingFangSC-Regular;
   font-weight: 400;
-  color: #434447;
+  color: #afb0bb;
   line-height: 22px;
-  padding: 14px 0px 36px 0px;
+  padding: 17px 0px 36px 0px;
 }
 
 .introduce_main_l .info {
-  width: 608px;
-  font-size: 16px;
+  width: 639px;
+  font-size: 14px;
   font-weight: 400;
-  color: #73747b;
+  color: #40424c;
   line-height: 24px;
-  padding-bottom: 88px;
+  padding-bottom: 40px;
+}
+
+.introduce_main_l .info .more {
+  color: #ed6d38;
+  cursor: pointer;
+}
+
+.triangle {
+  width: 543px;
+  padding: 22px 28px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0px 0px 33px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 32px;
+  left: 518px;
+  z-index: 99;
+  display: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #40424c;
+  line-height: 24px;
 }
 
 .introduce_main_l .video-box {
@@ -530,9 +588,14 @@ export default {
   cursor: pointer;
 }
 
+.introduce_main_l .video-box .video-main img.video-play {
+  display: block;
+}
+
 .introduce_main_l .video-box .video-main img.video-pause {
   opacity: 0;
   transition: all 0.4s;
+  display: none;
 }
 
 .introduce_main_l .video-box .video-main:hover .video-pause {
@@ -561,18 +624,17 @@ export default {
 
 .introduce_main_r .p {
   width: 100%;
-  font-size: 16px;
-  font-weight: 500;
-  color: #2a2a39;
+  font-size: 14px;
+  font-weight: 400;
+  color: #40424c;
   line-height: 24px;
   padding-bottom: 15px;
 }
 
 .introduce_main_r ul {
   width: 100%;
-  /* height: 212px; */
   background: #f6f8fc;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -604,12 +666,12 @@ export default {
 }
 
 .introduce_main_r ul li p {
-  font-size: 16px;
+  margin-top: 10px;
+  font-size: 14px;
   font-weight: 400;
-  color: #636873;
   text-align: center;
-  line-height: 22px;
-  margin-top: 8px;
+  color: #40424c;
+  line-height: 20px;
 }
 
 .introduce_main_r .video-sj {
@@ -649,7 +711,7 @@ export default {
   color: #ffffff;
   line-height: 32px;
   position: absolute;
-  top: 176px;
+  top: 160px;
   left: 46px;
 }
 
@@ -688,9 +750,8 @@ export default {
 
 .related_list_content {
   width: 524px;
-  /* height: 276px; */
   background: #ffffff;
-  padding: 0px 32px;
+  padding: 8px 32px;
 }
 
 .related_list_content dl {
@@ -707,14 +768,22 @@ export default {
   font-weight: 600;
   color: #40424c;
   line-height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .related_list_content dl dt p {
   font-size: 14px;
   font-weight: 400;
-  color: #898c98;
+  color: #73747b;
   line-height: 24px;
-  padding: 8px 0px 24px 0px;
+  margin: 8px 0px 17px 0px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 .related_list_content dl dd {
@@ -747,24 +816,26 @@ export default {
 
 .data_main .title_p {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
-  color: #2a2a39;
+  color: #40424c;
   line-height: 24px;
   display: flex;
   align-items: center;
 }
 
-.data_main .title_p .line {
+.line {
+  display: inline-block;
   width: 4px;
   height: 16px;
   background-color: #ed6d38;
-  margin-right: 16px;
+  margin-right: 10px;
   vertical-align: middle;
 }
 
 .data_main .tip {
   color: #ed6d38;
+  font-weight: 500;
 }
 
 .explain_box {
@@ -777,7 +848,7 @@ export default {
   padding: 16px 20px;
   font-size: 14px;
   font-weight: 400;
-  color: #2a2a39;
+  color: #73747b;
   line-height: 30px;
 }
 .p-line {
@@ -809,7 +880,7 @@ export default {
 
 .behavior_main {
   margin: 0 auto;
-  width: 1200px;
+  width: 1033px;
 }
 
 .behavior_main .swiper-wrapper {
@@ -823,14 +894,20 @@ export default {
   position: absolute;
 }
 
+.swiper-button-left img,
+.swiper-button-right img {
+  width: 40px;
+  height: 40px;
+}
+
 .swiper-button-left {
   top: 30%;
-  left: 4%;
+  left: 9.5%;
 }
 
 .swiper-button-right {
   top: 30%;
-  right: 4%;
+  right: 9.5%;
 }
 
 .behavior_main .swiper-wrapper .swiper-slide {
@@ -839,233 +916,147 @@ export default {
 
 .behavior_main .swiper-wrapper .swiper-slide img {
   width: 100%;
-  height: 273px;
+  height: 235px;
 }
 
 .behavior_main .swiper-wrapper .swiper-slide p {
   width: 100%;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
-  color: #40424c;
-  line-height: 36px;
-  padding-top: 28px;
+  color: #2a2a39;
+  line-height: 22px;
+  padding-top: 15px;
+}
+
+.exhibition {
+  padding-bottom: 80px;
 }
 
 .exhibition .title_box {
-    padding: 60px 0px 80px 0px;
+  padding: 80px 0px;
 }
 
 .exhibition-content {
-    margin-top: 60px;
+  margin-top: 60px;
 }
 
 .line-bg {
-    width: 1360px;
-    height: 167px;
-    background: #f7f8fb;
-    display: flex;
-    margin: 0 auto;
+  width: 1360px;
+  height: 167px;
+  background: #f7f8fb;
+  display: flex;
+  margin: 0 auto;
 }
 
 .exhibition_main {
-    width: 1090px;
-    height: 300px;
-    background-image: url(@/static/images/zsh-img/exhibition-bg.png);
-    background-size: 100% 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 50px 0px 60px;
-    margin-top: -228px
+  width: 1090px;
+  height: 300px;
+  background-image: url(@/static/images/zsh-img/exhibition-bg.png);
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 50px 0px 60px;
+  margin-top: -228px;
 }
 
 .exhibition_main img {
-    width: 296px;
-    height: 228px;
+  width: 296px;
+  height: 228px;
 }
 
 .content_info h5 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #40424c;
-    line-height: 33px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #2a2a39;
+  line-height: 30px;
 }
 
 .content_info p {
-    width: 761px;
-    padding: 16px 0px 44px 0px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #40424c;
-    line-height: 24px;
+  width: 761px;
+  padding: 16px 0px 44px 0px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #73747b;
+  line-height: 24px;
 }
 
-.content_info span, .content_info a{
-    display: inline-block;
-    width: 88px;
-    height: 32px;
-    border: 1px solid #ed6d38;
-    border-radius: 2px;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    color: #ed6d38;
-    line-height: 32px;
+.content_info span,
+.content_info a {
+  display: inline-block;
+  width: 86px;
+  height: 30px;
+  border: 1px solid #ed6d38;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #ed6d38;
+  line-height: 30px;
+  display: none;
+}
+
+.content_info a:hover {
+  width: 88px;
+  height: 32px;
+  background-color: #ed6d38;
+  border: transparent;
+  color: #fff;
 }
 
 .base_box {
-  background: #3d3e49;
-  margin-top: 80px;
+  margin: 80px 0px;
+  display: none;
 }
 
 .base_box_main {
-  width: 1200px;
+  width: 1166px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  padding: 45px 0px;
+  background-image: url(@/static/images/zsh-img/zh-xz-bg.png);
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 40px 0px 15px 34px;
 }
 
-.base_box_main_l h5 {
+.base_box_main_r h5 {
   font-size: 18px;
   font-weight: 500;
-  color: #ffffff;
+  color: #40424c;
   line-height: 28px;
   padding-bottom: 16px;
 }
 
-.base_box_main_l p {
+.base_box_main_r p {
   font-size: 14px;
   font-weight: 400;
-  color: #ffffff;
+  color: #40424c;
   line-height: 30px;
 }
 
-.base_box_main_r {
+.base_box_main_l {
   display: flex;
   flex-direction: column;
+  margin-right: 22px;
 }
 
-.base_box_main_r img {
+.base_box_main_l img {
   width: 113px;
   height: 113px;
-  border: 8px solid #ffffff;
-  background: #a9abb8;
 }
 
-.base_box_main_r span {
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  color: #ffffff;
-  line-height: 30px;
-}
-
-/* 侧导航 slide start  */
-.slide {
-  width: 60px;
-  position: fixed;
-  bottom: 214px;
-  right: 10px;
-  z-index: 999;
-}
-
-.slide .lx {
-  margin: 0 auto;
-  text-align: center;
-  cursor: pointer;
-  width: 60px;
-  height: 60px;
-  background: #ffffff;
-  box-shadow: 0px 0px 4px 0px rgba(6, 13, 31, 0.1);
-}
-
-.slide .lx img {
-  width: 20px;
-  height: 20px;
-  margin-top: 10px;
-}
-
-.slide .lx span {
-  display: inline-block;
+.base_box_main_l span {
   font-size: 12px;
   font-weight: 400;
-  color: #2a2a39;
-  line-height: 17px;
-  vertical-align: top;
-}
-.lx-info {
-  display: none;
-  width: 150px;
-  height: 145px;
-  background: #ffffff;
-  box-shadow: 0px 0px 4px 0px rgba(6, 13, 31, 0.1);
-  position: absolute;
-  top: 0px;
-  right: 76px;
-  overflow: hidden;
-  padding: 20px 12px;
+  text-align: center;
+  opacity: 0.55;
+  color: #40424c;
+  line-height: 26px;
 }
 
-.lx-info .tel {
-  position: relative;
-  display: flex;
-  padding-bottom: 12px;
-}
 
-.lx-info .tel dt {
-  width: 20px;
-  height: 20px;
-}
-
-.lx-info .tel dd {
-  margin-left: 6px;
-}
-
-.slide .lx-info .tel dd p:nth-child(1) {
-  margin-bottom: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: left;
-  color: #2a2a39;
-  line-height: 20px;
-}
-
-.slide .lx-info .tel dd p:nth-child(2) {
-  font-size: 12px;
-  font-weight: 500;
-  text-align: left;
-  color: #2a2a39;
-  line-height: 17px;
-}
-
-.slide .lx-info .tel dd span {
-  position: absolute;
-  right: 0px;
-  top: 5px;
-  background-image: url(https://www.yuanian.com/skin/images/zxkf_right.png);
-  width: 6px;
-  height: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.slide .lx-info .tel dd .code {
-    width: 70px;
-    height: 70px;
-    background: #f6f7ff;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.slide .lx-info .tel dd .code img {
-    width: 61px;
-    height: 61px;
-}
 </style>

@@ -63,25 +63,45 @@
             <div class="share-list" v-show="isShare">
               <div class="wx-box" v-show="isWx">
                 <span>微信扫码</span>
-                <img src="../../static/images/code.png" alt="" />
+                <div id="qrcode" class="qrcode"></div>
+                <!-- <img src="../../static/images/code.png" alt="" /> -->
               </div>
               <div class="list-right">
-                <div class="item">
+                <div class="item" @click.stop="copyUrl">
                   <img src="../../static/images/lj.png" alt="" />
                   <span>复制链接</span>
                 </div>
                 <div class="item">
-                  <img src="../../static/images/tsina.png" alt="" />
-                  <span>新浪微博</span>
+                  <a
+                    :href="
+                      'https://service.weibo.com/share/share.php?appkey=' +
+                      595885820 +
+                      '&url=' +
+                      linkUrl +
+                      '&title=数字化企业与管理会计体系转型研讨会'
+                    "
+                    target="_blank"
+                  >
+                    <img src="../../static/images/tsina.png" alt="" />
+                    <span>新浪微博</span>
+                  </a>
                 </div>
                 <div class="item" @click="isWxFn">
                   <img src="../../static/images/weixin.png" alt="" />
                   <span>微信</span>
                 </div>
-
                 <div class="item">
-                  <img src="../../static/images/db.png" alt="" />
-                  <span>豆瓣</span>
+                  <a
+                    :href="
+                      'http://shuo.douban.com/!service/share?href=' +
+                      linkUrl +
+                      '&name=数字化企业与管理会计体系转型研讨会'
+                    "
+                    target="_blank"
+                  >
+                    <img src="../../static/images/db.png" alt="" />
+                    <span>豆瓣</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -154,7 +174,7 @@
                 class="swiper-wrapper"
               >
                 <swiper-slide>
-                  <dl>
+                  <dl @click="details(1)">
                     <dt>
                       <img src="../../static/images/hd-img.png" alt="" />
                       <div class="point">最新活动</div>
@@ -173,7 +193,7 @@
                   </dl>
                 </swiper-slide>
                 <swiper-slide>
-                  <dl>
+                  <dl @click="details(2)">
                     <dt>
                       <img src="../../static/images/hd-img.png" alt="" />
                       <div class="point">最新活动</div>
@@ -192,7 +212,7 @@
                   </dl>
                 </swiper-slide>
                 <swiper-slide>
-                  <dl>
+                  <dl @click="details(3)">
                     <dt>
                       <img src="../../static/images/hd-img.png" alt="" />
                       <div class="point">最新活动</div>
@@ -260,8 +280,11 @@
   </div>
 </template>
 <script>
+import { notNeedlogin } from "@/request/api";
+import md5 from "js-md5";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
+  scrollToTop: true,
   data() {
     return {
       state: 3, //1我要报名2 已报名 3 已结束
@@ -287,6 +310,7 @@ export default {
           prevEl: ".btn-left", //上一张标签类名可以自定义
         },
       },
+      linkUrl: "",
     };
   },
   //点击空白处关闭下拉框
@@ -302,12 +326,41 @@ export default {
       },
     },
   },
+
+  async asyncData({ $axios, store, params }) {
+    let timestamp = Date.parse(new Date());
+    let sign = md5(timestamp + store.state.secretKey);
+    let res = await notNeedlogin($axios, {
+      sign: sign,
+      timespan: timestamp,
+      className: "ActivityController",
+      classMethod: "activityDetails",
+      data: {
+        mas_activity_id: parseInt(params.id),
+      },
+    });
+    console.log(res.data, "res-活动详情");
+    // if (res.bol) {
+    //   return { listData: res.data,banner: res.data.bannerImg[0].mas_banner_img};
+    // }
+  },
   components: {
     Swiper,
     SwiperSlide,
   },
   mounted() {
     // this.init();
+    this.linkUrl = window.location.href;
+    // 生成二维码
+    let qr = new QRCode("qrcode", {
+      width: 88,
+      height: 88, // 高度
+      text: this.linkUrl, // 二维码内容
+      // render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+      background: "#f0f",
+      foreground: "#ff0",
+      // correctLevel: QRCode.CorrectLevel.H,
+    });
   },
   methods: {
     init({ BMap, map }) {
@@ -357,6 +410,30 @@ export default {
     //点击微信
     isWxFn() {
       this.isWx = !this.isWx;
+    },
+    //点击赋值链接
+    copyUrl() {
+      var textArea = document.createElement("textarea");
+      document.body.appendChild(textArea);
+      textArea.readOnly = "readonly";
+      textArea.style.opacity = "0";
+      textArea.value = this.linkUrl; //你的要被复制的链接
+      textArea.select();
+      if (textArea.setSelectionRange)
+        textArea.setSelectionRange(0, textArea.value.length);
+      else textArea.select();
+      document.execCommand("copy");
+      this.$message({
+        message: "复制成功",
+        type: "success",
+      });
+      document.body.removeChild(textArea);
+    },
+    //点击到详情
+    details(id) {
+      this.$router.push({
+        path: `/activity/${id}`,
+      });
     },
   },
 };

@@ -2,13 +2,37 @@
   <div class="main_container">
     <singleHeader />
     <div class="digital-container banxin">
-      <div class="banner">
-        <img src="../static/images/way/kj-banner.png" alt="" />
+      <div class="banner" v-if="$route.params.id == 1">
+        <img src="@/static/images/szh-banner.png" alt="" />
+        <nuxt-link to="/wytg" class="wytg"></nuxt-link>
       </div>
-      <div class="introduce">
+      <div class="banner" v-if="$route.params.id == 2">
+        <img src="@/static/images/kj-banner.png" alt="" />
+        <nuxt-link to="/wytg" class="wytg"></nuxt-link>
+      </div>
+      <div class="introduce" v-if="$route.params.id == 1">
         <dl class="common-dl">
           <dt>
-            <img src="../static/images/way/kj-img.png" alt="" />
+            <img src="@/static/images/szh-book.png" alt="" />
+          </dt>
+          <dd>
+            <h6>“数字化”文章订阅</h6>
+            <p>
+              在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代。在数字化时代，如何将数字化转型落到实处，成为全球企业需要面对的首要问题。CMAS聚焦数字化转型，从政策热点到专家观点，从理论前沿到精益实践，带您深入理解在企业的数字化中会有怎样的变化。
+            </p>
+            <div class="introduce-base">
+              <div class="left">
+                ￥<span class="price">68</span><span class="yue">/月</span>
+              </div>
+              <button @click="buyFn()">立即订阅</button>
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div class="introduce" v-if="$route.params.id == 2">
+        <dl class="common-dl">
+          <dt>
+            <img src="@/static/images/way/kj-img.png" alt="" />
           </dt>
           <dd>
             <h6>“管理会计”文章订阅</h6>
@@ -30,13 +54,13 @@
           <div class="two-content">
             <div class="title-box">
               <div class="top">
-                <h2>淘咨讯</h2>
-                <span>查看更多</span>
+                <h2>淘资讯</h2>
+                <nuxt-link to="/tzx">查看更多</nuxt-link>
               </div>
               <div class="line"></div>
             </div>
             <ul class="two-ul">
-              <li>
+              <li @click="tzxDetails(1)">
                 <div class="li-left">
                   <img src="/images/sub-advert06.png" alt="" />
                   <div class="point">推荐</div>
@@ -55,7 +79,7 @@
                   </div>
                 </div>
               </li>
-              <li>
+              <li @click="tzxDetails(1)">
                 <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                 <div class="base">
                   <div class="left">
@@ -66,7 +90,7 @@
                   </div>
                 </div>
               </li>
-              <li>
+              <li @click="tzxDetails(1)">
                 <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                 <div class="base">
                   <div class="left">
@@ -85,12 +109,12 @@
             <div class="title-box">
               <div class="top">
                 <h2>学案例</h2>
-                <span>查看更多</span>
+                <nuxt-link to="/xal">查看更多</nuxt-link>
               </div>
               <div class="line"></div>
             </div>
             <ul class="two-ul">
-              <li class="two-ul-li">
+              <li class="two-ul-li" @click="xalDetails(1)">
                 <div class="li-right">
                   <h5 class="reset twoline">
                     数字化转型：<br />数字化转型文章数字化转型1
@@ -105,7 +129,7 @@
                   </div>
                 </div>
               </li>
-              <li>
+              <li @click="xalDetails(1)">
                 <h5>数字化转型：<br />数字化转型文章数字化转型1</h5>
                 <div class="base">
                   <div class="left">
@@ -116,7 +140,7 @@
                   </div>
                 </div>
               </li>
-              <li>
+              <li @click="xalDetails(1)">
                 <h5>数字化转型：<br />数字化转型文章数字化转型1</h5>
                 <div class="base">
                   <div class="left">
@@ -146,13 +170,13 @@
                   <img
                     v-show="!showPlay || currentIndex != index"
                     class="audio-img video-play"
-                    src="../static/images/play.png"
+                    src="@/static/images/play.png"
                     alt=""
                   />
                   <img
                     v-show="showPlay && currentIndex == index"
                     class="audio-img video-pause"
-                    src="../static/images/pause.png"
+                    src="@/static/images/pause.png"
                     alt=""
                   />
                   <div v-if="index == 0" class="point">推荐</div>
@@ -162,7 +186,7 @@
                     <h5 class="twoline">{{ item.title }}</h5>
                     <img
                       v-if="showPlay && currentIndex == index"
-                      src="../static/images/audio/pl.png"
+                      src="@/static/images/audio/pl.png"
                       alt=""
                     />
                   </div>
@@ -195,14 +219,14 @@
               @ended="onAudioEnded"
             ></audio>
             <div class="left">
-              <img src="../static/images/audio/img.png" alt="" />
-              <img src="../static/images/audio/film.png" alt="" />
+              <img src="@/static/images/audio/img.png" alt="" />
+              <img src="@/static/images/audio/film.png" alt="" />
             </div>
             <div class="right">
               <div class="top">
                 <div class="top-l">
                   <img
-                    src="../static/images/audio/pre.png"
+                    src="@/static/images/audio/pre.png"
                     alt=""
                     @click="prevClick"
                   />
@@ -217,7 +241,7 @@
                     alt=""
                   />
                   <img
-                    src="../static/images/audio/nuxt.png"
+                    src="@/static/images/audio/nuxt.png"
                     alt=""
                     @click="nextClick"
                   />
@@ -271,7 +295,7 @@
           <div class="title-box">
             <div class="top">
               <h2>大咖说</h2>
-              <span>查看更多</span>
+              <nuxt-link to="/jdk">查看更多</nuxt-link>
             </div>
             <div class="line"></div>
           </div>
@@ -282,7 +306,7 @@
               class="swiper-wrapper"
             >
               <swiper-slide>
-                <dl>
+                <dl @click="goJdk(1)">
                   <dt>
                     <img
                       src="https://www.chinamas.cn/upload/2021/04/01/16172596716524.jpg"
@@ -293,7 +317,7 @@
                 </dl>
               </swiper-slide>
               <swiper-slide>
-                <dl>
+                <dl @click="goJdk(1)">
                   <dt>
                     <img
                       src="https://www.chinamas.cn/upload/2021/03/25/16166566872079.jpg"
@@ -304,7 +328,7 @@
                 </dl>
               </swiper-slide>
               <swiper-slide>
-                <dl>
+                <dl @click="goJdk(1)">
                   <dt>
                     <img
                       src="https://www.chinamas.cn/upload/2021/04/01/16172596716524.jpg"
@@ -314,7 +338,7 @@
                   <dd>内容详情</dd>
                 </dl>
               </swiper-slide>
-              <swiper-slide>
+              <swiper-slide @click="goJdk(1)">
                 <dl>
                   <dt>
                     <img
@@ -327,24 +351,16 @@
               </swiper-slide>
             </swiper>
             <div class="btn-left">
-              <img
-                class="left01"
-                src="../static/images/way/left01.png"
-                alt=""
-              />
-              <img class="left1" src="../static/images/way/left1.png" alt="" />
+              <img class="left01" src="@/static/images/way/left01.png" alt="" />
+              <img class="left1" src="@/static/images/way/left1.png" alt="" />
             </div>
             <div class="btn-right">
               <img
                 class="right02"
-                src="../static/images/way/right02.png"
+                src="@/static/images/way/right02.png"
                 alt=""
               />
-              <img
-                class="right2"
-                src="../static/images/way/right2.png"
-                alt=""
-              />
+              <img class="right2" src="@/static/images/way/right2.png" alt="" />
             </div>
           </div>
         </div>
@@ -366,14 +382,14 @@
             <img
               v-show="isplay"
               class="video-play"
-              src="../static/images/play.png"
+              src="@/static/images/play.png"
               alt=""
               @click="handlePlay"
             />
             <img
               v-show="!isplay"
               class="video-pause"
-              src="../static/images/pause.png"
+              src="@/static/images/pause.png"
               alt=""
               @click="handlePause"
             />
@@ -420,15 +436,15 @@
           <div class="title-box">
             <div class="top">
               <h2>找方法</h2>
-              <span>查看更多</span>
+              <nuxt-link to="/zff">查看更多</nuxt-link>
             </div>
             <div class="line"></div>
           </div>
           <ul class="module-r-ul">
             <li>
               <div class="keyword_box">
-                <span>预算</span>
-                <span>管理会计</span>
+                <span @click="onHotWord(1, '预算')">预算</span>
+                <span @click="onHotWord(1, '管理会计')">管理会计</span>
                 <span>数字化转型</span>
                 <span>数字化转型 </span>
                 <span>关键字</span>
@@ -441,7 +457,7 @@
                 <span>数字化转型</span>
               </div>
             </li>
-            <li>
+            <li @click="zffDetails(2)">
               <h5>
                 中国石油刘跃珍：
                 <br />业财融合新模式，财务人员新角色
@@ -455,7 +471,7 @@
                 </div>
               </div>
             </li>
-            <li>
+            <li @click="zffDetails(2)">
               <h5>
                 中国石油刘跃珍：
                 <br />业财融合新模式，财务人员新角色
@@ -477,12 +493,12 @@
           <div class="title-box">
             <div class="top">
               <h2>逛书店</h2>
-              <span>更多课程</span>
+              <nuxt-link to="/gsd">查看更多</nuxt-link>
             </div>
             <div class="line"></div>
           </div>
           <div class="magazine">
-            <dl>
+            <dl @click="gsdDetails(1)">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -494,7 +510,7 @@
                 <p>重塑核心能力</p>
               </dd>
             </dl>
-            <dl>
+            <dl @click="gsdDetails(1)">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -506,7 +522,7 @@
                 <p>重塑核心能力</p>
               </dd>
             </dl>
-            <dl>
+            <dl @click="gsdDetails(1)">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -518,7 +534,7 @@
                 <p>重塑核心能力</p>
               </dd>
             </dl>
-            <dl>
+            <dl @click="gsdDetails(1)">
               <dt>
                 <div class="dt-img">
                   <div class="cj"></div>
@@ -536,7 +552,7 @@
           <div class="title-box">
             <div class="top">
               <h2>更多专题</h2>
-              <span>查看更多</span>
+              <nuxt-link to="kzt">查看更多</nuxt-link>
             </div>
             <div class="line"></div>
           </div>
@@ -548,24 +564,33 @@
             >
               <swiper-slide>
                 <div class="subject-item">
-                  <img src="../static/images/way/zz-img.png" alt="" />
+                  <img
+                    src="@/static/images/way/zz-img.png"
+                    alt=""
+                  />
                   <div class="point">管理会计专题</div>
                 </div>
               </swiper-slide>
               <swiper-slide>
                 <div class="subject-item">
-                  <img src="../static/images/way/zz-img1.png" alt="" />
+                  <img
+                    src="@/static/images/way/zz-img1.png"
+                    alt=""
+                  />
                   <div class="point">管理会计专题</div>
                 </div>
               </swiper-slide>
               <swiper-slide>
-                <img src="../static/images/way/zz-img2.png" alt="" />
+                <img
+                  src="@/static/images/way/zz-img2.png"
+                  alt=""
+                />
               </swiper-slide>
               <swiper-slide>
-                <img src="../static/images/way/zz-img3.png" alt="" />
+                <img src="@/static/images/way/zz-img3.png" alt="" />
               </swiper-slide>
               <swiper-slide>
-                <img src="../static/images/way/zz-img.png" alt="" />
+                <img src="@/static/images/way/zz-img.png" alt="" />
               </swiper-slide>
             </swiper>
             <!-- Optional controls -->
@@ -839,6 +864,54 @@ export default {
         100
       );
     },
+    //淘资讯跳转到详情
+    tzxDetails(id) {
+      this.$router.push({
+        path: `/tzx/${id}`,
+      });
+    },
+    //学案例跳转到详情
+    xalDetails(id) {
+      this.$router.push({
+        path: `/xal/${id}`,
+      });
+    },
+    //点击大咖说
+    goJdk(id) {
+      this.$router.push({
+        path: `/jdk/${id}`,
+      });
+    },
+    //点击站内热词
+    onHotWord(index, val) {
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, index: index },
+      });
+    },
+    //跳转到找方法详情
+    zffDetails(id) {
+      this.$router.push({
+        path: `/zff/${id}`,
+      });
+    },
+    //逛书店点击到详情
+    gsdDetails(id) {
+      this.$router.push({
+        path: `/gsd/${id}`,
+        // name: "",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
+      });
+    },
+    //看专题点击跳转
+    kztDetails(id) {
+      this.$router.push({
+        path: `/kzt/${id}`,
+      });
+    },
   },
 };
 </script>
@@ -847,6 +920,15 @@ export default {
   padding: 20px 0px 40px;
   .banner {
     height: 391px;
+    position: relative;
+    .wytg {
+      position: absolute;
+      bottom: 21%;
+      left: 9%;
+      width: 122px;
+      height: 38px;
+      cursor: pointer;
+    }
   }
   .introduce {
     padding: 30px 0px;
@@ -910,6 +992,7 @@ export default {
             line-height: 22px;
             border: none;
             display: block;
+            cursor: pointer;
           }
         }
       }
@@ -924,16 +1007,18 @@ export default {
       padding-bottom: 18px;
       h2 {
         font-size: 22px;
-        font-weight: 600;
+        font-weight: 500;
         text-align: left;
         color: rgba(0, 0, 0, 0.85);
         line-height: 22px;
       }
-      span {
+      span,
+      a {
         font-size: 14px;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.45);
+        color: rgba(0, 0, 0, 0.35);
         line-height: 22px;
+        cursor: pointer;
       }
     }
     .line {
@@ -977,7 +1062,7 @@ export default {
     align-items: center;
     h5 {
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
       text-align: left;
       color: rgba(0, 0, 0, 0.85);
       line-height: 24px;
@@ -1001,6 +1086,7 @@ export default {
             padding-top: 24px;
             height: 100px;
             border-bottom: 1px dashed #e7e7e7;
+            cursor: pointer;
             &:last-child {
               border-bottom: none;
             }
@@ -1103,9 +1189,6 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 width: 172px;
-                h5 {
-                  width: 120px;
-                }
                 img {
                   width: 18px;
                   height: 15px;
@@ -1172,6 +1255,7 @@ export default {
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
+    cursor: pointer;
     .left {
       display: flex;
       align-items: center;
@@ -1317,7 +1401,6 @@ export default {
           -webkit-appearance: none;
           border: 2px solid #ff7d3b; /*设置边框*/
         }
-
       }
     }
   }
@@ -1407,6 +1490,7 @@ export default {
         dl {
           width: 245px;
           height: 184px;
+          cursor: pointer;
           dt {
             width: 100%;
             height: 100%;
@@ -1433,6 +1517,7 @@ export default {
         justify-content: space-between;
         dl {
           width: 323px;
+          cursor: pointer;
           dt {
             width: 100%;
             height: 241px;
@@ -1440,7 +1525,7 @@ export default {
           dd {
             h6 {
               font-size: 16px;
-              font-weight: 600;
+              font-weight: 500;
               color: rgba(0, 0, 0, 0.85);
               line-height: 24px;
               padding: 20px 0px 6px;
@@ -1465,6 +1550,7 @@ export default {
         padding: 24px 18px;
         dl {
           width: 154px;
+          cursor: pointer;
           dt {
             .dt-img {
               width: 152px;
@@ -1486,7 +1572,7 @@ export default {
               width: 152px;
               height: 48px;
               font-size: 16px;
-              font-weight: 600;
+              font-weight: 500;
               color: rgba(0, 0, 0, 0.85);
               line-height: 24px;
               padding: 18px 0px 6px;
@@ -1563,6 +1649,7 @@ export default {
             font-weight: 400;
             color: rgba(0, 0, 0, 0.65);
             line-height: 17px;
+            cursor: pointer;
           }
           span:hover {
             background: #fff2f0;
@@ -1575,12 +1662,13 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          cursor: pointer;
           &:last-child {
             border-bottom: none;
           }
           h5 {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             text-align: left;
             color: rgba(0, 0, 0, 0.85);
             line-height: 24px;
@@ -1591,6 +1679,7 @@ export default {
         position: relative;
         .subject-item {
           position: relative;
+          cursor: pointer;
         }
         .btn-left-two {
           top: 50%;

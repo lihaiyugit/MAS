@@ -80,7 +80,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -114,7 +114,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -131,7 +131,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -148,7 +148,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -165,7 +165,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -182,7 +182,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -232,7 +232,7 @@
             class="swiper-wrapper"
           >
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -249,7 +249,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -266,7 +266,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -283,7 +283,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -300,7 +300,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -317,7 +317,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -334,7 +334,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -351,7 +351,7 @@
               </dl>
             </swiper-slide>
             <swiper-slide>
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <img
                     class="dt-img"
@@ -506,7 +506,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  padding: 18px 0px 40px 0px;
+  padding: 30px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;

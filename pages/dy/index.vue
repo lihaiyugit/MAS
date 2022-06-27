@@ -111,7 +111,7 @@
             <li :style="{ 'background-image': 'url(' + img3 + ')' }">
               <img class="dy" src="../../static/images/dy.png" alt="" />
               <div class="title">
-                <h6>淘咨询</h6>
+                <h6>淘资讯</h6>
                 <nuxt-link to="/tzx" class="more">查看更多</nuxt-link>
               </div>
 
@@ -166,7 +166,7 @@
               <!-- <img class="dy" src="../../static/images/dy.png" alt="" /> -->
               <div class="title">
                 <h6>数字化转型</h6>
-                <nuxt-link to="/szhzx" class="more">查看更多</nuxt-link>
+                <nuxt-link to="/kzt/1" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -196,7 +196,7 @@
               <!-- <img class="dy" src="../../static/images/dy.png" alt="" /> -->
               <div class="title">
                 <h6>管理会计</h6>
-                <nuxt-link to="/glkj" class="more">查看更多</nuxt-link>
+                <nuxt-link to="/kzt/2" class="more">查看更多</nuxt-link>
               </div>
               <div class="info">
                 <p>
@@ -346,7 +346,7 @@
         <div class="magazine-title">
           <h2>其他杂志</h2>
           <div class="more-btn">
-             <nuxt-link to="/zz/list">查看更多</nuxt-link>
+            <nuxt-link to="/zz/list">查看更多</nuxt-link>
             <img src="../../static/images/arrows-left.png" alt="" />
           </div>
         </div>
@@ -463,11 +463,16 @@ export default {
     AOS.init({
       once: false,
     });
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   setTimeout(function () {
+    //     AOS.refresh();
+    //   }, 500);
+    // });
   },
   methods: {
     //点击立即订阅
     buyFn() {
-       this.$router.push({
+      this.$router.push({
         name: "dy-pay",
       });
     },
@@ -482,6 +487,11 @@ export default {
         // },
       });
     },
+  },
+  destroyed() {
+    AOS.init({
+      once: true,
+    });
   },
 };
 </script>
@@ -714,8 +724,9 @@ export default {
                 font-size: 14px;
                 font-weight: 400;
                 text-align: left;
-                color: rgba(0, 0, 0, 0.45);
+                color: rgba(0, 0, 0, 0.35);
                 display: none;
+                cursor: pointer;
               }
             }
             .info {
@@ -863,17 +874,17 @@ export default {
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
         }
-        .more-btn{
+        .more-btn {
           display: flex;
           align-items: center;
           font-size: 14px;
           font-weight: 400;
           text-align: left;
-          color: rgba(0, 0, 0, 0.85);
+          color: rgba(0, 0, 0, 0.35);
           line-height: 22px;
           cursor: pointer;
-          a{
-             color: rgba(0, 0, 0, 0.85);
+          a {
+            color: rgba(0, 0, 0, 0.85);
           }
           img {
             width: 13px;

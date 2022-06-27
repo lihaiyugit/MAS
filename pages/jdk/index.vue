@@ -197,4 +197,5 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/static/css/page-css/listCommon.less";
+
 </style>

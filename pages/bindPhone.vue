@@ -268,10 +268,13 @@ export default {
               _this.$message.success(res.msg);
               setTimeout(() => {
                 _this.bindType = 2;
-                // _this.$router.push("/");
               }, 500);
               setTimeout(() => {
-                _this.$router.push("/");
+                // _this.$router.push("/");
+                let path = _this.$route.query.path || "/";
+                _this.$router.push({
+                  path: _this.$route.query.path ? path : "/",
+                });
               }, 1000);
             } else {
               _this.$message.error(res.msg);
@@ -344,7 +347,7 @@ export default {
   }
 
   /deep/.el-input.is-active .el-input__inner,
-   /deep/.el-input__inner:focus {
+  /deep/.el-input__inner:focus {
     border-color: #ed6d38 !important;
   }
 

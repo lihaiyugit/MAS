@@ -57,6 +57,7 @@ export default {
     oNitem(index, item) {
       document.body.scrollTop = 0;
       this.current = index;
+      this.$store.commit("setSubTabIndex", index);
       if (index == 1) {
         this.$router.push({
           name: "zff",
@@ -107,7 +108,7 @@ export default {
   border-radius: 6px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
   ul {
-    padding: 10px 14px;
+    padding: 16px 14px;
     li {
       width: 160px;
       height: 47px;
@@ -116,13 +117,14 @@ export default {
       text-align: center;
       color: rgba(0, 0, 0, 0.85);
       line-height: 47px;
+      margin-bottom: 4px;
       cursor: pointer;
       &:nth-child(1) {
         display: none;
       }
     }
     li:last-child {
-      border-bottom: none;
+      margin-bottom: 0px;
     }
     li:hover {
       background: #fff2ed;

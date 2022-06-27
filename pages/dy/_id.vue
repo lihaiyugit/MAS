@@ -19,7 +19,7 @@
         </div>
         <div class="support-box">
           <!-- v-if="isPay == 0" -->
-          <div style="border-bottom:1px solid #f00;">
+          <div style="border-bottom: 1px solid #f00">
             <img
               class="triangle"
               src="../../static/images/triangle.png"
@@ -57,7 +57,7 @@
             </div>
           </div>
           <!-- v-else-if="isPay == 1" -->
-          <div style="border-bottom:1px solid #f00;">
+          <div style="border-bottom: 1px solid #f00">
             <div class="open-box">
               <p>畅读学案例栏目所有内容！</p>
               <div class="go-open">
@@ -67,16 +67,18 @@
             </div>
           </div>
           <!-- v-else -->
-          <div style="border-bottom:1px solid #f00;">
+          <div style="border-bottom: 1px solid #f00">
             <div class="dy-tip">
               <div class="dy-tip-l">
-                <img src="../../static/images/hy.png" alt="">
-                <span>您已订阅本文章所属栏目，可以畅读栏目所有付费文章，订阅剩余时长</span>
+                <img src="../../static/images/hy.png" alt="" />
+                <span
+                  >您已订阅本文章所属栏目，可以畅读栏目所有付费文章，订阅剩余时长</span
+                >
                 <span class="day">100天</span>
               </div>
               <div class="dy-tip-r">
                 <span>去续费</span>
-                <img src="../../static/images/way/right02.png" alt="">
+                <img src="../../static/images/way/right02.png" alt="" />
               </div>
             </div>
           </div>
@@ -143,9 +145,23 @@
               <div class="login-tip">
                 <p>
                   您需要登录后才可以评论
-                  <a class="login" href="" target="_blank">登录</a>
+                  <nuxt-link
+                    target="_blank"
+                    :to="{
+                      path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                    }"
+                    class="login"
+                    >登录</nuxt-link
+                  >
                   |
-                  <a class="login" href="" target="_blank">立即注册</a>
+                  <nuxt-link
+                    target="_blank"
+                    :to="{
+                      path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                    }"
+                    class="login"
+                    >立即注册</nuxt-link
+                  >
                 </p>
               </div>
               <button class="comment">评论</button>
@@ -279,14 +295,13 @@
       <articleModule />
       <!-- 未登录未支付 -->
       <el-dialog
-
         :lock-scroll="false"
         :visible.sync="loginVisible"
         width="420px"
         class="login-box"
         center
       >
-        <LoginBox/>
+        <LoginBox />
       </el-dialog>
       <!-- 已登录未支付 -->
       <el-dialog
@@ -296,21 +311,25 @@
         width="316px"
         center
       >
-       <div class="pay-box">
-         <p>扫码完成付费，可订阅本模块</p>
-         <div class="code-box">
-           <img src="	https://www.chinamas.cn/static/picImG/header-footer/footer.jpg" alt="">
-         </div>
-         <div class="base-tip">
-           <img src="../../static/images/weixin.png" alt="">
-           <span>扫码支付</span>
-         </div>
-       </div>
+        <div class="pay-box">
+          <p>扫码完成付费，可订阅本模块</p>
+          <div class="code-box">
+            <img
+              src="	https://www.chinamas.cn/static/picImG/header-footer/footer.jpg"
+              alt=""
+            />
+          </div>
+          <div class="base-tip">
+            <img src="../../static/images/weixin.png" alt="" />
+            <span>扫码支付</span>
+          </div>
+        </div>
       </el-dialog>
     </div>
   </div>
 </template>
 <script>
+import AOS from "aos";
 export default {
   data() {
     return {
@@ -376,6 +395,9 @@ export default {
   //   // let res= await ArticleIdApi({id:query.id})
   // },
   mounted() {
+    AOS.init({
+      once: true,
+    });
     // console.log("document.meta.keywords",document.meta.name,'this.head.meta.name')
     // 开启滚动监听
     window.addEventListener("scroll", this.handleScroll);

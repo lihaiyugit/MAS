@@ -65,6 +65,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   .el-icon-top {
     margin-left: -1px;
   }

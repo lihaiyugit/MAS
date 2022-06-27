@@ -58,7 +58,7 @@
               >
             </div>
             <div class="content-container-list">
-              <dl>
+              <dl @click="details(1)">
                 <dt>
                   <div class="top">
                     <h3 class="twoline">
@@ -95,7 +95,7 @@
                   <img src="../../static/images/way/list.png" alt="" />
                 </dd>
               </dl>
-              <dl>
+              <dl @click="details(2)">
                 <dt>
                   <div class="top">
                     <h3 class="twoline">
@@ -196,6 +196,12 @@ export default {
       } else {
         this.industryHeight = "auto";
       }
+    },
+    //点击到详情
+    details(id) {
+      this.$router.push({
+        path: `/zff/${id}`,
+      });
     },
   },
 };

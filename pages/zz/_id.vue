@@ -1,6 +1,6 @@
 <template>
   <div class="main_container">
-    <singleHeader/>
+    <singleHeader />
     <div class="crumbs">
       <div class="banxin crumbs-item">
         首页 > 订阅 > 杂志订阅 >
@@ -77,13 +77,15 @@
                   class="join"
                   :disabled="dis"
                   :class="{ disabled: dis == false }"
-                  v-if="current!= 1"
+                  v-if="current != 1"
                 >
                   加入购物车
                 </button>
-                <button v-else class="freeTry" @click="tryRead()">免费试读</button>
+                <button v-else class="freeTry" @click="tryRead()">
+                  免费试读
+                </button>
               </div>
-              <div class="order-info" v-if="current!= 1">
+              <div class="order-info" v-if="current != 1">
                 <div class="subscription-box">
                   <div class="more">
                     <span>更多订阅： </span>
@@ -115,10 +117,16 @@
                 <div class="tips">
                   会员购买全年纸质期刊，同时获得免费阅读历史过刊、每期新刊电子刊的权益。注册成为会员，有机会享受折扣优惠
                 </div>
-                <a class="register" href="">
+                <nuxt-link
+                  target="_blank"
+                  :to="{
+                    path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                  }"
+                  class="register"
+                >
                   <span>立即注册</span>
                   <img src="../../static/images/arrows-left.png" alt="" />
-                </a>
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -220,9 +228,23 @@
                       <div class="login-tip">
                         <p>
                           您需要登录后才可以评论
-                          <a class="login" href="" target="_blank">登录</a>
+                          <nuxt-link
+                            target="_blank"
+                            :to="{
+                              path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                            }"
+                            class="login"
+                            >登录</nuxt-link
+                          >
                           |
-                          <a class="login" href="" target="_blank">立即注册</a>
+                          <nuxt-link
+                            target="_blank"
+                            :to="{
+                              path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                            }"
+                            class="login"
+                            >立即注册</nuxt-link
+                          >
                         </p>
                       </div>
                       <button class="comment">评论</button>
@@ -510,7 +532,7 @@ export default {
     });
   },
   methods: {
-     //点击试读
+    //点击试读
     tryRead() {
       this.$router.push({
         name: "journal",

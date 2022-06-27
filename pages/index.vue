@@ -20,7 +20,7 @@
               <div class="title-box">
                 <div class="top">
                   <h2>{{ indexData.master.title }}</h2>
-                  <nuxt-link to="/jdk" class="more">查看更多</nuxt-link>
+                  <nuxt-link to="/dks" class="more">查看更多</nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
@@ -28,6 +28,7 @@
                 <li
                   v-for="(item, index) in indexData.master.masterTheory"
                   :key="index"
+                  @click="dksDetails(item.mas_master_list_id)"
                 >
                   <h5>{{ item.mas_master_list_title }}</h5>
                   <div class="base">
@@ -83,15 +84,16 @@
                 <span
                   v-for="(item, index) in indexData.master.masterList"
                   :key="index"
+                  @click="goJdk(item.mas_master_user_id)"
                   >{{ item.mas_master_user_name }}</span
                 >
-                <span>于增彪</span>
-                <span>郝宇晓</span>
-                <span>叶康涛 </span>
-                <span>何年初</span>
-                <span>李连清</span>
-                <span>王秀明</span>
-                <span>冈野浩</span>
+                <span @click="goJdk(1)">于增彪</span>
+                <span @click="goJdk(1)">郝宇晓</span>
+                <span @click="goJdk(1)">叶康涛 </span>
+                <span @click="goJdk(1)">何年初</span>
+                <span @click="goJdk(1)">李连清</span>
+                <span @click="goJdk(1)">王秀明</span>
+                <span @click="goJdk(1)">冈野浩</span>
               </div>
               <nuxt-link to="/jdk" class="skip-box">
                 <span>查看更多</span>
@@ -192,12 +194,12 @@
                   </div>
                   <div class="line"></div>
                 </div>
-                <div class="advert-box">
+                <nuxt-link :to="{ path: `/activity/1` }" class="advert-box">
                   <div class="img">
                     <!-- <img src="/images/sub-advert02.png" alt="" /> -->
                     <img :src="indexData.newActivity.mas_activity_img" alt="" />
                   </div>
-                </div>
+                </nuxt-link>
               </div>
               <div class="right-content">
                 <div class="title-box">
@@ -207,7 +209,7 @@
                   </div>
                   <div class="line"></div>
                 </div>
-                <div class="advert-box">
+                <nuxt-link :to="{ path: `/zz/1` }" class="advert-box">
                   <div class="img">
                     <!-- <img src="/images/way/zz.png" alt="" /> -->
                     <img
@@ -216,7 +218,7 @@
                     />
                     <div class="point">新书</div>
                   </div>
-                </div>
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -236,7 +238,7 @@
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
-                <li
+                <!-- <li
                   v-for="(tzItem, tzIndex) in indexData.articleTzx"
                   :key="tzIndex"
                 >
@@ -255,8 +257,28 @@
                       </div>
                     </div>
                   </div>
+                </li> -->
+
+                <li @click="tzxDetails(1)">
+                  <div class="li-left">
+                    <img src="/images/sub-advert06.png" alt="" />
+                    <div class="point">推荐</div>
+                  </div>
+                  <div class="li-right">
+                    <h5 class="reset twoline">
+                      36氪首发｜构建品牌东南亚出海高速路…
+                    </h5>
+                    <div class="base">
+                      <div class="left">
+                        <img class="icon" src="/images/time.png" alt="" />
+                        <span>JULY 1, 2019</span>
+                        <img class="icon" src="/images/chat.png" alt="" />
+                        <span>3</span>
+                      </div>
+                    </div>
+                  </div>
                 </li>
-                <li>
+                <li @click="tzxDetails(2)">
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
@@ -267,7 +289,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li @click="tzxDetails(3)">
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
@@ -296,6 +318,7 @@
                     <span
                       v-for="(item, index) in indexData.articleZff.tag"
                       :key="index"
+                      @click="onHotWord(index, item.mas_tag_name)"
                       >{{ item.mas_tag_name }}</span
                     >
                   </div>
@@ -303,6 +326,7 @@
                 <li
                   v-for="(item, index) in indexData.articleZff.Zff"
                   :key="index"
+                  @click="zffDetails(2)"
                 >
                   <h5>{{ item.mas_article_title }}</h5>
                   <div class="base">
@@ -314,17 +338,6 @@
                     </div>
                   </div>
                 </li>
-                <li>
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -332,13 +345,13 @@
             <div class="two-content">
               <div class="title-box">
                 <div class="top">
-                  <h2>共创内容</h2>
+                  <h2>政策解读</h2>
                   <span class="more">查看更多</span>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
-                <li class="two-ul-li">
+                <li @click="tzxDetails(3)" class="two-ul-li">
                   <div class="li-right">
                     <h5 class="reset twoline">
                       做15后的生意，把迪士尼装进商场，室内亲子乐园…
@@ -350,7 +363,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li @click="tzxDetails(3)">
                   <h5>焦点分析｜极兔不想成为字节跳动的“菜鸟”，而是…</h5>
                   <div class="base">
                     <div class="left">
@@ -358,7 +371,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li @click="tzxDetails(3)">
                   <h5>车厘子价格腰斩？记者走访全国最大果菜批发市场…</h5>
                   <div class="base">
                     <div class="left">
@@ -384,7 +397,7 @@
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
-                <li>
+                <li @click="kztDetails(1)">
                   <div class="li-left">
                     <img src="/images/sub-advert06.png" alt="" />
                     <div class="point">推荐</div>
@@ -401,7 +414,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li @click="kztDetails(2)">
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
@@ -412,7 +425,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li @click="kztDetails(1)">
                   <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
                   <div class="base">
                     <div class="left">
@@ -567,9 +580,9 @@ export default {
   created() {
     this.$store.commit("setHeaderWidth", "1200px");
     this.$store.commit("setIsFixedHeader", true);
+
   },
   mounted() {
-    this.$store.commit("setIsFixedHeader", true);
     console.log(this.indexData, "indexData");
     // if (process.client) {
     //   this.vuePdf = require("vue-pdf");
@@ -635,6 +648,43 @@ export default {
         // params: {
         //   type: item,
         // },
+      });
+    },
+    //点击大咖说
+    goJdk(id) {
+      this.$router.push({
+        path: `/jdk/${id}`,
+      });
+    },
+    //点击大咖说详情
+    dksDetails(id){
+       this.$router.push({
+        path: `/dks/${id}`,
+      });
+    },
+    //点击站内热词
+    onHotWord(index, val) {
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, index: index },
+      });
+    },
+    //跳转到找方法详情
+    zffDetails(id) {
+      this.$router.push({
+        path: `/zff/${id}`,
+      });
+    },
+    //淘资讯跳转到详情
+    tzxDetails(id) {
+      this.$router.push({
+        path: `/tzx/${id}`,
+      });
+    },
+    //看专题点击跳转
+    kztDetails(id) {
+      this.$router.push({
+        path: `/kzt/${id}`,
       });
     },
   },
@@ -711,11 +761,10 @@ export default {
           }
         }
         .right {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
-          text-align: left;
-          color: rgba(0, 0, 0, 0.65);
-          line-height: 22px;
+          color: rgba(0, 0, 0, 0.25);
+          line-height: 12px;
         }
       }
       .skip-box {
@@ -745,6 +794,7 @@ export default {
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
           line-height: 17px;
+          cursor: pointer;
         }
         span:hover {
           background: #fff2f0;
@@ -795,6 +845,7 @@ export default {
               width: 306px;
               height: 92px;
               margin-top: 20px;
+              cursor: pointer;
             }
             li:nth-child(1) {
               margin-top: 0px;
@@ -807,6 +858,7 @@ export default {
               margin-top: 26px;
               border-bottom: 1px dashed #e7e7e7;
               padding-bottom: 13px;
+              cursor: pointer;
               &:last-child {
                 border-bottom: none;
               }
@@ -821,7 +873,7 @@ export default {
                 margin-bottom: 18px;
               }
               .base {
-                margin-bottom: 13px;
+                margin-bottom: 14px;
               }
             }
           }
@@ -843,6 +895,8 @@ export default {
           .advert-box {
             border-bottom: 1px dashed #e7e7e7;
             position: relative;
+            cursor: pointer;
+            display: block;
             .img {
               width: 242px;
               height: 116px;
@@ -870,6 +924,7 @@ export default {
               padding-top: 24px;
               height: 104px;
               border-bottom: 1px dashed #e7e7e7;
+              cursor: pointer;
               &:last-child {
                 border-bottom: none;
               }
@@ -914,6 +969,7 @@ export default {
             }
           }
           .two-content-mid {
+            cursor: pointer;
             .img-box {
               width: 149px;
               height: 164px;

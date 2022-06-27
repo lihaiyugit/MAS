@@ -342,7 +342,7 @@
               <td>29元</td>
             </tr>
             <tr>
-              <td class="left">淘咨讯</td>
+              <td class="left">淘资讯</td>
               <td>58元</td>
               <td>58元</td>
               <td>58元</td>

@@ -26,7 +26,7 @@
               </li>
             </ul>
           </div>
-          <span class="line">|</span>
+          <span class="line"></span>
           <input placeholder="输入搜索的内容" v-model="searchValue" />
           <div class="search" @click="onSearch">搜索</div>
         </div>
@@ -46,7 +46,9 @@
         <div class="base-left">
           <nuxt-link to="/kzt/zghx" class="span">中国化学专题</nuxt-link>
           <nuxt-link to="/kzt/zsh" class="span">中国石油专题</nuxt-link>
-          <img src="/images/giftbag.png" alt="" />
+          <nuxt-link to="/hyfw">
+            <img src="/images/giftbag.png" alt="" />
+          </nuxt-link>
         </div>
         <div class="base-right">
           <img src="/images/pen.png" alt="" />
@@ -113,7 +115,7 @@ export default {
         // this.$refs.subHeader.style.top = 37 + "px";
         this.$refs.subHeader["style"].transition = "all 0.5s ease";
         $(".sub-header").removeClass("sticky");
-        console.log('===')
+        console.log("===");
       }
     },
     //点击搜索跳转
@@ -181,6 +183,7 @@ export default {
   top: 37px;
   left: 0px;
   background: #ffffff;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.1);
   z-index: 998;
   .container {
     .content-top {
@@ -203,9 +206,9 @@ export default {
         align-items: center;
         position: relative;
         .line {
-          font-size: 20px;
-          color: #dadada;
-          margin-top: -6px;
+          width: 1px;
+          height: 16px;
+          background: #dadada;
         }
         input {
           width: 250px;
@@ -223,22 +226,22 @@ export default {
         }
         input::-webkit-input-placeholder {
           /* WebKit browsers */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input:-moz-placeholder {
           /* Mozilla Firefox 4 to 18 */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input::-moz-placeholder {
           /* Mozilla Firefox 19+ */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
         input:-ms-input-placeholder {
           /* Internet Explorer 10+ */
-          color: rgba(0, 0, 0, 0.45);
+          color: rgba(0, 0, 0, 0.25);
           font-size: 14px;
         }
 
@@ -318,7 +321,7 @@ export default {
       p {
         font-size: 13px;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.55);
+        color: rgba(0, 0, 0, 0.45);
         line-height: 22px;
         margin-bottom: 0px;
         span {

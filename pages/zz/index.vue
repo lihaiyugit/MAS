@@ -267,7 +267,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  padding: 18px 0px 40px 0px;
+  padding: 30px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;
@@ -285,8 +285,8 @@ export default {
         position: relative;
         .wytg {
           position: absolute;
-          bottom: 24%;
-          left: 8%;
+          bottom: 20%;
+          left: 5%;
           width: 122px;
           height: 38px;
           cursor: pointer;
@@ -368,7 +368,7 @@ export default {
       .more-btn {
         font-size: 14px;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.85);
+        color: rgba(0, 0, 0, 0.35);
         line-height: 22px;
         cursor: pointer;
         img {

@@ -2,6 +2,7 @@
   <div class="activity-container banxin">
     <div class="banner">
       <img src="../../static/images/hd-banner.png" alt="" />
+      <!-- <img :src="banner" alt="" /> -->
     </div>
     <div class="tabbar">
       <span class="screen">活动筛选：</span>
@@ -174,6 +175,7 @@ export default {
       showData: [], //展示数据
       pageIndex: 1, //当前页
       pageSize: 3, //当前页
+      banner:'',//总数据
     };
   },
   //点击空白处关闭下拉框
@@ -198,18 +200,18 @@ export default {
     },
   },
   async asyncData({ $axios, store }) {
-    let timestamp = Date.parse(new Date());
-    let sign = md5(timestamp + store.state.secretKey);
-    let res = await notNeedlogin($axios, {
-      sign: sign,
-      timespan: timestamp,
-      className: "HomeController",
-      classMethod: "activityList",
-    });
-    // console.log(res, "res-活动列表");
-    if (res.bol) {
-      return { listData: res.data };
-    }
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + store.state.secretKey);
+    // let res = await notNeedlogin($axios, {
+    //   sign: sign,
+    //   timespan: timestamp,
+    //   className: "HomeController",
+    //   classMethod: "activityList",
+    // });
+    // console.log(res.data, "res-活动列表");
+    // if (res.bol) {
+    //   return { listData: res.data,banner: res.data.bannerImg[0].mas_banner_img};
+    // }
     //请求接口总数
     //  this.listData=res.data.task;
     // this.showData=res.data.task.slice((this.pageIndex-1) * this.pageSize, this.pageIndex * this.pageSize),

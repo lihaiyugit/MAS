@@ -8,7 +8,7 @@
         <nuxt-link to="/activity" class="more">查看更多</nuxt-link>
       </div>
       <div class="selections-main">
-        <a href="">
+        <nuxt-link :to="'/activity/'+1">
           <dl>
             <dt>
               <img
@@ -19,8 +19,8 @@
             </dt>
             <dd>数字化企业与管理会计体系转型研讨会</dd>
           </dl>
-        </a>
-        <a href="">
+        </nuxt-link>
+        <nuxt-link :to="'/activity/'+1">
           <dl>
             <dt>
               <img
@@ -30,8 +30,8 @@
             </dt>
             <dd>数字化赋能产业互联</dd>
           </dl>
-        </a>
-        <a href="">
+        </nuxt-link>
+        <nuxt-link :to="'/activity/'+1">
           <dl>
             <dt>
               <img
@@ -41,7 +41,7 @@
             </dt>
             <dd>2021中国智慧财务国际峰会将于上海召开</dd>
           </dl>
-        </a>
+        </nuxt-link>
       </div>
     </div>
     <!-- 杂志模块 -->
@@ -66,8 +66,9 @@ export default {
     .more {
       font-size: 14px;
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.45);
+      color: rgba(0, 0, 0, 0.35);
       line-height: 22px;
+      cursor: pointer;
     }
   }
   .hot-recommend {

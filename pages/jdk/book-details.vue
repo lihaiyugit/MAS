@@ -54,7 +54,7 @@
                 <div class="point">新书</div>
               </div>
               <div class="headline">2022年第一期｜总第567期</div>
-              <div class="contribute">马上阅读</div>
+              <nuxt-link :to="'/zz/'+1" class="contribute">马上阅读</nuxt-link>
             </div>
           </div>
         </div>

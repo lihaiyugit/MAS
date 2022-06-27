@@ -15,23 +15,22 @@
             <div class="list-content">
               <dl class="dl">
                 <dt>
-                  <nuxt-link to="/szhzx">
+                  <nuxt-link :to="'/kzt/'+1">
                     <img src="../../static/images/way/zt-1.png" alt="" />
                   </nuxt-link>
                 </dt>
                 <dd>
-                  <nuxt-link to="/szhzx" class="h5-box">
+                  <nuxt-link :to="'/kzt/'+1" class="h5-box">
                     <h5>数字化转型</h5>
                     <span class="into">进入专题</span>
                   </nuxt-link>
-
                   <p>
                     在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…
                   </p>
                   <div class="share-l">
                     <span>分享到</span>
                     <a
-                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=https://v2.chinamas.cn/szhzx&title=数字化转型"
+                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=https://v2.chinamas.cn/kzt/1&title=数字化转型"
                       target="_blank"
                       deta-title="微博分享"
                       ><img src="../../static/images/tsina.png"
@@ -46,7 +45,7 @@
                       </div>
                     </div>
                     <a
-                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/szhzx&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
+                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/kzt/1&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
                       target="_blank"
                       deta-title="豆瓣分享"
                       ><img src="../../static/images/db.png"
@@ -56,12 +55,12 @@
               </dl>
               <dl class="dl">
                 <dt>
-                  <nuxt-link to="/glkj">
+                  <nuxt-link :to="'/kzt/'+2">
                     <img src="@/static/images/way/zt-2.png" alt="" />
                   </nuxt-link>
                 </dt>
                 <dd>
-                  <nuxt-link to="/glkj" class="h5-box">
+                  <nuxt-link :to="'/kzt/'+2" class="h5-box">
                     <h5>管理会计</h5>
                     <span class="into">进入专题</span>
                   </nuxt-link>
@@ -70,8 +69,9 @@
                   </p>
                   <div class="share-l">
                     <span>分享到</span>
+                    <!-- http://service.weibo.com/share/share.php?url=你的分享网址&sharesource=weibo&title=你的分享标题&pic=你的分享图片&appkey=你的key，需要在新浪微博开放平台中申请 -->
                     <a
-                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=/glkj&title=管理会计"
+                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=/kzt/2&title=管理会计"
                       target="_blank"
                       deta-title="微博分享"
                       ><img src="@/static/images/tsina.png"
@@ -86,7 +86,7 @@
                       </div>
                     </div>
                     <a
-                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/glkj&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
+                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/kzt/2&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
                       target="_blank"
                       deta-title="豆瓣分享"
                       ><img src="../../static/images/db.png"
@@ -120,7 +120,7 @@ export default {
     let qr = new QRCode("qrcode" + 1, {
       width: 88,
       height: 88, // 高度
-      text: "https://v2.chinamas.cn/szhzx", // 二维码内容
+      text: "https://v2.chinamas.cn/kzt/1", // 二维码内容
       render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
       background: "#f0f",
       foreground: "#ff0",
@@ -129,7 +129,7 @@ export default {
     let qr1 = new QRCode("qrcode", {
       width: 88,
       height: 88, // 高度
-      text: "https://v2.chinamas.cn/glkj", // 二维码内容
+      text: "https://v2.chinamas.cn/kzt/2", // 二维码内容
       render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
       background: "#f0f",
       foreground: "#ff0",
@@ -164,7 +164,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content-container {
-  padding: 18px 0px 40px 0px;
+  padding: 30px 0px 40px 0px;
   .content-container-main {
     display: flex;
     justify-content: space-between;

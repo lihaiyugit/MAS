@@ -31,8 +31,9 @@ export default {};
     .more {
       font-size: 14px;
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.45);
+      color: rgba(0, 0, 0, 0.35);
       line-height: 22px;
+      cursor: pointer;
     }
   }
   .magazine-img {

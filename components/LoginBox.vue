@@ -511,7 +511,6 @@ export default {
         ],
       },
       autoLogin: false, //是否自动登录
-      userState: "", //根据state获取user信息监听事件
       timer: null, //state获取user信息定时器
     };
   },
@@ -554,7 +553,6 @@ export default {
         classMethod: "getWxParams",
       }).then((res) => {
         if (res.bol) {
-          // _this.userState = res.data.state;
           // 扫码登录
           var obj = new WxLogin({
             self_redirect: false,
@@ -831,10 +829,15 @@ export default {
             classMethod: "register",
           }).then((res) => {
             if (res.bol) {
+              _this.setToken(res.data.token);
+              _this.$cookies.set("token", res.data.token, config.cookieConfig);
+              _this.setUserInfo(res.data);
+              _this.$cookies.set("userInfo", res.data, config.cookieConfig);
               _this.$message.success(res.msg);
-              setTimeout(() => {
-                _this.$router.push("/");
-              }, 1000);
+              let path = _this.$route.query.path || "/";
+              _this.$router.push({
+                path: _this.$route.query.path ? path : "/",
+              });
             } else {
               _this.$message.error(res.msg);
             }

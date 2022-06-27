@@ -103,7 +103,7 @@
         <div class="clear"></div>
         <div class="section_introduce">
           <div class="section_introduceL">
-            <h6>杂志推荐</h6>
+            <h6>书推荐</h6>
             <div class="section_introduceLD">
               <dl>
                 <dt>
@@ -194,9 +194,23 @@
                       <div class="login-tip">
                         <p>
                           您需要登录后才可以评论
-                          <a class="login" href="" target="_blank">登录</a>
+                          <nuxt-link
+                            target="_blank"
+                            :to="{
+                              path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                            }"
+                            class="login"
+                            >登录</nuxt-link
+                          >
                           |
-                          <a class="login" href="" target="_blank">立即注册</a>
+                          <nuxt-link
+                            target="_blank"
+                            :to="{
+                              path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                            }"
+                            class="login"
+                            >立即注册</nuxt-link
+                          >
                         </p>
                       </div>
                       <button class="comment">评论</button>
@@ -395,7 +409,7 @@
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-const tabList = ["杂志简介", "杂志评论", "订阅须知"];
+const tabList = ["书简介", "书评论", "订阅须知"];
 export default {
   name: "swiper-example-thumbs-gallery",
   title: "Thumbs gallery with Two-way control",

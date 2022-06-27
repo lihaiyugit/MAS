@@ -2,14 +2,13 @@
   <div class="header" ref="header">
     <div class="header-container" :style="'width:' + $store.state.headerWidth">
       <div class="header-nav-wrapper">
-        <a href="/" class="header-nav-home">MAS</a>
         <div
           class="header-nav-item-wrapper"
           v-for="(item, index) in meanList"
           :key="index"
-          @click="oNitem(index)"
+
         >
-          <div class="header-nav-item-entry">
+          <div class="header-nav-item-entry"  @click="oNitem(index)">
             <nuxt-link
               :to="{ name: item.url }"
               class="text"
@@ -218,7 +217,7 @@ import md5 from "js-md5";
 export default {
   data() {
     return {
-      active: this.$store.state.tabIndex ? this.$store.state.tabIndex : 0,
+      active: this.$store.state.tabIndex ? this.$store.state.tabIndex : -1,
       meanList: meanList,
     };
   },
@@ -240,10 +239,6 @@ export default {
   mounted() {
     // 开启滚动监听
     window.addEventListener("scroll", this.handleScroll);
-    console.log(
-      this.$store.state.isFixedHeader,
-      "this.$store.state.isFixedHeader"
-    );
     // console.log(this.$router.currentRoute.fullPath,'this.$router.currentRoute.fullPath')
   },
 
@@ -260,7 +255,6 @@ export default {
       // 距离至页面顶部的距离
       // let offsetTop = document.querySelector('.details-info').offsetTop;
       if (this.$store.state.isFixedHeader == false) {
-        console.log(this.$store.state.isFixedHeader, "=");
         if (scrollTop >= 37) {
           this.$refs.header["style"].top = -37 + "px";
           // this.$refs.header["style"].transition = "all 0.5s ease";
@@ -269,10 +263,12 @@ export default {
           // this.$refs.header["style"].transition = "all 0.5s ease";
         }
       } else {
+        this.$refs.header["style"].top = 0 + "px";
+        this.$refs.header["style"].transition = "all 0.5s ease";
         if (scrollTop >= 37) {
-          $('.header').addClass("sticky");
+          $(".header").addClass("sticky");
         } else {
-          $('.header').removeClass("sticky");
+          $(".header").removeClass("sticky");
         }
       }
     },
@@ -281,6 +277,7 @@ export default {
       document.body.scrollTop = 0;
       this.active = index;
       this.$store.commit("setTabIndex", index);
+      this.$store.commit("setSubTabIndex", -1);
     },
     //点击退出登录
     loginOut() {

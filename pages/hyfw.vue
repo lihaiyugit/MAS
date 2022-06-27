@@ -150,7 +150,7 @@
       </div>
       <div class="hyfw-main banxin">
         <div class="hyfw-type">
-          <div class="hyfw-type-item yd-vip">
+          <div class="hyfw-type-item yd-vip back">
             <div class="title-bg">
               <div class="title">
                 <img src="../static/images/hyfw/yd-vip.png" alt="" />
@@ -208,7 +208,7 @@
               <button>立即订阅</button>
             </div>
           </div>
-          <div class="hyfw-type-item plus-vip">
+          <div class="hyfw-type-item plus-vip active">
             <div class="title-bg">
               <div class="title">
                 <img src="../static/images/hyfw/plus-vip.png" alt="" />
@@ -272,7 +272,7 @@
               <button>立即订阅</button>
             </div>
           </div>
-          <div class="hyfw-type-item benefits">
+          <div class="hyfw-type-item benefits back">
             <div class="title-bg">
               <div class="title">
                 <h5>MAS新福利</h5>
@@ -628,13 +628,17 @@ export default {
     };
   },
   mounted() {
-    $(".hyfw-type .hyfw-type-item").hover(function (index) {
+    $(".hyfw-type .hyfw-type-item").mouseenter(function (index) {
       //通过 .index()方法获取元素下标，从0开始，赋值给某个变量
       var _index = $(this).index();
       //改变选中时候的选项框的样式，移除其他几个选项的样式
       $(this).addClass("active").siblings().removeClass("active");
-
+      $(this).removeClass("back").siblings().addClass("back");
     });
+    // $(".hyfw-type .hyfw-type-item").mouseleave(function (index) {
+    //   $(this).removeClass("active").siblings().removeClass("active");
+    //   $(this).removeClass("back").siblings().removeClass("back");
+    // });
   },
   methods: {
     ydFn(index) {
