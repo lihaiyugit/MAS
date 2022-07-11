@@ -544,7 +544,7 @@ export default {
     width: 88px;
     height: 32px;
     border-radius: 2px;
-    background: #ed6d38;
+    background: #fa6725;
     font-size: 14px;
     font-weight: 400;
     color: #fff;
@@ -586,6 +586,7 @@ export default {
           font-size: 13px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
+          text-align: justify;
           line-height: 20px;
           padding: 15px 0px;
         }
@@ -664,7 +665,7 @@ export default {
         .active {
           font-size: 18px;
           font-weight: 500;
-          color: #ed6d38;
+          color: #fa6725;
           position: relative;
           &:after {
             content: "";
@@ -673,7 +674,7 @@ export default {
             bottom: 50px;
             width: 38px;
             height: 2px;
-            background: #ed6d38;
+            background: #fa6725;
             border-radius: 2px;
             transform: translateX(-50%);
             z-index: 100;
@@ -787,7 +788,7 @@ export default {
             display: block;
             font-size: 24px;
             font-weight: 600;
-            color: #ed6d38;
+            color: #fa6725;
             line-height: 32px;
             margin-left: 8px;
           }
@@ -802,7 +803,7 @@ export default {
               #f7f8fa 100%
             );
             border-radius: 6px;
-            box-shadow: 0px 4px 0px 0px #ed6d38 inset;
+            box-shadow: 0px 4px 0px 0px #fa6725 inset;
             padding: 35px 18px 0px 27px;
             margin-bottom: 30px;
             dt {
@@ -828,14 +829,14 @@ export default {
               .dd-l {
                 font-size: 14px;
                 font-weight: 400;
-                color: #ed6d38;
+                color: #fa6725;
                 line-height: 16px;
                 display: flex;
                 align-items: flex-end;
                 .num {
                   font-size: 26px;
                   font-weight: 600;
-                  color: #ed6d38;
+                  color: #fa6725;
                   line-height: 23px;
                 }
                 .text {
@@ -897,8 +898,8 @@ export default {
             line-height: 22px;
           }
           .join-btn {
-            background: #ed6d38;
-            border: 1px solid #ed6d38;
+            background: #fa6725;
+            border: 1px solid #fa6725;
           }
           .join-btn:hover {
             background: rgba(237, 109, 56, 0.8) !important;

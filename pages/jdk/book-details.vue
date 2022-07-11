@@ -9,7 +9,7 @@
         </div>
         <div class="book-info">
           <div class="book-info-l">
-            <img src="../../static/images/dk-zp.png" alt="" />
+            <img src="@/static/images/dk-zp.png" alt="" />
           </div>
           <div class="book-info-r">
             <h2>财务管理案例(第三版)</h2>
@@ -54,7 +54,7 @@
                 <div class="point">新书</div>
               </div>
               <div class="headline">2022年第一期｜总第567期</div>
-              <nuxt-link :to="'/zz/'+1" class="contribute">马上阅读</nuxt-link>
+              <nuxt-link :to="'/dzz/'+1" class="contribute">马上阅读</nuxt-link>
             </div>
           </div>
         </div>

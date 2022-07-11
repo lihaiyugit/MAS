@@ -6,13 +6,12 @@
           class="header-nav-item-wrapper"
           v-for="(item, index) in meanList"
           :key="index"
-
         >
-          <div class="header-nav-item-entry"  @click="oNitem(index)">
+          <div class="header-nav-item-entry" @click="oNitem(index)">
             <nuxt-link
               :to="{ name: item.url }"
+              :exact="index == 0 ? true : false"
               class="text"
-              :active-class="active == index ? 'nuxt-link-active' : ''"
               >{{ item.title }}</nuxt-link
             >
           </div>
@@ -212,21 +211,14 @@ const meanList = [
     title: "作者服务",
   },
 ];
-import { notNeedlogin } from "@/request/api";
-import md5 from "js-md5";
 export default {
   data() {
     return {
-      active: this.$store.state.tabIndex ? this.$store.state.tabIndex : -1,
       meanList: meanList,
     };
   },
   async fetch() {
-    let timestamp = Date.parse(new Date());
-    let sign = md5(timestamp + this.$store.state.secretKey);
-    let res = await notNeedlogin(this.$axios, {
-      sign: sign,
-      timespan: timestamp,
+    let res = await this.$axios.notNeedlogin({
       className: "NavigationController",
       classMethod: "getTopNavigation",
     });
@@ -275,9 +267,7 @@ export default {
     //点击菜单每一项
     oNitem(index) {
       document.body.scrollTop = 0;
-      this.active = index;
-      this.$store.commit("setTabIndex", index);
-      this.$store.commit("setSubTabIndex", -1);
+      this.$store.commit("setSubTabId", -1);
     },
     //点击退出登录
     loginOut() {
@@ -295,11 +285,12 @@ export default {
 .nuxt-link-active {
   font-weight: 600;
   text-decoration: none;
-  color: #ed6d38 !important;
+  color: #fa6725 !important;
 }
 /* .nuxt-link-exact-active {
   font-weight: 600;
-  color: #ed6d38 !important;
+  text-decoration: none;
+  color: ##fa6725 !important;
 } */
 .header {
   width: 100%;

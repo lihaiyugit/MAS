@@ -3,48 +3,65 @@
     <div class="activity-info">
       <div class="activity-info-main banxin">
         <div class="activity-info-main-l">
-          <img src="../../static/images/ad-img.png" alt="" />
+          <img :src="activityDetails.mas_activity_img" alt="" />
         </div>
         <div class="activity-info-main-r">
-          <h2>数字化企业与管理会计体系转型研讨会</h2>
+          <h2>{{ activityDetails.mas_activity_title }}</h2>
           <div class="activity-time">
-            <img src="../../static/images/time.png" alt="" />
-            <span>时间：2021-04-11 - 14:00-17:30</span>
-            <span class="restrict"
-              >限制：<span style="color: #ed6d38">100人</span></span
+            <img src="@/static/images/time.png" alt="" />
+            <span>时间：{{ activityDetails.mas_activity_starttime }}</span>
+            <span
+              class="restrict"
+              v-if="activityDetails.mas_activity_limit_num !== null"
+              >限制：<span style="color: #fa6725"
+                >{{ activityDetails.mas_activity_limit_num }}人</span
+              ></span
             >
-            <span>线下：上海</span>
+            <span v-else class="restrict" style="color: #fa6725">无限制</span>
+            <span v-if="activityDetails.mas_activity_address_type == '线下'"
+              >{{ activityDetails.mas_activity_address_type }}：{{
+                activityDetails.mas_activity_address
+              }}</span
+            >
+            <span v-else>{{ activityDetails.mas_activity_address_type }}</span>
           </div>
           <div class="activity-time">
-            <img src="../../static/images/zb.png" alt="" />
+            <img src="@/static/images/zb.png" alt="" />
             <span
-              >主办：<span style="color: #bc996d"
-                >《管理会计研究》杂志</span
-              ></span
+              >主办：<span style="color: #bc996d">{{
+                activityDetails.mas_activity_host
+              }}</span></span
             >
           </div>
           <div class="activity-time">
             <img src="../../static/images/xb.png" alt="" />
-            <span
-              >协办：<span style="color: #bc996d"
-                >中国医药会计学会、上海市成本研究会、上海交通大学安泰经济与管理学院…</span
-              ></span
-            >
+            <span class="jointly">协办：</span>
+            <p class="oneline" style="color: #bc996d">
+              {{ activityDetails.mas_activity_sponsor }}
+            </p>
           </div>
-          <div class="operate-box" v-if="state == 1">
-            <button class="state-one">我要报名</button>
+          <div
+            class="operate-box"
+            v-if="activityDetails.mas_activity_status == 1"
+          >
+            <button class="state-one">报名中</button>
           </div>
-          <div class="operate-box" v-else-if="state == 2">
-            <button type="button" disabled="disabled" class="state-two">
-              已报名
-            </button>
-            <button class="check">查看活动</button>
+          <div
+            class="operate-box"
+            v-else-if="activityDetails.mas_activity_status == 2"
+          >
+            <button type="button" class="state-two">活动中</button>
           </div>
-          <div class="operate-box" v-else>
+          <div
+            class="operate-box"
+            v-else-if="activityDetails.mas_activity_status == 3"
+          >
             <button type="button" disabled="disabled" class="state-three">
               已结束
             </button>
-            <button class="check">查看活动</button>
+          </div>
+          <div class="operate-box" v-else>
+            <button type="button" class="state-two">未开始</button>
           </div>
           <div class="share-box" v-close>
             <div class="share-title" @click="shareFn">
@@ -115,7 +132,11 @@
           <span class="line"></span>
           <h5>活动票种</h5>
         </div>
-        <div class="ticket">免费票</div>
+        <div class="ticket">
+          {{
+            activityDetails.mas_activity_ticket_type == 1 ? "免费票" : "收费票"
+          }}
+        </div>
         <div class="title-box">
           <span class="line"></span>
           <h5>主办方介绍</h5>
@@ -123,7 +144,7 @@
         <div class="introduce-box">
           <img src="../../static/images/gl-logo.png" alt="" />
           <p>
-            《管理会计研究》杂志在立足但不拘泥于传统管理会计教科书内容和工具应用的指导思想下，将把视角拓展到生机勃勃的财经领域，会特别关注公司治理、商业模式、投融资、企业重组、风险管理、战略创新、组织转型、工业互联网和智能财务等。
+            {{ activityDetails.mas_activity_host_introduction }}
           </p>
         </div>
         <div class="title-box">
@@ -133,22 +154,34 @@
         <div class="details-box">
           <dl>
             <dt>
-              <img src="../../static/images/yh.png" alt="" />
+              <img src="@/static/images/yh.png" alt="" />
             </dt>
-            <dd>
-              <p>
-                数字化已经深度嵌入中国企业的方方面面，建设数字化企业乃大势所趋。
-              </p>
-              <p>
+            <dd v-html="activityDetails.mas_activity_details">
+              <!-- <p v-html="activityDetails.mas_activity_details">
+
+              </p> -->
+              <!-- <p>
                 基于此“数字化企业与管理会计体系转型”研讨会来啦，本次研讨会汇聚管理会计产学研政等各领域专家学者、大型企业财务负责人，面对面交流，赋能中国企业数字化转型。
-              </p>
+              </p> -->
             </dd>
           </dl>
-          <img class="flow" src="../../static/images/flow.png" alt="" />
+          <!-- <img class="flow" src="../../static/images/flow.png" alt="" /> -->
         </div>
       </div>
       <div class="detailed-info-r">
-        <div class="module">
+        <div class="module" v-if="activityDetails.mas_activity_address_type!='线下'">
+          <h2>扫码参与活动</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <div class="code-main">
+              <div class="code-bg">
+                <img src="../../static/images/code.png" alt="" />
+              </div>
+              <button class="xsmf">限时免费</button>
+            </div>
+          </div>
+        </div>
+        <div class="module" v-else>
           <h2>活动地点</h2>
           <div class="module-main">
             <div class="top-line"></div>
@@ -173,26 +206,35 @@
                 ref="mySwiper"
                 class="swiper-wrapper"
               >
-                <swiper-slide>
-                  <dl @click="details(1)">
+                <swiper-slide
+                  v-for="(item, index) in moreActivity"
+                  :key="index"
+                  @click="details(1)"
+                >
+                  <dl>
                     <dt>
-                      <img src="../../static/images/hd-img.png" alt="" />
+                      <img :src="item.mas_activity_img" alt="" />
                       <div class="point">最新活动</div>
-                      <h5>疫情下的日企成本企划和改善之道</h5>
+                      <span class="shadow"></span>
+                      <h5 class="oneline">{{ item.mas_activity_title }}</h5>
                     </dt>
                     <dd>
                       <div class="dd-l">
-                        <img src="../../static/images/time.png" alt="" />
-                        <span>11月18日 13:21</span>
+                        <img src="@/static/images/time.png" alt="" />
+                        <span>{{ item.mas_activity_starttime }}</span>
                       </div>
                       <div class="dd-r">
-                        <img src="../../static/images/map.png" alt="" />
-                        <span>北京</span>
+                        <img src="@/static/images/map.png" alt="" />
+                        <span>{{ item.mas_activity_province }}</span>
+                      </div>
+                       <div class="dd-r">
+                        <img class="online" src="@/static/images/online.png" alt="" />
+                        <span>线上</span>
                       </div>
                     </dd>
                   </dl>
                 </swiper-slide>
-                <swiper-slide>
+                <!-- <swiper-slide>
                   <dl @click="details(2)">
                     <dt>
                       <img src="../../static/images/hd-img.png" alt="" />
@@ -229,7 +271,7 @@
                       </div>
                     </dd>
                   </dl>
-                </swiper-slide>
+                </swiper-slide> -->
               </swiper>
               <!-- 如果需要分页器 -->
               <div class="swiper-pagination"></div>
@@ -241,7 +283,15 @@
           <div class="module-main">
             <div class="top-line"></div>
             <ul>
-              <li>
+              <li v-for="(item, index) in moreArticle" :key="index">
+                <div class="li-l twoline">
+                  {{ item.mas_article_title }}
+                </div>
+                <div class="li-r">
+                  <img :src="item.mas_article_img" alt="" />
+                </div>
+              </li>
+              <!--  <li>
                 <div class="li-l twoline">
                   论文《 潜水期权与高管绩效薪酬敏感 度之间的…
                 </div>
@@ -256,15 +306,7 @@
                 <div class="li-r">
                   <img src="@/static/images/article-img.png" alt="" />
                 </div>
-              </li>
-              <li>
-                <div class="li-l twoline">
-                  论文《 潜水期权与高管绩效薪酬敏感 度之间的…
-                </div>
-                <div class="li-r">
-                  <img src="@/static/images/article-img.png" alt="" />
-                </div>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -272,7 +314,7 @@
           <h2>热点推荐</h2>
           <div class="module-main">
             <div class="top-line"></div>
-            <HotRecommend />
+            <HotRecommend :hotRecommend="hotRecommend" />
           </div>
         </div>
       </div>
@@ -280,8 +322,8 @@
   </div>
 </template>
 <script>
-import { notNeedlogin } from "@/request/api";
-import md5 from "js-md5";
+// import { notNeedlogin } from "@/request/api";
+// import md5 from "js-md5";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
   scrollToTop: true,
@@ -292,8 +334,8 @@ export default {
       isWx: false, //是否展示微信二维码
       swiperOption: {
         loop: false, // 无限循环
-        autoplay: true, //可选选项，自动滑动
-        speed: 2000,
+        autoplay: false, //可选选项，自动滑动
+        speed: 1000,
         slidesPerView: 1, // 设置slider容器能够同时显示的slides数量(轮播模式)
         spaceBetween: 0, // 在slide之间设置距离
         slidesPerGroup: 1, // 在轮播模式下定义slides的数量多少为一组。
@@ -310,7 +352,11 @@ export default {
           prevEl: ".btn-left", //上一张标签类名可以自定义
         },
       },
-      linkUrl: "",
+      linkUrl: "",//当前页面路由
+      activityDetails: "", //活动详情
+      moreActivity: [], //更多活动
+      moreArticle: [], //相关文章
+      hotRecommend: [], //	热点推荐
     };
   },
   //点击空白处关闭下拉框
@@ -328,21 +374,21 @@ export default {
   },
 
   async asyncData({ $axios, store, params }) {
-    let timestamp = Date.parse(new Date());
-    let sign = md5(timestamp + store.state.secretKey);
-    let res = await notNeedlogin($axios, {
-      sign: sign,
-      timespan: timestamp,
+    let res = await $axios.notNeedlogin({
       className: "ActivityController",
       classMethod: "activityDetails",
       data: {
         mas_activity_id: parseInt(params.id),
       },
     });
-    console.log(res.data, "res-活动详情");
-    // if (res.bol) {
-    //   return { listData: res.data,banner: res.data.bannerImg[0].mas_banner_img};
-    // }
+    if (res.bol) {
+      return {
+        activityDetails: res.data.activityDetails,
+        moreActivity: res.data.moreActivity,
+        moreArticle: res.data.moreArticle,
+        hotRecommend: res.data.pageViews,
+      };
+    }
   },
   components: {
     Swiper,

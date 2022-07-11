@@ -6,7 +6,7 @@
           <img :src="require('@/static/images/logo.png')" alt="" />
         </nuxt-link>
         <div class="search-box">
-          <div class="select-group" v-close>
+          <!-- <div class="select-group" v-close>
             <div class="input-group" @click="selectClick">
               <span class="title">{{ defaultValue }}</span>
               <img
@@ -25,8 +25,8 @@
                 {{ item }}
               </li>
             </ul>
-          </div>
-          <span class="line"></span>
+          </div> -->
+          <!-- <span class="line"></span> -->
           <input placeholder="输入搜索的内容" v-model="searchValue" />
           <div class="search" @click="onSearch">搜索</div>
         </div>
@@ -34,12 +34,9 @@
           <span
             v-for="(item, index) in hotWord"
             :key="index"
-            @click="onItem(item.mas_tag_id, item.mas_tag_name)"
+            @click="onItem(item.mas_tag_name,item.mas_tag_id)"
             >{{ item.mas_tag_name }}</span
           >
-          <!-- <span @click="onItem(2, '站内热词')">站内热词</span>
-          <span @click="onItem(3, '站内热词')">站内热词</span>
-          <span @click="onItem(4, '站内热词')">站内热词</span> -->
         </p>
       </div>
       <div class="content-base">
@@ -115,13 +112,11 @@ export default {
         // this.$refs.subHeader.style.top = 37 + "px";
         this.$refs.subHeader["style"].transition = "all 0.5s ease";
         $(".sub-header").removeClass("sticky");
-        console.log("===");
       }
     },
     //点击搜索跳转
     onSearch() {
       if (this.searchValue != "") {
-        console.log("===");
         this.$router.push({
           name: "search",
           // path: "/search",
@@ -135,20 +130,16 @@ export default {
       }
     },
     //点击站内热词
-    onItem(index, val) {
+    onItem(val, id) {
       this.$router.push({
         path: "/search",
-        query: { keyword: val, index: index },
-        // params: {
-        //   type: item,
-        // },
+        query: { keyword: val, hotWordId: id },
       });
     },
     selectClick() {
       this.selectList = !this.selectList; //点击显示或隐藏下拉框
     },
     cutValue(item, index) {
-      console.log(item, index);
       this.selectList = false;
       this.defaultValue = item;
       this.current = index;
@@ -250,9 +241,9 @@ export default {
           height: 40px;
           background: linear-gradient(
             90deg,
-            #f34250 0%,
-            #f28a51 82%,
-            #ff7d3b 100%
+            #ff4e5c 0%,
+            #ff9261 82%,
+            #fa6725 100%
           );
           border-radius: 0px 4px 4px 0px;
           font-size: 14px;

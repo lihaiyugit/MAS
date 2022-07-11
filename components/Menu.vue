@@ -485,7 +485,7 @@ export default {
 
 .el-menu--horizontal .el-menu-item.is-active {
   border-bottom: none;
-  color: #ed6d38;
+  color: #fa6725;
 }
 .el-menu-item {
   font-size: 12px;

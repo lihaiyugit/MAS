@@ -5,18 +5,19 @@
       <div class="banxin content-container-main">
         <div class="content-container-main-left">
           <div class="banner">
-            <img src="../../static/images/way/banner.png" alt="" />
+            <!-- <img src="../../static/images/way/banner.png" alt="" /> -->
+            <img :src="bannerArr[0].mas_banner_img" alt="" />
             <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
-          <div class="list-box">
+          <div class="list-box-new">
             <ul class="tabs">
               <li
                 :class="tabActive == index ? 'tabActive' : ''"
                 v-for="(item, index) in tabs"
                 :key="index"
-                @click="onTab(index)"
+                @click="onTab(index, item.mas_article_type_id)"
               >
-                {{ item }}
+                {{ item.mas_article_type_name }}
               </li>
             </ul>
             <div class="major-container">
@@ -27,11 +28,11 @@
               >
                 <li
                   v-for="(item, index) in major"
-                  @click="oNitem(index)"
+                  @click="oNitem(index, item.mas_tag_id)"
                   :key="index"
                   :class="current == index ? 'checked' : ''"
                 >
-                  {{ item }}
+                  {{ item.mas_tag_name }}
                 </li>
               </ul>
               <span class="major-container-right" @click.stop="allFn"
@@ -45,140 +46,202 @@
                 :style="'height:' + industryHeight + ''"
               >
                 <li
-                  v-for="(item, index) in major"
-                  @click="industryItem(index)"
+                  v-for="(item, index) in industry"
+                  @click="industryItem(index, item.mas_industry_id)"
                   :key="index"
                   :class="industryCurrent == index ? 'checked' : ''"
                 >
-                  {{ item }}
+                  {{ item.mas_industry_name }}
                 </li>
               </ul>
               <span class="major-container-right" @click="industryAllFn"
                 >全部</span
               >
             </div>
-            <div class="content-container-list">
-              <dl @click="details(1)">
+            <div class="content-container-list" v-if="listShowType == 1">
+              <dl
+                v-for="(item, index) in listData"
+                :key="index"
+                @click="details(item.mas_article_id)"
+              >
                 <dt>
+                  <img :src="item.mas_article_img" alt="" />
+                </dt>
+                <dd>
                   <div class="top">
                     <h3 class="twoline">
-                      中国化学刘东进：大智移云物科技革命 重塑财务新职能
-                      引领财务新变革 重塑财务新职能 引领
+                      {{ item.mas_article_title }}
                     </h3>
-                    <p>
-                      企业财务人员不仅是企业的价值管理者，而且业财融合新模式
+                    <p class="oneline">
+                      {{ item.mas_article_introduce }}
                     </p>
                   </div>
                   <div class="base">
                     <div class="base-left">
-                      <img src="../../static/images/way/pen.png" alt="" />
-                      <span>找方法</span>
+                      <div
+                        class="pay"
+                        v-if="item.mas_article_details_type == 1"
+                      >
+                        付费
+                      </div>
+                      <img v-else src="@/static/images/way/pen.png" alt="" />
+                      <span>{{ item.mas_article_author }}</span>
                     </div>
 
                     <div class="base-right">
-                      <img
-                        src="../../static/images/time.png"
-                        alt=""
-                        class="time"
-                      />
-                      <span class="text">2022-03-14</span>
-                      <img
-                        src="../../static/images/chat.png"
-                        alt=""
-                        class="chat"
-                      />
-                      <span class="text">3</span>
+                      <img src="@/static/images/time.png" alt="" class="time" />
+                      <span class="text">{{ item.mas_article_addtime }}</span>
+                      <img src="@/static/images/chat.png" alt="" class="chat" />
+                      <span class="text">{{ item.commont_num }}</span>
                     </div>
                   </div>
-                </dt>
-                <dd>
-                  <img src="../../static/images/way/list.png" alt="" />
                 </dd>
               </dl>
-              <dl @click="details(2)">
-                <dt>
-                  <div class="top">
-                    <h3 class="twoline">
-                      论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
-                    </h3>
-                    <p>
-                      企业财务人员不仅是企业的价值管理者，而且业财融合新模式
-                    </p>
-                  </div>
-                  <div class="base">
-                    <div class="base-left">
-                      <img src="../../static/images/way/pen.png" alt="" />
-                      <span>找方法</span>
-                    </div>
-
-                    <div class="base-right">
-                      <img
-                        src="../../static/images/time.png"
-                        alt=""
-                        class="time"
-                      />
-                      <span class="text">2022-03-14</span>
-                      <img
-                        src="../../static/images/chat.png"
-                        alt=""
-                        class="chat"
-                      />
-                      <span class="text">3</span>
-                    </div>
-                  </div>
-                </dt>
-                <dd>
-                  <img src="../../static/images/way/list.png" alt="" />
-                </dd>
-              </dl>
-              <div class="more-btn">查看更多</div>
+              <div class="more-btn" v-show="!finished">查看更多</div>
+            </div>
+            <div class="no-data-box" v-if="listShowType == 2">
+              <img src="@/static/images/no-data.png" alt="" />
+              <div class="tip">目前还没有内容哦～</div>
             </div>
           </div>
         </div>
         <!-- 页面右侧内容 -->
-        <ColumnR />
+        <ColumnR
+          :hotRecommend="hotRecommend"
+          :magazineLeft="magazineLeft"
+          :selections="selections"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
-const major = [
-  "成本管理",
-  "绩效管理",
-  "预算管理",
-  "财务管理",
-  "管理会计",
-  "人工智能",
-  "人工智能",
-];
 export default {
   data() {
     return {
-      major, //专业
-      current: 0, //专业默认索引
-      industryCurrent: 0, //行业默认索引
+      major: [], //专业
+      current: -1, //专业默认索引
+      industry: [], //行业
+      industryCurrent: -1, //行业默认索引
       majorHeight: "40px", //专业默认高
       industryHeight: "40px", //行业默认高
-      tabs: ["案例", "观点", "方法"],
-      tabActive: 0,
+      tabs: [], //文章类型
+      tabActive: 0, //文章类型
+      listData: [], //总列表数据
+      pageIndex: 1, //当前页
+      pageSize: 6, //当前页
+      total: "", //总条数
+      bannerArr: [], //banner图
+      hotRecommend: [], //热点推荐
+      magazineLeft: {}, //左侧杂志数据
+      selections: [], //荐读
+      showlaoding: true, // 是否显示loading效果
+      finished: false, //数据是否加载完毕
+      articleTypeId: "", //文章类型
+      tagId: "", //专业类型
+      industryId: "", //行业类型
+      moretype: "", //加载更多 取值 ‘list’
+      listShowType: 1, // 列表显示状态 0加载中 1有数据 2无数据
     };
   },
-  asyncData({ query, params }) {
-    // this.$route.params.id
-    // let res= await ArticleIdApi({id:query.id})
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      data: {
+        MenuId: store.state.subTabId,
+        page: 1,
+        limit: 6,
+      },
+      className: "ArticleController",
+      classMethod: "zff",
+    });
+    if (res.bol) {
+      return {
+        bannerArr: res.data.bannerImg,
+        tabs: res.data.articleType,
+        major: res.data.tag,
+        industry: res.data.industry,
+        listData: res.data.articleList.articleList,
+        total: res.data.articleList.articleCount,
+        hotRecommend: res.data.hostpot,
+        magazineLeft: res.data.magazine,
+        selections: res.data.selections,
+        showlaoding: false,
+        finished: res.data.articleList.articleCount > 6 ? false : true,
+      };
+    }
+  },
+  computed: {
+    // orderList() {
+    //   return this.$store.state.subTabId;
+    // },
+  },
+  created() {
+  },
+  mounted() {
+    // console.log(this.orderList, "===");
+    // this.$store.commit("setSubTabId", this.orderList);
+    // scroll事件并监听
+    window.addEventListener("scroll", this.zffScroll);
   },
   methods: {
-    //点击专业每一项
-    oNitem(index) {
-      this.current = index;
+    //scroll事件并监听
+    zffScroll() {
+      //可视区域大小window.innerHeight
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop; //滚动高度
+      //"文档高度"document.body.offsetHeight 327底部高度
+      //判断是否滚动到底部
+      if (
+        scrollTop + window.innerHeight + 327 * 1.5 >=
+        document.body.offsetHeight
+      ) {
+        //327 表示距离底部多少的距离的开始触发loadmore效果
+        if (!this.showlaoding && !this.finished) {
+          //防止多次加载
+          this.moretype = "list";
+          this.moreFn();
+        }
+      }
     },
     //点击tabs
-    onTab(index) {
+    onTab(index, typeId) {
+      this.pageIndex = 1;
+      this.listData = [];
+      this.finished = false;
+      this.moretype = "list";
+      this.listShowType = 1;
+      this.tagId = "";
+      this.industryId = "";
+      this.current = "-1";
+      this.industryCurrent = "-1";
       this.tabActive = index;
+      this.articleTypeId = typeId;
+      this.getList();
     },
+    //点击专业每一项
+    oNitem(index, majorId) {
+      this.pageIndex = 1;
+      this.listData = [];
+      this.finished = false;
+      this.moretype = "list";
+      this.listShowType = 1;
+      this.current = index;
+      this.tagId = majorId;
+      this.getList();
+    },
+
     //点击行业每一项
-    industryItem(index) {
+    industryItem(index, industryId) {
+      this.pageIndex = 1;
+      this.listData = [];
+      this.moretype = "list";
+      this.finished = false;
+      this.listShowType = 1;
       this.industryCurrent = index;
+      this.industryId = industryId;
+      this.getList();
     },
     //点击专业全部
     allFn() {
@@ -203,6 +266,49 @@ export default {
         path: `/zff/${id}`,
       });
     },
+    //滑动加载
+    moreFn() {
+      let pageIndex = this.pageIndex + 1;
+      this.commonData(pageIndex);
+    },
+    //根据条件搜索
+    getList() {
+      this.commonData(this.pageIndex);
+    },
+    //公共请求接口
+    async commonData(pageIndex) {
+      this.showlaoding = true;
+      let res = await this.$axios.notNeedlogin({
+        data: {
+          MenuId: this.$store.state.subTabId,
+          page: pageIndex,
+          limit: this.pageSize,
+          articleTypeId: this.articleTypeId,
+          tagId: this.tagId,
+          industryId: this.industryId,
+          type: this.moretype,
+        },
+        className: "ArticleController",
+        classMethod: "zff",
+      });
+      if (res.bol) {
+        let articleArr = res.data.articleList;
+        this.total = res.data.articleCount;
+        this.listShowType = this.total ? 1 : 2;
+        if (this.total / this.pageSize > this.pageIndex) {
+          this.pageIndex = pageIndex;
+          this.showlaoding = false;
+        } else {
+          this.finished = true; // 数据全部加载完成
+        }
+        // 将新请求到的数据添加到之前的数据后
+        console.log(this.pageIndex, "this.pageIndex");
+        this.listData = this.listData.concat(articleArr);
+      }
+    },
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.zffScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>

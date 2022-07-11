@@ -152,7 +152,7 @@ export default {
   button {
     width: 74px;
     height: 32px;
-    background: #ed6d38;
+    background: #fa6725;
     border-radius: 2px;
     border: transparent;
     font-size: 14px;

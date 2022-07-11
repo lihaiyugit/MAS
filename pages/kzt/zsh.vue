@@ -46,7 +46,7 @@
                 <h2>中国石油化工集团有限公司 (简称中国石化)</h2>
                 <p class="english">Sinopec Group</p>
                 <p class="info">
-                  中国石油化工集团有限公司（以下简称公司）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，公司是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
+                  中国石油化工集团有限公司（以下简称中国化学）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，中国化学是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
                 </p>
                 <div class="video-box">
                   <img src="@/static/images/zsh-img/zsh-in-l.png" alt="" />
@@ -504,7 +504,7 @@ export default {
 .related_info_main_top .title {
   width: 244px;
   height: 32px;
-  background: #ed6d38;
+  background: #fa6725;
   border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
@@ -599,7 +599,7 @@ export default {
 .related_list_content dl dd a {
   font-size: 16px;
   font-weight: 600;
-  color: #ed6d38;
+  color: #fa6725;
   line-height: 16px;
 }
 
@@ -735,7 +735,7 @@ export default {
   line-height: 24px;
 }
 .content_info p .more {
-  color: #ed6d38;
+  color: #fa6725;
   cursor: pointer;
 }
 .triangle {
@@ -758,18 +758,18 @@ export default {
   display: inline-block;
   width: 86px;
   height: 30px;
-  border: 1px solid #ed6d38;
+  border: 1px solid #fa6725;
   border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
-  color: #ed6d38;
+  color: #fa6725;
   line-height: 30px;
 }
 .content_info a:hover {
   width: 88px;
   height: 32px;
-  background-color: #ed6d38;
+  background-color: #fa6725;
   border: transparent;
   color: #fff;
 }

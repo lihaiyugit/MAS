@@ -25,6 +25,7 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+
             .fx-icon {
               width: 16px;
               height: 16px;
@@ -54,6 +55,7 @@
             box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
             display: flex;
             cursor: pointer;
+
             .wx-box {
               padding: 0px 30px;
               border-right: 1px solid #e7e7e7;
@@ -77,20 +79,26 @@
                 }
               }
             }
+
             .list-right {
               width: 80px;
               padding: 0px 30px;
-              .item,a {
+
+              .item,
+              a {
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
-                &:last-child{
+
+                &:last-child {
                   margin-bottom: 0px;
                 }
+
                 img {
                   width: 20px;
                   height: 20px;
                 }
+
                 span {
                   font-size: 13px;
                   font-weight: 400;
@@ -117,6 +125,7 @@
           color: rgba(0, 0, 0, 0.45);
           line-height: 13px;
           padding-bottom: 14px;
+          display: flex;
 
           img {
             width: 12px;
@@ -124,6 +133,10 @@
             border-radius: 0px;
             margin-right: 8px;
             vertical-align: bottom;
+          }
+
+          .jointly {
+            width: 62px;
           }
 
           .restrict {
@@ -147,7 +160,7 @@
           }
 
           .state-one {
-            background: #ed6d38;
+            background: #fa6725;
 
             &:hover {
               background: rgba(237, 109, 56, 0.80);
@@ -260,6 +273,15 @@
           }
 
           dd {
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.65);
+            line-height: 30px;
+            margin-left: 17px;
+            text-align: justify;
+            padding-bottom: 20px;
+            text-indent: 32px;
+
             p {
               font-size: 13px;
               font-weight: 400;
@@ -307,6 +329,42 @@
             margin-top: -2px;
           }
 
+          .code-main {
+            padding: 34px 20px 34px;
+
+            .code-bg {
+              width: 159px;
+              height: 160px;
+              border: 1px solid #f0f0f0;
+              margin: 0 auto;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                width: 130px;
+                height: 131px;
+              }
+            }
+
+            .xsmf {
+              width: 159px;
+              height: 30px;
+              border: none;
+              background: linear-gradient(180deg, #fcf9f4, #f8f0e6 100%);
+              margin: 0 auto;
+              font-size: 14px;
+              font-weight: 600;
+              text-align: center;
+              color: #bc996d;
+              line-height: 30px;
+              text-align: center;
+              display: block;
+              margin-top: 10px;
+            }
+          }
+
           .map {
             padding: 22px 20px 20px;
 
@@ -351,10 +409,10 @@
             dl {
               padding-bottom: 34px;
               cursor: pointer;
+
               dt {
                 width: 305px;
                 height: 183px;
-                background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 48%, #000000 100%);
                 position: relative;
 
                 h5 {
@@ -362,9 +420,22 @@
                   bottom: 11px;
                   left: 20px;
                   color: #fff;
-                  width: 267px;
-                  font-size: 18px;
+                  width: 273px;
+                  font-size: 16px;
                   font-weight: 500;
+                  text-align: justify;
+                  color: #ffffff;
+                  line-height: 24px;
+                }
+
+                .shadow {
+                  position: absolute;
+                  bottom: 0px;
+                  left: 0px;
+                  width: 305px;
+                  height: 183px;
+                  background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, #000000 100%);
+                  border-radius: 6px;
                 }
               }
 
@@ -396,8 +467,13 @@
 
                 .dd-r {
                   img {
-                    width: 9px;
-                    height: 11px;
+                    width: 10px;
+                    height: 12px;
+                    border-radius: 0px;
+                  }
+                  .online{
+                    width: 12px;
+                    height: 10px;
                   }
                 }
               }

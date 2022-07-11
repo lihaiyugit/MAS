@@ -99,26 +99,27 @@ export default {
   display: none;
 }
 
-/deep/.el-select-dropdown__item.selected {
-  color: #ed6d38 !important;
-}
 /deep/.el-pagination {
   display: flex !important;
   justify-content: center !important;
   margin: 50px !important;
 }
 /deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #ed6d38 !important;
+  background-color: #fa6725 !important;
 }
 /deep/.el-input.is-active .el-input__inner,
 .el-input__inner:focus {
-  border-color: #ed6d38 !important;
+  border-color: #fa6725 !important;
 }
 /deep/.el-select .el-input.is-focus .el-input__inner {
-  border-color: #ed6d38 !important;
+  border-color: #fa6725 !important;
 }
 /deep/.el-select .el-input__inner:focus,
 .el-select .el-input__inner:hover {
-  border-color: #ed6d38 !important;
+  border-color: #fa6725 !important;
+}
+
+/deep/.el-select-dropdown__item.selected {
+  color: #fa6725 !important;
 }
 </style>

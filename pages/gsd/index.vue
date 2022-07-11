@@ -5,7 +5,7 @@
       <div class="banxin content-container-main">
         <div class="content-container-main-left">
           <div class="banner">
-            <img src="@/static/images/way/book-banner.png" alt="" />
+            <img :src="bannerArr[0].mas_banner_img" alt="" />
           </div>
         </div>
         <div class="content-container-main-right">
@@ -15,10 +15,10 @@
               <dl
                 v-for="(item, index) in recommend"
                 :key="index"
-                @click="details(index + 1)"
+                @click="details(item.mas_book_id)"
               >
                 <dt>
-                  <img src="@/static/images/way/small-book.png" alt="" />
+                  <img :src="item.mas_book_img" alt="" />
                   <img
                     v-if="index + 1 == 1"
                     src="@/static/images/way/one.png"
@@ -39,8 +39,8 @@
                   />
                 </dt>
                 <dd>
-                  <p>{{ item.title }}</p>
-                  <span>￥ {{ item.price }}</span>
+                  <p class="twoline">{{ item.mas_book_name }}</p>
+                  <span>￥ {{ item.mas_book_price }}</span>
                 </dd>
               </dl>
             </div>
@@ -49,369 +49,121 @@
       </div>
       <div class="tabber">
         <ul class="banxin">
-          <li>图书分类</li>
-          <li v-for="(item, index) in showBookList" :key="index">
-            {{ item }}
+          <li class="active">图书分类</li>
+          <li
+            :class="index == current ? 'active-li' : ''"
+            v-for="(item, index) in showBookType"
+            :key="index"
+            @click="oNitem(index, item.mas_booktype_id)"
+          >
+            {{ item.mas_booktype_name }}
           </li>
-          <li v-show="isShow" @click="moreFn">更多</li>
+          <li v-if="bookType.length >= 6" v-show="isShow" @click="moreFn">
+            更多
+          </li>
         </ul>
       </div>
-      <div class="magazine-list banxin">
+      <div class="magazine-list banxin" v-if="!isSearch">
         <div class="magazine-title">
-          <h2>管理类</h2>
+          <h2>{{ listData[0].mas_booktype_name }}</h2>
         </div>
         <div class="magazine-gather">
           <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrapper">
-            <swiper-slide>
-              <dl @click="details(1)">
+            <swiper-slide v-for="(it, idx) in listData[0].list" :key="idx">
+              <dl @click="details(it.mas_book_id)">
                 <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
+                  <img class="dt-img" :src="it.mas_book_img" alt="" />
+                  <span>￥ {{ it.mas_book_price }}</span>
+                  <h4 class="oneline">{{ it.mas_book_name }}</h4>
+                  <p class="oneline">作者：{{ it.mas_book_author }}</p>
                 </dt>
                 <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(2)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
+                  <span>出版社：{{ it.mas_book_press }}</span>
                 </dd>
               </dl>
             </swiper-slide>
           </swiper>
-          <!-- Optional controls -->
           <div class="btn-left">
-            <img
-              class="left01"
-              src="../../static/images/way/left01.png"
-              alt=""
-            />
-            <img class="left1" src="../../static/images/way/left1.png" alt="" />
+            <img class="left01" src="@/static/images/way/left01.png" alt="" />
+            <img class="left1" src="@/static/images/way/left1.png" alt="" />
           </div>
           <div class="btn-right">
-            <img
-              class="right02"
-              src="../../static/images/way/right02.png"
-              alt=""
-            />
-            <img
-              class="right2"
-              src="../../static/images/way/right2.png"
-              alt=""
-            />
+            <img class="right02" src="@/static/images/way/right02.png" alt="" />
+            <img class="right2" src="@/static/images/way/right2.png" alt="" />
           </div>
         </div>
         <div class="clear"></div>
-        <div class="magazine-title" data-aos="fade-up">
-          <h2>技术类</h2>
+        <div
+          class="magazine-title"
+          data-aos="fade-up"
+          v-if="listData[1].list.length > 0"
+        >
+          <h2>{{ listData[1].mas_booktype_name }}</h2>
         </div>
-        <div class="magazine-gather" data-aos="fade-up">
+        <div
+          class="magazine-gather"
+          data-aos="fade-up"
+          v-if="listData[1].list.length > 0"
+        >
           <swiper
             :options="swiperTwoOption"
             ref="myTwoSwiper"
             class="swiper-wrapper"
           >
-            <swiper-slide>
-              <dl @click="details(1)">
+            <swiper-slide v-for="(it, idx) in listData[1].list" :key="idx">
+              <dl @click="details(it.mas_book_id)">
                 <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
+                  <img class="dt-img" :src="it.mas_book_img" alt="" />
+                  <span>￥ {{ it.mas_book_price }}</span>
+                  <h4 class="oneline">{{ it.mas_book_name }}</h4>
+                  <p class="oneline">作者：{{ it.mas_book_author }}</p>
                 </dt>
                 <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
-                </dd>
-              </dl>
-            </swiper-slide>
-            <swiper-slide>
-              <dl @click="details(1)">
-                <dt>
-                  <img
-                    class="dt-img"
-                    src="@/static/images/way/book.png"
-                    alt=""
-                  />
-                  <span>￥ 45</span>
-                  <h4>智能管理会计</h4>
-                  <p>作者：韩向东</p>
-                </dt>
-                <dd>
-                  <span>出版社：xxxxxxxx</span>
+                  <span>出版社：{{ it.mas_book_press }}</span>
                 </dd>
               </dl>
             </swiper-slide>
           </swiper>
-          <!-- Optional controls -->
           <div class="btn-left-two">
-            <img
-              class="left01"
-              src="../../static/images/way/left01.png"
-              alt=""
-            />
-            <img class="left1" src="../../static/images/way/left1.png" alt="" />
+            <img class="left01" src="@/static/images/way/left01.png" alt="" />
+            <img class="left1" src="@/static/images/way/left1.png" alt="" />
           </div>
           <div class="btn-right-two">
-            <img
-              class="right02"
-              src="../../static/images/way/right02.png"
-              alt=""
-            />
-            <img
-              class="right2"
-              src="../../static/images/way/right2.png"
-              alt=""
-            />
+            <img class="right02" src="@/static/images/way/right02.png" alt="" />
+            <img class="right2" src="@/static/images/way/right2.png" alt="" />
           </div>
         </div>
         <div class="clear"></div>
       </div>
+      <div class="magazine-list banxin" v-else>
+        <div class="search-list" v-if="bookList.length>0">
+          <dl
+            v-for="(it, idx) in bookList"
+            :key="idx"
+            @click="details(it.mas_book_id)"
+          >
+            <dt>
+              <img class="dt-img" :src="it.mas_book_img" alt="" />
+              <span>￥ {{ it.mas_book_price }}</span>
+              <h4 class="oneline">{{ it.mas_book_name }}</h4>
+              <p class="oneline">作者：{{ it.mas_book_author }}</p>
+            </dt>
+            <dd>
+              <span>出版社：{{ it.mas_book_press }}</span>
+            </dd>
+          </dl>
+        </div>
+        <div class="no-data-box" v-else>
+          <img src="@/static/images/no-data.png" alt="" />
+          <div class="tip">目前还没有内容哦～</div>
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
   </div>
 </template>
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-const recommend = [
-  { title: "疫情之下，企业如何应对？疫情之下，企业如何应对？", price: "50" },
-  { title: "疫情之下，企业如何应对？", price: "40" },
-  { title: "疫情之下，企业如何应对？", price: "45" },
-];
-const bookList = [
-  "管理类",
-  "技术类",
-  "哲学类",
-  "经济类",
-  "管理类",
-  "技术类",
-  "哲学类",
-  "经济类",
-];
 export default {
   name: "carrousel",
   data() {
@@ -420,7 +172,7 @@ export default {
         watchOverflow: true, //当没有足够的slide切换时，例如只有1个slide（非loop），swiper会失效且隐藏导航。
         grabCursor: true, //设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
         effect: "slide", //切换效果：默认为“位移切换”
-        loop: true, // 无限循环
+        loop: false, // 无限循环
         autoplay: false, //可选选项，自动滑动
         speed: 3000,
         slidesPerView: 4, // 设置slider容器能够同时显示的slides数量(轮播模式)
@@ -436,7 +188,7 @@ export default {
         },
       },
       swiperTwoOption: {
-        loop: true, // 无限循环
+        loop: false, // 无限循环
         autoplay: false, //可选选项，自动滑动
         speed: 3000,
         slidesPerView: 4, // 设置slider容器能够同时显示的slides数量(轮播模式)
@@ -451,27 +203,40 @@ export default {
           prevEl: ".btn-left-two", //上一张标签类名可以自定义
         },
       },
-      recommend,
-      bookList, //书类型
-      showBookList: [],
-      current: 0, //专业默认索引
-      industryCurrent: 0, //行业默认索引
-      majorHeight: "40px", //专业默认高
-      industryHeight: "40px", //行业默认高
-      typeName: this.$route.query.type, //页面标题
+      recommend: [], //热销图书
+      bookType: [], //书类型
+      showBookType: [], //展示几个书类型
+      current: -1, //专业默认索引
       isShow: true, //是否展示更多按钮
+      bannerArr: [], //banner图
+      listData: [], //列表数据
+      bookTypeId: "", //书籍类型id
+      bookList:[],//根据书籍类型id搜索结果列表
+      isSearch:false,//false 默认数据 true 搜索数据
     };
   },
   components: {
     Swiper,
     SwiperSlide,
   },
-  asyncData({ query, params }) {
-    // this.$route.params.id
-    // let res= await ArticleIdApi({id:query.id})
-    return {
-      showBookList: bookList.slice(0, 4),
-    };
+
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      data: {
+        MenuId: store.state.subTabId,
+      },
+      className: "BookController",
+      classMethod: "bookList",
+    });
+    if (res.bol) {
+      return {
+        bannerArr: res.data.bannerImg,
+        bookType: res.data.bookType,
+        showBookType: res.data.bookType.slice(0, 5),
+        listData: res.data.bookList,
+        recommend: res.data.hotlist,
+      };
+    }
   },
   computed: {
     // swiper() {
@@ -482,6 +247,10 @@ export default {
     // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
     // console.log("this is current swiper instance object", this.swiper);
     // this.swiper.slideTo(3, 1000, false);
+    // $(".tabber li").click(function () {
+    //   var index = $(this).index(); //获取被按下按钮的索引值，需要注意index是从0开始的
+    //   $(this).addClass("active-li").siblings().removeClass("active-li");
+    // });
   },
   methods: {
     //点击到详情
@@ -498,13 +267,46 @@ export default {
 
     //点击更多
     moreFn() {
-      this.showBookList = this.bookList;
+      this.showBookType = this.bookType;
+      console.log(this.bookType, "this.bookList");
       this.isShow = false;
+    },
+    //点击每一个书类型
+    oNitem(index, id) {
+      this.current = index;
+      this.isSearch=true
+      this.bookTypeId = id;
+      this.getList();
+    },
+    //根据条件搜索
+    getList() {
+      this.commonData();
+    },
+    //公共请求接口
+    async commonData() {
+      this.showlaoding = true;
+      let res = await this.$axios.notNeedlogin({
+        data: {
+          MenuId: this.$store.state.subTabId,
+          bookTypeId: this.bookTypeId,
+          type: "list",
+        },
+        className: "BookController",
+        classMethod: "bookList",
+      });
+      if (res.bol) {
+        this.bookList=res.data.bookList;
+      }else{
+        this.$message.error(res.msg);
+      }
     },
   },
 };
 </script>
 <style lang="less" scoped>
+.main_container {
+  background-color: transparent;
+}
 .content-container {
   padding: 30px 0px 40px 0px;
   .content-container-main {
@@ -541,66 +343,36 @@ export default {
         }
       }
       .hot-recommend {
-        width: 306px;
-        height: 262px;
-        background: #ffffff;
-        border-radius: 6px;
+        width: 304px;
+        height: 260px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         padding: 20px;
-        ul {
-          margin-top: 16px;
-          li a {
-            display: flex;
-            margin-bottom: 18px;
-            cursor: pointer;
-            span {
-              display: inline-block;
-              min-width: 16px;
-              height: 16px;
-              background: #bfbfbf;
-              border-radius: 2px;
-              font-size: 14px;
-              font-weight: 400;
-              text-align: center;
-              color: #ffffff;
-              line-height: 16px;
-            }
-            p {
-              width: 271px;
-              font-size: 14px;
-              font-weight: 400;
-              color: rgba(0, 0, 0, 0.85);
-              line-height: 14px;
-              margin-left: 7px;
-            }
-          }
-          li:nth-last-child(1) {
-            margin-bottom: 0px;
-          }
-        }
         .hot-book {
-          width: 285px;
-          height: 205px;
-          background: rgba(0, 0, 0, 0.02);
-          border-radius: 2px;
           margin-top: 13px;
-          padding: 10px 16px 10px 5px;
+
           dl {
+            width: 289px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 2px;
+            padding: 5px 15px 5px 5px;
             display: flex;
             justify-content: space-between;
-            height: 60px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             position: relative;
             cursor: pointer;
             dt {
               width: 42px;
-              height: 100%;
+              height: 60px;
+              img {
+                border-radius: 0px;
+              }
               .top-img {
                 width: 19px;
                 height: 15px;
                 position: absolute;
-                top: 4px;
-                left: -8px;
-                border-radius: 0px;
+                top: 8px;
+                left: -7px;
               }
             }
             dd {
@@ -621,6 +393,11 @@ export default {
                 text-align: left;
                 color: #ea3a3a;
                 line-height: 28px;
+              }
+            }
+            &:hover {
+              dd p {
+                color: #fa6725;
               }
             }
           }
@@ -647,55 +424,51 @@ export default {
         line-height: 54px;
         margin-right: 20px;
         margin-bottom: 15px;
-        &:nth-child(1) {
-          background: linear-gradient(
-            90deg,
-            #f34250 0%,
-            #f28a51 81%,
-            #ff7d3b 100%
-          );
-          color: #ffffff;
-        }
         &:nth-child(6n) {
           margin-right: 0px;
         }
       }
+      .active {
+        background: linear-gradient(
+          90deg,
+          #f34250 0%,
+          #f28a51 81%,
+          #ff7d3b 100%
+        );
+        color: #ffffff;
+      }
+      .active-li {
+        color: #fa6725;
+      }
     }
   }
   .magazine-list {
-    width: 1020px;
-    // height: 877px;
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 45px 40px 0px;
-    margin-top: 22px;
+    width: 1100px;
+    padding: 55px 0px 0px;
     .magazine-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       h2 {
-        font-size: 24px;
-        font-weight: 600;
+        font-size: 22px;
+        font-weight: 500;
+        text-align: justify;
         color: rgba(0, 0, 0, 0.85);
         line-height: 22px;
+        padding-bottom: 22px;
+        border-bottom: 2px solid #fa6725;
       }
       .more-btn {
-        width: 88px;
-        height: 30px;
-        background: #ffffff;
-        border: 1px solid #d9d9d9;
-        border-radius: 2px;
         font-size: 14px;
         font-weight: 400;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.65);
-        line-height: 30px;
+        color: rgba(0, 0, 0, 0.35);
+        line-height: 22px;
         cursor: pointer;
-        &:hover {
-          height: 32px;
-          background: #ed6d38;
-          border: none;
-          color: #fff;
+        img {
+          width: 13px;
+          height: 8px;
+          margin-left: 5px;
         }
       }
     }
@@ -704,18 +477,18 @@ export default {
       dl {
         width: 152px;
         float: left;
-        margin: 35px 95px 55px 0px;
+        margin: 40px 95px 55px 0px;
         cursor: pointer;
         dt {
           .dt-img {
             width: 152px;
             height: 215px;
-            border-radius: 6px;
+            border-radius: 0px;
           }
           span {
             font-size: 18px;
             font-weight: 600;
-            text-align: left;
+            text-align: justify;
             color: #ea3a3a;
             line-height: 24px;
             display: inline-block;
@@ -724,7 +497,7 @@ export default {
           h4 {
             font-size: 16px;
             font-weight: 600;
-            text-align: left;
+            text-align: justify;
             color: rgba(0, 0, 0, 0.85);
             line-height: 24px;
             margin: 8px 0px 6px;
@@ -732,7 +505,7 @@ export default {
           p {
             font-size: 13px;
             font-weight: 400;
-            text-align: left;
+            text-align: justify;
             color: rgba(0, 0, 0, 0.45);
             line-height: 20px;
           }
@@ -742,9 +515,14 @@ export default {
           span {
             font-size: 13px;
             font-weight: 400;
-            text-align: left;
+            text-align: justify;
             color: rgba(0, 0, 0, 0.85);
             line-height: 20px;
+          }
+        }
+        &:hover {
+          dt h4 {
+            color: #fa6725;
           }
         }
       }
@@ -752,7 +530,7 @@ export default {
         margin-right: 0px;
       }
       /deep/.swiper-wrapper {
-        width: 94%;
+        width: 90%;
         margin: 0 auto;
       }
       .btn-left,
@@ -796,7 +574,7 @@ export default {
       .btn-right:hover,
       .btn-left-two:hover,
       .btn-right-two:hover {
-        background: #ed6d38;
+        background: #fa6725;
       }
       .btn-left:hover .left1,
       .btn-left-two:hover .left1 {
@@ -814,6 +592,85 @@ export default {
       .btn-right:hover .right02,
       .btn-right-two:hover .right02 {
         display: none;
+      }
+    }
+    .search-list {
+      display: flex;
+      flex-wrap: wrap;
+      dl {
+        width: 152px;
+        margin: 40px 85px 55px 0px;
+        cursor: pointer;
+        dt {
+          .dt-img {
+            width: 152px;
+            height: 215px;
+            border-radius: 0px;
+          }
+          span {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: justify;
+            color: #ea3a3a;
+            line-height: 24px;
+            display: inline-block;
+            margin-top: 18px;
+          }
+          h4 {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: justify;
+            color: rgba(0, 0, 0, 0.85);
+            line-height: 24px;
+            margin: 8px 0px 6px;
+          }
+          p {
+            font-size: 13px;
+            font-weight: 400;
+            text-align: justify;
+            color: rgba(0, 0, 0, 0.45);
+            line-height: 20px;
+          }
+        }
+        dd {
+          margin-top: 26px;
+          span {
+            font-size: 13px;
+            font-weight: 400;
+            text-align: justify;
+            color: rgba(0, 0, 0, 0.85);
+            line-height: 20px;
+          }
+        }
+        &:nth-child(5n) {
+          margin-right: 0px;
+        }
+        &:hover {
+          dt h4 {
+            color: #fa6725;
+          }
+        }
+      }
+    }
+    //无数据样式
+    .no-data-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 110px;
+
+      img {
+        width: 380px;
+        height: 254px;
+      }
+
+      .tip {
+        margin-top: 22px;
+        font-size: 18px;
+        font-weight: 400;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.65);
+        line-height: 22px;
       }
     }
   }

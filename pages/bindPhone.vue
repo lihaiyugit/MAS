@@ -92,9 +92,9 @@
   </div>
 </template>
 <script>
-import { notNeedlogin } from "../request/api";
+// import { notNeedlogin } from "../request/api";
+// import md5 from "js-md5";
 import { mapMutations } from "vuex";
-import md5 from "js-md5";
 import config from "../config/index";
 export default {
   layout: "not",
@@ -175,11 +175,11 @@ export default {
     //获取图形验证码CaptchaAppId
     CaptchaAppId() {
       let _this = this;
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + _this.$store.state.secretKey);
-      notNeedlogin(_this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + _this.$store.state.secretKey);
+      _this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         className: "SendCode",
         classMethod: "getCaptchaAppId",
       }).then((res) => {
@@ -215,11 +215,11 @@ export default {
     getRegisterCode(ticket, randstr) {
       let _this = this;
       _this.sendState = 1;
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + _this.$store.state.secretKey);
-      notNeedlogin(_this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + _this.$store.state.secretKey);
+      _this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         data: {
           phone: _this.registerParams.mobile,
           Ticket: ticket,
@@ -245,11 +245,11 @@ export default {
           if (_this.registerParams.agreement == false) {
             return _this.$message.warning("请阅读并同意服务协议");
           }
-          let timestamp = Date.parse(new Date());
-          let sign = md5(timestamp + _this.$store.state.secretKey);
-          notNeedlogin(_this.$axios, {
-            sign: sign,
-            timespan: timestamp,
+          // let timestamp = Date.parse(new Date());
+          // let sign = md5(timestamp + _this.$store.state.secretKey);
+          _this.$axios.notNeedlogin({
+            // sign: sign,
+            // timespan: timestamp,
             data: {
               phone: _this.registerParams.mobile,
               code: _this.registerParams.code,
@@ -348,20 +348,20 @@ export default {
 
   /deep/.el-input.is-active .el-input__inner,
   /deep/.el-input__inner:focus {
-    border-color: #ed6d38 !important;
+    border-color: #fa6725 !important;
   }
 
   /deep/.el-checkbox__input.is-checked .el-checkbox__inner,
   /deep/.el-checkbox__input.is-indeterminate .el-checkbox__inner {
-    border-color: #ed6d38;
-    background: #ed6d38;
+    border-color: #fa6725;
+    background: #fa6725;
   }
   /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
     color: rgba(0, 0, 0, 0.65);
   }
   /deep/.el-checkbox__inner:hover,
   /deep/.el-checkbox__input.is-focus .el-checkbox__inner {
-    border-color: #ed6d38;
+    border-color: #fa6725;
   }
   /deep/.el-input__prefix {
     left: 10px;
@@ -377,7 +377,7 @@ export default {
     font-size: 14px;
     font-weight: 400;
     text-align: center;
-    color: #ed6d38 !important;
+    color: #fa6725 !important;
     line-height: 24px;
     cursor: pointer;
     display: flex;
@@ -386,7 +386,7 @@ export default {
   .login-btn {
     width: 368px;
     height: 40px;
-    background: #ed6d38;
+    background: #fa6725;
     border-radius: 2px;
     border: none;
     font-size: 16px;
@@ -403,7 +403,7 @@ export default {
     border-radius: 2px;
     font-size: 14px;
     font-weight: 400;
-    color: #ed6d38;
+    color: #fa6725;
     line-height: 22px;
     margin-left: 4px;
   }

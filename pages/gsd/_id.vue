@@ -4,7 +4,7 @@
     <div class="crumbs">
       <div class="banxin crumbs-item">
         首页 > 逛书店 >
-        <span>智能管理会计</span>
+        <span>{{ bookData.mas_book_name }}</span>
       </div>
     </div>
     <div class="content-container">
@@ -40,28 +40,33 @@
               </div>
             </div>
             <div class="zz-infoL-r">
-              <h1>智能管理会计</h1>
+              <h1>{{ bookData.mas_book_name }}</h1>
               <p class="introduce">
-                《管理会计研究》杂志为广东经济出版社主办的管理会计专业期刊，双月刊，单月份26日出刊，国内统一刊号：CN
-                44-1740/F。
+                {{ bookData.mas_book_describe }}
               </p>
               <div class="book-info">
-                <p>作者：<span>韩向东</span></p>
-                <p>出版社：<span>广东经济出版社</span></p>
+                <p>
+                  作者：<span>{{ bookData.mas_book_author }}</span>
+                </p>
+                <p>
+                  出版社：<span>{{ bookData.mas_book_press }}</span>
+                </p>
               </div>
               <div class="price-box">
                 <div class="current-price">
                   <span class="text">MAS价格</span>
                   <span class="icon">￥</span>
-                  <span class="num">58.00</span>
+                  <!-- <span class="num">58.00</span> -->
+                  <span class="num">{{ bookData.mas_book_price }}</span>
                 </div>
                 <div class="current-price" style="padding-top: 10px">
                   <span class="text"
                     >定价
+                    <!-- <span style="text-decoration: line-through">¥88.00</span> -->
                     <span style="text-decoration: line-through"
-                      >¥88.00</span
-                    ></span
-                  >
+                      >¥{{ bookData.mas_book_o_price }}</span
+                    >
+                  </span>
                 </div>
               </div>
 
@@ -77,7 +82,8 @@
                   />
                   <button class="plus" @click="add">+</button>
                 </div>
-                <div class="stock">库存：342本</div>
+                <!-- <div class="stock">库存：342本</div> -->
+                <div class="stock">库存：{{ bookData.mas_book_num }}本</div>
               </div>
               <div class="tips">
                 全国快递投递， 快递不到地区采用邮局挂号配送。 包邮地区不含西藏，
@@ -105,16 +111,17 @@
           <div class="section_introduceL">
             <h6>书推荐</h6>
             <div class="section_introduceLD">
-              <dl>
+              <dl
+                v-for="(item, index) in recommend"
+                :key="index"
+                @click="zzDetails(item.mas_magazine_id)"
+              >
                 <dt>
-                  <img
-                    src="https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg"
-                    alt=""
-                  />
+                  <img :src="item.mas_magazine_master_img" alt="" />
                 </dt>
-                <dd>2022年 第2期总第23期</dd>
+                <dd>{{ item.mas_magazine_title_main }}</dd>
               </dl>
-              <dl>
+              <!-- <dl>
                 <dt>
                   <img
                     src="https://www.chinamas.cn/upload/img/2021/11/22/96bf6f043922dc0fda07b3b27c0dbd46.jpg"
@@ -122,17 +129,8 @@
                   />
                 </dt>
                 <dd>2021年 第6期 总第21期</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img
-                    src="https://www.chinamas.cn/upload/img/2021/09/27/0e86b81ed731d9bb6876702ff22ef38d.jpg"
-                    alt=""
-                  />
-                </dt>
-                <dd>2021年 第五期 总第20期</dd>
-              </dl>
-              <div class="clear"></div>
+              </dl> -->
+              <!-- <div class="clear"></div> -->
             </div>
           </div>
           <div class="section_introduceR">
@@ -153,15 +151,41 @@
                 <div class="div div1" v-if="tabCurrent == 0">
                   <div class="information">
                     <ol>
-                      <li>主管单位：<span>南方出版传媒股份有限公司</span></li>
-                      <li>主办单位：<span>广东经济出版社有限公司</span></li>
-                      <li>出版单位：<span>广东经济出版社有限公司</span></li>
-                      <li>创刊时间：<span>2018年7月</span></li>
-                      <li>国内刊号：<span>CN44-1740/F</span></li>
-                      <li>出版周期：<span>双月刊</span></li>
-                      <li>ISBN：<span>1671-0762</span></li>
-                      <li>页数：<span>88页</span></li>
-                      <li>开本：<span>全彩16开</span></li>
+                      <li>
+                        主管单位：<span>{{ bookData.mas_magazine_host }}</span>
+                      </li>
+                      <li>
+                        主办单位：<span>{{
+                          bookData.mas_magazine_charge
+                        }}</span>
+                      </li>
+                      <li>
+                        出版单位：<span>{{ bookData.mas_magazine_press }}</span>
+                      </li>
+                      <li>
+                        创刊时间：<span>{{
+                          bookData.mas_magazine_founded_time
+                        }}</span>
+                      </li>
+                      <li>
+                        国内刊号：<span>{{
+                          bookData.mas_magazine_domestic_issn
+                        }}</span>
+                      </li>
+                      <li>
+                        出版周期：<span>{{
+                          bookData.mas_magazine_publication_cycle
+                        }}</span>
+                      </li>
+                      <li>
+                        ISBN：<span>{{ bookData.mas_magazine_isbn }}</span>
+                      </li>
+                      <li>
+                        页数：<span>{{ bookData.mas_magazine_pages }}</span>
+                      </li>
+                      <li>
+                        开本：<span>{{ bookData.mas_magazine_open_book }}</span>
+                      </li>
                     </ol>
                   </div>
                   <div class="briefIntroduction">
@@ -189,7 +213,13 @@
                 <div class="div div2" v-if="tabCurrent == 1">
                   <div class="comments_mod_v1">
                     <!-- 没有登陆提示登录后评论 -->
-                    <div class="post-comment">
+                    <div
+                      class="post-comment"
+                      v-if="
+                        $store.state.token == '' ||
+                        $store.state.token == undefined
+                      "
+                    >
                       <h6 class="total_num">暂无评价</h6>
                       <div class="login-tip">
                         <p>
@@ -215,7 +245,10 @@
                       </div>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="post-comment">
+                    <div
+                      class="post-comment"
+                      v-else-if="bookComment.length == 0 && $store.state.token"
+                    >
                       <h6 class="total_num">暂无评价</h6>
                       <el-input
                         type="textarea"
@@ -225,7 +258,7 @@
                       </el-input>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="comment-list">
+                    <div class="comment-list" v-else>
                       <ul>
                         <li>
                           <div class="li-l">
@@ -401,13 +434,15 @@
             </div>
             <div class="clear"></div>
           </div>
-          <!-- <div class="clear"></div> -->
         </div>
+        <div class="clear"></div>
       </div>
     </div>
   </div>
 </template>
 <script>
+// import { notNeedlogin } from "@/request/api";
+// import md5 from "js-md5";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 const tabList = ["书简介", "书评论", "订阅须知"];
 export default {
@@ -446,7 +481,6 @@ export default {
         centeredSlides: false,
         slideToClickedSlide: true,
       },
-
       tabList, //tab列表
       tabCurrent: 0, //默认选中
       typeName: "逛书店", //页面标题
@@ -456,15 +490,34 @@ export default {
       dis: true,
       commentStatus: 3, //1未登录 2暂无评论 3有评论
       textarea: "",
+      bookData: "", //书详情数据
+      bookComment: [], //书评论数据
+      recommend: [], //书推荐
     };
   },
   components: {
     Swiper,
     SwiperSlide,
   },
-  asyncData({ query, params }) {
-    // this.$route.params.id
-    // let res= await ArticleIdApi({id:query.id})
+  async asyncData({ $axios, store, params }) {
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + store.state.secretKey);
+    let res = await $axios.notNeedlogin({
+      // sign: sign,
+      // timespan: timestamp,
+      className: "BookController",
+      classMethod: "getBookDetails",
+      data: {
+        bookId: parseInt(params.id),
+      },
+    });
+    if (res.bol) {
+      return {
+        bookData: res.data.bookData,
+        bookComment: res.data.bookComment,
+        recommend: res.data.recommend,
+      };
+    }
   },
   watch: {
     counter_num(newVal) {
@@ -652,11 +705,11 @@ export default {
                 line-height: 13px;
               }
               .icon {
-                color: #ed6d38;
+                color: #fa6725;
                 line-height: 22px;
               }
               .num {
-                color: #ed6d38;
+                color: #fa6725;
                 font-size: 28px;
                 font-weight: 500;
                 margin-left: -6px;
@@ -667,7 +720,7 @@ export default {
             background: #fff9ee;
             font-size: 12px;
             font-weight: 400;
-            color: #ed6d38;
+            color: #fa6725;
             line-height: 16px;
             padding: 10px 8px 10px 16px;
             margin-bottom: 20px;
@@ -749,9 +802,9 @@ export default {
             }
             .join {
               background: #fff5f1;
-              border: 1px solid #ed6d38;
+              border: 1px solid #fa6725;
               box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
-              color: #ed6d38;
+              color: #fa6725;
             }
             .disabled {
               background: rgb(234, 234, 234) !important;
@@ -773,10 +826,10 @@ export default {
     }
     .section_introduce {
       margin-top: 52px;
-      display: flex;
-      justify-content: space-between;
+      // display: flex;
+      // justify-content: space-between;
       .section_introduceL {
-        // float: left;
+        float: left;
         width: 257px;
         border: 1px solid #e5e5e5;
         h6 {
@@ -792,6 +845,7 @@ export default {
         }
         .section_introduceLD {
           width: 219px;
+
           padding: 5px 19px 8px 19px;
           dl {
             width: 100%;
@@ -818,7 +872,7 @@ export default {
         }
       }
       .section_introduceR {
-        // float: right;
+        float: right;
         width: 802px;
         background: #f7f7f7;
         border: 1px solid #e5e5e5;
@@ -862,7 +916,7 @@ export default {
             .comments_mod_v1 {
               .comment {
                 padding: 5px 16px;
-                background: #ed6d38;
+                background: #fa6725;
                 border-radius: 2px;
                 font-size: 14px;
                 font-weight: 400;
@@ -893,7 +947,7 @@ export default {
                     color: rgba(0, 0, 0, 0.85);
                     line-height: 20px;
                     .login {
-                      color: #ed6d38;
+                      color: #fa6725;
                     }
                   }
                 }
@@ -907,7 +961,7 @@ export default {
                 }
                 /deep/.el-textarea__inner:focus {
                   outline: none !important;
-                  border: 1px solid #ed6d38;
+                  border: 1px solid #fa6725;
                 }
               }
               .comment-list {

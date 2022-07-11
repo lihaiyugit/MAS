@@ -1,8 +1,8 @@
 <template>
   <div class="activity-container banxin">
     <div class="banner">
-      <img src="../../static/images/hd-banner.png" alt="" />
-      <!-- <img :src="banner" alt="" /> -->
+      <!-- <img src="../../static/images/hd-banner.png" alt="" /> -->
+      <img :src="bannerArr[0].mas_banner_img" alt="" />
     </div>
     <div class="tabbar">
       <span class="screen">活动筛选：</span>
@@ -22,7 +22,7 @@
             :class="current == index ? 'active' : ''"
             @click="cutValue(item, index)"
           >
-            {{ item }}
+            {{ item.val }}
           </li>
         </ul>
       </div>
@@ -48,26 +48,38 @@
       </div>
     </div>
     <div class="list">
-      <dl @click="details(1)">
+      <dl
+        v-for="(item, index) in listData"
+        :key="index"
+        @click="details(item.mas_activity_id)"
+      >
         <dt>
-          <img src="../../static/images/ad-img.png" alt="" />
+          <img :src="item.mas_activity_img" alt="" />
         </dt>
         <dd>
           <h5>
-            数字化企业与管理会计体系转型研讨会数字化企业与管理会计体系转型研讨会
+            {{ item.mas_activity_title }}
           </h5>
           <div class="dd-base">
-            <div class="left state-one">报名中</div>
+            <div
+              class="left state-two"
+              v-if="item.mas_activity_status == '已结束'"
+            >
+              {{ item.mas_activity_status }}
+            </div>
+            <div class="left state-one" v-else>
+              {{ item.mas_activity_status }}
+            </div>
             <div class="right">
               <img class="time" src="@/static/images/time.png" alt="" />
-              <span>2022-03-14</span>
+              <span>{{ item.mas_activity_starttime }}</span>
               <img class="online" src="../../static/images/online.png" alt="" />
-              <span>线上</span>
+              <span>{{ item.mas_activity_address_type }}</span>
             </div>
           </div>
         </dd>
       </dl>
-      <dl @click="details(2)">
+      <!-- <dl @click="details(2)">
         <dt>
           <img src="../../static/images/ad-img.png" alt="" />
         </dt>
@@ -84,40 +96,7 @@
           </div>
         </dd>
       </dl>
-      <dl @click="details(3)">
-        <dt>
-          <img src="../../static/images/ad-img.png" alt="" />
-        </dt>
-        <dd>
-          <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <div class="dd-base">
-            <div class="left state-two">已结束</div>
-            <div class="right">
-              <img class="time" src="@/static/images/time.png" alt="" />
-              <span>2022-03-14</span>
-              <img class="map" src="../../static/images/map.png" alt="" />
-              <span>北京</span>
-            </div>
-          </div>
-        </dd>
-      </dl>
-      <dl @click="details(4)">
-        <dt>
-          <img src="../../static/images/ad-img.png" alt="" />
-        </dt>
-        <dd>
-          <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <div class="dd-base">
-            <div class="left state-two">已结束</div>
-            <div class="right">
-              <img class="time" src="@/static/images/time.png" alt="" />
-              <span>2022-03-14</span>
-              <img class="map" src="../../static/images/map.png" alt="" />
-              <span>北京</span>
-            </div>
-          </div>
-        </dd>
-      </dl>
+
       <dl @click="details(4)">
         <dt>
           <img src="../../static/images/hd-rw.png" alt="" />
@@ -134,36 +113,21 @@
             </div>
           </div>
         </dd>
-      </dl>
-      <dl @click="details(4)">
-        <dt>
-          <img src="../../static/images/hd-rw.png" alt="" />
-        </dt>
-        <dd>
-          <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <div class="dd-base">
-            <div class="left state-two">已结束</div>
-            <div class="right">
-              <img class="time" src="@/static/images/time.png" alt="" />
-              <span>2022-03-14</span>
-              <img class="map" src="../../static/images/map.png" alt="" />
-              <span>北京</span>
-            </div>
-          </div>
-        </dd>
-      </dl>
+      </dl> -->
     </div>
-    <button class="more" @click="moreFn">查看更多</button>
+    <button class="more" v-show="!finished">查看更多</button>
   </div>
 </template>
 <script>
-import { notNeedlogin } from "@/request/api";
-import md5 from "js-md5";
 export default {
   scrollToTop: true,
   data() {
     return {
-      timeData: ["全部时间", "本周", "本月"], //时间下拉菜单
+      timeData: [
+        { val: "全部时间", type: 0 },
+        { val: "本周", type: 2 },
+        { val: "本月", type: 1 },
+      ], //时间下拉菜单
       defaultValue: "", //时间默认值
       selectList: false, //先将下拉框隐藏
       current: "-1", //下拉默认选中项
@@ -171,11 +135,15 @@ export default {
       typeValue: "", //状态默认值
       typeShow: false, //是否展示
       typeCurrent: "-1", //下拉默认选中项
-      listData: [], //总列表数据
-      showData: [], //展示数据
       pageIndex: 1, //当前页
-      pageSize: 3, //当前页
-      banner:'',//总数据
+      pageSize: 6, //当前页
+      total: "", //总条数
+      listData: [], //总列表数据
+      bannerArr: [], //banner图
+      finished: false, //数据是否加载完成
+      showlaoding: true, // 是否显示loading效果
+      moretype: "", //加载更多 取值 ‘list’
+      timeType: "", //查询时间 1 本月 2本周
     };
   },
   //点击空白处关闭下拉框
@@ -200,36 +168,64 @@ export default {
     },
   },
   async asyncData({ $axios, store }) {
-    // let timestamp = Date.parse(new Date());
-    // let sign = md5(timestamp + store.state.secretKey);
-    // let res = await notNeedlogin($axios, {
-    //   sign: sign,
-    //   timespan: timestamp,
-    //   className: "HomeController",
-    //   classMethod: "activityList",
-    // });
-    // console.log(res.data, "res-活动列表");
-    // if (res.bol) {
-    //   return { listData: res.data,banner: res.data.bannerImg[0].mas_banner_img};
-    // }
-    //请求接口总数
-    //  this.listData=res.data.task;
-    // this.showData=res.data.task.slice((this.pageIndex-1) * this.pageSize, this.pageIndex * this.pageSize),
+    let res = await $axios.notNeedlogin({
+      className: "HomeController",
+      classMethod: "activityList",
+      data: {
+        page: 1,
+        limit: 6,
+      },
+    });
+    if (res.bol) {
+      return {
+        bannerArr: res.data.bannerImg,
+        listData: res.data.activityList.activityList,
+        total: res.data.activityList.activityCount,
+        showlaoding: false,
+        finished: res.data.activityList.activityCount > 6 ? false : true,
+      };
+    }
   },
   mounted() {
-    this.defaultValue = this.timeData[0];
+    this.defaultValue = this.timeData[0].val;
     this.typeValue = this.typeData[0];
+    //scroll事件并监听
+    window.addEventListener("scroll", this.activityScroll);
   },
   methods: {
+    //scroll事件并监听
+    activityScroll() {
+      //可视区域大小window.innerHeight
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop; //滚动高度
+      //"文档高度"document.body.offsetHeight 327底部高度
+      //判断是否滚动到底部
+      if (scrollTop + window.innerHeight + 327 >= document.body.offsetHeight) {
+        //327 表示距离底部多少的距离的开始触发loadmore效果
+        if (!this.showlaoding && !this.finished) {
+          //防止多次加载
+          this.moretype = "list";
+          this.moreFn();
+        }
+      }
+    },
     //时间类型下拉框
     selectClick() {
       this.selectList = !this.selectList; //点击显示或隐藏下拉框
     },
     //点击时间下拉框
     cutValue(item, index) {
+      this.pageIndex = 1;
+      this.listData = [];
+      this.moretype = "list";
+      this.finished = false;
       this.selectList = false;
-      this.defaultValue = item;
+      this.defaultValue = item.val;
       this.current = index;
+      this.timeType = item.type;
+      this.getList();
     },
     //状态
     typeClick() {
@@ -237,23 +233,51 @@ export default {
     },
     //点击状态下拉框
     typeFn(item, index) {
+      this.pageIndex = 1;
+      this.listData = [];
+      this.moretype = "list";
+      this.finished = false;
       this.typeShow = false;
       this.typeValue = item;
       this.typeCurrent = index;
+      this.getList();
     },
+
     //点击查看更多
     moreFn() {
-      //   let that = this;
-      //   let pageIndex = that.pageIndex + 1;
-      //   if (that.listData.length / that.pageSize > that.pageIndex) {
-      //     that.showData = that.listData.slice(
-      //       (pageIndex - 1) * that.pageSize,
-      //       pageIndex * that.pageSize
-      //     );
-      //     that.pageIndex = pageIndex;
-      //   } else {
-      //     console.log("最后一页了哟！");
-      //   }
+      let pageIndex = this.pageIndex + 1;
+      this.commonData(pageIndex);
+    },
+    //根据条件搜索
+    getList() {
+      this.commonData(this.pageIndex);
+    },
+    //公共请求接口
+    async commonData(pageIndex) {
+      this.showlaoding = true;
+      let res = await this.$axios.notNeedlogin({
+        data: {
+          page: pageIndex,
+          limit: this.pageSize,
+          type: this.moretype,
+          timeType: this.timeType > 0 ? this.timeType : "",
+          status: this.typeCurrent > 0 ? this.typeCurrent : "",
+        },
+        className: "HomeController",
+        classMethod: "activityList",
+      });
+      if (res.bol) {
+        let activityArr = res.data.activityList;
+        this.total = res.data.activityCount;
+        this.showlaoding = false;
+        if (this.total / this.pageSize > this.pageIndex) {
+          this.pageIndex = pageIndex;
+        } else {
+          this.finished = true; // 数据全部加载完成
+        }
+        // 将新请求到的数据添加到之前的数据后
+        this.listData = this.listData.concat(activityArr);
+      }
     },
     //点击到详情
     details(id) {
@@ -261,6 +285,9 @@ export default {
         path: `/activity/${id}`,
       });
     },
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.activityScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>
@@ -394,7 +421,7 @@ export default {
             margin-left: 20px;
           }
           .state-one {
-            background: #ed6d38;
+            background: #fa6725;
           }
           .state-two {
             background: #cccccc;
@@ -440,12 +467,12 @@ export default {
     width: 146px;
     height: 40px;
     background: #ffffff;
-    border: 1px solid #ed6d38;
+    border: 1px solid #fa6725;
     border-radius: 2px;
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.02);
     font-size: 14px;
     font-weight: 400;
-    color: #ed6d38;
+    color: #fa6725;
     line-height: 22px;
     display: flex;
     justify-content: center;
@@ -453,7 +480,7 @@ export default {
     margin: 17px auto;
     cursor: pointer;
     &:hover {
-      background: #ed6d38;
+      background: #fa6725;
       color: #fff;
       border: transparent;
     }

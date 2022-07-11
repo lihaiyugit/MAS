@@ -2,7 +2,12 @@
   <div class="project_container">
     <singleHeader />
     <div class="project">
-      <div class="banner">
+      <div
+        class="banner"
+        :style="{
+          'background-image': 'url(' + bannerArr[0].mas_banner_img + ')',
+        }"
+      >
         <div class="banner-main banxin">
           <h1>课题研究</h1>
           <p>管理会计创新研究平台设CMAS研究中心</p>
@@ -28,12 +33,18 @@
                 </div>
                 <ul class="select-item" v-show="selectList">
                   <li
-                    v-for="(item, index) in typeData"
-                    :key="index"
-                    :class="current == index ? 'active' : ''"
-                    @click="cutValue(item, index)"
+                    v-for="(it, idx) in typeData"
+                    :key="idx"
+                    :class="current == idx ? 'active' : ''"
+                    @click="
+                      cutValue(
+                        it.mas_special_study_type_name,
+                        idx,
+                        it.mas_special_study_type_id
+                      )
+                    "
                   >
-                    {{ item }}
+                    {{ it.mas_special_study_type_name }}
                   </li>
                 </ul>
               </div>
@@ -45,40 +56,51 @@
               ref="myTwoSwiper"
               class="swiper-wrapper"
             >
-              <swiper-slide>
+              <swiper-slide
+                v-for="(itStudy, inStudy) in studyList"
+                :key="inStudy"
+              >
                 <dl>
                   <dt>
-                    <img src="../../static/images/way/kt-01.png" alt="" />
+                    <img :src="itStudy.mas_special_study_img" alt="" />
                   </dt>
                   <dd>
-                    <h6>数字智能时代中国企业财务共享的创新与升级调研报告</h6>
-                    <p class="info">
-                      肇始于20世纪80年代的财务共享模式，在今天的数据智能时代会有哪些“出圈”、“跨界”的变化？由上海国家会计学院智能财务研究中心、元年研究院、《管理会计研究》CMAS智库联合制作的《数字智能时代，中国企业财务共享的创新与升级调研报告》正式发布，报告用翔实的调研数据和专业的洞察结论系统回答了这个业界非常关心的热门话题。
-                    </p>
+                    <h6>{{ itStudy.mas_special_study_title }}</h6>
+                    <p class="info">{{ itStudy.mas_special_study_describe }}</p>
                     <p>
                       <span>联合发布：</span
-                      >上海国家会计学院智能财务研究中心、元年研究院、《管理会计研究》CMAS智库
+                      >{{ itStudy.mas_special_study_join_issue }}
                     </p>
-                    <p><span>报告专家：</span>刘勤，韩向东，贾小强</p>
-                    <p class="time"><span>发布时间：</span>2021年9月28日</p>
+                    <p>
+                      <span>报告专家：</span
+                      >{{ itStudy.mas_special_study_report_expert }}
+                    </p>
+                    <p class="time">
+                      <span>发布时间：</span
+                      >{{ itStudy.mas_special_study_time }}
+                    </p>
                     <div class="btn">
                       <button
                         :style="{
                           backgroundColor: backgroundColor1,
                           color: color1,
                         }"
-                        @click="tryRead()"
+                        @click="tryRead(itStudy.mas_special_study_id)"
                       >
                         试读
                       </button>
-                      <button @mouseover="changeStyle1" @mouseout="restStyle1" @click="download">
+                      <button
+                        @mouseover="changeStyle1"
+                        @mouseout="restStyle1"
+                        @click="download(itStudy.mas_special_study_pdf_url)"
+                      >
                         下载
                       </button>
                     </div>
                   </dd>
                 </dl>
               </swiper-slide>
-              <swiper-slide>
+              <!-- <swiper-slide>
                 <dl>
                   <dt>
                     <img src="../../static/images/way/kt-01.png" alt="" />
@@ -109,34 +131,22 @@
                     </div>
                   </dd>
                 </dl>
-              </swiper-slide>
+              </swiper-slide> -->
             </swiper>
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
             <!-- 如果需要导航按钮 -->
-            <div class="btn-left">
-              <img
-                class="left01"
-                src="../../static/images/way/left01.png"
-                alt=""
-              />
-              <img
-                class="left1"
-                src="../../static/images/way/left1.png"
-                alt=""
-              />
+            <div class="btn-left" v-if="studyList.length > 0">
+              <img class="left01" src="@/static/images/way/left01.png" alt="" />
+              <img class="left1" src="@/static/images/way/left1.png" alt="" />
             </div>
-            <div class="btn-right">
+            <div class="btn-right" v-if="studyList.length > 0">
               <img
                 class="right02"
-                src="../../static/images/way/right02.png"
+                src="@/static/images/way/right02.png"
                 alt=""
               />
-              <img
-                class="right2"
-                src="../../static/images/way/right2.png"
-                alt=""
-              />
+              <img class="right2" src="@/static/images/way/right2.png" alt="" />
             </div>
           </div>
           <div class="title" style="margin-top: 63px">
@@ -157,14 +167,14 @@
                 <div class="btn">
                   <button
                     :style="{ backgroundColor: backgroundColor, color: color }"
-                    @click="JGVisible = true"
+                    @click="JGVisibleFn()"
                   >
                     机构合作
                   </button>
                   <button
                     @mouseover="changeStyle"
                     @mouseout="restStyle"
-                    @click="personalVisible = true"
+                    @click="personalVisibleFn()"
                   >
                     个人合作
                   </button>
@@ -183,64 +193,34 @@
           <div class="activity">
             <div class="title">近期交流会活动</div>
             <div class="list">
-              <dl>
+              <dl
+                v-for="(itXs, inXs) in xsjlList"
+                :key="inXs"
+                @click="activityDetails(itXs.mas_activity_id)"
+              >
                 <dt>
-                  <img src="../../static/images/way/kt-03.png" alt="" />
+                  <img :src="itXs.mas_activity_img" alt="" />
                 </dt>
                 <dd>
-                  <span class="dd-title"
-                    >活动标题活动标题活动标题活动标题活动标题</span
-                  >
+                  <span class="dd-title">{{ itXs.mas_activity_title }}</span>
                   <p class="oneline">
-                    我们将根据课题进度需要不定期举办课题讨论...
+                    {{ itXs.mas_activity_head_details }}
                   </p>
                   <div class="details">
                     <div class="left">
-                      <span>阅读详情</span>
-                      <img src="../../static/images/arrows-left.png" alt="" />
+                      <span>活动详情</span>
+                      <img src="@/static/images/arrows-left.png" alt="" />
                     </div>
                     <div class="right">
-                      <img src="../../static/images/time.png" alt="" />
-                      <span>2022-03-14</span>
-                      <img
-                        class="map"
-                        src="../../static/images/map.png"
-                        alt=""
-                      />
-                      <span>北京</span>
+                      <img src="@/static/images/time.png" alt="" />
+                      <span>{{ itXs.mas_activity_starttime }}</span>
+                      <img class="map" src="@/static/images/map.png" alt="" />
+                      <span>{{ itXs.mas_activity_province }}</span>
                     </div>
                   </div>
                 </dd>
               </dl>
-              <dl>
-                <dt>
-                  <img src="../../static/images/way/kt-03.png" alt="" />
-                </dt>
-                <dd>
-                  <span class="dd-title"
-                    >活动标题活动标题活动标题活动标题活动标题</span
-                  >
-                  <p class="oneline">
-                    我们将根据课题进度需要不定期举办课题讨论...
-                  </p>
-                  <div class="details">
-                    <div class="left">
-                      <span>阅读详情</span>
-                      <img src="../../static/images/arrows-left.png" alt="" />
-                    </div>
-                    <div class="right">
-                      <img src="../../static/images/time.png" alt="" />
-                      <span>2022-03-14</span>
-                      <img
-                        class="map"
-                        src="../../static/images/map.png"
-                        alt=""
-                      />
-                      <span>北京</span>
-                    </div>
-                  </div>
-                </dd>
-              </dl>
+              <!--
               <dl>
                 <dt>
                   <img src="../../static/images/way/kt-03.png" alt="" />
@@ -255,7 +235,7 @@
                   </p>
                   <div class="details">
                     <div class="left">
-                      <span>阅读详情</span>
+                      <span>活动详情</span>
                       <img src="../../static/images/arrows-left.png" alt="" />
                     </div>
                     <div class="right">
@@ -263,7 +243,7 @@
                     </div>
                   </div>
                 </dd>
-              </dl>
+              </dl> -->
             </div>
           </div>
         </div>
@@ -275,23 +255,34 @@
         center
         :lock-scroll="false"
       >
-        <el-form :model="JGform" size="mini" label-width="70px">
-          <el-form-item label="机构名称：">
+        <el-form
+          :model="JGform"
+          :rules="rules"
+          ref="JGform"
+          size="mini"
+          label-width="70px"
+          :hide-required-asterisk="true"
+        >
+          <el-form-item label="机构名称：" prop="name">
             <el-input v-model="JGform.name" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-form-item label="合作形式：">
+          <el-form-item label="合作形式：" prop="type">
             <div class="radio-group">
-              <div class="radio-box">
+              <div
+                class="radio-box"
+                v-for="(it, idx) in cooperationForm"
+                :key="idx"
+              >
                 <input
                   name="type"
                   type="checkbox"
-                  value="0"
-                  checked
-                  @click="checkedThis(0)"
+                  :value="idx"
+                  :checked="idx == 0 ? true : false"
+                  @click="checkedThis(it, idx)"
                 />
-                <label>共建</label>
+                <label>{{ it }}</label>
               </div>
-              <div class="radio-box">
+              <!-- <div class="radio-box">
                 <input
                   name="type"
                   type="checkbox"
@@ -299,21 +290,25 @@
                   @click="checkedThis(1)"
                 />
                 <label>参与</label>
-              </div>
+              </div> -->
             </div>
           </el-form-item>
-          <el-form-item label="合作方向：">
-            <el-select v-model="JGform.direction" placeholder="请选择">
+          <el-form-item label="合作方向：" prop="direction">
+            <el-select
+              v-model="JGform.direction"
+              placeholder="请选择"
+              :popper-append-to-body="false"
+            >
               <el-option
-                v-for="item in typeData"
-                :key="item"
-                :label="item"
-                :value="item"
+                v-for="(item, index) in cooperationDirection"
+                :key="index"
+                :label="item.mas_tag_name"
+                :value="item.mas_tag_id"
               >
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="联系方式：">
+          <el-form-item label="联系方式：" prop="contact">
             <el-input
               v-model="JGform.contact"
               maxlength="11"
@@ -326,7 +321,7 @@
         </div>
 
         <span slot="footer" class="dialog-footer">
-          <button @click="JGVisible = false">提交</button>
+          <button @click="JGVisibleForm('JGform')">提交</button>
         </span>
       </el-dialog>
       <el-dialog
@@ -336,45 +331,56 @@
         center
         :lock-scroll="false"
       >
-        <el-form :model="personalform" size="mini" label-width="70px">
-          <el-form-item label="姓名：">
+        <el-form
+          :model="personalform"
+          :rules="formRules"
+          ref="personalform"
+          size="mini"
+          label-width="70px"
+          :hide-required-asterisk="true"
+        >
+          <el-form-item label="姓名：" prop="name">
             <el-input
               v-model="personalform.name"
               placeholder="请输入"
             ></el-input>
           </el-form-item>
-          <el-form-item label="工作单位：">
+          <el-form-item label="工作单位：" prop="company">
             <el-input
               v-model="personalform.company"
               placeholder="请输入"
             ></el-input>
           </el-form-item>
-          <el-form-item label="职务：">
+          <el-form-item label="职务：" prop="post">
             <el-input
               v-model="personalform.post"
               placeholder="请输入"
             ></el-input>
           </el-form-item>
-          <el-form-item label="联系方式：">
+          <el-form-item label="联系方式：" prop="tel">
             <el-input
-              v-model="personalform.contact"
-              maxlength="11"
+              v-model="personalform.tel"
+              :maxlength="11"
               placeholder="请输入"
             ></el-input>
           </el-form-item>
-          <el-form-item label="邮箱：">
+          <el-form-item label="邮箱：" prop="email">
             <el-input
               v-model="personalform.email"
               placeholder="请输入"
             ></el-input>
           </el-form-item>
-          <el-form-item label="合作方向：">
-            <el-select v-model="personalform.direction" placeholder="请选择">
+          <el-form-item label="合作方向：" prop="direction">
+            <el-select
+              v-model="personalform.direction"
+              placeholder="请选择"
+              :popper-append-to-body="false"
+            >
               <el-option
-                v-for="item in typeData"
-                :key="item"
-                :label="item"
-                :value="item"
+                v-for="(item, index) in cooperationDirection"
+                :key="index"
+                :label="item.mas_tag_name"
+                :value="item.mas_tag_id"
               >
               </el-option>
             </el-select>
@@ -385,7 +391,7 @@
         </div>
 
         <span slot="footer" class="dialog-footer">
-          <button @click="personalVisible = false">提交</button>
+          <button @click="personalVisibleSubmit('personalform')">提交</button>
         </span>
       </el-dialog>
     </div>
@@ -395,16 +401,45 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
   data() {
+    const validateMobilePhone = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("联系方式不能为空"));
+      } else {
+        if (value !== "") {
+          var reg = /^1[3456789]\d{9}$/;
+          if (!reg.test(value)) {
+            callback(new Error("请输入有效的联系方式"));
+          }
+        }
+        callback();
+      }
+    };
+
+    const validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请正确填写邮箱"));
+      } else {
+        if (value !== "") {
+          var reg =
+            /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+          if (!reg.test(value)) {
+            callback(new Error("请输入有效的邮箱"));
+          }
+        }
+        callback();
+      }
+    };
+
     return {
-      defaultValue: "业务",
-      typeData: ["数字化", "人工智能", "数据挖掘", "数据中台", "智能财务"],
+      defaultValue: "全部",
+      typeData: [], //课题成果类型
       selectList: false, //先将下拉框隐藏
       current: "-1", //下拉默认选中项
       swiperOption: {
         watchOverflow: true, //当没有足够的slide切换时，例如只有1个slide（非loop），swiper会失效且隐藏导航。
         // grabCursor: true, //设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
         effect: "slide", //切换效果：默认为“位移切换”
-        loop: true, // 无限循环
+        loop: false, // 无限循环
         autoplay: false, //可选选项，自动滑动
         speed: 3000,
         slidesPerView: 1, // 设置slider容器能够同时显示的slides数量(轮播模式)
@@ -427,23 +462,77 @@ export default {
       JGform: {
         name: "",
         type: "",
-        direction: "数字化",
+        direction: "",
         contact: "",
-      }, //机构表单
+      }, //合作机构表单
+      cooperationForm: [], // 合作形式
+      cooperationDirection: [], //合作方向
+      //合作机构表单验证
+      rules: {
+        name: [{ required: true, message: "请输入机构名称", trigger: "blur" }],
+        direction: [
+          { required: true, message: "请选择合作方向", trigger: "change" },
+        ],
+        contact: [
+          { required: true, message: "请输入联系方式", trigger: "blur" },
+        ],
+      },
       personalVisible: false, //课题合作（个人）弹框
       personalform: {
         name: "",
         company: "",
         post: "",
-        contact: "",
+        tel: "",
         email: "",
-        direction: "数字化",
+        direction: "",
       }, //个人表单
+      //个人合作表单验证
+      formRules: {
+        name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+        company: [
+          { required: true, message: "请输入工作单位", trigger: "blur" },
+        ],
+        post: [{ required: true, message: "请输入职务", trigger: "blur" }],
+        tel: [
+          { required: true, validator: validateMobilePhone, trigger: "blur" },
+        ],
+        email: [
+          { required: true, validator: validateEmail, trigger: "blur" },
+          {
+            type: "email",
+            message: "请输入正确的邮箱地址",
+            trigger: ["blur", "change"],
+          },
+        ],
+        direction: [
+          { required: true, message: "请选择合作方向", trigger: "change" },
+        ],
+      },
       backgroundColor: "",
       color: "",
       backgroundColor1: "",
       color1: "",
+      bannerArr: [], //banner图
+      studyList: [], //课题研究列表
+      xsjlList: [], //学术研究活动列表
     };
+  },
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      data: {
+        MenuId: 7,
+      },
+      className: "SpecialStudyController",
+      classMethod: "ktyj",
+    });
+    if (res.bol) {
+      return {
+        bannerArr: res.data.bannerImg,
+        typeData: res.data.specialStudyType,
+        studyList: res.data.specialStudy,
+        xsjlList: res.data.xsjlList,
+      };
+    }
   },
   //点击空白处关闭下拉框
   directives: {
@@ -461,21 +550,25 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  mounted() {},
   methods: {
     //点击试读
-    tryRead() {
+    tryRead(id) {
       this.$router.push({
         name: "journal",
-        query: { id: 30 },
+        query: { id: id },
       });
     },
     //点击下载
-    download(){
-
+    download(url) {
+      let portUrl='https://develop.chinamas.cn/down'
+      // https://yuanian-test.oss-cn-beijing.aliyuncs.com/mas/images/2022/07/04/2022-v2.0.pdf
+      console.log(url,'url')
+      location.href=portUrl+'?url='+encodeURI(url);
     },
     //单选按钮
-    checkedThis(obj) {
-      //  let gender=$("input[name='type']:checked").val();
+    checkedThis(name, obj) {
+      this.JGform.type = name;
       var boxArray = document.getElementsByName("type");
       for (var i = 0; i <= boxArray.length - 1; i++) {
         if (boxArray[i].value == obj && boxArray[i].checked) {
@@ -490,25 +583,147 @@ export default {
       this.selectList = !this.selectList; //点击显示或隐藏下拉框
     },
     //点击下拉框
-    cutValue(item, index) {
+    cutValue(item, index, id) {
       this.selectList = false;
       this.defaultValue = item;
       this.current = index;
+      this.studyList = [];
+      this.getList(id);
+    },
+    //根据条件筛选
+    async getList(id) {
+      let res = await this.$axios.notNeedlogin({
+        data: {
+          MenuId: 7,
+          studyTypeId: id,
+        },
+        className: "SpecialStudyController",
+        classMethod: "ktyj",
+      });
+      if (res.bol) {
+        this.studyList = res.data;
+      }
+    },
+    //点击合作机构按钮
+    JGVisibleFn() {
+      let _this = this;
+      _this.formFiltrate();
+      setTimeout(() => {
+        _this.JGVisible = true;
+        _this.$nextTick(() => {
+          _this.$refs.JGform.resetFields();
+        });
+      }, 200);
+    },
+    //表单筛选
+    formFiltrate() {
+      let _this = this;
+      _this.$axios
+        .notNeedlogin({
+          className: "SpecialStudyController",
+          classMethod: "getOption",
+        })
+        .then((res) => {
+          if (res.bol) {
+            _this.cooperationForm = res.data.xs;
+            _this.cooperationDirection = res.data.tag;
+            _this.JGform.type = _this.cooperationForm[0];
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+    },
+    //点击合作机构提交按钮
+    JGVisibleForm(formName) {
+      let _this = this;
+      _this.$refs[formName].validate((valid) => {
+        if (valid) {
+          _this.$axios
+            .notNeedlogin({
+              data: {
+                tableType: 1,
+                mas_company_name: _this.JGform.name,
+                mas_company_hzxs: _this.JGform.type,
+                mas_hz_tag: _this.JGform.direction,
+                mas_hz_contact: _this.JGform.contact,
+              },
+              className: "SpecialStudyController",
+              classMethod: "insertTable",
+            })
+            .then((res) => {
+              if (res.bol) {
+                _this.$message.success("提交成功");
+                _this.JGVisible = false;
+              } else {
+                _this.$message.error(res.msg);
+              }
+            });
+        } else {
+          return false;
+        }
+      });
+    },
+    //点击个人合作按钮
+    personalVisibleFn() {
+      let _this = this;
+      _this.formFiltrate();
+      _this.personalVisible = true;
+      _this.$nextTick(() => {
+        _this.$refs.personalform.resetFields();
+      });
+    },
+    //点击个人合作提交按钮
+    personalVisibleSubmit(personalform) {
+      let _this = this;
+      _this.$refs[personalform].validate((valid) => {
+        if (valid) {
+          _this.$axios
+            .notNeedlogin({
+              data: {
+                tableType: 2,
+                mas_person_name: _this.personalform.name,
+                mas_person_unit: _this.personalform.company,
+                mas_person_job: _this.personalform.post,
+                mas_hz_contact: _this.personalform.tel,
+                mas_person_email: _this.personalform.email,
+                mas_hz_tag: _this.personalform.direction,
+              },
+              className: "SpecialStudyController",
+              classMethod: "insertTable",
+            })
+            .then((res) => {
+              if (res.bol) {
+                _this.$message.success("提交成功");
+                _this.personalVisible = false;
+              } else {
+                _this.$message.error(res.msg);
+              }
+            });
+        } else {
+          return false;
+        }
+      });
+    },
+    //跳转到活动详情
+    activityDetails(id) {
+      this.$router.push({
+        path: `/activity/${id}`,
+      });
     },
     changeStyle() {
       this.backgroundColor = "#fff";
-      this.color = "#ed6d38";
+      this.color = "#fa6725";
     },
     restStyle() {
-      this.backgroundColor = "#ed6d38";
+      this.backgroundColor = "#fa6725";
       this.color = "#fff";
     },
     changeStyle1() {
       this.backgroundColor1 = "#fff";
-      this.color1 = "#ed6d38";
+      this.color1 = "#fa6725";
     },
     restStyle1() {
-      this.backgroundColor1 = "#ed6d38";
+      this.backgroundColor1 = "#fa6725";
       this.color1 = "#fff";
     },
   },
@@ -522,7 +737,7 @@ export default {
     margin-top: 121px;
     .banner {
       height: 240px;
-      background-image: url(@/static/images/way/kt-banner.png);
+      // background-image: url(@/static/images/way/kt-banner.png);
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -650,6 +865,7 @@ export default {
           position: relative;
           dl {
             display: flex;
+
             dt {
               width: 240px;
               height: 303px;
@@ -673,6 +889,7 @@ export default {
                 font-size: 12px;
                 font-weight: 400;
                 color: rgba(0, 0, 0, 0.65);
+                text-align: justify;
                 line-height: 13px;
                 padding-bottom: 13px;
                 span {
@@ -695,27 +912,27 @@ export default {
                 button {
                   cursor: pointer;
                   padding: 5px 16px;
-                  border: 1px solid #ed6d38;
+                  border: 1px solid #fa6725;
                   border-radius: 2px;
                   font-size: 14px;
                   font-weight: 400;
                   line-height: 22px;
                   &:nth-child(1) {
                     color: #ffffff;
-                    background: #ed6d38;
+                    background: #fa6725;
                   }
                   &:nth-child(2) {
                     background: #fff;
-                    color: #ed6d38;
+                    color: #fa6725;
                     margin-left: 32px;
                     &:hover {
                       color: #ffffff;
-                      background: #ed6d38;
+                      background: #fa6725;
                     }
                   }
                   // &:nth-child(2):hover + &:nth-child(1) {
                   //   background: #fff;
-                  //   color: #ed6d38;
+                  //   color: #fa6725;
                   // }
                 }
               }
@@ -735,7 +952,7 @@ export default {
             margin-left: 10px;
           }
           /deep/.swiper-pagination-bullet-active {
-            background: #ed6d38;
+            background: #fa6725;
           }
           .btn-left,
           .btn-right {
@@ -774,7 +991,7 @@ export default {
           }
           .btn-left:hover,
           .btn-right:hover {
-            background: #ed6d38;
+            background: #fa6725;
           }
           .btn-left:hover .left1 {
             display: block;
@@ -812,12 +1029,13 @@ export default {
           display: flex;
           justify-content: space-between;
           dl {
+            cursor: pointer;
             dt {
               width: 327px;
               height: 184px;
               position: relative;
               .point {
-                background: #ed6d38;
+                background: #fa6725;
               }
               img {
                 border-radius: 6px 6px 0px 0px;
@@ -832,6 +1050,7 @@ export default {
               .dd-title {
                 width: 305px;
                 font-size: 18px;
+                height: 48px;
                 font-weight: 600;
                 color: rgba(0, 0, 0, 0.85);
                 line-height: 24px;
@@ -854,6 +1073,7 @@ export default {
                   align-items: center;
                   span {
                     font-size: 14px;
+
                     font-weight: 400;
                     color: rgba(0, 0, 0, 0.85);
                     line-height: 22px;
@@ -909,7 +1129,7 @@ export default {
       border-bottom: 1px solid #f0f0f0;
       .el-dialog__headerbtn:focus .el-dialog__close,
       .el-dialog__headerbtn:hover .el-dialog__close {
-        color: #ed6d38;
+        color: #fa6725;
       }
     }
     /deep/.el-dialog__title {
@@ -935,10 +1155,13 @@ export default {
         font-size: 12px;
         font-weight: 500;
         text-align: center;
-        color: #ed6d38;
+        color: #fa6725;
         line-height: 14px;
         padding-bottom: 26px;
       }
+    }
+    .radio-group {
+      margin-top: 8px;
     }
     /deep/.el-dialog__footer {
       padding: 22px 20px 22px;
@@ -946,7 +1169,7 @@ export default {
       button {
         width: 60px;
         height: 32px;
-        background: #ed6d38;
+        background: #fa6725;
         border-radius: 2px;
         border: none;
         font-size: 14px;
@@ -956,5 +1179,23 @@ export default {
       }
     }
   }
+}
+/deep/.el-select-dropdown__item.selected {
+  color: #fa6725;
+}
+/deep/.el-select-dropdown__item.selected,
+/deep/.el-select-dropdown__item:hover {
+  color: #fa6725;
+}
+/deep/.el-input.is-active .el-input__inner,
+/deep/.el-input__inner:focus {
+  border-color: #fa6725;
+}
+/deep/.el-select .el-input.is-focus .el-input__inner {
+  border-color: #fa6725;
+}
+/deep/.el-select .el-input__inner:focus,
+.el-select .el-input__inner:hover {
+  border-color: #fa6725;
 }
 </style>

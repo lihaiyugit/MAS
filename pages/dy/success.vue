@@ -45,7 +45,7 @@ export default {
     text-align: center;
     margin-top: 30px;
     span {
-      color: #ed6d38;
+      color: #fa6725;
       line-height: 25px;
     }
   }

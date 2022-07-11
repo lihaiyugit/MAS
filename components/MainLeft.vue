@@ -3,51 +3,37 @@
     <!-- :class="current == index ? 'active' : ''"  @click="oNitem(index)"-->
     <ul>
       <li
-        v-for="(item, index) in list"
+        v-for="(item, index) in tabList"
         :key="index"
         @click="oNitem(index, item)"
       >
-        {{ item }}
-        <!-- {{ item.mas_menu_name }} -->
+        {{ item.mas_menu_name }}
         <!-- <nuxt-link :to="{name:'catalogue-id',params:{id:index+1,type:item}}">{{ item }}</nuxt-link> -->
       </li>
     </ul>
   </div>
 </template>
 <script>
-const list = [
-  "听课程",
-  "找方法",
-  "学案例",
-  "见大咖",
-  "读杂志",
-  "逛书店",
-  "淘资讯",
-  "看专题",
-];
-import { notNeedlogin } from "@/request/api";
-import md5 from "js-md5";
 export default {
   data() {
     return {
-      list,
       current: 0,
-      listData: [],
+      tabList: [],
     };
   },
   async fetch() {
-    // let res = await axios.get('https://xuexiluxian.cn/');
-    let timestamp = Date.parse(new Date());
-    let sign = md5(timestamp + this.$store.state.secretKey);
-    let res = await notNeedlogin(this.$axios, {
-      sign: sign,
-      timespan: timestamp,
-      className: "NavigationController",
-      classMethod: "getLeftNavigation",
-    });
-    if (res.bol) {
-      return (this.listData = res.data);
-      // return { this.listData=res.data };
+    if (this.$store.state.tabList == undefined) {
+      let res = await this.$axios.notNeedlogin({
+        className: "NavigationController",
+        classMethod: "getLeftNavigation",
+      });
+      if (res.bol) {
+        console.log(res.data, "res.data");
+        this.$store.commit("setTabList", res.data);
+        return (this.tabList = res.data);
+      }
+    } else {
+      this.tabList = this.$store.state.tabList;
     }
   },
   mounted() {},
@@ -56,47 +42,10 @@ export default {
     //点击每一个栏目
     oNitem(index, item) {
       document.body.scrollTop = 0;
-      this.current = index;
-      this.$store.commit("setSubTabIndex", index);
-      if (index == 1) {
-        this.$router.push({
-          name: "zff",
-        });
-      } else if (index == 2) {
-        this.$router.push({
-          name: "xal",
-        });
-      } else if (index == 3) {
-        this.$router.push({
-          name: "jdk",
-        });
-      } else if (index == 4) {
-        this.$router.push({
-          name: "zz",
-        });
-      } else if (index == 5) {
-        this.$router.push({
-          name: "gsd",
-          // query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
-        });
-      } else if (index == 6) {
-        this.$router.push({
-          name: "tzx",
-        });
-      } else if (index == 7) {
-        this.$router.push({
-          name: "kzt",
-        });
-      }
-      // if (index == 2) {
-      //   this.$router.push("/home/case");
-      // }
-      // if (index == 3) {
-      //   this.$router.push("/home/master");
-      // }
+      this.$store.commit("setSubTabId", item.mas_menu_id);
+      this.$router.push({
+        name: item.mas_menu_url,
+      });
     },
   },
 };
@@ -119,9 +68,6 @@ export default {
       line-height: 47px;
       margin-bottom: 4px;
       cursor: pointer;
-      &:nth-child(1) {
-        display: none;
-      }
     }
     li:last-child {
       margin-bottom: 0px;
@@ -129,7 +75,7 @@ export default {
     li:hover {
       background: #fff2ed;
       border-radius: 6px;
-      color: #ed6d38;
+      color: #fa6725;
     }
   }
 }

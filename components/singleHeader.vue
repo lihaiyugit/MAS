@@ -4,16 +4,24 @@
     <div class="banxin sub-header-main">
       <div class="sub-header-main-left">
         <nuxt-link to="/">
-          <img src="@/static/images/logo.png" alt="" @click="tabIndex"/>
+          <img src="@/static/images/logo.png" alt="" />
         </nuxt-link>
         <ul>
           <li
             v-for="(item, index) in tabList"
-            :key="item"
+            :key="index"
             @click="oNitem(index, item)"
-            :class="current == index ? 'active' : ''"
+            :class="current == item.mas_menu_id ? 'active' : ''"
           >
-            {{ item }}
+            <!-- :class="current == item.mas_menu_id ? 'active' : ''" -->
+            {{ item.mas_menu_name }}
+            <!-- <nuxt-link
+              :to="{
+                name: item.mas_menu_url,
+                params:{menuId:item.mas_menu_id}
+              }"
+              >{{ item.mas_menu_name }}</nuxt-link
+            > -->
           </li>
         </ul>
       </div>
@@ -28,25 +36,28 @@
 </template>
 
 <script>
-const tabList = [
-  "听课程",
-  "找方法",
-  "学案例",
-  "见大咖",
-  "读杂志",
-  "逛书店",
-  "淘资讯",
-  "看专题",
-];
 export default {
   data() {
     return {
       searchValue: "",
-      tabList,
-      current: this.$store.state.subTabIndex
-        ? this.$store.state.subTabIndex
-        : -1,
+      tabList: [],
+      current: this.$store.state.subTabId ? this.$store.state.subTabId : 0,
     };
+  },
+  async fetch() {
+    if (this.$store.state.tabList == undefined) {
+      let res = await this.$axios.notNeedlogin({
+        className: "NavigationController",
+        classMethod: "getLeftNavigation",
+      });
+      if (res.bol) {
+        console.log(res.data, "res.data");
+        this.$store.commit("setTabList", res.data);
+        return (this.tabList = res.data);
+      }
+    } else {
+      this.tabList = this.$store.state.tabList;
+    }
   },
   watch: {},
   mounted() {
@@ -92,48 +103,15 @@ export default {
         this.$message.error("请输入搜索词");
       }
     },
+
     //点击每一项菜单
     oNitem(index, item) {
+      // console.log(item, "=item===");
       document.body.scrollTop = 0;
-      this.current = index;
-      this.$store.commit("setSubTabIndex", index);
-      if (index == 1) {
-        this.$router.push({
-          name: "zff",
-        });
-      } else if (index == 2) {
-        this.$router.push({
-          name: "xal",
-        });
-      } else if (index == 3) {
-        this.$router.push({
-          name: "jdk",
-        });
-      } else if (index == 4) {
-        this.$router.push({
-          name: "zz",
-        });
-      } else if (index == 5) {
-        this.$router.push({
-          name: "gsd",
-          // query: { id: index, type: item },
-          // params: {
-          //   type: item,
-          // },
-        });
-      } else if (index == 6) {
-        this.$router.push({
-          name: "tzx",
-        });
-      } else if (index == 7) {
-        this.$router.push({
-          name: "kzt",
-        });
-      }
-    },
-    //点击图标返回首页
-    tabIndex() {
-      this.$store.commit("setTabIndex", 0);
+      this.$store.commit("setSubTabId", item.mas_menu_id);
+      this.$router.push({
+        name: item.mas_menu_url,
+      });
     },
   },
   destroyed() {
@@ -142,8 +120,12 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.nuxt-link-active {
+  text-decoration: none;
+  color: #fa6725 !important;
+}
 .active {
-  color: #ed6d38 !important;
+  color: #fa6725 !important;
 }
 .middle-header {
   position: fixed;
@@ -190,8 +172,8 @@ export default {
           text-align: left;
           color: rgba(0, 0, 0, 0.85);
           line-height: 24px;
-          &:nth-child(1) {
-            display: none;
+          a {
+            color: rgba(0, 0, 0, 0.85);
           }
         }
       }
@@ -252,9 +234,9 @@ export default {
           height: 36px;
           background: linear-gradient(
             90deg,
-            #f34250 0%,
-            #f28a51 82%,
-            #ff7d3b 100%
+            #ff4e5c 0%,
+            #ff9261 82%,
+            #fa6725 100%
           );
           border-radius: 0px 4px 4px 0px;
           font-size: 14px;

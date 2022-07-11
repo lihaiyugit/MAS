@@ -1,13 +1,27 @@
 <template>
-  <div class="container">
-    <h1 v-if="error.statusCode === 404">页面不存在</h1>
-    <h1 v-else>应用发生错误异常</h1>
-    <nuxt-link to="/">首 页</nuxt-link>
+  <div class="wapper">
+    <singleHeader />
+    <div class="error-box">
+      <nuxt-link to="/">
+        <img src="@/static/images/404.jpg" alt="" />
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: ['error'],
-  }
+export default {
+  props: ["error"],
+};
 </script>
+<style lang="less" scoped>
+.error-box {
+  width: 100%;
+  height: 575px;
+  padding-top: 121px;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>

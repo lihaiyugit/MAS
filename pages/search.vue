@@ -6,14 +6,14 @@
         <div class="search-left">
           <input
             placeholder="输入搜索的内容"
-            v-model="$route.query.keyword"
-            @onSearch="search"
+            v-model="searchValue"
+            @onSearch="searchFn"
           />
-          <div class="search" @click="search">
-            <img src="../static/images/search-icon.png" alt="" />
+          <div class="search" @click="searchFn">
+            <img src="@/static/images/search-icon.png" alt="" />
           </div>
         </div>
-        <img class="search-right" src="../static/images/search-l.png" alt="" />
+        <img class="search-right" src="@/static/images/search-l.png" alt="" />
       </div>
       <div class="search-content">
         <div class="search-content-main banxin">
@@ -21,148 +21,141 @@
             <div class="search-info">
               <div class="search-word">
                 <div class="word">
-                  管理会计
+                  {{ searchValue }}
                   <img
                     class="hot"
-                    src="../static/images/search-hot.png"
+                    src="@/static/images/search-hot.png"
                     alt=""
                   />
                 </div>
                 <div class="tip-text">相关信息</div>
               </div>
-              <div class="word-explain" v-if="$route.query.index!=undefined">
-                <h5>管理会计</h5>
+              <div
+                class="word-explain"
+                v-show="hotWordId != undefined"
+              >
+                <h5>{{ describe.mas_tag_name }}</h5>
                 <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
+                  {{ describe.mas_tag_describe }}
                 </p>
               </div>
             </div>
-            <ul class="search-list">
-              <li>
-                <h5>管理会计发展的趋势与机遇</h5>
-                <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
+            <ul class="search-list" v-if="listShowType == 1">
+              <li
+                v-for="(item, index) in listData"
+                :key="index"
+                @click="
+                  goDetail(item.mas_article_type_url, item.mas_article_id)
+                "
+              >
+                <h5>{{ item.mas_article_title }}</h5>
+                <p class="twoline">
+                  {{ item.mas_article_introduce }}
                 </p>
                 <div class="base">
-                  <span class="base-l">政策解读</span>
+                  <span class="base-l">{{ item.mas_article_type_name }}</span>
                   <div class="base-r">
-                    <span class="name">财政部</span>
+                    <span class="name">{{ item.mas_article_author }}</span>
                     <img
                       class="time-icon"
-                      src="../static/images/time.png"
+                      src="@/static/images/time.png"
                       alt=""
                     />
-                    <span class="time">2022-03-14</span>
+                    <span class="time">{{ item.mas_article_addtime }}</span>
                     <img
                       class="chat-icon"
-                      src="../static/images/chat.png"
+                      src="@/static/images/chat.png"
                       alt=""
                     />
-                    <span class="time">3</span>
+                    <span class="time">{{
+                      item.mas_article_comments_num
+                    }}</span>
                   </div>
                 </div>
               </li>
-              <li>
-                <h5>管理会计控制系统、 信息系统与企业绩效研究综述</h5>
-                <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
-                </p>
-                <div class="base">
-                  <span class="base-l">理论前沿</span>
-                  <div class="base-r">
-                    <span class="name">孙健</span>
-                    <img
-                      class="time-icon"
-                      src="../static/images/time.png"
-                      alt=""
-                    />
-                    <span class="time">2022-03-14</span>
-                    <img
-                      class="chat-icon"
-                      src="../static/images/chat.png"
-                      alt=""
-                    />
-                    <span class="time">3</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <h5>管理会计发展的趋势与机遇</h5>
-                <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
-                </p>
-                <div class="base">
-                  <span class="base-l">政策解读</span>
-                  <div class="base-r">
-                    <span class="name">孙健</span>
-                    <img
-                      class="time-icon"
-                      src="../static/images/time.png"
-                      alt=""
-                    />
-                    <span class="time">2022-03-14</span>
-                    <img
-                      class="chat-icon"
-                      src="../static/images/chat.png"
-                      alt=""
-                    />
-                    <span class="time">3</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <h5>管理会计发展的趋势与机遇</h5>
-                <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
-                </p>
-                <div class="base">
-                  <span class="base-l">政策解读</span>
-                  <div class="base-r">
-                    <span class="name">孙健</span>
-                    <img
-                      class="time-icon"
-                      src="../static/images/time.png"
-                      alt=""
-                    />
-                    <span class="time">2022-03-14</span>
-                    <img
-                      class="chat-icon"
-                      src="../static/images/chat.png"
-                      alt=""
-                    />
-                    <span class="time">3</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <h5>管理会计发展的趋势与机遇</h5>
-                <p>
-                  启发式效应一直是行为学及心理学关注的焦点，这一效应影响着人们的信息决策，甚至往往引起决策误差，但当前对启发式效应在管理会计决策中的讨论仍属少数…
-                </p>
-                <div class="base">
-                  <span class="base-l">政策解读</span>
-                  <div class="base-r">
-                    <span class="name">孙健</span>
-                    <img
-                      class="time-icon"
-                      src="../static/images/time.png"
-                      alt=""
-                    />
-                    <span class="time">2022-03-14</span>
-                    <img
-                      class="chat-icon"
-                      src="../static/images/chat.png"
-                      alt=""
-                    />
-                    <span class="time">3</span>
-                  </div>
-                </div>
-              </li>
+              <div v-show="!finished" class="more-btn">查看更多</div>
             </ul>
-            <div class="more-btn">查看更多</div>
+            <div class="no-data-box" v-if="listShowType == 2">
+              <img src="@/static/images/no-data.png" alt="" />
+              <div class="tip">目前还没有内容哦～</div>
+            </div>
           </div>
           <!-- 右侧文章相关部分 -->
-          <ArticleModule/>
+          <div class="article-main-right">
+            <div class="module">
+              <h2>热点推荐</h2>
+              <div class="module-main">
+                <div class="top-line"></div>
+                <ul class="hot-word">
+                  <li v-for="(item, index) in hotRecommend" :key="index">
+                    <a
+                      @click="
+                        goDetail(item.mas_article_type_url, item.mas_article_id)
+                      "
+                    >
+                      <span
+                        v-if="index + 1 == 1"
+                        :style="`${
+                          index + 1 == 1 ? 'background: #ea3a3a' : ''
+                        }`"
+                        >{{ index + 1 }}</span
+                      >
+                      <span
+                        v-else-if="index + 1 == 2"
+                        :style="`${
+                          index + 1 == 2 ? 'background: #fa6725' : ''
+                        }`"
+                        >{{ index + 1 }}</span
+                      >
+                      <span
+                        v-else-if="index + 1 == 3"
+                        :style="`${
+                          index + 1 == 3 ? 'background: #f4a74d' : ''
+                        }`"
+                        >{{ index + 1 }}</span
+                      >
+                      <span v-else>{{ index + 1 }}</span>
+                      <p class="oneline">{{ item.mas_article_title }}</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="module">
+              <h2>站内热词</h2>
+              <div class="module-main">
+                <div class="top-line"></div>
+                <div class="keyword">
+                  <span
+                    :class="current == index ? 'active' : ''"
+                    v-for="(item, index) in hotWord"
+                    :key="index"
+                    @click="onItem(item.mas_tag_name, item.mas_tag_id, index)"
+                    >{{ item.mas_tag_name }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="module">
+              <h2>杂志</h2>
+              <div class="module-main">
+                <div class="top-line"></div>
+                <nuxt-link
+                  :to="'/dzz/' + magazineLeft.mas_magazine_id"
+                  class="magazine"
+                >
+                  <div class="magazine-img">
+                    <img :src="magazineLeft.mas_magazine_master_img" alt="" />
+                    <div class="point">新书</div>
+                  </div>
+                  <div class="headline">
+                    {{ magazineLeft.mas_magazine_title_main }}
+                  </div>
+                  <div class="contribute">马上阅读</div>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -172,21 +165,176 @@
 export default {
   data() {
     return {
-      searchValue: this.$route.query.keyword,
-      current:this.$route.query.index
+      searchValue: this.$route.query.keyword, //搜索内容
+      hotWordId: this.$route.query.hotWordId, //站内热词id
+      listData: [], //总列表数据
+      describe: {}, //热词描述
+      pageIndex: 1, //当前页
+      pageSize: 6, //当前页
+      total: "", //总条数
+      hotRecommend: [], //右侧热点推荐
+      magazineLeft: {}, //右侧杂志数据
+      hotWord: [], //右侧站内热词
+      showlaoding: true, // 是否显示loading效果
+      finished: false, //数据是否加载完毕
+      moretype: "", //加载更多 取值 ‘list’
+      listShowType: 1, // 列表显示状态 0加载中 1有数据 2无数据
+      current: 0,
     };
   },
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      data: {
+        page: 1,
+        limit: 6,
+        searchVal: query.hotWordId ? "" : query.keyword,
+        searchTag: query.hotWordId,
+      },
+      className: "HomeController",
+      classMethod: "search",
+    });
+    if (res.bol) {
+      return {
+        listData: res.data.searchList.searchData,
+        describe: res.data.searchList.describe,
+        total: res.data.searchList.searchCount,
+        hotRecommend: res.data.hotspot,
+        magazineLeft: res.data.newMagazine,
+        hotWord: res.data.hotWord,
+        showlaoding: false,
+        finished: res.data.searchList.searchCount > 6 ? false : true,
+        listShowType: res.data.searchList.searchCount > 0 ? 1 : 2,
+      };
+    }
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.getData(to.query.hotWordId);
+    this.hotWordId = to.query.hotWordId;
+    this.searchValue = to.query.keyword;
+    next();
+  },
+  created() {},
   mounted() {
+    // scroll事件并监听
+    window.addEventListener("scroll", this.searchScroll);
   },
   methods: {
-    //点击立即咨询
-    consultFn() {
-      // this.$router.push({
-      //   name: "dy-pay",
-      // });
+    //当前页面点击热词跳转
+    getData(id) {
+      this.$axios
+        .notNeedlogin({
+          data: {
+            page: 1,
+            limit: 6,
+            searchTag: id,
+            searchVal: id ? "" : this.$route.query.keyword,
+          },
+          className: "HomeController",
+          classMethod: "search",
+        })
+        .then((res) => {
+          if (res.bol) {
+            this.listData = res.data.searchList.searchData;
+            this.describe = res.data.searchList.describe;
+            this.total = res.data.searchList.searchCount;
+            this.hotRecommend = res.data.hotspot;
+            this.magazineLeft = res.data.newMagazine;
+            this.hotWord = res.data.hotWord;
+            this.showlaoding = false;
+            this.finished = res.data.searchList.searchCount > 6 ? false : true;
+            this.listShowType = res.data.searchList.searchCount > 0 ? 1 : 2;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+    },
+    //scroll事件并监听
+    searchScroll() {
+      //可视区域大小window.innerHeight
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop; //滚动高度
+      //"文档高度"document.body.offsetHeight 327底部高度
+      //判断是否滚动到底部
+      if (
+        scrollTop + window.innerHeight + 327 * 1.5 >=
+        document.body.offsetHeight
+      ) {
+        //327 表示距离底部多少的距离的开始触发loadmore效果
+        if (!this.showlaoding && !this.finished) {
+          //防止多次加载
+          this.moretype = "list";
+          this.moreFn();
+        }
+      }
     },
     //点击搜索
-    search() {},
+    searchFn() {
+      this.hotWordId = undefined;
+      this.pageIndex = 1;
+      this.listShowType = 1;
+      this.finished = false;
+      this.moretype = "list";
+      this.getList();
+    },
+    //滑动加载
+    moreFn() {
+      let pageIndex = this.pageIndex + 1;
+      this.commonData(pageIndex);
+    },
+    //根据条件搜索
+    getList() {
+      this.commonData(this.pageIndex);
+    },
+    //公共请求接口
+    async commonData(pageIndex) {
+      this.showlaoding = true;
+      let res = await this.$axios.notNeedlogin({
+        data: {
+          page: pageIndex,
+          limit: this.pageSize,
+          searchTag: this.hotWordId,
+          searchVal: this.searchValue,
+          type: this.moretype,
+        },
+        className: "HomeController",
+        classMethod: "search",
+      });
+      if (res.bol) {
+        let searchArr = res.data.searchData;
+        this.total = res.data.searchCount;
+        this.showlaoding = false;
+        this.listShowType = this.total ? 1 : 2;
+        if (this.total / this.pageSize > this.pageIndex) {
+          this.pageIndex = pageIndex;
+        } else {
+          this.finished = true; // 数据全部加载完成
+        }
+        // 将新请求到的数据添加到之前的数据后
+        console.log(this.pageIndex, "this.pageIndex");
+        this.listData = this.listData.concat(searchArr);
+      }
+    },
+    //点击每个热词
+    onItem(val, id, index) {
+      this.current = index;
+      this.searchValue = ""; //搜索内容
+      this.hotWordId = "";
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, hotWordId: id },
+      });
+    },
+    //点击跳转到文章详情
+    goDetail(url, id) {
+      this.$router.push({
+        path: `/${url}/${id}`,
+      });
+    },
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.searchScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>
@@ -244,9 +392,9 @@ export default {
         height: 36px;
         background: linear-gradient(
           90deg,
-          #f34250 0%,
-          #f28a51 82%,
-          #ff7d3b 100%
+          #ff4e5c 0%,
+          #ff9261 82%,
+          #fa6725 100%
         );
         border-radius: 0px 4px 4px 0px;
         position: absolute;
@@ -254,6 +402,7 @@ export default {
         right: 0px;
         text-align: center;
         line-height: 52px;
+        cursor: pointer;
         img {
           width: 26px;
           height: 26px;
@@ -287,7 +436,7 @@ export default {
               font-size: 16px;
               font-weight: 500;
               text-align: left;
-              color: #ed6d38;
+              color: #fa6725;
               line-height: 14px;
               position: relative;
               .hot {
@@ -341,8 +490,14 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            cursor: pointer;
             &:nth-child(1) {
               padding-top: 12px;
+            }
+            &:hover {
+              h5 {
+                color: #fa6725;
+              }
             }
             h5 {
               font-size: 18px;
@@ -355,7 +510,8 @@ export default {
               font-weight: 400;
               color: rgba(0, 0, 0, 0.45);
               line-height: 20px;
-              padding: 12px 0px 22px 0px;
+              text-align: justify;
+              margin: 12px 0px 22px 0px;
             }
             .base {
               display: flex;
@@ -366,7 +522,7 @@ export default {
               color: rgba(0, 0, 0, 0.25);
               line-height: 20px;
               .base-l {
-                color: #ed6d38;
+                color: #fa6725;
               }
               .base-r {
                 display: flex;
@@ -376,6 +532,7 @@ export default {
                 }
                 .time {
                   margin-top: -2px;
+                  margin-left: 2px;
                 }
                 .time-icon {
                   width: 12px;
@@ -394,19 +551,86 @@ export default {
           width: 146px;
           height: 32px;
           background: #ffffff;
-          border: 1px solid #ed6d38;
+          border: 1px solid #fa6725;
           border-radius: 2px;
           box-shadow: 0px 2px 0px 0px rgb(0 0 0 / 2%);
           font-size: 14px;
           font-weight: 400;
           text-align: center;
-          color: #ed6d38;
+          color: #fa6725;
           line-height: 30px;
           margin: 0 auto;
           margin-top: 32px;
+          cursor: pointer;
+        }
+        .more-btn:hover {
+          background: #fa6725;
+          color: #fff;
         }
       }
     }
+  }
+  //无数据样式
+  .no-data-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 110px;
+
+    img {
+      width: 380px;
+      height: 254px;
+    }
+
+    .tip {
+      margin-top: 22px;
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.65);
+      line-height: 22px;
+    }
+  }
+}
+
+@import "@/static/css/page-css/articleModule.less";
+.hot-word {
+  li {
+    margin-bottom: 0px !important;
+  }
+  li a {
+    display: flex;
+    margin-bottom: 18px;
+    cursor: pointer;
+    span {
+      display: inline-block;
+      min-width: 16px;
+      height: 16px;
+      background: #bfbfbf;
+      border-radius: 2px;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      color: #ffffff;
+      line-height: 16px;
+    }
+    p {
+      width: 271px;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: justify;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: 14px;
+      margin-left: 7px;
+    }
+    &:hover {
+      p {
+        color: #fa6725;
+      }
+    }
+  }
+  li:last-child a {
+    margin-bottom: 0px;
   }
 }
 </style>

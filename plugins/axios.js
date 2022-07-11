@@ -1,4 +1,5 @@
 import config from '@/config';
+import md5 from "js-md5";
 export default ({ app, $axios, store, redirect }, inject) => {
   //项目地址
   $axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
@@ -33,15 +34,18 @@ export default ({ app, $axios, store, redirect }, inject) => {
     return response;
   })
   // fetchPost  请求方式 创建
-  $axios.fetchPost = function (url, params, query) {
-    let urls = url;
-    if (query) {
-      urls = url + '?' + query;
-    } else {
-      urls = url;
-    }
+  $axios.fetchPost = function (url, params, headers) {
+    // let urls = url;
+    // if (query) {
+    //   urls = url + '?' + query;
+    // } else {
+    //   urls = url;
+    // }
+    let timestamp = Date.parse(new Date());
+    params.timespan = timestamp;
+    params.sign = md5(timestamp + store.state.secretKey);
     return new Promise((resolve, reject) => {
-      $axios.post(urls, params)
+      $axios.post(url, params)
         .then(response => {
           resolve(response.data);
         }, err => {
@@ -54,6 +58,9 @@ export default ({ app, $axios, store, redirect }, inject) => {
   }
   // GET 请求方式 查看
   $axios.fetchGet = function (url, params, header) {
+    let timestamp = Date.parse(new Date());
+    params.timespan = timestamp;
+    params.sign = md5(timestamp + store.state.secretKey);
     return new Promise((resolve, reject) => {
       $axios.get(url, {
         params: params,
@@ -69,6 +76,22 @@ export default ({ app, $axios, store, redirect }, inject) => {
         });
     });
   }
+  /***
+   * 公共接口不需要登录请求地址
+   * @param $axios
+   * @param params
+   */
+  $axios.notNeedlogin = function (params, headers) {
+    return $axios.fetchPost('/index', params, headers)
+  }
+    /***
+   * 公共接口不需要登录请求地址
+   * @param $axios
+   * @param params
+   */
+     $axios.down = function (params, headers) {
+      return $axios.fetchPost('/down', params, headers)
+    }
   // $axios.defaults.timeout = 500000;
   // $axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro;
   // console.log($axios.defaults.baseURL, '$axios.defaults.baseURL')

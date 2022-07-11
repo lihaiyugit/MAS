@@ -3,23 +3,31 @@
     <div class="banxin article-main">
       <div class="article-main-left">
         <div class="title">首页 / 学案例 / <span>文章详情</span></div>
-        <h1>贯彻落实全面依法治国新理念新思想新战略 扎实推进会计法治建设</h1>
+        <h1>{{ detailsData.article.mas_article_title }}</h1>
         <div class="details-info">
-          <span>财政部</span>
+          <span>{{ detailsData.article.mas_article_author }}</span>
           <span class="line"></span>
-          <span class="type">政策解读</span>
+          <span class="type">{{
+            detailsData.article.mas_article_type_name
+          }}</span>
           <span class="line"></span>
           <img src="@/static/images/time.png" alt="" />
-          <span>2022-03-14</span>
+          <span>{{ detailsData.article.mas_article_addtime }}</span>
         </div>
-        <div class="content">
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-        </div>
+        <div
+          class="content"
+          v-for="(item, index) in detailsData.articleDetails.articleDetails"
+          :key="index"
+          v-html="item.mas_article_details_content"
+        ></div>
         <div class="support-box">
-          <!-- v-if="isPay == 0" -->
-          <div style="border-bottom: 1px solid #f00">
+          <!-- v-if="isPay == 0" 未登录未付款状态 -->
+          <div
+            v-if="
+              detailsData.articleDetails.isLogin == 'N' &&
+              detailsData.articleDetails.isPay == 'N'
+            "
+          >
             <img class="triangle" src="@/static/images/triangle.png" alt="" />
             <div class="info-tip">本文为付费文章，更多精彩内容可付费查看！</div>
             <div class="radio-group">
@@ -52,8 +60,13 @@
               </div>
             </div>
           </div>
-          <!-- v-else-if="isPay == 1" -->
-          <div style="border-bottom: 1px solid #f00">
+          <!-- v-else-if="isPay == 1" 已登录已支付未订阅状态-->
+          <div
+            v-else-if="
+              detailsData.articleDetails.isLogin == 'Y' &&
+              detailsData.articleDetails.isPay == 'N'
+            "
+          >
             <div class="open-box">
               <p>畅读学案例栏目所有内容！</p>
               <div class="go-open">
@@ -62,8 +75,13 @@
               </div>
             </div>
           </div>
-          <!-- v-else -->
-          <div style="border-bottom: 1px solid #f00">
+          <!-- v-else 已登录已支付已订阅状态-->
+          <div
+            v-else-if="
+              detailsData.articleDetails.isLogin == 'Y' &&
+              detailsData.articleDetails.isPay == 'Y'
+            "
+          >
             <div class="dy-tip">
               <div class="dy-tip-l">
                 <img src="@/static/images/hy.png" alt="" />
@@ -79,12 +97,20 @@
             </div>
           </div>
         </div>
-        <!-- <share :config="config"></share> -->
+
         <div class="share" :class="{ fixedShare: isFixed }">
           <div class="share-l">
             <span>分享文章</span>
             <a
-              href="http://v.t.sina.com.cn/share/share.php?url=http://www.tmtpost.com/6064793.html&amp;title=【若觉人生难动容，劝君听听张国荣】听懂了这三首歌，或许你就听懂了张国荣。&amp;appkey=1898705929&amp;pic=https://images.tmtpost.com/uploads/images/2022/04/ec37daf3e7728a95b1ca221d56014f5b_1648810695.png?imageMogr2/auto-orient/strip/interlace/1/quality/85/format/jpg/thumbnail/1400x1192/gravity/center/crop/!1400x1192&amp;ext=.png"
+              :href="
+                'https://service.weibo.com/share/share.php?appkey=' +
+                595885820 +
+                '&url=' +
+                linkUrl +
+                '&title=' +
+                detailsData.article.mas_article_title +
+                ''
+              "
               target="_blank"
               deta-title="微博分享"
               ><img src="@/static/images/tsina.png"
@@ -94,9 +120,8 @@
               <a
                 class="circle-wechat qcode_pop_open"
                 data-share="wechat_friend_circle"
-                href="javascript:void(0);"
                 title="微信分享"
-                ><i data-share-url="http://www.tmtpost.com/6064793.html"
+                ><i :data-share-url="linkUrl"
                   ><img src="@/static/images/weixin.png" /></i
               ></a>
               <div class="dropdown-menu wx-dropdown visible">
@@ -106,17 +131,22 @@
             </div>
 
             <a
-              href="https://accounts.douban.com/passport/login?redir=https%3A//www.douban.com/share/service%3Fhref%3Dhttps%253A%252F%252Fwww.chinamas.cn%252Fxw%252F305%25230-douban-1-2036-8281435cf7fd5566f1df466eda875057%26name%3D2022%25E4%25B8%25AD%25E5%259B%25BD%25EF%25BC%2588%25E5%258C%2597%25E4%25BA%25AC%25EF%25BC%2589%25E5%259B%25BD%25E9%2599%2585%25E6%2599%25BA%25E6%2585%25A7%25E8%25B4%25A2%25E5%258A%25A1%25E5%25B1%2595%25E8%25A7%2588%25E4%25BC%259A%25E6%259A%25A8%25E8%25AE%25BA%25E5%259D%259B%2520-%2520%25E7%25AE%25A1%25E7%2590%2586%25E4%25BC%259A%25E8%25AE%25A1%25E7%25A0%2594%25E7%25A9%25B6%26text%3D"
+              :href="
+                'http://shuo.douban.com/!service/share?href=' +
+                linkUrl +
+                '&name=' +
+                detailsData.article.mas_article_title +
+                ''
+              "
               target="_blank"
               deta-title="豆瓣分享"
-              @click="shareToDouban"
               ><img src="@/static/images/db.png"
             /></a>
           </div>
           <div class="share-r">
             <div class="share-r-item">
               <img src="@/static/images/watch.png" alt="" />
-              <span>888</span>
+              <span>{{ detailsData.article.mas_article_pageviews }}</span>
             </div>
             <div class="share-r-item" @click="collectFn">
               <img
@@ -129,26 +159,49 @@
             </div>
             <div class="share-r-item" @click="goInput">
               <img src="@/static/images/reply.png" alt="" />
-              <span>8</span>
+              <span>{{ detailsData.article.mas_article_comments_num }}</span>
             </div>
           </div>
         </div>
         <div class="comment-box">
           <div class="comments_mod_v1">
             <!-- 没有登陆提示登录后评论 -->
-            <div class="post-comment">
+            <div
+              class="post-comment"
+              v-if="detailsData.articleDetails.isLogin == 'N'"
+            >
               <h6 class="total_num">暂无评价</h6>
               <div class="login-tip">
                 <p>
                   您需要登录后才可以评论
-                  <a class="login" href="" target="_blank">登录</a>
+                  <nuxt-link
+                    target="_blank"
+                    :to="{
+                      path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                    }"
+                    class="login"
+                    >登录</nuxt-link
+                  >
                   |
-                  <a class="login" href="" target="_blank">立即注册</a>
+                  <nuxt-link
+                    target="_blank"
+                    :to="{
+                      path: `/login?path=${this.$router.currentRoute.fullPath}`,
+                    }"
+                    class="login"
+                    >立即注册</nuxt-link
+                  >
                 </p>
               </div>
               <button class="comment">评论</button>
             </div>
-            <div class="post-comment">
+            <div
+              class="post-comment"
+              v-else-if="
+                articleComment.length == 0 &&
+                detailsData.articleDetails.isLogin == 'Y'
+              "
+            >
               <h6 class="total_num">暂无评价</h6>
               <el-input
                 type="textarea"
@@ -158,7 +211,7 @@
               </el-input>
               <button class="comment">评论</button>
             </div>
-            <div class="comment-list">
+            <div class="comment-list" v-else>
               <ul>
                 <li>
                   <div class="li-l">
@@ -282,7 +335,62 @@
         </div>
       </div>
       <!-- 右侧文章相关部分 -->
-      <articleModule />
+      <div class="article-main-right">
+        <div class="module">
+          <h2>相关文章</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <ul>
+              <li v-for="(item, index) in detailsData.list" :key="index">
+                <div class="li-l twoline">
+                  {{ item.mas_article_title }}
+                </div>
+                <div class="li-r">
+                  <img :src="item.mas_article_img" alt="" />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="module" data-aos="fade-up">
+          <h2>站内热词</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <div class="keyword">
+              <span
+                :class="current == index ? 'active' : ''"
+                v-for="(item, index) in detailsData.hotWord"
+                :key="index"
+                @click="onItem(item.mas_tag_name, item.mas_tag_id, index)"
+                >{{ item.mas_tag_name }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="module" data-aos="fade-up">
+          <h2>杂志</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <div class="magazine">
+              <div class="magazine-img">
+                <img
+                  :src="detailsData.magazine.mas_magazine_master_img"
+                  alt=""
+                />
+                <div class="point">新书</div>
+              </div>
+              <div class="headline">
+                {{ detailsData.magazine.mas_magazine_title_main }}
+              </div>
+              <nuxt-link
+                :to="'/dzz/' + detailsData.magazine.mas_magazine_id"
+                class="contribute"
+                >马上阅读</nuxt-link
+              >
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 未登录未支付 -->
       <el-dialog
         :lock-scroll="false"
@@ -318,6 +426,11 @@
 <script>
 import AOS from "aos";
 export default {
+  props: {
+    detailsData: {
+      type: Object,
+    },
+  },
   data() {
     return {
       total: 1,
@@ -327,28 +440,23 @@ export default {
       textarea: "",
       isFixed: false,
       isLogin: false,
-      isPay: 3, // 0未登录未付款状态 1已登录已支付未订阅
+      isPay: 3, // 0未登录未付款状态 1已登录已支付未订阅 2已登录已支付已订阅
       isLoginIsPay: 0, //0 未登录未付款状态 1已登录未付款
       loginVisible: false, //未登录弹框
       payVisible: false, //已登录未支付
-      // config: {
-      //   url: window.location.href, // 网址，默认使用 window.location.href
-      //   source: "", // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
-      //   title: document.title , // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
-      //   description: document.description, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
-      //   image: "", // 图片, 默认取网页中第一个img标签
-      //   sites: ["weibo", "wechat", "douban"], // 启用的站点
-      //   // disabled: ["google", "facebook", "twitter"], // 禁用的站点
-      //   wechatQrcodeHelper: "<p>微信扫码</p>",
-      // },
       keywords: "淘宝 西瓜视频、今日头条、微博",
       isCollect: false, //是否收藏
+      current: 0,
+      //  "isLogin": "Y",---Y登录 N未登录 是否登录
+      //   "isPay": "Y",---O 不需要购买  Y 已购买  N 未购买
+      linkUrl: "", //当前页面路由
+      articleComment: [], //文章评论列表
     };
   },
   head() {
     //优化seo 动态设置title、keywprds和description
     return {
-      title: "订阅详情页",
+      title: "文章详情页",
       meta: [
         {
           hid: "keywords",
@@ -364,37 +472,58 @@ export default {
       ],
     };
   },
-  asyncData({
-    app,
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error,
-  }) {},
-  // asyncData({ query, params }) {
-  //   // this.$route.params.id
-  //   // let res= await ArticleIdApi({id:query.id})
-  // },
+
+  async fetch() {
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + this.$store.state.secretKey);
+    // let res = await notNeedlogin(this.$axios, {
+    //   className: "ArticleController",
+    //   classMethod: "articleDetails",
+    //   sign: sign,
+    //   timespan: timestamp,
+    //   data: {
+    //     articleId: this.$route.params.id,
+    //     token: this.$store.state.token,
+    //   },
+    // });
+    // console.log(res, "res-文章详情");
+    // this.detailsData=res.data;
+  },
+  created() {
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + this.$store.state.secretKey);
+    // this.$axios
+    //   .notNeedlogin({
+    //     className: "ArticleController",
+    //     classMethod: "articleDetails",
+    //     sign: sign,
+    //     timespan: timestamp,
+    //     data: {
+    //       articleId: this.$route.params.id,
+    //       token: this.$store.state.token,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res, "res-文章详情");
+    //     if (res.bol) {
+    //       this.detailsData = res.data;
+    //     }
+    //   });
+  },
   mounted() {
+    this.linkUrl = window.location.href;
     AOS.init({
       once: true,
     });
     // console.log("document.meta.keywords",document.meta.name,'this.head.meta.name')
     // 开启滚动监听
     window.addEventListener("scroll", this.handleScroll);
-    console.log(window.location.href, this.$route.path);
     // 生成二维码
     let qr = new QRCode("qrcode", {
       width: 88,
       height: 88, // 高度
-      text: "http://www.tmtpost.com/6064793.html", // 二维码内容
-      render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+      text: this.linkUrl, // 二维码内容
+      // render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
       background: "#f0f",
       foreground: "#ff0",
     });
@@ -403,7 +532,7 @@ export default {
   methods: {
     //点击立即支付未登录状态
     goLogin() {
-      if (this.isLoginIsPay == 0) {
+      if (this.detailsData.articleDetails.isLogin == "N") {
         this.loginVisible = true;
       } else {
         this.payVisible = true;
@@ -424,7 +553,6 @@ export default {
       // console.log(info)
       if (scrollTop >= clientHeight / 4 && scrollTop <= offsetTop - 200) {
         this.isFixed = true;
-        // this.$refs.scrollBox["className"] = "toptab";
       } else {
         this.isFixed = false;
       }
@@ -485,6 +613,14 @@ export default {
         }
       }
     },
+    //点击每个热词
+    onItem(val, id, index) {
+      this.current = index;
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, hotWordId: id },
+      });
+    },
   },
 
   destroyed() {
@@ -494,4 +630,5 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/static/css/page-css/article.less";
+@import "@/static/css/page-css/articleModule.less";
 </style>

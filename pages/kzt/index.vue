@@ -5,101 +5,210 @@
       <div class="banxin content-container-main">
         <div class="content-container-main-left">
           <div class="banner">
-            <img src="../../static/images/way/kzt-banner.png" alt="" />
+            <img src="@/static/images/way/kzt-banner-bg.png" alt="" />
             <nuxt-link to="/wytg" class="wytg"></nuxt-link>
-          </div>
-          <div class="zt-list">
-            <div class="list-title">
-              <h2>MAS专题</h2>
-            </div>
-            <div class="list-content">
-              <dl class="dl">
-                <dt>
-                  <nuxt-link :to="'/kzt/'+1">
-                    <img src="../../static/images/way/zt-1.png" alt="" />
-                  </nuxt-link>
-                </dt>
-                <dd>
-                  <nuxt-link :to="'/kzt/'+1" class="h5-box">
-                    <h5>数字化转型</h5>
-                    <span class="into">进入专题</span>
-                  </nuxt-link>
-                  <p>
-                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…
-                  </p>
-                  <div class="share-l">
-                    <span>分享到</span>
-                    <a
-                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=https://v2.chinamas.cn/kzt/1&title=数字化转型"
-                      target="_blank"
-                      deta-title="微博分享"
-                      ><img src="../../static/images/tsina.png"
-                    /></a>
-                    <div class="dropdown-menu-part">
-                      <a title="微信分享"
-                        ><img src="../../static/images/weixin.png" />
-                      </a>
-                      <div class="dropdown-menu wx-dropdown visible">
-                        <div id="qrcode1" class="qrcode"></div>
-                        <div class="w_txt">微信扫码</div>
-                      </div>
-                    </div>
-                    <a
-                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/kzt/1&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
-                      target="_blank"
-                      deta-title="豆瓣分享"
-                      ><img src="../../static/images/db.png"
-                    /></a>
-                  </div>
-                </dd>
-              </dl>
-              <dl class="dl">
-                <dt>
-                  <nuxt-link :to="'/kzt/'+2">
-                    <img src="@/static/images/way/zt-2.png" alt="" />
-                  </nuxt-link>
-                </dt>
-                <dd>
-                  <nuxt-link :to="'/kzt/'+2" class="h5-box">
-                    <h5>管理会计</h5>
-                    <span class="into">进入专题</span>
-                  </nuxt-link>
-                  <p>
-                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…
-                  </p>
-                  <div class="share-l">
-                    <span>分享到</span>
-                    <!-- http://service.weibo.com/share/share.php?url=你的分享网址&sharesource=weibo&title=你的分享标题&pic=你的分享图片&appkey=你的key，需要在新浪微博开放平台中申请 -->
-                    <a
-                      href="https://service.weibo.com/share/share.php?appkey=595885820&url=/kzt/2&title=管理会计"
-                      target="_blank"
-                      deta-title="微博分享"
-                      ><img src="@/static/images/tsina.png"
-                    /></a>
-                    <div class="dropdown-menu-part">
-                      <a title="微信分享">
-                        <img src="../../static/images/weixin.png"
-                      /></a>
-                      <div class="dropdown-menu wx-dropdown visible">
-                        <div id="qrcode" class="qrcode"></div>
-                        <div class="w_txt">微信扫码</div>
-                      </div>
-                    </div>
-                    <a
-                      href="http://shuo.douban.com/!service/share?href=https://v2.chinamas.cn/kzt/2&name=在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成为时代的共识——数字化时代…"
-                      target="_blank"
-                      deta-title="豆瓣分享"
-                      ><img src="../../static/images/db.png"
-                    /></a>
-                  </div>
-                </dd>
-              </dl>
-            </div>
-            <div class="tip-text">更多专题敬请期待！</div>
           </div>
         </div>
         <!-- 左侧内容 -->
-        <ContainerRight />
+        <div class="content-container-main-right">
+          <div class="hot-recommend">
+            <h3>热门专题</h3>
+            <div class="hot-book">
+              <dl @click="details(1)">
+                <dt>
+                  <img src="@/static/images/way/zt01.png" alt="" />
+                </dt>
+                <dd>
+                  <p class="twoline">数字化转型</p>
+                  <span>进入专题 ></span>
+                </dd>
+              </dl>
+              <dl @click="details(1)">
+                <dt>
+                  <img src="@/static/images/way/zt02.png" alt="" />
+                </dt>
+                <dd>
+                  <p class="twoline">管理会计</p>
+                  <span>进入专题 ></span>
+                </dd>
+              </dl>
+              <dl @click="details(1)">
+                <dt>
+                  <img src="@/static/images/way/zt03.png" alt="" />
+                </dt>
+                <dd>
+                  <p class="twoline">MAS企业巡展 • 中国石化</p>
+                  <span>进入专题 ></span>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="zt-list-box banxin">
+        <div class="zt-list">
+          <ul class="tabs">
+            <li
+              :class="tabActive == index ? 'tabActive' : ''"
+              v-for="(item, index) in tabs"
+              :key="index"
+              @click="onTab(index)"
+            >
+              {{ item }}
+            </li>
+          </ul>
+          <div class="list-content">
+            <dl>
+              <dt>
+                <img
+                  class="zt-img"
+                  src="@/static/images/way/zt-hx.png"
+                  alt=""
+                />
+                <img
+                  class="icon"
+                  src="@/static/images/way/zt-icon.png"
+                  alt=""
+                />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>MAS企业巡展 • 中国石化</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                <img src="@/static/images/way/zt-sh.png" alt="" />
+                <img
+                  class="icon"
+                  src="@/static/images/way/zt-icon.png"
+                  alt=""
+                />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>MAS企业巡展 • 中国石化</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                <img src="@/static/images/way/zt-sh.png" alt="" />
+                <img
+                  class="icon"
+                  src="@/static/images/way/zt-icon.png"
+                  alt=""
+                />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>MAS企业巡展 • 成都生物</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                <img src="@/static/images/way/zt-szh.png" alt="" />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>数字化转型</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                  <a class="right">立即订阅</a>
+                </div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                <img src="@/static/images/way/zt-szh.png" alt="" />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>管理会计</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                  <a class="right">立即订阅</a>
+                </div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                <img src="@/static/images/way/zt-szh.png" alt="" />
+              </dt>
+              <dd>
+                <div class="dd-top">
+                  <h5>其他非主打、非系列性质专题</h5>
+                  <p class="twoline">
+                    在全球经济加速从工业经济向数字经济过渡的大背景下，企业数字化转型已经成
+                    …
+                  </p>
+                </div>
+
+                <div class="dd-base">
+                  <div class="left">
+                    <span>进入专题</span>
+                    <img src="@/static/images/arrows-left.png" alt="" />
+                  </div>
+                  <a class="right">立即订阅</a>
+                </div>
+              </dd>
+            </dl>
+          </div>
+          <div class="tip-text">更多专题敬请期待！</div>
+        </div>
       </div>
     </div>
   </div>
@@ -109,6 +218,8 @@ export default {
   data() {
     return {
       // typeName: this.$route.query.type, //页面标题
+      tabs: ["全部", "企业巡展", "专题订阅"],
+      tabActive: 0, //专题类型
     };
   },
   asyncData({ query, params }) {
@@ -117,25 +228,35 @@ export default {
   },
   mounted() {
     // 生成二维码
-    let qr = new QRCode("qrcode" + 1, {
-      width: 88,
-      height: 88, // 高度
-      text: "https://v2.chinamas.cn/kzt/1", // 二维码内容
-      render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
-      background: "#f0f",
-      foreground: "#ff0",
-    });
+    // let qr = new QRCode("qrcode" + 1, {
+    //   width: 88,
+    //   height: 88, // 高度
+    //   text: "https://v2.chinamas.cn/kzt/1", // 二维码内容
+    //   render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+    //   background: "#f0f",
+    //   foreground: "#ff0",
+    // });
     // 生成二维码
-    let qr1 = new QRCode("qrcode", {
-      width: 88,
-      height: 88, // 高度
-      text: "https://v2.chinamas.cn/kzt/2", // 二维码内容
-      render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
-      background: "#f0f",
-      foreground: "#ff0",
-    });
+    // let qr1 = new QRCode("qrcode", {
+    //   width: 88,
+    //   height: 88, // 高度
+    //   text: "https://v2.chinamas.cn/kzt/2", // 二维码内容
+    //   render: "canvas", // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+    //   background: "#f0f",
+    //   foreground: "#ff0",
+    // });
   },
   methods: {
+    //点击tabs
+    onTab(index) {
+      // this.pageIndex = 1;
+      // this.listData = [];
+      // this.finished = false;
+      // this.moretype = "list";
+      // this.listShowType = 1;
+      this.tabActive = index;
+      // this.getList();
+    },
     //分享的微博
     shareToSinaWB(event) {
       event.preventDefault();
@@ -163,6 +284,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.main_container {
+  background-color: transparent;
+}
 .content-container {
   padding: 30px 0px 40px 0px;
   .content-container-main {
@@ -189,228 +313,221 @@ export default {
           cursor: pointer;
         }
       }
-      .zt-list {
-        width: 671px;
-        background: #ffffff;
-        border-radius: 6px;
-        margin-top: 22px;
-        padding: 0px 22px 0px;
-        .list-title {
-          height: 60px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid #e7e7e7;
-          h2 {
-            font-size: 22px;
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.85);
-            line-height: 22px;
+    }
+    .content-container-main-right {
+      width: 346px;
 
-            position: relative;
-            &:after {
-              content: "";
-              position: absolute;
-              left: 50%;
-              bottom: -20px;
-              width: 93px;
-              height: 2px;
-              background: #ed6d38;
-              border-radius: 2px;
-              transform: translateX(-50%);
-              z-index: 100;
-            }
-          }
-          span {
-            font-size: 14px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 0.45);
-            line-height: 22px;
-            cursor: pointer;
-          }
+      .hot-recommend {
+        width: 346px;
+        height: 300px;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        h3 {
+          height: 47px;
+          line-height: 47px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          font-size: 18px;
+          font-weight: 600;
+          text-align: justify;
+          color: rgba(0, 0, 0, 0.85);
+          padding-left: 20px;
         }
-        .list-content {
-          padding-top: 18px;
-          .dl {
-            height: 195px;
+        .hot-book {
+          padding: 19px 20px 22px 20px;
+
+          dl {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px dashed #e7e7e7;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+            &:last-child {
+              margin-bottom: 0px;
+            }
             dt {
-              width: 216px;
-              height: 144px;
+              width: 94px;
+              height: 57px;
+              img {
+                border-radius: 0px;
+              }
             }
             dd {
-              width: 420px;
-              .h5-box {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                .into {
-                  font-size: 14px;
-                  font-weight: 400;
-                  color: rgba(0, 0, 0, 0.45);
-                  line-height: 14px;
-                }
-              }
-              h5 {
-                font-size: 18px;
-                font-weight: 600;
-                color: rgba(0, 0, 0, 0.85);
-                line-height: 24px;
-              }
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              margin-left: 15px;
               p {
-                width: 100%;
-                font-size: 13px;
-                font-weight: 400;
-                color: rgba(0, 0, 0, 0.45);
-                line-height: 20px;
-                padding: 12px 0px 42px 0px;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: justify;
+                color: rgba(0, 0, 0, 0.85);
+                line-height: 18px;
               }
-              .share-l {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                cursor: pointer;
-                span {
-                  display: inline-block;
-                  width: 63px;
-                  height: 26px;
-                  background: #f7f8fa;
-                  border-radius: 2px;
-                  font-size: 14px;
-                  font-weight: 400;
-                  text-align: center;
-                  color: rgba(0, 0, 0, 0.65);
-                  line-height: 26px;
-                }
-
-                img {
-                  width: 24px;
-                  height: 24px;
-                }
-                a {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  position: relative;
-                  margin-left: 20px;
-                }
-                a[deta-title]:after {
-                  content: attr(deta-title);
-                  position: absolute;
-                  left: 50%;
-                  bottom: 100%;
-                  transform: translate(-50%, 0);
-                  width: 130px;
-                  height: 80px;
-                  background: url(https://www.tmtpost.com/public/img/common/bg_tips.png);
-                  background-size: 100% 100%;
-                  color: gray;
-                  font-size: 14px;
-                  line-height: 14px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  white-space: nowrap;
-                  opacity: 0;
-                  visibility: hidden;
-                }
-                a[deta-title]:hover:after {
-                  transition-delay: 100ms;
-                  visibility: visible;
-                  transform: translate(-50%, 8px);
-                  opacity: 1;
-                }
-
-                .dropdown-menu-part {
-                  position: relative;
-                  white-space: normal;
-                  i {
-                    display: flex;
-                    align-items: center;
-                  }
-                }
-                .dropdown-menu {
-                  padding: 15px 20px;
-                  position: absolute;
-                  top: 54px;
-                  background: #fff;
-                  border: 1px solid rgba(26, 53, 71, 0.12);
-                  border-radius: 4px;
-                  box-shadow: 0 1px 2px rgba(26, 53, 71, 0.1);
-                  opacity: 0;
-                  filter: alpha(opacity=0);
-                  -ms-filter: alpha(opacity=0);
-                  zoom: 1;
-                  pointer-events: none;
-                  transition: 0.25s cubic-bezier(0.3, 0, 0, 1.3);
-                  &::before {
-                    content: "";
-                    position: absolute;
-                    top: -7px;
-                    right: calc(50% - 9px);
-                    right: -webkit-calc(50% - 9px);
-                    right: -moz-calc(50% - 9px);
-                    width: 13px;
-                    height: 7px;
-                    z-index: 4;
-                    background: url(https://www.tmtpost.com/public/css/img/dropdown-menu-arrow.svg);
-                  }
-                }
-                .dropdown-menu.visible {
-                  opacity: 1;
-                  filter: alpha(opacity=100);
-                  -ms-filter: alpha(opacity=100);
-                  zoom: 1;
-                  pointer-events: auto;
-                  -webkit-transform: none;
-                  transform: none;
-                  z-index: 3;
-                  display: none;
-                }
-                .dropdown-menu-part:hover .visible {
-                  display: block;
-                }
-                .dropdown-menu:before {
-                  transform: rotate(180deg);
-                  bottom: -7px;
-                  top: unset;
-                }
-                .dropdown-menu {
-                  top: -146px;
-                  left: -36px;
-                }
-
-                .dropdown-menu {
-                  transform: scale(0.8) translateY(-30%);
-                }
-
-                .w_txt {
-                  text-align: center;
-                  font-size: 12px;
-                }
-                /deep/.qrcode {
-                  img {
-                    width: 88px;
-                    height: 88px;
-                    border-radius: 0px;
-                  }
-                }
+              span,
+              a {
+                font-size: 12px;
+                font-weight: 400;
+                text-align: justify;
+                color: rgba(0, 0, 0, 0.65);
+                line-height: 28px;
+              }
+            }
+            &:hover {
+              dd p,
+              dd a,
+              dd span {
+                color: #fa6725;
               }
             }
           }
         }
-        .tip-text {
-          font-size: 16px;
-          font-weight: 500;
-          text-align: center;
-          color: #bc996d;
-          line-height: 22px;
-          padding: 42px 0px 190px 0px;
+      }
+    }
+  }
+  .zt-list {
+    width: 100%;
+    margin-top: 32px;
+    .tabs {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e7e7e7;
+
+      li {
+        font-size: 18px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.65);
+        line-height: 22px;
+        margin-right: 36px;
+        cursor: pointer;
+      }
+
+      .tabActive {
+        font-size: 22px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.85);
+        position: relative;
+
+        &:after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: -16px;
+          width: 40px;
+          height: 2px;
+          background: #fa6725;
+          transform: translateX(-50%);
+          z-index: 100;
         }
       }
+    }
+    .list-content {
+      margin-top: 38px;
+      display: flex;
+      flex-wrap: wrap;
+      dl {
+        width: 346px;
+        margin-right: 28px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        &:nth-child(3n) {
+          margin-right: 0px;
+        }
+
+        &:hover {
+          dd .dd-top h5 {
+            color: #fa6725;
+          }
+        }
+        dt {
+          height: 208px;
+          position: relative;
+          .zt-img {
+            height: 100%;
+          }
+          .icon {
+            width: 116px;
+            height: 39px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+          }
+          img {
+            border-radius: 0px;
+          }
+        }
+        dd {
+          padding: 19px 0px 24px 0px;
+          width: 344px;
+          border: 1px solid #eeeeee;
+          border-radius: 0px 0px 6px 6px;
+          margin-top: -4px;
+          .dd-top {
+            padding: 0px 26px 26px 19px;
+            h5 {
+              font-size: 16px;
+              font-weight: 500;
+              text-align: justify;
+              color: rgba(0, 0, 0, 0.85);
+              line-height: 24px;
+              padding-bottom: 12px;
+            }
+            p {
+              font-size: 13px;
+              font-weight: 400;
+              text-align: justify;
+              color: rgba(0, 0, 0, 0.45);
+              line-height: 20px;
+            }
+          }
+
+          .dd-base {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px dashed #eeeeee;
+            padding-top: 20px;
+
+            .left {
+              display: flex;
+              align-items: center;
+              span,
+              a {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.85);
+                line-height: 22px;
+                margin-left: 19px;
+              }
+              img {
+                width: 13px;
+                height: 8px;
+                margin-left: 5px;
+              }
+            }
+            .right {
+              width: 88px;
+              height: 32px;
+              background: #fa6725;
+              border-radius: 2px;
+              font-size: 14px;
+              font-weight: 400;
+              text-align: center;
+              color: #ffffff;
+              line-height: 32px;
+              margin-right: 20px;
+            }
+          }
+        }
+      }
+    }
+    .tip-text {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 22px;
+      padding: 42px 0px 92px 0px;
     }
   }
 }

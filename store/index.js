@@ -5,9 +5,9 @@ export const state = () => ({
   headerWidth: '1100px',//默认宽度
   secretKey: "mas20220520",//秘钥
   userInfo: {},//用户信息
-  isFixedHeader:false,//是否固定header头
-  tabIndex:'',//tab菜单栏默认选中项
-  subTabIndex:'',//二级菜单默认选中项
+  isFixedHeader: false,//是否固定header头
+  subTabId: '',//二级菜单选中项id
+  tabList: [],//菜单列表
 })
 export const mutations = {
   setToken(state, token) {
@@ -24,7 +24,7 @@ export const mutations = {
   setHeaderWidth(state, data) {
     state.headerWidth = data
   },
-  setIsFixedHeader(state, data){
+  setIsFixedHeader(state, data) {
     state.isFixedHeader = data
   },
   /**
@@ -36,26 +36,31 @@ export const mutations = {
     this.$cookies.remove("token");
     this.$cookies.remove("userInfo");
     this.$cookies.remove("autoLogin");
+    this.$cookies.remove("tabList");
+    this.$cookies.remove("subTabId");
     state.token = '';
     state.userInfo = {};
+    state.tabList = [];
+    state.subTabId = '';
   },
-  setTabIndex(state, data) {
-    state.tabIndex = data
-    this.$cookies.set('tabIndex',data)
+
+  setTabList(state, data) {
+    state.tabList = data
+    this.$cookies.set('tabList', data)
   },
-  setSubTabIndex(state, data) {
-    state.subTabIndex = data
-    this.$cookies.set('subTabIndex',data)
-  },
+  setSubTabId(state, data) {
+    state.subTabId = data
+    this.$cookies.set('subTabId', data)
+  }
 }
 export const actions = {
   nuxtServerInit(store, content) {
     //store:vuex上下文 content:nuxt上下文
     // store.commit('setToken','admin');
     store.commit('getToken');
-    store.commit('setTabIndex',this.$cookies.get('tabIndex'));
-    store.commit('setSubTabIndex',this.$cookies.get('subTabIndex'));
     store.commit('setUserInfo', this.$cookies.get('userInfo'));
-    console.log(store.state.userInfo, 'nuxtServerInit')
+    store.commit('setTabList', this.$cookies.get('tabList'));
+    store.commit('setSubTabId', this.$cookies.get('subTabId'));
+    console.log(store.state.subTabId, 'nuxtServerInit')
   }
 }

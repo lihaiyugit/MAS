@@ -316,11 +316,11 @@
 </template>
 
 <script>
-import { notNeedlogin, getUserInfo } from "../request/api";
+// import { notNeedlogin, getUserInfo } from "../request/api";
+// import md5 from "js-md5";
 import { mapMutations } from "vuex";
-import md5 from "js-md5";
 import qs from "qs";
-import config from "../config/index";
+import config from "@/config/index";
 export default {
   loading: false,
   data() {
@@ -544,11 +544,11 @@ export default {
     // 获取微信数据
     getWxData() {
       let _this = this;
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + this.$store.state.secretKey);
-      notNeedlogin(this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + this.$store.state.secretKey);
+      this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         className: "Wx",
         classMethod: "getWxParams",
       }).then((res) => {
@@ -673,11 +673,11 @@ export default {
     //账号密码公共的登录方法
     publicLogin(type, val) {
       let _this = this;
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + this.$store.state.secretKey);
-      notNeedlogin(this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + this.$store.state.secretKey);
+      this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         data: val,
         className: "UserController",
         classMethod: "login",
@@ -725,11 +725,11 @@ export default {
     //获取图形验证码CaptchaAppId
     CaptchaAppId() {
       let _this = this;
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + _this.$store.state.secretKey);
-      notNeedlogin(_this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + _this.$store.state.secretKey);
+      _this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         className: "SendCode",
         classMethod: "getCaptchaAppId",
       }).then((res) => {
@@ -786,11 +786,11 @@ export default {
         phone = _this.findPwdFormData.mobile;
       }
 
-      let timestamp = Date.parse(new Date());
-      let sign = md5(timestamp + _this.$store.state.secretKey);
-      notNeedlogin(_this.$axios, {
-        sign: sign,
-        timespan: timestamp,
+      // let timestamp = Date.parse(new Date());
+      // let sign = md5(timestamp + _this.$store.state.secretKey);
+      _this.$axios.notNeedlogin({
+        // sign: sign,
+        // timespan: timestamp,
         data: {
           phone: phone,
           Ticket: ticket,
@@ -816,11 +816,11 @@ export default {
           if (_this.registerParams.agreement == false) {
             return _this.$message.warning("请阅读并同意服务协议");
           }
-          let timestamp = Date.parse(new Date());
-          let sign = md5(timestamp + _this.$store.state.secretKey);
-          notNeedlogin(_this.$axios, {
-            sign: sign,
-            timespan: timestamp,
+          // let timestamp = Date.parse(new Date());
+          // let sign = md5(timestamp + _this.$store.state.secretKey);
+          _this.$axios.notNeedlogin({
+            // sign: sign,
+            // timespan: timestamp,
             data: {
               phone: _this.registerParams.mobile,
               code: _this.registerParams.code,
@@ -863,11 +863,11 @@ export default {
       let _this = this;
       _this.$refs.findFormPwd.validate((valid) => {
         if (valid) {
-          let timestamp = Date.parse(new Date());
-          let sign = md5(timestamp + _this.$store.state.secretKey);
-          notNeedlogin(_this.$axios, {
-            sign: sign,
-            timespan: timestamp,
+          // let timestamp = Date.parse(new Date());
+          // let sign = md5(timestamp + _this.$store.state.secretKey);
+          _this.$axios.notNeedlogin({
+            // sign: sign,
+            // timespan: timestamp,
             data: {
               phone: _this.findPwdFormData.mobile,
               code: _this.findPwdFormData.code,
@@ -935,7 +935,7 @@ export default {
       line-height: 28px;
       font-size: 14px;
       font-weight: 400;
-      color: #ed6d38;
+      color: #fa6725;
       span {
         margin-left: 8px;
       }
@@ -999,22 +999,22 @@ export default {
 
   /deep/.el-checkbox__input.is-checked .el-checkbox__inner,
   /deep/.el-checkbox__input.is-indeterminate .el-checkbox__inner {
-    border-color: #ed6d38;
-    background: #ed6d38;
+    border-color: #fa6725;
+    background: #fa6725;
   }
   /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
     color: rgba(0, 0, 0, 0.65);
   }
   /deep/.el-checkbox__inner:hover,
   /deep/.el-checkbox__input.is-focus .el-checkbox__inner {
-    border-color: #ed6d38;
+    border-color: #fa6725;
   }
   /deep/.el-input__prefix {
     left: 10px;
   }
   /deep/.el-input.is-active .el-input__inner,
   /deep/.el-input__inner:focus {
-    border-color: #ed6d38;
+    border-color: #fa6725;
   }
 
   .icon {
@@ -1071,14 +1071,14 @@ export default {
     font-size: 14px;
     font-weight: 400;
     text-align: center;
-    color: #ed6d38 !important;
+    color: #fa6725 !important;
     line-height: 14px;
     cursor: pointer;
   }
   .login-btn {
     width: 368px;
     height: 40px;
-    background: #ed6d38;
+    background: #fa6725;
     border-radius: 2px;
     border: none;
     font-size: 16px;
@@ -1095,7 +1095,7 @@ export default {
     border-radius: 2px;
     font-size: 14px;
     font-weight: 400;
-    color: #ed6d38;
+    color: #fa6725;
     line-height: 22px;
     margin-left: 4px;
   }

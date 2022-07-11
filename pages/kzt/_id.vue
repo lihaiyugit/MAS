@@ -443,9 +443,9 @@
           <ul class="module-r-ul">
             <li>
               <div class="keyword_box">
-                <span @click="onHotWord(1, '预算')">预算</span>
-                <span @click="onHotWord(1, '管理会计')">管理会计</span>
-                <span>数字化转型</span>
+                <span @click="onHotWord('预算',1)">预算</span>
+                <span @click="onHotWord('管理会计',1)">管理会计</span>
+                <!-- <span>数字化转型</span>
                 <span>数字化转型 </span>
                 <span>关键字</span>
                 <span>管理会计</span>
@@ -454,7 +454,7 @@
                 <span>关键字</span>
                 <span>管理会计</span>
                 <span>数字化转型</span>
-                <span>数字化转型</span>
+                <span>数字化转型</span> -->
               </div>
             </li>
             <li @click="zffDetails(2)">
@@ -883,10 +883,10 @@ export default {
       });
     },
     //点击站内热词
-    onHotWord(index, val) {
+    onHotWord(val,id) {
       this.$router.push({
         path: "/search",
-        query: { keyword: val, index: index },
+        query: { keyword: val, hotWordId: id },
       });
     },
     //跳转到找方法详情
@@ -958,6 +958,7 @@ export default {
           font-size: 13px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
+           text-align: justify;
           line-height: 20px;
           padding: 24px 0px 30px;
         }
@@ -967,7 +968,7 @@ export default {
           align-items: center;
           .left {
             font-size: 14px;
-            color: #ed6d38;
+            color: #fa6725;
             font-weight: 400;
           }
           .price {
@@ -985,7 +986,7 @@ export default {
             width: 88px;
             height: 32px;
             border-radius: 2px;
-            background: #ed6d38;
+            background: #fa6725;
             font-size: 14px;
             font-weight: 400;
             color: #fff;
@@ -1024,7 +1025,7 @@ export default {
     .line {
       width: 82px;
       height: 2px;
-      background: #ed6d38;
+      background: #fa6725;
       margin-top: -2px;
     }
   }
@@ -1063,7 +1064,7 @@ export default {
     h5 {
       font-size: 16px;
       font-weight: 500;
-      text-align: left;
+      text-align: justify;
       color: rgba(0, 0, 0, 0.85);
       line-height: 24px;
     }
@@ -1451,7 +1452,7 @@ export default {
     .btn-right:hover,
     .btn-left-two:hover,
     .btn-right-two:hover {
-      background: #ed6d38;
+      background: #fa6725;
     }
     .btn-left:hover .left1,
     .btn-left-two:hover .left1 {
@@ -1537,7 +1538,7 @@ export default {
               line-height: 20px;
               .name {
                 font-weight: 500;
-                color: #ed6d38;
+                color: #fa6725;
                 margin-right: 12px;
               }
             }

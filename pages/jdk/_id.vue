@@ -6,8 +6,9 @@
         <div class="banner-main">
           <div class="rw-name">
             <span></span>
-            <h5>汤谷良</h5>
+            <h5>{{ detailsData.mas_master_user_name }}</h5>
           </div>
+          <!-- <p>{{detailsData.mas_master_golden}}</p> -->
           <p>
             要破解预算管理“理想与现实”的难题，预算必须从商业计划开始，建立自下而上的计划－预算体系。
           </p>
@@ -18,24 +19,30 @@
           <a class="selection" @click="skip('#information')">基本信息</a>
           <a @click="skip('#js')">介绍</a>
           <a @click="skip('#Work')">著作</a>
-          <a @click="skip('#book')">出版书籍</a>
+          <a v-if="detailsData.books.length > 0" @click="skip('#book')">出版书籍</a>
           <a @click="skip('#achievement')">学术成就</a>
           <a @click="course()">TA的课程</a>
         </div>
         <div class="information-main" id="information">
           <div class="information-main-l">
             <dl>
-              <dt><img src="../../static/images/dk-rw.png" alt="" /></dt>
+              <dt><img :src="detailsData.mas_master_photo" alt="" /></dt>
               <dd>
-                <h5>汤谷良</h5>
+                <h5>{{ detailsData.mas_master_user_name }}</h5>
                 <div class="research-box">
                   研究领域：
-                  <span>管理会计</span>
-                  <span>人工智能</span>
+                  <span
+                    v-for="(keyIt, keyIn) in detailsData.newData"
+                    :key="keyIn"
+                    >{{ keyIt }}</span
+                  >
+                  <!-- <span>管理会计</span>
+                  <span>人工智能</span> -->
                 </div>
                 <div class="experience-box">
-                  经{{ sepDot }}历：
-                  <p>
+                  <span>经{{ sepDot }}历：</span>
+                  <!-- <p>{{detailsData.mas_master_experienc}}</p> -->
+                  <p class="experience">
                     1993年受聘为硕士研究生导师；1993年7月开始在职攻读博士学位1996年8月获得博士学位；现任对外经贸大学国际商学院院长，博士生导师。
                   </p>
                 </div>
@@ -120,7 +127,7 @@
               </li>
             </ul>
           </div>
-          <div class="module" id="book">
+          <div class="module" id="book" v-if="detailsData.books.length > 0">
             <div class="module-title">
               <span></span>
               出版书籍
@@ -128,17 +135,21 @@
             <div class="books-main">
               <dl>
                 <dt>
-                  <img src="../../static/images/dk-zp.png" alt="" />
+                  <img :src="detailsData.books[0].mas_book_img" alt="" />
                 </dt>
                 <dd>
-                  <h5>汤谷良</h5>
+                  <h5>{{ detailsData.books[0].mas_book_name }}</h5>
                   <div class="rw-introduction">
                     简介：
                     <p>
-                      《财务管理案例(第三版)》第二版为十二五***规划教材，《财务管理案例(第三版)》充分融合财务理论、管理实务与财务政策。案例的理论背景介绍可以使学生
+                      {{ detailsData.books[0].mas_book_describe }}
                     </p>
                   </div>
-                  <nuxt-link to="/jdk/book-details"
+                  <nuxt-link
+                    :to="{
+                      name: 'jdk-book-details',
+                      query: { bookId: detailsData.books[0].mas_book_id },
+                    }"
                     >查看更多
                     <img src="../../static/images/arrows-left.png" alt="" />
                   </nuxt-link>
@@ -177,7 +188,13 @@
             <div class="new-mian">
               <div class="top-line"></div>
               <ul class="new-content">
-                <li>
+                <li v-for="(itNews, idx) in masterNews" :key="idx">
+                  <p class="twoline">
+                    {{ itNews.mas_article_title }}
+                  </p>
+                  <span>来源：{{ itNews.mas_article_author }}</span>
+                </li>
+                <!-- <li>
                   <p class="twoline">
                     长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
                   </p>
@@ -200,13 +217,7 @@
                     长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
                   </p>
                   <span>来源：新浪网</span>
-                </li>
-                <li>
-                  <p class="twoline">
-                    长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
-                  </p>
-                  <span>来源：新浪网</span>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -215,12 +226,12 @@
             <div class="new-mian">
               <div class="top-line"></div>
               <div class="guess-like">
-                <p @click="goDetail(1)">疫情之下，企业如何应对？</p>
-                <p @click="goDetail(1)">
-                  论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
-                </p>
-                <p @click="goDetail(1)">
-                  论文《 潜水期权与高管绩效薪酬敏感 度之间的动态关系》的评述
+                <p
+                  v-for="(itLike, idx) in masterLike"
+                  :key="idx"
+                  @click="goDetail(itLike.mas_article_id)"
+                >
+                  {{ itLike.mas_article_title }}
                 </p>
               </div>
             </div>
@@ -230,40 +241,17 @@
             <div class="new-mian">
               <div class="top-line"></div>
               <div class="recommended">
-                <dl @click="details(1)">
+                <dl
+                  v-for="(itRw, index) in masterShare"
+                  :key="index"
+                  @click="details(itRw.mas_master_user_id)"
+                >
                   <dt>
-                    <img src="../../static/images/dk-rw.png" alt="" />
+                    <img :src="itRw.mas_master_photo" alt="" />
                   </dt>
                   <dd>
-                    <span>田高</span>
-                    <p>西安交通大学管理学院副院长，教授，博士生导师</p>
-                  </dd>
-                </dl>
-                <dl @click="details(1)">
-                  <dt>
-                    <img src="../../static/images/dk-rw.png" alt="" />
-                  </dt>
-                  <dd>
-                    <span>田高</span>
-                    <p>西安交通大学管理学院副院长，教授，博士生导师</p>
-                  </dd>
-                </dl>
-                <dl @click="details(1)">
-                  <dt>
-                    <img src="../../static/images/dk-rw.png" alt="" />
-                  </dt>
-                  <dd>
-                    <span>田高</span>
-                    <p>西安交通大学管理学院副院长，教授，博士生导师</p>
-                  </dd>
-                </dl>
-                <dl @click="details(2)">
-                  <dt>
-                    <img src="../../static/images/dk-rw.png" alt="" />
-                  </dt>
-                  <dd>
-                    <span>田高</span>
-                    <p>西安交通大学管理学院副院长，教授，博士生导师</p>
+                    <span>{{ itRw.mas_master_user_name }}</span>
+                    <p>{{ itRw.mas_master_duty }}</p>
                   </dd>
                 </dl>
               </div>
@@ -278,26 +266,49 @@
 export default {
   data() {
     return {
-      sepDot: "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 ",
+      sepDot: "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 ", //空格
+      detailsData: {}, //详情数据
+      masterLike: [], //猜你喜欢
+      masterNews: [], //人物新闻
+      masterShare: [], //人物推荐
     };
+  },
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      className: "MasterController",
+      classMethod: "masterDetails",
+      data: {
+        mas_master_user_id: params.id,
+      },
+    });
+    if (res.bol) {
+      let newData = [];
+      newData = res.data.masMasterDetails.tag_name.split(",");
+      res.data.masMasterDetails.newData = newData;
+      return {
+        detailsData: res.data.masMasterDetails,
+        masterLike: res.data.masterLike,
+        masterNews: res.data.masterNews,
+        masterShare: res.data.masterShare,
+      };
+    }
   },
   methods: {
     skip(id) {
       const target = document.querySelector(id);
       var anchor = $(".information-title").outerHeight();
-      document.documentElement.scrollTop =
-        target.offsetTop - anchor - 121;
+      document.documentElement.scrollTop = target.offsetTop - anchor - 121;
     },
-    course(){
+    course() {
       this.$message.info("暂未开课");
     },
-     //跳转到文章详情
+    //跳转到文章详情
     goDetail(id) {
       this.$router.push({
         path: `/dy/${id}`,
       });
     },
-      //点击到详情
+    //点击到详情
     details(id) {
       this.$router.push({
         path: `/jdk/${id}`,

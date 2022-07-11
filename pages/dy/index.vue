@@ -248,7 +248,7 @@
             </p>
             <div class="base">
               <div class="all-year">￥<span class="price">168</span>/年</div>
-              <button @click="buyFn()">立即订阅</button>
+              <button><nuxt-link to="/zz">立即订阅</nuxt-link></button>
             </div>
           </dd>
         </dl>
@@ -257,7 +257,7 @@
         <div class="magazine-title">
           <h2>管理会计研究</h2>
           <div class="more-btn">
-            <nuxt-link to="/zz/list">查看更多</nuxt-link>
+            <nuxt-link to="/dzz/list">查看更多</nuxt-link>
             <img src="../../static/images/arrows-left.png" alt="" />
           </div>
         </div>
@@ -346,7 +346,7 @@
         <div class="magazine-title">
           <h2>其他杂志</h2>
           <div class="more-btn">
-            <nuxt-link to="/zz/list">查看更多</nuxt-link>
+            <nuxt-link to="/dzz/list">查看更多</nuxt-link>
             <img src="../../static/images/arrows-left.png" alt="" />
           </div>
         </div>
@@ -479,7 +479,7 @@ export default {
     //点击杂志每一个
     details(id) {
       this.$router.push({
-        path: `/zz/${id}`,
+        path: `/dzz/${id}`,
         // name: "",
         // query: { id: index, type: item },
         // params: {
@@ -604,6 +604,7 @@ export default {
           font-weight: 400;
           color: #ffffff;
           line-height: 22px;
+           text-align: justify;
           padding: 22px 0px 10px;
           opacity: 0.9;
         }
@@ -646,12 +647,15 @@ export default {
           background: #ffffff;
           font-size: 14px;
           font-weight: 400;
-          color: #ed6d38;
+          color: #fa6725;
           line-height: 22px;
           border: none;
           margin-top: 37px;
           display: block;
           cursor: pointer;
+          a{
+            color: #fa6725;
+          }
         }
       }
     }
@@ -735,7 +739,7 @@ export default {
               p {
                 font-size: 14px;
                 font-weight: 400;
-                text-align: left;
+               text-align: justify;
                 color: rgba(0, 0, 0, 0.45);
                 line-height: 28px;
                 img {
@@ -763,14 +767,14 @@ export default {
               /deep/.el-radio__inner {
                 width: 14px;
                 height: 14px;
-                border: 2px solid #ed6d38;
+                border: 2px solid #fa6725;
                 border-radius: 50%;
                 background-color: transparent;
               }
               /deep/.el-radio__inner::after {
                 width: 6px;
                 height: 6px;
-                background: #ed6d38;
+                background: #fa6725;
                 border-radius: 50%;
               }
               /deep/.el-radio__label {
@@ -781,10 +785,10 @@ export default {
               }
 
               .money-icon {
-                color: #ed6d38;
+                color: #fa6725;
               }
               .money-num {
-                color: #ed6d38;
+                color: #fa6725;
                 font-size: 20px;
                 font-weight: 500;
                 margin-left: -3px;
@@ -795,12 +799,12 @@ export default {
                 text-align: left;
                 color: rgba(0, 0, 0, 0.85);
                 .icon {
-                  color: #ed6d38;
+                  color: #fa6725;
                 }
                 .num {
                   font-size: 20px;
                   font-weight: 500;
-                  color: #ed6d38;
+                  color: #fa6725;
                   line-height: 22px;
                   letter-spacing: 1.33px;
                   margin-left: -3px;
@@ -810,7 +814,7 @@ export default {
               button {
                 width: 88px;
                 height: 32px;
-                background: #ed6d38;
+                background: #fa6725;
                 border-radius: 2px;
                 border: none;
                 font-size: 14px;
@@ -849,6 +853,7 @@ export default {
           border-radius: 0px 6px 6px 0px;
           p {
             width: 551px;
+             text-align: justify;
           }
           .base {
             display: flex;
@@ -944,7 +949,7 @@ export default {
               font-size: 20px;
               font-weight: 400;
               text-align: left;
-              color: #ed6d38;
+              color: #fa6725;
               line-height: 22px;
               letter-spacing: 1.33px;
               padding-top: 20px;

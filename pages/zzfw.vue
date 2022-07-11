@@ -205,9 +205,9 @@
           </div>
           <div class="frame create-main-right">
             <h6>去创作</h6>
-            <div class="img-box">
-              <div class="img img1"><span>网站投稿</span></div>
-              <div class="img img2"><span>杂志投稿</span></div>
+            <div class="img-box" >
+              <nuxt-link to="/wytg" class="img img1"><span>网站投稿</span></nuxt-link>
+              <nuxt-link to="/wytg" class="img img2"><span>杂志投稿</span></nuxt-link>
             </div>
           </div>
         </div>
@@ -288,8 +288,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.main_container{
-   background: #fff;
+.main_container {
+  background: #fff;
 }
 .digital-container {
   padding: 30px 0px 0px;
@@ -320,7 +320,7 @@ export default {
     width: 88px;
     height: 32px;
     border-radius: 2px;
-    background: #ed6d38;
+    background: #fa6725;
     font-size: 14px;
     font-weight: 400;
     color: #fff;
@@ -362,6 +362,7 @@ export default {
           font-size: 13px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
+          text-align: justify;
           line-height: 20px;
           padding: 15px 0px 30px;
         }
@@ -494,7 +495,7 @@ export default {
             background: #fef7f5;
             font-size: 14px;
             font-weight: 500;
-            color: #ed6d38;
+            color: #fa6725;
             text-align: center;
             line-height: 54px;
             margin: 10px auto;
@@ -574,7 +575,7 @@ export default {
             color: rgba(0, 0, 0, 0.45);
           }
           .detial {
-            color: #ed6d38;
+            color: #fa6725;
           }
         }
       }
@@ -656,6 +657,7 @@ export default {
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
+            cursor: pointer;
             span {
               font-size: 12px;
               font-weight: 400;

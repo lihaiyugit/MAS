@@ -10,8 +10,9 @@
             <img src="../static/images/read.png" alt="" class="img" />
             <h2>试读结束...</h2>
             <h3>意犹未尽，立即购买，后面内容更精彩！</h3>
-            <div class="book-link" @click="buyFn">下载</div>
-            <!-- <button @click="getPdf(url)">下载paf</button> -->
+            <div class="book-link" @click="buyFn">下载1</div>
+            <button @click="getPdf(url)">下载paf</button>
+            <!-- <a :href="url" download>下载22</a> -->
           </div>
         </li>
         <li class="single-li" :page="list.length" v-else>
@@ -42,6 +43,8 @@
               </div>
             </div>
             <div class="book-link" @click="buyFn">下载</div>
+             <!-- <a :href="url" download>下载22</a> -->
+             <button @click="getPdf('https://develop.chinamas.cn/down')">下载paf</button>
           </div>
         </li>
       </ul>
@@ -181,6 +184,7 @@
 <script>
 import { saveAs } from "file-saver";
 export default {
+  scrollToTop: true,
   layout: "not",
   data() {
     return {
@@ -197,7 +201,7 @@ export default {
         "https://images.chinamas.cn/Pdfimg/2022/03/22/b3c013c57d741a22cfd20ec1b6d34b4b.png",
         "https://images.chinamas.cn/Pdfimg/2022/03/22/9fbf52cadcfd8c3d47ee38ed25e4458c.png",
       ], //电子刊图片列表数据
-      // url: "https://www.chinamas.cn/static/img/1.pdf",
+      url: "https://www.chinamas.cn/static/img/1.pdf",
       isPay: true, //是否为付费文章
     };
   },
@@ -224,18 +228,12 @@ export default {
   mounted() {
     let that = this;
     document.body.style.backgroundColor = '#000';
-    //初始化置顶
-    window.onunload = unload;
-    function unload(e) {
-      window.scrollTo(0, 0);
-    }
+       //监听滚动条获取index索引
+    window.addEventListener("scroll", that.handleScroll);
     if (that.isBuy == 1) {
       $(".buy img").attr({ title: "已购买" });
       $(".buy").removeAttr("onclick");
     }
-    //监听滚动条获取index索引
-    window.addEventListener("scroll", that.handleScroll);
-
     //获取键盘按键按下事件
     $(document).bind("keydown", function (e) {
       //获取按键键值
@@ -360,7 +358,7 @@ export default {
       let that=this;
       var t = document.documentElement.scrollTop || document.body.scrollTop;
       if (t <= 0) {
-        that.$message({ message: "已经是第一页了", duration: 1000 });
+        // that.$message({ message: "已经是第一页了", duration: 1000 });
       } else {
         if (that.readType == 1) {
           that.pageindex = Math.floor(t / that.pageHeight);
@@ -390,14 +388,17 @@ export default {
     },
     //下载pdf文件
     getPdf(url) {
-      let name = "测试";
-      this.fileLinkToStreamDownload(url);
-      // this.downloadFileByBlob(url, name);
+      // let name = "测试";
+      location.href=url+'?url='+encodeURI('https://yuanian-test.oss-cn-beijing.aliyuncs.com/mas/images/2022/07/04/2022-v2.0.pdf');
+      // let res = this.$axios.down({});
+      // this.fileLinkToStreamDownload(url);
+      // this.downloadFileByBlob(res, name);
       // this.downloadFile(url, "file.pdf").then((res) => {
       //   console.log(url, "===");
-      //   // 下载成功后的操作
-      //   console.log("下载成功！");
+      //   // // 下载成功后的操作
+      //   // console.log("下载成功！");
       // });
+
     },
     // 下载文件 获取链接接口添加responseType: 'blob'
     downloadFile(fileStream, saveFileName) {
@@ -470,6 +471,7 @@ export default {
     },
     // 下载文件的流
     downloadFileByBlob(res, fileName) {
+      console.log(res, fileName,'res, fileName')
       const blobUrl = window.URL.createObjectURL(new Blob([res]));
       const filename = fileName || "file";
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -599,7 +601,7 @@ export default {
     //跳转到详情
     detailsFn() {
       this.$router.push({
-        path: `/zz/${1}`,
+        path: `/dzz/${1}`,
         // name: "",
         // query: { id: this.magazineId },
         // params: {
@@ -838,7 +840,7 @@ export default {
 .last-page .pay-tip {
   font-size: 14px;
   font-weight: 400;
-  color: #ed6d38;
+  color: #fa6725;
   line-height: 16px;
   padding: 17px 0px;
 }

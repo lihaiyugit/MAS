@@ -34,7 +34,7 @@ export default {
 
   ],
   //自定义进度条颜色
-  // loading: { color: '#ed6d38', height: '2px' }, // loading:false,//禁用
+  // loading: { color: '#fa6725', height: '2px' }, // loading:false,//禁用
   loading:false,
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -173,7 +173,7 @@ export default {
   },
   router: {
     linkActiveClass: 'nuxt-link-active',
-    linkExactActiveClass: 'nuxt-link-exact-active',
+    // linkExactActiveClass: 'nuxt-link-exact-active',
     // mode: 'hash',
     // base: '/static/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
     // middleware:'midd',//全局生效

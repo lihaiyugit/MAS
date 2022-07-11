@@ -3,20 +3,21 @@
     <div class="banxin article-main">
       <div class="article-main-left">
         <div class="title">首页 / 学案例 / <span>文章详情</span></div>
-        <h1>贯彻落实全面依法治国新理念新思想新战略 扎实推进会计法治建设</h1>
+        <h1>{{ detailsData.article.mas_article_title }}</h1>
         <div class="details-info">
-          <span>财政部</span>
+          <span>{{ detailsData.article.mas_article_author }}</span>
           <span class="line"></span>
           <span class="type">政策解读</span>
           <span class="line"></span>
           <img src="../../static/images/time.png" alt="" />
-          <span>2022-03-14</span>
+          <span>{{ detailsData.article.mas_article_addtime }}</span>
         </div>
-        <div class="content">
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-          “法者，治之端也。”习近平总书记多次强调：“法治兴则民族兴，法治强则国家强。”全面依法治国，是国家治理领域一场广泛而深刻的变革。在“四个全面”战略布局中，全面依法治国具有基础性、保障性作用，落实好这一重大战略任务，对推动经济持续健康发展具有十分重要的意义。会计工作是市场经济活动的重要基础，也是经济管理的重要组成部分。加快完善中国特色社会主义会计法律规范体系，扎实推进会计法治建设，是落实《会计改革与发展“十四五”规划纲要》的重要举措，是社会主义市场经济正常运行的根本保障。
-        </div>
+        <div
+          class="content"
+          v-for="(item, index) in detailsData.articleDetails.articleDetails"
+          :key="index"
+          v-html="item.mas_article_details_content"
+        ></div>
         <div class="support-box">
           <!-- v-if="isPay == 0" -->
           <div style="border-bottom: 1px solid #f00">
@@ -292,7 +293,71 @@
         </div>
       </div>
       <!-- 右侧文章相关部分 -->
-      <articleModule />
+      <div class="article-main-right">
+        <div class="module">
+          <h2>相关文章</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <ul>
+              <li v-for="(item, index) in detailsData.list" :key="index">
+                <div class="li-l twoline">
+                  {{ item.mas_article_title }}
+                </div>
+                <div class="li-r">
+                  <img :src="item.mas_article_img" alt="" />
+                </div>
+              </li>
+              <!-- <li>
+                <div class="li-l twoline">
+                  论文《 潜水期权与高管绩效薪酬敏感 度之间的…
+                </div>
+                <div class="li-r">
+                  <img src="@/static/images/article-img.png" alt="" />
+                </div>
+              </li>
+              -->
+            </ul>
+          </div>
+        </div>
+        <div class="module" data-aos="fade-up">
+          <h2>站内热词</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <div class="keyword">
+              <span
+                :class="current == index ? 'active' : ''"
+                v-for="(item, index) in detailsData.hotWord"
+                :key="index"
+                @click="onItem(index, item.mas_tag_name)"
+                >{{ item.mas_tag_name }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="module" data-aos="fade-up">
+          <h2>杂志</h2>
+          <div class="module-main">
+            <div class="top-line"></div>
+            <div class="magazine">
+              <div class="magazine-img">
+                <img
+                  :src="detailsData.magazine.mas_magazine_master_img"
+                  alt=""
+                />
+                <div class="point">新书</div>
+              </div>
+              <div class="headline">
+                {{ detailsData.magazine.mas_magazine_title_main }}
+              </div>
+              <nuxt-link
+                :to="'/dzz/' + detailsData.magazine.mas_magazine_id"
+                class="contribute"
+                >马上阅读</nuxt-link
+              >
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 未登录未支付 -->
       <el-dialog
         :lock-scroll="false"
@@ -330,6 +395,8 @@
 </template>
 <script>
 import AOS from "aos";
+// import { notNeedlogin } from "@/request/api";
+// import md5 from "js-md5";
 export default {
   data() {
     return {
@@ -356,6 +423,8 @@ export default {
       // },
       keywords: "淘宝 西瓜视频、今日头条、微博",
       isCollect: false, //是否收藏
+      detailsData: {}, //文章详情数据
+      current: 0,
     };
   },
   head() {
@@ -377,23 +446,26 @@ export default {
       ],
     };
   },
-  asyncData({
-    app,
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error,
-  }) {},
-  // asyncData({ query, params }) {
-  //   // this.$route.params.id
-  //   // let res= await ArticleIdApi({id:query.id})
-  // },
+  async asyncData({ $axios, query, params, store }) {
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + store.state.secretKey);
+    let res = await $axios.notNeedlogin({
+      className: "ArticleController",
+      classMethod: "articleDetails",
+      // sign: sign,
+      // timespan: timestamp,
+      data: {
+        articleId: params.id,
+        token: store.state.token,
+      },
+    });
+    console.log(res, "res-文章详情");
+    if (res.bol) {
+      return {
+        detailsData: res.data,
+      };
+    }
+  },
   mounted() {
     AOS.init({
       once: true,
@@ -498,6 +570,18 @@ export default {
         }
       }
     },
+    //点击每个热词
+    onItem(index, item) {
+      this.current = index;
+      console.log(this.current);
+      this.$router.push({
+        path: "/search",
+        query: { keyword: item, index: index },
+        // params: {
+        //   type: item,
+        // },
+      });
+    },
   },
 
   destroyed() {
@@ -507,4 +591,5 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/static/css/page-css/article.less";
+@import "@/static/css/page-css/articleModule.less";
 </style>

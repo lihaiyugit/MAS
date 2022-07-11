@@ -4,7 +4,7 @@
     <div class="crumbs">
       <div class="banxin crumbs-item">
         首页 > 订阅 > 杂志订阅 >
-        <span>《管理会计研究》2021年第一二期合刊 总第16/17期</span>
+        <span>{{ magazineDetails.mas_magazine_title_main }}</span>
       </div>
     </div>
     <div class="content-container">
@@ -18,12 +18,12 @@
                   ref="mySwiper"
                   class="swiper-wrapper gallery-top"
                 >
-                  <swiper-slide v-for="(item, index) in imgList" :key="index">
-                    <img :src="item.img" alt="" class="swiper-img" />
+                  <swiper-slide v-for="(item, index) in magazineDetails.mas_magazine_img" :key="index">
+                    <img :src="item" alt="" class="swiper-img" />
                   </swiper-slide>
                 </swiper>
-                <div class="tryRead" v-if="current == 1" @click="tryRead()">
-                  <img src="../../static/images/mini-read.png" alt="" />
+                <div class="tryRead" v-if="current == 2" @click="tryRead()">
+                  <img src="@/static/images/mini-read.png" alt="" />
                   <p>试读</p>
                 </div>
               </div>
@@ -33,8 +33,8 @@
                   ref="swiperThumbs"
                   class="swiper-wrapper gallery-thumbs"
                 >
-                  <swiper-slide v-for="(item, index) in imgList" :key="index">
-                    <img :src="item.img" alt="" />
+                  <swiper-slide v-for="(item, index) in magazineDetails.mas_magazine_img" :key="index">
+                    <img :src="item" alt="" />
                   </swiper-slide>
                 </swiper>
               </div>
@@ -44,17 +44,16 @@
               </div>
             </div>
             <div class="zz-infoL-r">
-              <h1>《管理会计研究》2021年第一二期合刊 总第16/17期</h1>
-              <h6>新技术•新理念•新实践</h6>
+              <h1>{{ magazineDetails.mas_magazine_title_main }}</h1>
+              <h6>{{ magazineDetails.mas_magazine_title }}</h6>
               <div class="select">
-                <dl
-                  :class="current == index ? 'default' : ''"
-                  @click="onSelect(index)"
-                  v-for="(item, index) in selectList"
-                  :key="index"
-                >
-                  <dt>{{ item.type }}</dt>
-                  <dd>¥ {{ item.price }}</dd>
+                <dl :class="current == 1 ? 'default' : ''" @click="onSelect(1)">
+                  <dt>平装</dt>
+                  <dd>¥ {{ magazineDetails.mas_magazine_flat }}</dd>
+                </dl>
+                <dl :class="current == 2 ? 'default' : ''" @click="onSelect(2)">
+                  <dt>电子刊</dt>
+                  <dd>¥ {{ magazineDetails.mas_magazine_electronics }}</dd>
                 </dl>
               </div>
               <div class="details_Number">
@@ -69,7 +68,9 @@
                   />
                   <button class="plus" @click="add">+</button>
                 </div>
-                <div class="stock">库存：342本</div>
+                <div class="stock">
+                  库存：{{ magazineDetails.mas_magazine_num }}本
+                </div>
               </div>
               <div class="buy-btn">
                 <button class="immediately">立即订阅</button>
@@ -77,7 +78,7 @@
                   class="join"
                   :disabled="dis"
                   :class="{ disabled: dis == false }"
-                  v-if="current != 1"
+                  v-if="current != 2"
                 >
                   加入购物车
                 </button>
@@ -85,7 +86,7 @@
                   免费试读
                 </button>
               </div>
-              <div class="order-info" v-if="current != 1">
+              <div class="order-info" v-if="current != 2">
                 <div class="subscription-box">
                   <div class="more">
                     <span>更多订阅： </span>
@@ -93,7 +94,7 @@
                   </div>
                   <!-- disabled="disabled" -->
                   <div class="SubscribeMoreP">
-                    <input
+                    <!-- <input
                       type="checkbox"
                       id="1"
                       title="半年/3期"
@@ -101,16 +102,22 @@
                       name="test"
                       @click="checkedThis(150)"
                     />
-                    <span>半年/3期</span><span class="price">¥150.00</span>
+                    <span>半年/3期</span><span class="price">¥150.00</span> -->
                     <input
                       type="checkbox"
                       id="2"
                       title=" 全年 / 共6期 "
                       value="300"
+                      :checked="isChecked"
                       name="test"
-                      @click="checkedThis(300)"
+                      @click="
+                        checkedThis(magazineDetails.mas_magazine_flat * 6)
+                      "
                     />
-                    <span>全年 / 共6期</span><span class="price">¥300.00</span>
+                    <span>全年 / 共6期</span
+                    ><span class="price"
+                      >¥{{ magazineDetails.mas_magazine_flat * 6 }}</span
+                    >
                   </div>
                 </div>
 
@@ -125,13 +132,13 @@
                   class="register"
                 >
                   <span>立即注册</span>
-                  <img src="../../static/images/arrows-left.png" alt="" />
+                  <img src="@/static/images/arrows-left.png" alt="" />
                 </nuxt-link>
               </div>
             </div>
           </div>
           <div class="zz-infoR">
-            <img src="../../static/images/press.png" alt="" />
+            <img src="@/static/images/press.png" alt="" />
           </div>
         </div>
         <div class="clear"></div>
@@ -139,16 +146,17 @@
           <div class="section_introduceL">
             <h6>杂志推荐</h6>
             <div class="section_introduceLD">
-              <dl>
+              <dl
+                v-for="(item, index) in recommend"
+                :key="index"
+                @click="zzDetails(item.mas_magazine_id)"
+              >
                 <dt>
-                  <img
-                    src="https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg"
-                    alt=""
-                  />
+                  <img :src="item.mas_magazine_master_img" alt="" />
                 </dt>
-                <dd>2022年 第2期总第23期</dd>
+                <dd>{{ item.mas_magazine_title_main }}</dd>
               </dl>
-              <dl>
+              <!-- <dl>
                 <dt>
                   <img
                     src="https://www.chinamas.cn/upload/img/2021/11/22/96bf6f043922dc0fda07b3b27c0dbd46.jpg"
@@ -165,8 +173,7 @@
                   />
                 </dt>
                 <dd>2021年 第五期 总第20期</dd>
-              </dl>
-              <div class="clear"></div>
+              </dl> -->
             </div>
           </div>
           <div class="section_introduceR">
@@ -187,43 +194,68 @@
                 <div class="div div1" v-if="tabCurrent == 0">
                   <div class="information">
                     <ol>
-                      <li>主管单位：<span>南方出版传媒股份有限公司</span></li>
-                      <li>主办单位：<span>广东经济出版社有限公司</span></li>
-                      <li>出版单位：<span>广东经济出版社有限公司</span></li>
-                      <li>创刊时间：<span>2018年7月</span></li>
-                      <li>国内刊号：<span>CN44-1740/F</span></li>
-                      <li>出版周期：<span>双月刊</span></li>
-                      <li>ISBN：<span>1671-0762</span></li>
-                      <li>页数：<span>88页</span></li>
-                      <li>开本：<span>全彩16开</span></li>
+                      <li>
+                        主管单位：<span>{{
+                          magazineDetails.mas_magazine_host
+                        }}</span>
+                      </li>
+                      <li>
+                        主办单位：<span>{{
+                          magazineDetails.mas_magazine_charge
+                        }}</span>
+                      </li>
+                      <li>
+                        出版单位：<span>{{
+                          magazineDetails.mas_magazine_press
+                        }}</span>
+                      </li>
+                      <li>
+                        创刊时间：<span>{{
+                          magazineDetails.mas_magazine_founded_time
+                        }}</span>
+                      </li>
+                      <li>
+                        国内刊号：<span>{{
+                          magazineDetails.mas_magazine_domestic_issn
+                        }}</span>
+                      </li>
+                      <li>
+                        出版周期：<span>{{
+                          magazineDetails.mas_magazine_publication_cycle
+                        }}</span>
+                      </li>
+                      <li>
+                        ISBN：<span>{{
+                          magazineDetails.mas_magazine_isbn
+                        }}</span>
+                      </li>
+                      <li>
+                        页数：<span>{{
+                          magazineDetails.mas_magazine_pages
+                        }}</span>
+                      </li>
+                      <li>
+                        开本：<span>{{
+                          magazineDetails.mas_magazine_open_book
+                        }}</span>
+                      </li>
                     </ol>
                   </div>
-                  <div class="briefIntroduction">
-                    <p>
-                      <img
-                        src="https://www.chinamas.cn/upload/img/2022/01/24/fbe9e98dd8e4aeaba7749b3e9e7adfa1.png"
-                        alt="undefined"
-                      /><br />
-                    </p>
-                    <p>
-                      <img
-                        src="https://www.chinamas.cn/upload/img/2022/01/24/f407c81519e803b7a954e911b9adc309.jpg"
-                        alt="undefined"
-                      /><br />
-                    </p>
-                    <p>
-                      <img
-                        src="https://www.chinamas.cn/upload/img/2022/01/24/49495a93fb8011a0cd934e3fc67efb43.jpg"
-                        alt="undefined"
-                      /><br />
-                    </p>
-                    <p><br /></p>
-                  </div>
+                  <div
+                    class="briefIntroduction"
+                    v-html="magazineDetails.mas_magazine_text"
+                  ></div>
                 </div>
                 <div class="div div2" v-if="tabCurrent == 1">
                   <div class="comments_mod_v1">
                     <!-- 没有登陆提示登录后评论 -->
-                    <div class="post-comment">
+                    <div
+                      class="post-comment"
+                      v-if="
+                        $store.state.token == '' ||
+                        $store.state.token == undefined
+                      "
+                    >
                       <h6 class="total_num">暂无评价</h6>
                       <div class="login-tip">
                         <p>
@@ -249,7 +281,12 @@
                       </div>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="post-comment">
+                    <div
+                      class="post-comment"
+                      v-else-if="
+                        magazineComment.length == 0 && $store.state.token
+                      "
+                    >
                       <h6 class="total_num">暂无评价</h6>
                       <el-input
                         type="textarea"
@@ -259,11 +296,11 @@
                       </el-input>
                       <button class="comment">评论</button>
                     </div>
-                    <div class="comment-list">
+                    <div class="comment-list" v-else>
                       <ul>
                         <li>
                           <div class="li-l">
-                            <img src="../../static/images/photo.png" alt="" />
+                            <img src="@/static/images/photo.png" alt="" />
                           </div>
                           <div class="li-r">
                             <div class="li-r-info">
@@ -274,12 +311,9 @@
                               本杂志可以进行单期杂志购买与订阅及一年期订阅，同时可以满足电子刊以及刊内文章单独订阅。集团订阅请直接和我们联系（400-819-1255）。
                             </p>
                             <div class="li-r-base">
-                              <img
-                                src="../../static/images/praise.png"
-                                alt=""
-                              />
+                              <img src="@/static/images/praise.png" alt="" />
                               <span>赞1</span>
-                              <img src="../../static/images/reply.png" alt="" />
+                              <img src="@/static/images/reply.png" alt="" />
                               <span>回复</span>
                             </div>
                             <div class="li-r-reply">
@@ -287,7 +321,7 @@
                                 <li>
                                   <div class="li-l">
                                     <img
-                                      src="../../static/images/photo.png"
+                                      src="@/static/images/photo.png"
                                       alt=""
                                     />
                                   </div>
@@ -301,12 +335,12 @@
                                     </p>
                                     <div class="li-r-base">
                                       <img
-                                        src="../../static/images/praise.png"
+                                        src="@/static/images/praise.png"
                                         alt=""
                                       />
                                       <span>赞1</span>
                                       <img
-                                        src="../../static/images/reply.png"
+                                        src="@/static/images/reply.png"
                                         alt=""
                                       />
                                       <span>回复</span>
@@ -316,7 +350,7 @@
                                 <li>
                                   <div class="li-l">
                                     <img
-                                      src="../../static/images/photo.png"
+                                      src="@/static/images/photo.png"
                                       alt=""
                                     />
                                   </div>
@@ -330,12 +364,12 @@
                                     </p>
                                     <div class="li-r-base">
                                       <img
-                                        src="../../static/images/praise.png"
+                                        src="@/static/images/praise.png"
                                         alt=""
                                       />
                                       <span>赞1</span>
                                       <img
-                                        src="../../static/images/reply.png"
+                                        src="@/static/images/reply.png"
                                         alt=""
                                       />
                                       <span>回复</span>
@@ -348,7 +382,7 @@
                         </li>
                         <li>
                           <div class="li-l">
-                            <img src="../../static/images/photo.png" alt="" />
+                            <img src="@/static/images/photo.png" alt="" />
                           </div>
                           <div class="li-r">
                             <div class="li-r-info">
@@ -359,10 +393,7 @@
                               本杂志可以进行单期杂志购买与订阅及一年期订阅，同时可以满足电子刊以及刊内文章单独订阅。集团订阅请直接和我们联系（400-819-1255）。
                             </p>
                             <div class="li-r-base">
-                              <img
-                                src="../../static/images/praise.png"
-                                alt=""
-                              />
+                              <img src="@/static/images/praise.png" alt="" />
                               <span>赞1</span>
                               <img src="../../static/images/reply.png" alt="" />
                               <span>回复</span>
@@ -384,6 +415,15 @@
                         @pagination="getList"
                       />
                       <div class="post-comment">
+                        <el-input
+                          type="textarea"
+                          placeholder="请输入评论内容"
+                          v-model="textarea"
+                        >
+                        </el-input>
+                        <button class="comment">评论</button>
+                      </div>
+                      <!-- <div class="post-comment">
                         <div class="login-tip">
                           <p>
                             您需要登录后才可以评论
@@ -395,7 +435,7 @@
                           </p>
                         </div>
                         <button class="comment">评论</button>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -433,28 +473,19 @@
                 </div>
               </div>
             </div>
-            <div class="clear"></div>
           </div>
-          <!-- <div class="clear"></div> -->
+          <!-- <span>{{create_time| timeAgo}}</span> -->
         </div>
+        <div class="clear"></div>
       </div>
     </div>
   </div>
 </template>
 <script>
+// import { notNeedlogin } from "@/request/api";
+// import md5 from "js-md5";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 const tabList = ["杂志简介", "杂志评论", "订阅须知"];
-const selectList = [
-  {
-    type: "平装",
-    price: "100.00",
-  },
-  {
-    type: "电子刊",
-    price: "60.00",
-  },
-];
-
 export default {
   name: "swiper-example-thumbs-gallery",
   title: "Thumbs gallery with Two-way control",
@@ -463,8 +494,7 @@ export default {
       total: 1,
       page: 1,
       limit: 10,
-      selectList, //购买类型
-      current: 0, //购买类型索引
+      current: 1, //购买类型索引1平装2电子刊
       imgList: [
         {
           img: "https://www.chinamas.cn/upload/img/2022/03/22/8b1e4e1bcc70762c1408a03ab9913839.jpg",
@@ -486,31 +516,48 @@ export default {
       swiperTwoOption: {
         spaceBetween: 10, // 在slide之间设置距离
         slidesPerView: 3, //同时显示的数量
-        grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状
         loop: true,
         loopedSlides: 5, // looped slides should be the same
-        centeredSlides: false,
+        centeredSlides: true,
         slideToClickedSlide: true,
       },
-
       tabList, //tab列表
       tabCurrent: 0, //默认选中
-      typeName: "逛书店", //页面标题
       counter_num: "1", // 计数
       min_num: 1, // 设定最小值
       max_num: Infinity, // 设定最大值,Infinity表示无穷大
-      dis: true,
+      dis: true, //订阅按钮是否禁止
       commentStatus: 3, //1未登录 2暂无评论 3有评论
       textarea: "",
+      magazineDetails: "", //杂志详情数据
+      magazineComment: [], //杂志评论数据
+      recommend: [], //杂志推荐
+      isChecked: false, //是否选中全年
     };
   },
   components: {
     Swiper,
     SwiperSlide,
   },
-  asyncData({ query, params }) {
-    // this.$route.params.id
-    // let res= await ArticleIdApi({id:query.id})
+  async asyncData({ $axios, store, params }) {
+    // let timestamp = Date.parse(new Date());
+    // let sign = md5(timestamp + store.state.secretKey);
+    let res = await $axios.notNeedlogin({
+      // sign: sign,
+      // timespan: timestamp,
+      className: "MagazineController",
+      classMethod: "getMagazineDetails",
+      data: {
+        magazineId: parseInt(params.id),
+      },
+    });
+    if (res.bol) {
+      return {
+        magazineDetails: res.data.magazineDetails,
+        magazineComment: res.data.magazineComment,
+        recommend: res.data.recommend,
+      };
+    }
   },
   watch: {
     counter_num(newVal) {
@@ -550,7 +597,9 @@ export default {
     //点击购买类型
     onSelect(index) {
       this.current = index;
+      this.isChecked = false;
     },
+    //数量减
     minus() {
       if (this.counter_num <= this.min_num) {
         this.counter_num = this.min_num;
@@ -558,6 +607,7 @@ export default {
         this.counter_num--;
       }
     },
+    //数量加
     add() {
       if (this.counter_num >= this.max_num) {
         this.counter_num = this.max_num;
@@ -565,15 +615,29 @@ export default {
         this.counter_num++;
       }
     },
+    //点击更多订阅类型
     checkedThis(obj) {
-      var boxArray = document.getElementsByName("test");
-      for (var i = 0; i <= boxArray.length - 1; i++) {
-        if (boxArray[i].value == obj && boxArray[i].checked) {
-          boxArray[i].checked = true;
-        } else {
-          boxArray[i].checked = false;
-        }
-      }
+      this.current = -1;
+      this.isChecked = !this.isChecked;
+      // var boxArray = document.getElementsByName("test");
+      // for (var i = 0; i <= boxArray.length - 1; i++) {
+      //   if (boxArray[i].value == obj && boxArray[i].checked) {
+      //     boxArray[i].checked = true;
+      //   } else {
+      //     boxArray[i].checked = false;
+      //   }
+      // }
+    },
+    //点击到详情
+    zzDetails(id) {
+      this.$router.push({
+        path: `/dzz/${id}`,
+        // name: "",
+        // query: { id: index, type: item },
+        // params: {
+        //   type: item,
+        // },
+      });
     },
   },
 };
@@ -810,9 +874,9 @@ export default {
             }
             .join {
               background: #fff5f1;
-              border: 1px solid #ed6d38;
+              border: 1px solid #fa6725;
               box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
-              color: #ed6d38;
+              color: #fa6725;
             }
             .disabled {
               background: rgb(234, 234, 234) !important;
@@ -909,7 +973,7 @@ export default {
               background: #fff9ee;
               font-size: 12px;
               font-weight: 400;
-              color: #ed6d38;
+              color: #fa6725;
               line-height: 16px;
               padding: 10px 8px 10px 16px;
               margin: 20px 0px 18px 0px;
@@ -920,7 +984,7 @@ export default {
               span {
                 font-weight: 600;
                 text-align: center;
-                color: #ed6d38;
+                color: #fa6725;
                 line-height: 16px;
               }
               img {
@@ -944,10 +1008,10 @@ export default {
     }
     .section_introduce {
       margin-top: 52px;
-      display: flex;
-      justify-content: space-between;
+      // display: flex;
+      // justify-content: space-between;
       .section_introduceL {
-        // float: left;
+        float: left;
         width: 257px;
         border: 1px solid #e5e5e5;
         h6 {
@@ -967,6 +1031,7 @@ export default {
           dl {
             width: 100%;
             border-bottom: 1px dashed #e7e7e7;
+            cursor: pointer;
             &:nth-last-child(1) {
               border-bottom: none;
             }
@@ -989,7 +1054,7 @@ export default {
         }
       }
       .section_introduceR {
-        // float: right;
+        float: right;
         width: 802px;
         background: #f7f7f7;
         border: 1px solid #e5e5e5;
@@ -1033,7 +1098,7 @@ export default {
             .comments_mod_v1 {
               .comment {
                 padding: 5px 16px;
-                background: #ed6d38;
+                background: #fa6725;
                 border-radius: 2px;
                 font-size: 14px;
                 font-weight: 400;
@@ -1064,7 +1129,7 @@ export default {
                     color: rgba(0, 0, 0, 0.85);
                     line-height: 20px;
                     .login {
-                      color: #ed6d38;
+                      color: #fa6725;
                     }
                   }
                 }
@@ -1078,7 +1143,7 @@ export default {
                 }
                 /deep/.el-textarea__inner:focus {
                   outline: none !important;
-                  border: 1px solid #ed6d38;
+                  border: 1px solid #fa6725;
                 }
               }
               .comment-list {
@@ -1200,10 +1265,7 @@ export default {
               color: rgba(34, 34, 34, 1);
               line-height: 26px;
               text-indent: 2rem;
-              text-align: left;
-            }
-            p {
-              text-align: left;
+              text-align: justify;
             }
           }
           .div3 {

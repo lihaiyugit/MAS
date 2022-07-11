@@ -57,18 +57,12 @@
   </div>
 </template>
 <script>
-import { notNeedlogin } from "@/request/api";
-import md5 from "js-md5";
 export default {
   data() {
     return {};
   },
   async fetch() {
-    let timestamp = Date.parse(new Date());
-    let sign = md5(timestamp + this.$store.state.secretKey);
-    let res = await notNeedlogin(this.$axios, {
-      sign: sign,
-      timespan: timestamp,
+    let res = await this.$axios.notNeedlogin( {
       className: "NavigationController",
       classMethod: "getBottomNavigation",
     });
