@@ -18,12 +18,10 @@
               ></span
             >
             <span v-else class="restrict" style="color: #fa6725">无限制</span>
-            <span v-if="activityDetails.mas_activity_address_type == '线下'"
-              >{{ activityDetails.mas_activity_address_type }}：{{
-                activityDetails.mas_activity_address
-              }}</span
+            <span v-if="activityDetails.mas_activity_address_type == 1"
+              >线下：{{ activityDetails.mas_activity_address }}</span
             >
-            <span v-else>{{ activityDetails.mas_activity_address_type }}</span>
+            <span v-else>线上</span>
           </div>
           <div class="activity-time">
             <img src="@/static/images/zb.png" alt="" />
@@ -36,7 +34,7 @@
           <div class="activity-time">
             <img src="../../static/images/xb.png" alt="" />
             <span class="jointly">协办：</span>
-            <p class="oneline" style="color: #bc996d">
+            <p class="oneline" style="color: #bc996d,width: 518px;">
               {{ activityDetails.mas_activity_sponsor }}
             </p>
           </div>
@@ -169,13 +167,16 @@
         </div>
       </div>
       <div class="detailed-info-r">
-        <div class="module" v-if="activityDetails.mas_activity_address_type!='线下'">
+        <div
+          class="module"
+          v-if="activityDetails.mas_activity_address_type != 1"
+        >
           <h2>扫码参与活动</h2>
           <div class="module-main">
             <div class="top-line"></div>
             <div class="code-main">
               <div class="code-bg">
-                <img src="../../static/images/code.png" alt="" />
+                <img :src="activityDetails.mas_activity_uppercode" alt="" />
               </div>
               <button class="xsmf">限时免费</button>
             </div>
@@ -186,13 +187,46 @@
           <div class="module-main">
             <div class="top-line"></div>
             <div class="map">
-              <div class="bm-view">地图</div>
-              <!-- <baidu-map
-                id="allmap"
-                class="bm-view"
-                zoom="17"
-                @ready="init"
-              ></baidu-map> -->
+              <client-only>
+                <baidu-map
+                  class="bm-view1"
+                  :center="center"
+                  :zoom="zoom"
+                  @ready="handler"
+                  :scroll-wheel-zoom="true"
+                >
+                  <bm-marker
+                    :position="center"
+                    :dragging="true"
+                    animation="BMAP_ANIMATION_BOUNCE"
+                  >
+                    <bm-label
+                      :content="activityDetails.mas_activity_address"
+                      :labelStyle="{ color: 'red', fontSize: '10px' }"
+                      :offset="{ width: -35, height: 30 }"
+                    />
+                  </bm-marker>
+                </baidu-map>
+                <!-- <baidu-map
+                  class="bm-view1"
+                  :center="activity_address"
+                  :zoom="17"
+                  :scroll-wheel-zoom="true"
+                  @ready="handler"
+                >
+                  <bm-marker
+                    :position="{ lng: 116.331398, lat: 39.897445 }"
+                    :dragging="true"
+                    animation="BMAP_ANIMATION_BOUNCE"
+                  >
+                    <bm-label
+                      :content="activity_address"
+                      :labelStyle="{ color: 'red', fontSize: '10px' }"
+                      :offset="{ width: -35, height: 30 }"
+                    />
+                  </bm-marker>
+                </baidu-map> -->
+              </client-only>
             </div>
           </div>
         </div>
@@ -209,9 +243,8 @@
                 <swiper-slide
                   v-for="(item, index) in moreActivity"
                   :key="index"
-                  @click="details(1)"
                 >
-                  <dl>
+                  <dl @click="details(item.mas_activity_id)">
                     <dt>
                       <img :src="item.mas_activity_img" alt="" />
                       <div class="point">最新活动</div>
@@ -223,55 +256,24 @@
                         <img src="@/static/images/time.png" alt="" />
                         <span>{{ item.mas_activity_starttime }}</span>
                       </div>
-                      <div class="dd-r">
+                      <div
+                        class="dd-r"
+                        v-if="item.mas_activity_address_type == 1"
+                      >
                         <img src="@/static/images/map.png" alt="" />
                         <span>{{ item.mas_activity_province }}</span>
                       </div>
-                       <div class="dd-r">
-                        <img class="online" src="@/static/images/online.png" alt="" />
+                      <div class="dd-r" v-else>
+                        <img
+                          class="online"
+                          src="@/static/images/online.png"
+                          alt=""
+                        />
                         <span>线上</span>
                       </div>
                     </dd>
                   </dl>
                 </swiper-slide>
-                <!-- <swiper-slide>
-                  <dl @click="details(2)">
-                    <dt>
-                      <img src="../../static/images/hd-img.png" alt="" />
-                      <div class="point">最新活动</div>
-                      <h5>疫情下的日企成本企划和改善之道</h5>
-                    </dt>
-                    <dd>
-                      <div class="dd-l">
-                        <img src="../../static/images/time.png" alt="" />
-                        <span>11月18日 13:21</span>
-                      </div>
-                      <div class="dd-r">
-                        <img src="../../static/images/map.png" alt="" />
-                        <span>北京</span>
-                      </div>
-                    </dd>
-                  </dl>
-                </swiper-slide>
-                <swiper-slide>
-                  <dl @click="details(3)">
-                    <dt>
-                      <img src="../../static/images/hd-img.png" alt="" />
-                      <div class="point">最新活动</div>
-                      <h5>疫情下的日企成本企划和改善之道</h5>
-                    </dt>
-                    <dd>
-                      <div class="dd-l">
-                        <img src="../../static/images/time.png" alt="" />
-                        <span>11月18日 13:21</span>
-                      </div>
-                      <div class="dd-r">
-                        <img src="../../static/images/map.png" alt="" />
-                        <span>北京</span>
-                      </div>
-                    </dd>
-                  </dl>
-                </swiper-slide> -->
               </swiper>
               <!-- 如果需要分页器 -->
               <div class="swiper-pagination"></div>
@@ -291,22 +293,6 @@
                   <img :src="item.mas_article_img" alt="" />
                 </div>
               </li>
-              <!--  <li>
-                <div class="li-l twoline">
-                  论文《 潜水期权与高管绩效薪酬敏感 度之间的…
-                </div>
-                <div class="li-r">
-                  <img src="@/static/images/article-img.png" alt="" />
-                </div>
-              </li>
-              <li>
-                <div class="li-l twoline">
-                  论文《 潜水期权与高管绩效薪酬敏感 度之间的…
-                </div>
-                <div class="li-r">
-                  <img src="@/static/images/article-img.png" alt="" />
-                </div>
-              </li> -->
             </ul>
           </div>
         </div>
@@ -322,8 +308,6 @@
   </div>
 </template>
 <script>
-// import { notNeedlogin } from "@/request/api";
-// import md5 from "js-md5";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
   scrollToTop: true,
@@ -352,13 +336,16 @@ export default {
           prevEl: ".btn-left", //上一张标签类名可以自定义
         },
       },
-      linkUrl: "",//当前页面路由
+      linkUrl: "", //当前页面路由
       activityDetails: "", //活动详情
       moreActivity: [], //更多活动
       moreArticle: [], //相关文章
       hotRecommend: [], //	热点推荐
+      center: { lng: 0, lat: 0 },
+      zoom: 12,
     };
   },
+
   //点击空白处关闭下拉框
   directives: {
     close: {
@@ -395,7 +382,6 @@ export default {
     SwiperSlide,
   },
   mounted() {
-    // this.init();
     this.linkUrl = window.location.href;
     // 生成二维码
     let qr = new QRCode("qrcode", {
@@ -409,46 +395,35 @@ export default {
     });
   },
   methods: {
-    init({ BMap, map }) {
-      this.map = map;
-      var point = new BMap.Point(116.331398, 39.897445); //设置城市经纬度坐标
-      map.centerAndZoom(point, 16); //
-      map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
-      map.enableScrollWheelZoom(true); //鼠标滚动缩放
-      var marker = new BMap.Marker(point); // 创建标注
-      map.addOverlay(marker); // 将标注添加到地图中
-      // for (var i in mapdata) {
-      //   var pt = new BMap.Point(mapdata[i].longitude, mapdata[i].latitude); //经纬度
-      //   var myicon = new BMap.Icon("图片路径", new BMap.Size(32, 32)); //设置对应图片和图片大小
-      //   var marker2 = new BMap.Marker(pt, { icon: myicon }); //创建标注
-      //   map.addOverLay(marker2);
-      // }
-      // 百度地图API功能
-      // var map = new BMap.Map("allmap");
-      // var point = new BMap.Point(116.331398,39.897445);
-      // map.centerAndZoom(point,12);
-      // // 创建地址解析器实例
-      // var myGeo = new BMap.Geocoder();
-      // // 将地址解析结果显示在地图上,并调整地图视野
-      // myGeo.getPoint(''+Detailed_address+'', function(point){
-      //     if (point) {
-      //         map.centerAndZoom(point, 16);
-      //         map.addOverlay(new BMap.Marker(point));
-      //     }else{
-      //         alert("您选择地址没有解析到结果!");
-      //     }
-      // }, ''+Active_address+'');
-      // map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    //地图
+    handler({ BMap, map }) {
+      let _this = this;
+      // 创建地址解析器实例
+      var myGeo = new BMap.Geocoder();
+      // map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
+      let address = this.activityDetails.mas_activity_address;
+      // 将地址解析结果显示在地图上,并调整地图视野 /* 获取位置对应的坐标 */
+      // this.activityDetails.mas_activity_address
+      myGeo.getPoint(
+        address,
+        function (point) {
+          if (point) {
+            console.log(point, "point");
+            _this.center.lng = point.lng;
+            _this.center.lat = point.lat;
+            _this.zoom = 17;
+          } else {
+            alert("您选择地址没有解析到结果!");
+          }
+        },
+        map
+      );
+      /* 利用坐标获取地址的详细信息 */
+      // myGeo.getLocation(_this.center, (res) => {
+      //   console.log(res);
+      // });
     },
 
-    // handler ({BMap, map}) {
-    //   var point = new BMap.Point(121.34113,31.19590)//标注点的经纬度
-    //   map.centerAndZoom(point, 13)
-    //   var marker = new BMap.Marker(point) // 创建标注
-    //   map.addOverlay(marker) // 将标注添加到地图中
-    //   var circle = new BMap.Circle(point, 6, { strokeColor: 'Red', strokeWeight: 6, strokeOpacity: 1, Color: 'Red', fillColor: '#f03' })
-    // //   map.addOverlay(circle)
-    // },
     //点击分享
     shareFn() {
       this.isShare = !this.isShare;
@@ -485,5 +460,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+/deep/.BMap_Marker {
+  img {
+    width: auto !important;
+  }
+}
 @import "@/static/css/page-css/activitydetails.less";
 </style>

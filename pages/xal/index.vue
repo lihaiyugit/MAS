@@ -132,7 +132,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
         page: 1,
         limit: 6,
       },
@@ -238,7 +238,7 @@ export default {
       this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
-          MenuId: this.$store.state.subTabId,
+          MenuId:this.$route.query.menuId,
           page: pageIndex,
           limit: this.pageSize,
           tagId: this.tagId,

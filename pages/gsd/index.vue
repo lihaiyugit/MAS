@@ -223,7 +223,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
       },
       className: "BookController",
       classMethod: "bookList",
@@ -287,7 +287,7 @@ export default {
       this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
-          MenuId: this.$store.state.subTabId,
+          MenuId:this.$route.query.menuId,
           bookTypeId: this.bookTypeId,
           type: "list",
         },

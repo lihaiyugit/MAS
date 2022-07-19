@@ -131,6 +131,7 @@ export default {
     },
     //点击站内热词
     onItem(val, id) {
+           this.$store.commit("setSubTabId", -1);
       this.$router.push({
         path: "/search",
         query: { keyword: val, hotWordId: id },
@@ -156,7 +157,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 300000;
+  z-index: 1000;
   transition: all 0.5s ease;
   animation: fadeInDown 0.5s both 0.2s;
 }
@@ -243,7 +244,7 @@ export default {
             90deg,
             #ff4e5c 0%,
             #ff9261 82%,
-            #fa6725 100%
+            #fe9062 100%
           );
           border-radius: 0px 4px 4px 0px;
           font-size: 14px;

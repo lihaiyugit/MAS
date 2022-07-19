@@ -4,23 +4,29 @@
     <div class="page-book-details banxin">
       <div class="book-details-l">
         <div class="page-router">
-          首页 / 汤谷良 韩慧博 祝继高 / 书籍 /
-          <span>财务管理案例（第三版）</span>
+          首页 / 书籍 /
+          <span>{{ bookData.mas_book_name }}</span>
         </div>
         <div class="book-info">
           <div class="book-info-l">
-            <img src="@/static/images/dk-zp.png" alt="" />
+            <img :src="bookData.mas_book_img" alt="" />
           </div>
           <div class="book-info-r">
-            <h2>财务管理案例(第三版)</h2>
-            <div class="classify">分类：<span>财务管理</span></div>
-            <div class="author">作者：<span>汤谷良 韩慧博 祝继高</span></div>
+            <h2>{{ bookData.mas_book_name }}</h2>
+            <div class="classify">
+              分类：<span>{{ bookData.mas_booktype_name }}</span>
+            </div>
+            <div class="author">
+              作者：<span>{{ bookData.mas_book_author }}</span>
+            </div>
             <div class="publish-info">
-              <p>出版社：<span>北京大学出版社</span></p>
-              <p>出版时间：2017年4月</p>
+              <p>
+                出版社：<span>{{ bookData.mas_magazine_host }}</span>
+              </p>
+              <p>出版时间：{{ bookData.mas_magazine_founded_time }}</p>
             </div>
             <p class="introduce fourline">
-              《财务管理案例(第三版)》第二版为十二五***规划教材，《财务管理案例(第三版)》充分融合财务理论、管理实务与财务政策。案例的理论背景介绍可以使学生巩固财务管理的基本原理和核心理论主张，精选的案例可以培养学生清晰的专业理念、较高的专业技能和敏锐的专…
+              {{ bookData.mas_book_describe }}
             </p>
           </div>
         </div>
@@ -29,8 +35,8 @@
             <span></span>
             出版书籍
           </div>
-          <div class="content-box">
-            <p class="title">编辑推荐</p>
+          <div class="content-box" v-html="bookData.mas_book_content">
+            <!-- <p class="title">编辑推荐</p>
             <p>《财务管理案例(第三版)》充分融合财务理论、管理实务与财务政策。案例的理论背景介绍可以使学生巩固财务管理的基本原理和核心理论主张，精选的案例可以培养学生清晰的专业理念、较高的专业技能和敏锐的专业判断水准。</p>
             <p>《财务管理案例(第三版)》全面展现和追踪中国本土企业财务管理的实践。案例来源全部是真实的案例，且都是“中国制造”。案例新颖，大部分都是2013年以后的“故事”。</p>
             <p class="title">内容简介</p>
@@ -39,7 +45,7 @@
             <p>汤谷良，对外经济贸易大学国际商学院院长、教授，教育部长江学者特聘教授。长期从事公司财务管理、管理控制系统的教学与研究，在集团财务管控、预算管理、财务战略等方面颇具建树。韩慧博，祝继高，对外经济贸易大学副教授。</p>
             <p class="title">目 录</p>
             <p>案例一 中信集团的分层上市治理</p>
-            <p>案例二 乐视网价值评估 </p>
+            <p>案例二 乐视网价值评估 </p> -->
           </div>
         </div>
       </div>
@@ -48,13 +54,18 @@
           <h2>书籍推荐</h2>
           <div class="module-main">
             <div class="top-line"></div>
-            <div class="magazine">
+            <div
+              class="magazine"
+              v-for="(item, index) in recommend.list"
+              :key="index"
+              @click="goBooks(recommend.menu.mas_menu_url, item.mas_book_id)"
+            >
               <div class="magazine-img">
-                <img src="@/static/images/way/zz.png" alt="" />
+                <img :src="item.mas_book_img" alt="" />
                 <div class="point">新书</div>
               </div>
-              <div class="headline">2022年第一期｜总第567期</div>
-              <nuxt-link :to="'/dzz/'+1" class="contribute">马上阅读</nuxt-link>
+              <div class="headline">{{ item.mas_book_name }}</div>
+              <a class="contribute">马上阅读</a>
             </div>
           </div>
         </div>
@@ -66,28 +77,31 @@
 export default {
   data() {
     return {
-      sepDot: "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 ",
+      bookData: {}, //书籍信息
+      recommend: {}, //书籍推荐
     };
   },
+  async asyncData({ $axios, route, store, env, params, query, error }) {
+    let res = await $axios.notNeedlogin({
+      className: "BookController",
+      classMethod: "bookDetails",
+      data: {
+        bookId: query.bookId,
+      },
+    });
+    if (res.bol) {
+      return {
+        bookData: res.data.bookData,
+        recommend: res.data.recommend,
+      };
+    }
+  },
   methods: {
-    skip(id) {
-      const target = document.querySelector(id);
-      var anchor = $(".information-title").outerHeight();
-      document.documentElement.scrollTop = target.offsetTop - anchor - 121;
-    },
-    course() {
-      this.$message.info("暂未开课");
-    },
-    //跳转到文章详情
-    goDetail(id) {
+    //点击跳转到书详情
+    goBooks(url, id) {
+      this.$store.commit("setSubTabId", url);
       this.$router.push({
-        path: `/dy/${id}`,
-      });
-    },
-    //点击到详情
-    details(id) {
-      this.$router.push({
-        path: `/jdk/${id}`,
+        path: `/${url}/${id}`,
       });
     },
   },

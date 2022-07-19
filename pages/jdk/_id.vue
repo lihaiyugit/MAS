@@ -8,10 +8,10 @@
             <span></span>
             <h5>{{ detailsData.mas_master_user_name }}</h5>
           </div>
-          <!-- <p>{{detailsData.mas_master_golden}}</p> -->
-          <p>
+          <p>{{ detailsData.mas_master_golden }}</p>
+          <!-- <p>
             要破解预算管理“理想与现实”的难题，预算必须从商业计划开始，建立自下而上的计划－预算体系。
-          </p>
+          </p> -->
         </div>
       </div>
       <div class="master-information">
@@ -19,7 +19,9 @@
           <a class="selection" @click="skip('#information')">基本信息</a>
           <a @click="skip('#js')">介绍</a>
           <a @click="skip('#Work')">著作</a>
-          <a v-if="detailsData.books.length > 0" @click="skip('#book')">出版书籍</a>
+          <a v-if="detailsData.books.length > 0" @click="skip('#book')"
+            >出版书籍</a
+          >
           <a @click="skip('#achievement')">学术成就</a>
           <a @click="course()">TA的课程</a>
         </div>
@@ -50,7 +52,7 @@
             </dl>
           </div>
           <div class="information-main-r">
-            <img src="../../static/images/zwkc.png" alt="" />
+            <img src="@/static/images/zwkc.png" alt="" />
           </div>
         </div>
       </div>
@@ -188,36 +190,18 @@
             <div class="new-mian">
               <div class="top-line"></div>
               <ul class="new-content">
-                <li v-for="(itNews, idx) in masterNews" :key="idx">
+                <li
+                  v-for="(itNews, idx) in masterNews"
+                  :key="idx"
+                  @click="
+                    goDetails(itNews.mas_article_type_url, itNews.mas_article_id)
+                  "
+                >
                   <p class="twoline">
                     {{ itNews.mas_article_title }}
                   </p>
                   <span>来源：{{ itNews.mas_article_author }}</span>
                 </li>
-                <!-- <li>
-                  <p class="twoline">
-                    长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
-                  </p>
-                  <span>来源：新浪网</span>
-                </li>
-                <li>
-                  <p class="twoline">
-                    长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
-                  </p>
-                  <span>来源：新浪网</span>
-                </li>
-                <li>
-                  <p class="twoline">
-                    长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
-                  </p>
-                  <span>来源：新浪网</span>
-                </li>
-                <li>
-                  <p class="twoline">
-                    长江证券独董汤谷良辞职 曾任泛海控股独立非执行董事…
-                  </p>
-                  <span>来源：新浪网</span>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -229,7 +213,12 @@
                 <p
                   v-for="(itLike, idx) in masterLike"
                   :key="idx"
-                  @click="goDetail(itLike.mas_article_id)"
+                  @click="
+                    goDetails(
+                      itLike.mas_article_type_url,
+                      itLike.mas_article_id
+                    )
+                  "
                 >
                   {{ itLike.mas_article_title }}
                 </p>
@@ -244,7 +233,7 @@
                 <dl
                   v-for="(itRw, index) in masterShare"
                   :key="index"
-                  @click="details(itRw.mas_master_user_id)"
+                  @click="goDetails(itRw.url, itRw.mas_master_user_id)"
                 >
                   <dt>
                     <img :src="itRw.mas_master_photo" alt="" />
@@ -302,16 +291,11 @@ export default {
     course() {
       this.$message.info("暂未开课");
     },
-    //跳转到文章详情
-    goDetail(id) {
-      this.$router.push({
-        path: `/dy/${id}`,
-      });
-    },
     //点击到详情
-    details(id) {
+    goDetails(url, id) {
+      this.$store.commit("setSubTabId", url);
       this.$router.push({
-        path: `/jdk/${id}`,
+        path: `/${url}/${id}`,
       });
     },
   },

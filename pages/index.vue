@@ -17,8 +17,15 @@
             <div class="container-one-left">
               <div class="title-box">
                 <div class="top">
-                  <h2>{{ indexData.master.title }}</h2>
-                  <nuxt-link to="/dks" class="more"
+                  <h2>大咖说</h2>
+                  <nuxt-link
+                    :to="{
+                      name: indexData.master.masterTheory.menu.mas_menu_url,
+                      query: {
+                        menuId: indexData.master.masterTheory.menu.mas_menu_id,
+                      },
+                    }"
+                    class="more"
                     >更多 <span class="more-img"></span
                   ></nuxt-link>
                 </div>
@@ -26,19 +33,25 @@
               </div>
               <ul class="left-content">
                 <li
-                  v-for="(item, index) in indexData.master.masterTheory"
+                  v-for="(item, index) in indexData.master.masterTheory
+                    .masterlist"
                   :key="index"
-                  @click="dksDetails(item.mas_master_list_id)"
+                  @click="
+                    goDetails(
+                      indexData.master.masterTheory.menu.mas_menu_url,
+                      item.mas_article_id
+                    )
+                  "
                 >
-                  <h5>{{ item.mas_master_list_title }}</h5>
+                  <h5 class="twoline">{{ item.mas_article_title }}</h5>
                   <div class="base">
                     <div class="left">
                       <img class="icon" src="@/static/images/time.png" alt="" />
-                      <span>{{ item.mas_master_list_addtime }}</span>
+                      <span>{{ item.mas_article_addtime }}</span>
                       <img class="icon" src="@/static/images/chat.png" alt="" />
                       <span>{{ item.commont_num }}</span>
                     </div>
-                    <span class="right">{{ item.mas_master_user_name }}</span>
+                    <span class="right">{{ item.mas_article_author }}</span>
                   </div>
                 </li>
               </ul>
@@ -46,13 +59,26 @@
               <h5 style="height: auto">猜你想认识的大咖</h5>
               <div class="keyword_box twoline">
                 <span
-                  v-for="(item, index) in indexData.master.masterList"
+                  v-for="(item, index) in indexData.master.masterList.master"
                   :key="index"
-                  @click="goJdk(item.mas_master_user_id)"
+                  @click="
+                    goDetails(
+                      indexData.master.masterList.menu.mas_menu_url,
+                      item.mas_master_user_id
+                    )
+                  "
                   >{{ item.mas_master_user_name }}</span
                 >
               </div>
-              <nuxt-link to="/jdk" class="skip-box">
+              <nuxt-link
+                :to="{
+                  name: indexData.master.masterList.menu.mas_menu_url,
+                  query: {
+                    menuId: indexData.master.masterList.menu.mas_menu_id,
+                  },
+                }"
+                class="skip-box"
+              >
                 <span>查看更多</span>
                 <img src="../static/images/arrows-left.png" alt="" />
               </nuxt-link>
@@ -70,6 +96,12 @@
                 <li
                   v-for="(jdItem, jdIndex) in indexData.recommend"
                   :key="jdIndex"
+                  @click="
+                    goDetails(
+                      jdItem.mas_article_type_url,
+                      jdItem.mas_article_id
+                    )
+                  "
                 >
                   <h5>{{ jdItem.mas_article_title }}</h5>
                   <div class="base">
@@ -88,42 +120,6 @@
                     <img src="../static/images/arrows-left.png" alt="" />
                   </div>
                 </li>
-                <!-- <li>
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                  <p>
-                    企业财务人员不仅是企业的价值管理者，而且业财融合新模式正在赋予财务人员更多新角色。
-                  </p>
-                  <div class="skip-box">
-                    <span>阅读详情</span>
-                    <img src="../static/images/arrows-left.png" alt="" />
-                  </div>
-                </li>
-                <li>
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                  <p>
-                    企业财务人员不仅是企业的价值管理者，而且业财融合新模式正在赋予财务人员更多新角色。
-                  </p>
-                  <div class="skip-box">
-                    <span>阅读详情</span>
-                    <img src="/images/arrows-left.png" alt="" />
-                  </div>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -156,10 +152,17 @@
                   </div>
                   <div class="line"></div>
                 </div>
-                <nuxt-link :to="{ path: `/activity/1` }" class="advert-box">
+                <nuxt-link
+                  :to="{
+                    path: `/activity/${indexData.newActivity.menu.mas_menu_id}`,
+                  }"
+                  class="advert-box"
+                >
                   <div class="img">
-                    <!-- <img src="/images/sub-advert02.png" alt="" /> -->
-                    <img :src="indexData.newActivity.mas_activity_img" alt="" />
+                    <img
+                      :src="indexData.newActivity.activity.mas_activity_img"
+                      alt=""
+                    />
                   </div>
                 </nuxt-link>
               </div>
@@ -167,22 +170,38 @@
                 <div class="title-box">
                   <div class="top">
                     <h2>新一期杂志</h2>
-                    <nuxt-link to="/zz" class="more"
+                    <nuxt-link
+                      :to="{
+                        name: indexData.newMagazine.menu.mas_menu_url,
+                        query: {
+                          menuId: indexData.newMagazine.menu.mas_menu_id,
+                        },
+                      }"
+                      class="more"
                       >更多<span class="more-img"></span
                     ></nuxt-link>
                   </div>
                   <div class="line"></div>
                 </div>
-                <nuxt-link :to="{ path: `/dzz/1` }" class="advert-box">
+                <a
+                  @click="
+                    goDetails(
+                      indexData.newMagazine.menu.mas_menu_url,
+                      indexData.newMagazine.magazine.mas_magazine_id
+                    )
+                  "
+                  class="advert-box"
+                >
                   <div class="img">
-                    <!-- <img src="/images/way/zz.png" alt="" /> -->
                     <img
-                      :src="indexData.newMagazine.mas_magazine_master_img"
+                      :src="
+                        indexData.newMagazine.magazine.mas_magazine_master_img
+                      "
                       alt=""
                     />
                     <div class="point">新书</div>
                   </div>
-                </nuxt-link>
+                </a>
               </div>
             </div>
           </div>
@@ -197,7 +216,14 @@
               <div class="title-box">
                 <div class="top">
                   <h2>淘资讯</h2>
-                  <nuxt-link to="/tzx" class="more"
+                  <nuxt-link
+                    :to="{
+                      name: indexData.articleTzx.menu.mas_menu_url,
+                      query: {
+                        menuId: indexData.articleTzx.menu.mas_menu_id,
+                      },
+                    }"
+                    class="more"
                     >更多<span class="more-img"></span
                   ></nuxt-link>
                 </div>
@@ -205,9 +231,14 @@
               </div>
               <ul class="two-ul">
                 <li
-                  v-for="(tzItem, tzIndex) in indexData.articleTzx"
+                  v-for="(tzItem, tzIndex) in indexData.articleTzx.Tzx"
                   :key="tzIndex"
-                  @click="tzxDetails(tzItem.mas_article_id)"
+                  @click="
+                    goDetails(
+                      indexData.articleTzx.menu.mas_menu_url,
+                      tzItem.mas_article_id
+                    )
+                  "
                 >
                   <div class="li-left">
                     <img :src="tzItem.mas_article_img" alt="" />
@@ -227,48 +258,6 @@
                     </div>
                   </div>
                 </li>
-
-                <!-- <li @click="tzxDetails(1)">
-                  <div class="li-left">
-                    <img src="/images/sub-advert06.png" alt="" />
-                    <div class="point">推荐</div>
-                  </div>
-                  <div class="li-right">
-                    <h5 class="reset twoline">
-                      36氪首发｜构建品牌东南亚出海高速路…
-                    </h5>
-                    <div class="base">
-                      <div class="left">
-                        <img class="icon" src="/images/time.png" alt="" />
-                        <span>JULY 1, 2019</span>
-                        <img class="icon" src="/images/chat.png" alt="" />
-                        <span>3</span>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li @click="tzxDetails(2)">
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                </li>
-                <li @click="tzxDetails(3)">
-                  <h5>中国石油刘跃珍： <br />业财融合新模式，财务人员新角色</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>DECEMBER 30, 2016</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -277,7 +266,14 @@
               <div class="title-box">
                 <div class="top">
                   <h2>找方法</h2>
-                  <nuxt-link to="/zff" class="more"
+                  <nuxt-link
+                    :to="{
+                      name: indexData.articleZff.menu.mas_menu_url,
+                      query: {
+                        menuId: indexData.articleZff.menu.mas_menu_id,
+                      },
+                    }"
+                    class="more"
                     >更多<span class="more-img"></span
                   ></nuxt-link>
                 </div>
@@ -297,7 +293,12 @@
                 <li
                   v-for="(item, index) in indexData.articleZff.Zff"
                   :key="index"
-                  @click="zffDetails(item.mas_article_id)"
+                  @click="
+                    goDetails(
+                      indexData.articleZff.menu.mas_menu_url,
+                      item.mas_article_id
+                    )
+                  "
                 >
                   <h5 class="twoline">{{ item.mas_article_title }}</h5>
                   <div class="base">
@@ -317,45 +318,42 @@
               <div class="title-box">
                 <div class="top">
                   <h2>政策解读</h2>
-                  <span class="more">更多<span class="more-img"></span></span>
+                  <nuxt-link
+                    :to="{
+                      name: indexData.policy.menu.mas_menu_url,
+                      query: {
+                        menuId: indexData.policy.menu.mas_menu_id,
+                      },
+                    }"
+                    class="more"
+                    >更多<span class="more-img"></span
+                  ></nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="two-ul">
-                <li @click="tzxDetails(3)" class="two-ul-li">
+                <li
+                  v-for="(zzItem, zzIndex) in indexData.policy.policy"
+                  :key="zzIndex"
+                  @click="
+                    goDetails(
+                      indexData.policy.menu.mas_menu_url,
+                      zzItem.mas_article_id
+                    )
+                  "
+                  class="two-ul-li"
+                >
                   <div class="li-right">
                     <h5 class="reset twoline">
-                      做15后的生意，把迪士尼装进商场，室内亲子乐园…
+                      {{ zzItem.mas_article_title }}
                     </h5>
                     <div class="base">
                       <div class="left">
                         <img class="icon" src="/images/time.png" alt="" />
-                        <span>2022-03-14</span>
+                        <span>{{ zzItem.mas_article_addtime }}</span>
                         <img class="icon" src="/images/chat.png" alt="" />
-                        <span>3</span>
+                        <span>{{ zzItem.commont_num }}</span>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li @click="tzxDetails(3)">
-                  <h5>焦点分析｜极兔不想成为字节跳动的“菜鸟”，而是…</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>2022-03-14</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
-                    </div>
-                  </div>
-                </li>
-                <li @click="tzxDetails(3)">
-                  <h5>车厘子价格腰斩？记者走访全国最大果菜批发市场…</h5>
-                  <div class="base">
-                    <div class="left">
-                      <img class="icon" src="/images/time.png" alt="" />
-                      <span>2022-03-14</span>
-                      <img class="icon" src="/images/chat.png" alt="" />
-                      <span>3</span>
                     </div>
                   </div>
                 </li>
@@ -428,64 +426,47 @@
               <div class="title-box">
                 <div class="top">
                   <h2>逛书店</h2>
-                  <nuxt-link to="/gsd" class="more"
+                  <nuxt-link
+                    :to="{
+                      name: indexData.bookstoreList.menu.mas_menu_url,
+                      query: {
+                        menuId: indexData.bookstoreList.menu.mas_menu_id,
+                      },
+                    }"
+                    class="more"
                     >更多<span class="more-img"></span
                   ></nuxt-link>
                 </div>
                 <div class="line"></div>
               </div>
               <div class="two-content-mid">
-                <dl @click="details(1)">
+                <dl
+                  v-for="(bookIt, bookId) in indexData.bookstoreList.books"
+                  :key="bookId"
+                  @click="
+                    goDetails(
+                      indexData.bookstoreList.menu.mas_menu_url,
+                      bookIt.mas_book_id
+                    )
+                  "
+                >
                   <dt>
                     <div class="dt-l">
                       <img src="@/static/images/tip-1.png" alt="" />
                     </div>
                     <div class="dt-r">
-                      <h5>智能管理会计</h5>
-                      <span>韩向东</span>
+                      <h5 class="oneline">{{ bookIt.mas_book_name }}</h5>
+                      <span>{{ bookIt.mas_book_author }}</span>
                       <p class="twoline">
-                        在全球经济加速从工业经济向数字经济过渡…
+                        {{ bookIt.mas_book_describe }}
                       </p>
                     </div>
                   </dt>
                   <dd>
-                    <img src="@/static/images/small-book.png" alt="" />
-                  </dd>
-                </dl>
-                <dl @click="details(1)">
-                  <dt>
-                    <div class="dt-l">
-                      <img src="@/static/images/tip-2.png" alt="" />
-                    </div>
-                    <div class="dt-r">
-                      <h5>智能管理会计</h5>
-                      <span>韩向东</span>
-                      <p class="twoline">
-                        在全球经济加速从工业经济向数字经济过渡…
-                      </p>
-                    </div>
-                  </dt>
-                  <dd>
-                    <img src="@/static/images/small-book.png" alt="" />
+                    <img :src="bookIt.mas_book_img" alt="" />
                   </dd>
                 </dl>
               </div>
-              <!-- <div class="two-content-mid" @click="details(1)">
-                <div class="img-box">
-                  <img :src="indexData.bookstoreList.mas_book_img" alt="" />
-                </div>
-                <h5>
-                  {{ indexData.bookstoreList.mas_book_name }}
-                </h5>
-                <div class="base">
-                  <div class="left">
-                    <img class="icon" src="/images/time.png" alt="" />
-                    <span>{{ indexData.bookstoreList.mas_book_addtime }}</span>
-                    <img class="icon" src="/images/chat.png" alt="" />
-                    <span>3</span>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
           <div class="container-two">
@@ -493,33 +474,33 @@
               <div class="title-box">
                 <div class="top">
                   <h2>投稿更多</h2>
-                  <span class="more"
+                  <!-- <span class="more"
                     >更多
-                    <span class="more-img"></span>
-                  </span>
+                    <span class="more-img"></span> -->
+                  <!-- </span> -->
                 </div>
                 <div class="line"></div>
               </div>
               <ul class="two-content-right">
                 <li>
-                  <div class="img">
+                  <nuxt-link to="/qyfw" class="img">
                     <img src="@/static/images/qytg.png" alt="" />
                     <img
                       class="img-icon"
                       src="@/static/images/tg-l-1.png"
                       alt=""
                     />
-                  </div>
+                  </nuxt-link>
                 </li>
                 <li>
-                  <div class="img">
+                  <nuxt-link to="/wytg" class="img">
                     <img src="@/static/images/mastg.png" alt="" />
                     <img
                       class="img-icon"
                       src="@/static/images/tg-l-1.png"
                       alt=""
                     />
-                  </div>
+                  </nuxt-link>
                 </li>
               </ul>
             </div>
@@ -602,6 +583,7 @@ export default {
   created() {
     this.$store.commit("setHeaderWidth", "1200px");
     this.$store.commit("setIsFixedHeader", true);
+    this.$store.commit("setSubTabId", "");
   },
   mounted() {
     console.log(this.indexData, "indexData");
@@ -661,52 +643,25 @@ export default {
       }
     },
     //点击到详情
-    details(id) {
+    goDetails(url, id) {
+      this.$store.commit("setSubTabId", url);
       this.$router.push({
-        path: `/gsd/${id}`,
-        // name: "",
-        // query: { id: index, type: item },
-        // params: {
-        //   type: item,
-        // },
-      });
-    },
-    //点击大咖说
-    goJdk(id) {
-      this.$router.push({
-        path: `/jdk/${id}`,
-      });
-    },
-    //点击大咖说详情
-    dksDetails(id) {
-      this.$router.push({
-        path: `/dks/${id}`,
-      });
-    },
-    //点击站内热词
-    onHotWord(val, id) {
-      this.$router.push({
-        path: "/search",
-        query: { keyword: val, hotWordId: id },
+        path: `/${url}/${id}`,
       });
     },
 
-    //跳转到找方法详情
-    zffDetails(id) {
-      this.$router.push({
-        path: `/zff/${id}`,
-      });
-    },
-    //淘资讯跳转到详情
-    tzxDetails(id) {
-      this.$router.push({
-        path: `/tzx/${id}`,
-      });
-    },
     //看专题点击跳转
     kztDetails(id) {
       this.$router.push({
         path: `/kzt/${id}`,
+      });
+    },
+    //点击站内热词
+    onHotWord(val, id) {
+      this.$store.commit("setSubTabId", -1);
+      this.$router.push({
+        path: "/search",
+        query: { keyword: val, hotWordId: id },
       });
     },
   },
@@ -756,7 +711,7 @@ export default {
       }
       h5 {
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
         color: rgba(0, 0, 0, 0.85);
         line-height: 24px;
         height: 48px;
@@ -856,7 +811,7 @@ export default {
               background-position: center center;
               background-repeat: no-repeat;
               margin-left: 4px;
-              margin-top: 2px;
+              margin-top: 1px;
             }
           }
         }
@@ -1056,6 +1011,7 @@ export default {
                     color: rgba(0, 0, 0, 0.85);
                     line-height: 24px;
                     height: auto;
+                    width: 160px;
                   }
                   span {
                     font-size: 13px;

@@ -5,7 +5,6 @@
       <nuxt-link to="/activity" class="more">
         更多
         <span class="more-img"></span>
-        <!-- <img src="@/static/images/way/more-arrow.png" alt="" /> -->
       </nuxt-link>
     </div>
     <div class="selections-main">
@@ -18,20 +17,9 @@
             />
             <div class="point">最新活动</div>
           </dt>
-          <dd>{{item.mas_activity_title}}</dd>
+          <dd class="oneline">{{item.mas_activity_title}}</dd>
         </dl>
       </nuxt-link>
-      <!-- <nuxt-link :to="'/activity/' + 1">
-        <dl>
-          <dt>
-            <img
-              src="https://www.chinamas.cn/upload/2021/03/15/16157866922673.15.jpg"
-              alt=""
-            />
-          </dt>
-          <dd>数字化赋能产业互联</dd>
-        </dl>
-      </nuxt-link> -->
     </div>
   </div>
 </template>
@@ -105,11 +93,15 @@ export default {
     padding: 17px 20px 20px;
     a {
       display: inline-block;
+
       font-size: 14px;
       font-weight: 400;
       text-align: justify;
       color: rgba(0, 0, 0, 0.85);
       margin-bottom: 12px;
+      dd{
+        width: 300px;
+      }
       &:last-child {
         margin-bottom: 0px;
       }
@@ -142,12 +134,12 @@ export default {
           width: 267px;
           font-size: 18px;
           font-weight: 500;
-          display: -webkit-box !important;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          word-break: break-all;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
+          // display: -webkit-box !important;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          // word-break: break-all;
+          // -webkit-box-orient: vertical;
+          // -webkit-line-clamp: 2;
         }
       }
     }

@@ -31,29 +31,27 @@
               <dl
                 v-for="(item, index) in listData"
                 :key="index"
-                @click="details(item.mas_master_user_id)"
+                @click="details(item.mas_article_id)"
               >
                 <dt>
-                  <img :src="item.mas_master_list_img" alt="" />
+                  <img :src="item.mas_article_img" alt="" />
                 </dt>
                 <dd>
                   <div class="top">
                     <h5 class="oneline">
-                      {{ item.mas_master_list_title }}
+                      {{ item.mas_article_title }}
                     </h5>
                     <p class="oneline">
-                      {{ item.mas_master_list_introduce }}
+                      {{ item.mas_article_introduce }}
                     </p>
                   </div>
                   <div class="base">
                     <div class="base-left">
-                      <span>{{ item.mas_master_user_name }}</span>
+                      <span>{{ item.mas_article_author }}</span>
                     </div>
                     <div class="base-right">
                       <img src="@/static/images/time.png" alt="" class="time" />
-                      <span class="text">{{
-                        item.mas_master_list_addtime
-                      }}</span>
+                      <span class="text">{{ item.mas_article_addtime }}</span>
                       <img src="@/static/images/chat.png" alt="" class="chat" />
                       <span class="text">{{ item.commont_num }}</span>
                     </div>
@@ -132,7 +130,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
         page: 1,
         limit: 6,
       },
@@ -155,43 +153,43 @@ export default {
     // scroll事件并监听
     window.addEventListener("scroll", this.dksScroll);
   },
-  //scroll事件并监听
-  dksScroll() {
-    //可视区域大小window.innerHeight
-    var scrollTop =
-      document.documentElement.scrollTop ||
-      window.pageYOffset ||
-      document.body.scrollTop; //滚动高度
-    //"文档高度"document.body.offsetHeight 327底部高度
-    //判断是否滚动到底部
-    if (
-      scrollTop + window.innerHeight + 327 * 1.5 >=
-      document.body.offsetHeight
-    ) {
-      //327 表示距离底部多少的距离的开始触发loadmore效果
-      if (!this.showlaoding && !this.finished) {
-        //防止多次加载
-        this.moretype = "list";
-        this.moreFn();
-      }
-    }
-  },
+
   methods: {
+    //scroll事件并监听
+    dksScroll() {
+      //可视区域大小window.innerHeight
+      var scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop; //滚动高度
+      //"文档高度"document.body.offsetHeight 327底部高度
+      //判断是否滚动到底部
+      if (
+        scrollTop + window.innerHeight + 327 * 1.5 >=
+        document.body.offsetHeight
+      ) {
+        //327 表示距离底部多少的距离的开始触发loadmore效果
+        if (!this.showlaoding && !this.finished) {
+          //防止多次加载
+           this.moretype = "list";
+          this.moreFn();
+        }
+      }
+    },
     //滑动加载
     moreFn() {
       let pageIndex = this.pageIndex + 1;
       this.commonData(pageIndex);
     },
-    //根据条件搜索
-    getList() {
-      this.commonData(this.pageIndex);
-    },
+
     //根据条件搜索
     async commonData(pageIndex) {
+
       this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
-          MenuId: this.$store.state.subTabId,
+          // MenuId: this.$store.state.subTabId,
+          MenuId: this.$route.query.menuId,
           page: pageIndex,
           limit: this.pageSize,
           type: this.moretype,

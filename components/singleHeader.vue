@@ -11,17 +11,17 @@
             v-for="(item, index) in tabList"
             :key="index"
             @click="oNitem(index, item)"
-            :class="current == item.mas_menu_id ? 'active' : ''"
+            :class="current == item.mas_menu_url ? 'active' : ''"
           >
-            <!-- :class="current == item.mas_menu_id ? 'active' : ''" -->
-            {{ item.mas_menu_name }}
-            <!-- <nuxt-link
+            <!-- @click="oNitem(index, item)":class="current == item.mas_menu_id ? 'active' : ''" -->
+            <!-- {{ item.mas_menu_name }} -->
+            <nuxt-link
               :to="{
                 name: item.mas_menu_url,
-                params:{menuId:item.mas_menu_id}
+                query: { menuId: item.mas_menu_id },
               }"
               >{{ item.mas_menu_name }}</nuxt-link
-            > -->
+            >
           </li>
         </ul>
       </div>
@@ -41,11 +41,14 @@ export default {
     return {
       searchValue: "",
       tabList: [],
-      current: this.$store.state.subTabId ? this.$store.state.subTabId : 0,
+      current: this.$store.state.subTabId ? this.$store.state.subTabId : "",
     };
   },
   async fetch() {
-    if (this.$store.state.tabList == undefined) {
+    if (
+      this.$store.state.tabList == undefined ||
+      this.$store.state.tabList == ""
+    ) {
       let res = await this.$axios.notNeedlogin({
         className: "NavigationController",
         classMethod: "getLeftNavigation",
@@ -63,9 +66,14 @@ export default {
   mounted() {
     // 开启滚动监听
     window.addEventListener("scroll", this.handleScroll);
+    // 浏览器控制按钮前进后退触发函数
+    window.addEventListener("popstate", this.popstate, false);
   },
 
   methods: {
+    popstate() {
+      this.$store.commit("setSubTabId", "");
+    },
     // 滚动监听  滚动触发的效果写在这里
     handleScroll() {
       var X = 0.8; //行高缩小比例
@@ -106,33 +114,35 @@ export default {
 
     //点击每一项菜单
     oNitem(index, item) {
-      // console.log(item, "=item===");
       document.body.scrollTop = 0;
-      this.$store.commit("setSubTabId", item.mas_menu_id);
-      this.$router.push({
-        name: item.mas_menu_url,
-      });
+      this.$store.commit("setSubTabId", item.mas_menu_url);
+      // this.$router.push({
+      //   name: item.mas_menu_url,
+      // });
     },
   },
   destroyed() {
+    // 避免堆栈溢出，多次创建、多次触发
+    window.removeEventListener("popstate", this.popstate, false);
     window.removeEventListener("scroll", this.handleScroll); // 离开页面 关闭监听 不然会报错
   },
 };
 </script>
 <style lang="less" scoped>
-.nuxt-link-active {
-  text-decoration: none;
-  color: #fa6725 !important;
-}
 .active {
+  font-weight: 500 !important;
   color: #fa6725 !important;
+  a {
+    font-weight: 500 !important;
+    color: #fa6725 !important;
+  }
 }
 .middle-header {
   position: fixed;
   top: 0px !important;
   left: 0;
   padding: 16px 0px !important;
-  z-index: 100000 !important;
+  z-index: 1001 !important;
   transition: all 0.5s ease !important;
   animation: fadeInDown 0.5s both 0.2s;
 }
@@ -236,7 +246,7 @@ export default {
             90deg,
             #ff4e5c 0%,
             #ff9261 82%,
-            #fa6725 100%
+            #fe9062 100%
           );
           border-radius: 0px 4px 4px 0px;
           font-size: 14px;

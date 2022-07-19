@@ -33,7 +33,7 @@
                   <span>增值服务</span>
                 </li>
               </ul>
-              <button>开通会员</button>
+              <button @click="isShowSon = true">开通会员</button>
             </div>
             <div class="state-two" v-else-if="vipstate == 1">
               <div class="state-two-title">
@@ -62,7 +62,7 @@
                   <span>增值服务</span>
                 </li>
               </ul>
-              <button>开通会员</button>
+              <button @click="isShowSon = true">开通会员</button>
             </div>
             <div class="state-three" v-else-if="vipstate == 2">
               <div class="three-title">
@@ -83,7 +83,7 @@
               </div>
               <div class="sub-title">
                 <h5>您可以畅游MAS平台</h5>
-                <button>去续费</button>
+                <button @click="isShowSon = true">去续费</button>
               </div>
               <ul class="platform">
                 <li>
@@ -143,7 +143,7 @@
                   <span>增值服务</span>
                 </li>
               </ul>
-              <button>去升级PLUS会员</button>
+              <button @click="isShowSon = true">去升级PLUS会员</button>
             </div>
           </div>
         </div>
@@ -616,6 +616,8 @@
         </div>
       </div>
     </div>
+    <!-- 开通会员弹框 -->
+    <VipPopup :isVisible="isShowSon" v-if="isShowSon" @close="closeDialog" />
   </div>
 </template>
 <script>
@@ -625,6 +627,7 @@ export default {
       ydCheack: 0, //阅读默认选中值
       plusCheack: 0, //plus默认选中值
       vipstate: 0, //
+      isShowSon: false, //是否显示开通会员弹框子组件
     };
   },
   mounted() {
@@ -640,12 +643,17 @@ export default {
     //   $(this).removeClass("back").siblings().removeClass("back");
     // });
   },
+
   methods: {
     ydFn(index) {
       this.ydCheack = index;
     },
     plusFn(index) {
       this.plusCheack = index;
+    },
+    // 关闭弹窗
+    closeDialog(val) {
+      this.isShowSon = val;
     },
   },
 };

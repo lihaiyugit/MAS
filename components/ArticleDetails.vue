@@ -341,7 +341,13 @@
           <div class="module-main">
             <div class="top-line"></div>
             <ul>
-              <li v-for="(item, index) in detailsData.list" :key="index">
+              <li
+                v-for="(item, index) in detailsData.list"
+                :key="index"
+                @click="
+                  goDetails(item.mas_article_type_url, item.mas_article_id)
+                "
+              >
                 <div class="li-l twoline">
                   {{ item.mas_article_title }}
                 </div>
@@ -371,7 +377,10 @@
           <h2>杂志</h2>
           <div class="module-main">
             <div class="top-line"></div>
-            <div class="magazine">
+            <div
+              class="magazine"
+              @click="goMagezine(detailsData.magazine.mas_magazine_id)"
+            >
               <div class="magazine-img">
                 <img
                   :src="detailsData.magazine.mas_magazine_master_img"
@@ -382,11 +391,7 @@
               <div class="headline">
                 {{ detailsData.magazine.mas_magazine_title_main }}
               </div>
-              <nuxt-link
-                :to="'/dzz/' + detailsData.magazine.mas_magazine_id"
-                class="contribute"
-                >马上阅读</nuxt-link
-              >
+              <a class="contribute">马上阅读</a>
             </div>
           </div>
         </div>
@@ -473,43 +478,8 @@ export default {
     };
   },
 
-  async fetch() {
-    // let timestamp = Date.parse(new Date());
-    // let sign = md5(timestamp + this.$store.state.secretKey);
-    // let res = await notNeedlogin(this.$axios, {
-    //   className: "ArticleController",
-    //   classMethod: "articleDetails",
-    //   sign: sign,
-    //   timespan: timestamp,
-    //   data: {
-    //     articleId: this.$route.params.id,
-    //     token: this.$store.state.token,
-    //   },
-    // });
-    // console.log(res, "res-文章详情");
-    // this.detailsData=res.data;
-  },
-  created() {
-    // let timestamp = Date.parse(new Date());
-    // let sign = md5(timestamp + this.$store.state.secretKey);
-    // this.$axios
-    //   .notNeedlogin({
-    //     className: "ArticleController",
-    //     classMethod: "articleDetails",
-    //     sign: sign,
-    //     timespan: timestamp,
-    //     data: {
-    //       articleId: this.$route.params.id,
-    //       token: this.$store.state.token,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res, "res-文章详情");
-    //     if (res.bol) {
-    //       this.detailsData = res.data;
-    //     }
-    //   });
-  },
+  async fetch() {},
+  created() {},
   mounted() {
     this.linkUrl = window.location.href;
     AOS.init({
@@ -530,6 +500,13 @@ export default {
   },
 
   methods: {
+    //点击到详情
+    goDetails(url, id) {
+      this.$store.commit("setSubTabId", url);
+      this.$router.push({
+        path: `/${url}/${id}`,
+      });
+    },
     //点击立即支付未登录状态
     goLogin() {
       if (this.detailsData.articleDetails.isLogin == "N") {
@@ -616,9 +593,17 @@ export default {
     //点击每个热词
     onItem(val, id, index) {
       this.current = index;
+      this.$store.commit("setSubTabId", -1);
       this.$router.push({
         path: "/search",
         query: { keyword: val, hotWordId: id },
+      });
+    },
+    //点击跳转到杂志详情
+    goMagezine(id) {
+      this.$store.commit("setSubTabId", "dzz");
+      this.$router.push({
+        path: `/dzz/${id}`,
       });
     },
   },

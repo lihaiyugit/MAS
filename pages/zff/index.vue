@@ -5,7 +5,6 @@
       <div class="banxin content-container-main">
         <div class="content-container-main-left">
           <div class="banner">
-            <!-- <img src="../../static/images/way/banner.png" alt="" /> -->
             <img :src="bannerArr[0].mas_banner_img" alt="" />
             <nuxt-link to="/wytg" class="wytg"></nuxt-link>
           </div>
@@ -147,7 +146,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
         page: 1,
         limit: 6,
       },
@@ -175,8 +174,7 @@ export default {
     //   return this.$store.state.subTabId;
     // },
   },
-  created() {
-  },
+  created() {},
   mounted() {
     // console.log(this.orderList, "===");
     // this.$store.commit("setSubTabId", this.orderList);
@@ -263,7 +261,7 @@ export default {
     //点击到详情
     details(id) {
       this.$router.push({
-        path: `/zff/${id}`,
+        path: `/${this.$route.name}/${id}`,
       });
     },
     //滑动加载
@@ -280,7 +278,8 @@ export default {
       this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
-          MenuId: this.$store.state.subTabId,
+          // MenuId: this.$store.state.subTabId,
+          MenuId: this.$route.query.menuId,
           page: pageIndex,
           limit: this.pageSize,
           articleTypeId: this.articleTypeId,

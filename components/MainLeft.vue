@@ -2,13 +2,16 @@
   <div class="main-left-container">
     <!-- :class="current == index ? 'active' : ''"  @click="oNitem(index)"-->
     <ul>
-      <li
-        v-for="(item, index) in tabList"
-        :key="index"
-        @click="oNitem(index, item)"
-      >
-        {{ item.mas_menu_name }}
-        <!-- <nuxt-link :to="{name:'catalogue-id',params:{id:index+1,type:item}}">{{ item }}</nuxt-link> -->
+      <li v-for="(item, index) in tabList" :key="index"  @click="oNitem(index, item)">
+        <nuxt-link
+          :to="{
+            name: item.mas_menu_url,
+            query: { menuId: item.mas_menu_id },
+          }"
+          >{{ item.mas_menu_name }}</nuxt-link
+        >
+        <!-- {{ item.mas_menu_name }} -->
+        <!--   @click="oNitem(index, item)"<nuxt-link :to="{name:'catalogue-id',params:{id:index+1,type:item}}">{{ item }}</nuxt-link> -->
       </li>
     </ul>
   </div>
@@ -22,7 +25,8 @@ export default {
     };
   },
   async fetch() {
-    if (this.$store.state.tabList == undefined) {
+    if (this.$store.state.tabList == undefined ||this.$store.state.tabList=='') {
+
       let res = await this.$axios.notNeedlogin({
         className: "NavigationController",
         classMethod: "getLeftNavigation",
@@ -42,10 +46,10 @@ export default {
     //点击每一个栏目
     oNitem(index, item) {
       document.body.scrollTop = 0;
-      this.$store.commit("setSubTabId", item.mas_menu_id);
-      this.$router.push({
-        name: item.mas_menu_url,
-      });
+      this.$store.commit("setSubTabId", item.mas_menu_url);
+      // this.$router.push({
+      //   name: item.mas_menu_url,
+      // });
     },
   },
 };
@@ -68,6 +72,9 @@ export default {
       line-height: 47px;
       margin-bottom: 4px;
       cursor: pointer;
+      a{
+         color: rgba(0, 0, 0, 0.85);
+      }
     }
     li:last-child {
       margin-bottom: 0px;
@@ -76,6 +83,9 @@ export default {
       background: #fff2ed;
       border-radius: 6px;
       color: #fa6725;
+      a{
+        color: #fa6725;
+      }
     }
   }
 }

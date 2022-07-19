@@ -29,6 +29,7 @@ export default {
   methods: {
     //跳转到文章详情
     goDetail(url,id) {
+        this.$store.commit("setSubTabId", url);
       this.$router.push({
         path:`/${url}/${id}`
       });

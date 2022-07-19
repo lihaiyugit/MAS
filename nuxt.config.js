@@ -13,7 +13,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // { rel: 'stylesheet', href: 'https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css' },
+      // { rel: 'stylesheet', href: "" },
     ],
     script: [
       { src: '/js/qrcode.min.js' },
@@ -38,7 +38,6 @@ export default {
   loading:false,
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-
     // '@/plugins/router',//全局路由守卫配置
     // { src: '@plugins/lib-flexible.js', ssr: false },
     { src: "@/plugins/axios.js" }, // api请求封装
@@ -49,7 +48,7 @@ export default {
     { src: '@/plugins/filters.js', ssr: true },
     { src: '@/plugins/lazyload', ssr: true },
     { src: '@/plugins/pdf.js', ssr: false },
-    // { src: '@/plugins/map.js', ssr: false },
+    { src: '@/plugins/map.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -180,5 +179,6 @@ export default {
     // scrollBehavior(to, from, savedPosition) {
     //   return { x: 0, y: 0 }
     // }
-  }
+  },
+
 }

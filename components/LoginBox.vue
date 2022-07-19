@@ -204,8 +204,8 @@
       </el-form>
       <div class="operation register-top">
         <el-checkbox v-model="registerParams.agreement"
-          >我已阅读并同意<span class="agreement"
-            >《服务协议》</span
+          >我已阅读并同意<a target="_blank" href="/protocol" class="agreement"
+            >《服务协议》</a
           ></el-checkbox
         >
         <span class="text" @click="changeLogin('5')">忘记密码</span>
@@ -316,7 +316,7 @@
 </template>
 
 <script>
-// import { notNeedlogin, getUserInfo } from "../request/api";
+import { getUserInfo } from "../request/api";
 // import md5 from "js-md5";
 import { mapMutations } from "vuex";
 import qs from "qs";
@@ -544,48 +544,38 @@ export default {
     // 获取微信数据
     getWxData() {
       let _this = this;
-      // let timestamp = Date.parse(new Date());
-      // let sign = md5(timestamp + this.$store.state.secretKey);
-      this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        className: "Wx",
-        classMethod: "getWxParams",
-      }).then((res) => {
-        if (res.bol) {
-          // 扫码登录
-          var obj = new WxLogin({
-            self_redirect: false,
-            id: `${
-              _this.loginType == 2 ? "login_container" : "login_container_one"
-            }`, //显示二维码的容器id
-            appid: res.data.appid, //应用唯一标识
-            scope: res.data.scope, //应用授权作用域,网页应用目前仅填写snsapi_login即可
-            state: _this.$route.query.path,
-            redirect_uri: encodeURIComponent(res.data.redirect_uri), //重定向地址，需要进行UrlEncode
-            style: "black",
-            href: "data:text/css;base64,LmltcG93ZXJCb3ggewogIHdpZHRoOiAxODBweDsKfQouaW1wb3dlckJveCAucXJjb2RlIHsKICB3aWR0aDogMTgwcHg7CiAgbWFyZ2luLXRvcDogMHB4OwogIGJvcmRlcjogbm9uZTsKfQouaW1wb3dlckJveCAudGl0bGUgewogIGRpc3BsYXk6IG5vbmU7Cn0KLmltcG93ZXJCb3ggLmluZm8gewogIHdpZHRoOiAxMDAlOwp9Ci5pbXBvd2VyQm94IC5pbmZvIC5zdGF0dXNfYnJvd3NlciB7CiAgICBkaXNwbGF5OiBub25lOwp9Ci5zdGF0dXNfaWNvbiB7CiAgZGlzcGxheTogbm9uZTsKfQouaW1wb3dlckJveCAuc3RhdHVzIHsKICB0ZXh0LWFsaWduOiBjZW50ZXI7CiAgcGFkZGluZzogMTRweDsKfQouaW1wb3dlckJveCAuc3RhdHVzX3N1Y2MgewogICAgZm9udC1zaXplOiAxNnB4OwogICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgbWFyZ2luLXRvcDogMHB4Owp9Ci5pbXBvd2VyQm94IC5pY29uMzhfbXNnLnN1Y2MgewogICAgYmFja2dyb3VuZDogdXJsKGh0dHBzOi8vcmVzLnd4LnFxLmNvbS9jb25uZWN0L3poX0NOL2h0bWxlZGl0aW9uL2ltYWdlcy9pY29uX3BvcHVwMzY5NmI0LnBuZykwIC0yOXB4IG5vLXJlcGVhdDsKICAgIGJhY2tncm91bmQtc2l6ZTogMjRweDsKfS5pbXBvd2VyQm94IC5pY29uMzhfbXNnIHsKICAgIHdpZHRoOiAyNHB4OwogICAgaGVpZ2h0OiAyNHB4Owp9Ci5pbmZvIC5zdGF0dXNfdHh0IHAgewogICAgZGlzcGxheTogbm9uZTsKfQ==",
-          });
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.$axios
+        .notNeedlogin({
+          className: "Wx",
+          classMethod: "getWxParams",
+        })
+        .then((res) => {
+          if (res.bol) {
+            // 扫码登录
+            var obj = new WxLogin({
+              self_redirect: false,
+              id: `${
+                _this.loginType == 2 ? "login_container" : "login_container_one"
+              }`, //显示二维码的容器id
+              appid: res.data.appid, //应用唯一标识
+              scope: res.data.scope, //应用授权作用域,网页应用目前仅填写snsapi_login即可
+              state: _this.$route.query.path,
+              redirect_uri: encodeURIComponent(res.data.redirect_uri), //重定向地址，需要进行UrlEncode
+              style: "black",
+              href: "data:text/css;base64,LmltcG93ZXJCb3ggewogIHdpZHRoOiAxODBweDsKfQouaW1wb3dlckJveCAucXJjb2RlIHsKICB3aWR0aDogMTgwcHg7CiAgbWFyZ2luLXRvcDogMHB4OwogIGJvcmRlcjogbm9uZTsKfQouaW1wb3dlckJveCAudGl0bGUgewogIGRpc3BsYXk6IG5vbmU7Cn0KLmltcG93ZXJCb3ggLmluZm8gewogIHdpZHRoOiAxMDAlOwp9Ci5pbXBvd2VyQm94IC5pbmZvIC5zdGF0dXNfYnJvd3NlciB7CiAgICBkaXNwbGF5OiBub25lOwp9Ci5zdGF0dXNfaWNvbiB7CiAgZGlzcGxheTogbm9uZTsKfQouaW1wb3dlckJveCAuc3RhdHVzIHsKICB0ZXh0LWFsaWduOiBjZW50ZXI7CiAgcGFkZGluZzogMTRweDsKfQouaW1wb3dlckJveCAuc3RhdHVzX3N1Y2MgewogICAgZm9udC1zaXplOiAxNnB4OwogICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgbWFyZ2luLXRvcDogMHB4Owp9Ci5pbXBvd2VyQm94IC5pY29uMzhfbXNnLnN1Y2MgewogICAgYmFja2dyb3VuZDogdXJsKGh0dHBzOi8vcmVzLnd4LnFxLmNvbS9jb25uZWN0L3poX0NOL2h0bWxlZGl0aW9uL2ltYWdlcy9pY29uX3BvcHVwMzY5NmI0LnBuZykwIC0yOXB4IG5vLXJlcGVhdDsKICAgIGJhY2tncm91bmQtc2l6ZTogMjRweDsKfS5pbXBvd2VyQm94IC5pY29uMzhfbXNnIHsKICAgIHdpZHRoOiAyNHB4OwogICAgaGVpZ2h0OiAyNHB4Owp9Ci5pbmZvIC5zdGF0dXNfdHh0IHAgewogICAgZGlzcGxheTogbm9uZTsKfQ==",
+            });
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
     },
     //根据state获取user信息监听事件
     getState() {
+      console.log(this.$route.query.code,'---')
       let _this = this;
       // clearInterval(_this.timer);//防止上次定时器没有关又请求下次
-      // let timestamp = Date.parse(new Date());
-      // let sign = md5(timestamp + this.$store.state.secretKey);
       getUserInfo(_this.$axios, {
         wxCode: _this.$route.query.code,
-        // sign: sign,
-        // timespan: timestamp,
-        // data: {
-        //   wxCode: _this.$route.query.code,
-        // },
-        // className: "Wx",
-        // classMethod: "getUserInfo",
       }).then((res) => {
         console.log(res, "res");
         if (res.err_code == 40023) {
@@ -620,15 +610,9 @@ export default {
     //点击登录方式切换
     changeLogin(type) {
       this.loginType = type;
-      console.log(type, "typetype");
       if (type == 2 || type == 4) {
         this.getWxData();
       }
-      // if (type == 0 || type == 3) {
-      //   console.log(this.timer, "this.timer");
-      //   clearInterval(this.timer);
-      //   // window.clearInterval(this.timer);
-      // }
     },
     //账号密码登录
     loginPwd(loginFormPwd) {
@@ -675,70 +659,74 @@ export default {
       let _this = this;
       // let timestamp = Date.parse(new Date());
       // let sign = md5(timestamp + this.$store.state.secretKey);
-      this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        data: val,
-        className: "UserController",
-        classMethod: "login",
-      }).then((res) => {
-        if (res.bol) {
-          // 是否自动登录 储存7天
-          if (type == 1) {
-            if (_this.autoLogin) {
-              //存储cookie
-              _this.$cookies.set(
-                "autoLogin",
-                {
-                  type: 1,
-                  phone: _this.loginFormPwdData.mobile,
-                  password: _this.loginFormPwdData.password,
-                },
-                {
-                  path: "/", //设置cookie为路由的跟路径，对整个网站有效
-                  maxAge: 60 * 60 * 24 * 7, //设置cookie过期时间为7天
-                }
-              );
-            } else {
-              _this.$cookies.remove("autoLogin", { path: "/" });
+      this.$axios
+        .notNeedlogin({
+          // sign: sign,
+          // timespan: timestamp,
+          data: val,
+          className: "UserController",
+          classMethod: "login",
+        })
+        .then((res) => {
+          if (res.bol) {
+            // 是否自动登录 储存7天
+            if (type == 1) {
+              if (_this.autoLogin) {
+                //存储cookie
+                _this.$cookies.set(
+                  "autoLogin",
+                  {
+                    type: 1,
+                    phone: _this.loginFormPwdData.mobile,
+                    password: _this.loginFormPwdData.password,
+                  },
+                  {
+                    path: "/", //设置cookie为路由的跟路径，对整个网站有效
+                    maxAge: 60 * 60 * 24 * 7, //设置cookie过期时间为7天
+                  }
+                );
+              } else {
+                _this.$cookies.remove("autoLogin", { path: "/" });
+              }
             }
+            _this.setToken(res.data.token);
+            _this.$cookies.set("token", res.data.token, config.cookieConfig);
+            _this.setUserInfo(res.data);
+            _this.$cookies.set("userInfo", res.data, config.cookieConfig);
+            _this.$message.success(res.msg);
+            // _this.$router.push({ name: "index" });
+            //fullPath为登录前的地址，登录成功后跳转到登录前的浏览地址
+            //fullPath可以从nuxt的asyncData的from参数中获取
+            //  let path = _self.fullPath || '/';
+            //  _self.$router.push({ path: path.indexOf('/verify') === 0 ? '/' : path });
+            let path = _this.$route.query.path || "/";
+            _this.$router.push({
+              path: _this.$route.query.path ? path : "/",
+            });
+          } else {
+            this.$message.error(res.msg);
           }
-          _this.setToken(res.data.token);
-          _this.$cookies.set("token", res.data.token, config.cookieConfig);
-          _this.setUserInfo(res.data);
-          _this.$cookies.set("userInfo", res.data, config.cookieConfig);
-          _this.$message.success(res.msg);
-          // _this.$router.push({ name: "index" });
-          //fullPath为登录前的地址，登录成功后跳转到登录前的浏览地址
-          //fullPath可以从nuxt的asyncData的from参数中获取
-          //  let path = _self.fullPath || '/';
-          //  _self.$router.push({ path: path.indexOf('/verify') === 0 ? '/' : path });
-          let path = _this.$route.query.path || "/";
-          _this.$router.push({
-            path: _this.$route.query.path ? path : "/",
-          });
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+        });
     },
     //获取图形验证码CaptchaAppId
     CaptchaAppId() {
       let _this = this;
       // let timestamp = Date.parse(new Date());
       // let sign = md5(timestamp + _this.$store.state.secretKey);
-      _this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        className: "SendCode",
-        classMethod: "getCaptchaAppId",
-      }).then((res) => {
-        if (res.bol) {
-          _this.verificationCode(res.data);
-        } else {
-          _this.$message.error(res.msg);
-        }
-      });
+      _this.$axios
+        .notNeedlogin({
+          // sign: sign,
+          // timespan: timestamp,
+          className: "SendCode",
+          classMethod: "getCaptchaAppId",
+        })
+        .then((res) => {
+          if (res.bol) {
+            _this.verificationCode(res.data);
+          } else {
+            _this.$message.error(res.msg);
+          }
+        });
     },
     // 注册验证码
     registerCode() {
@@ -788,25 +776,27 @@ export default {
 
       // let timestamp = Date.parse(new Date());
       // let sign = md5(timestamp + _this.$store.state.secretKey);
-      _this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        data: {
-          phone: phone,
-          Ticket: ticket,
-          Randstr: randstr,
-        },
-        className: "SendCode",
-        classMethod: "sendCode",
-      }).then((res) => {
-        if (res.bol) {
-          _this.sendState = 2;
-          _this.countDownFn();
-        } else {
-          _this.sendState = 3;
-          _this.$message.error(res.msg);
-        }
-      });
+      _this.$axios
+        .notNeedlogin({
+          // sign: sign,
+          // timespan: timestamp,
+          data: {
+            phone: phone,
+            Ticket: ticket,
+            Randstr: randstr,
+          },
+          className: "SendCode",
+          classMethod: "sendCode",
+        })
+        .then((res) => {
+          if (res.bol) {
+            _this.sendState = 2;
+            _this.countDownFn();
+          } else {
+            _this.sendState = 3;
+            _this.$message.error(res.msg);
+          }
+        });
     },
     // 注册
     registerUser() {
@@ -818,30 +808,36 @@ export default {
           }
           // let timestamp = Date.parse(new Date());
           // let sign = md5(timestamp + _this.$store.state.secretKey);
-          _this.$axios.notNeedlogin({
-            // sign: sign,
-            // timespan: timestamp,
-            data: {
-              phone: _this.registerParams.mobile,
-              code: _this.registerParams.code,
-            },
-            className: "UserController",
-            classMethod: "register",
-          }).then((res) => {
-            if (res.bol) {
-              _this.setToken(res.data.token);
-              _this.$cookies.set("token", res.data.token, config.cookieConfig);
-              _this.setUserInfo(res.data);
-              _this.$cookies.set("userInfo", res.data, config.cookieConfig);
-              _this.$message.success(res.msg);
-              let path = _this.$route.query.path || "/";
-              _this.$router.push({
-                path: _this.$route.query.path ? path : "/",
-              });
-            } else {
-              _this.$message.error(res.msg);
-            }
-          });
+          _this.$axios
+            .notNeedlogin({
+              // sign: sign,
+              // timespan: timestamp,
+              data: {
+                phone: _this.registerParams.mobile,
+                code: _this.registerParams.code,
+              },
+              className: "UserController",
+              classMethod: "register",
+            })
+            .then((res) => {
+              if (res.bol) {
+                _this.setToken(res.data.token);
+                _this.$cookies.set(
+                  "token",
+                  res.data.token,
+                  config.cookieConfig
+                );
+                _this.setUserInfo(res.data);
+                _this.$cookies.set("userInfo", res.data, config.cookieConfig);
+                _this.$message.success(res.msg);
+                let path = _this.$route.query.path || "/";
+                _this.$router.push({
+                  path: _this.$route.query.path ? path : "/",
+                });
+              } else {
+                _this.$message.error(res.msg);
+              }
+            });
         }
       });
     },
@@ -865,27 +861,29 @@ export default {
         if (valid) {
           // let timestamp = Date.parse(new Date());
           // let sign = md5(timestamp + _this.$store.state.secretKey);
-          _this.$axios.notNeedlogin({
-            // sign: sign,
-            // timespan: timestamp,
-            data: {
-              phone: _this.findPwdFormData.mobile,
-              code: _this.findPwdFormData.code,
-              password: _this.findPwdFormData.pass_word,
-              token: _this.$store.state.token,
-            },
-            className: "UserController",
-            classMethod: "setPassword",
-          }).then((res) => {
-            if (res.bol) {
-              _this.$message.success("设置成功,请重新登录");
-              setTimeout(() => {
-                _this.loginType = 0;
-              }, 1000);
-            } else {
-              _this.$message.error(res.msg);
-            }
-          });
+          _this.$axios
+            .notNeedlogin({
+              // sign: sign,
+              // timespan: timestamp,
+              data: {
+                phone: _this.findPwdFormData.mobile,
+                code: _this.findPwdFormData.code,
+                password: _this.findPwdFormData.pass_word,
+                token: _this.$store.state.token,
+              },
+              className: "UserController",
+              classMethod: "setPassword",
+            })
+            .then((res) => {
+              if (res.bol) {
+                _this.$message.success("设置成功,请重新登录");
+                setTimeout(() => {
+                  _this.loginType = 0;
+                }, 1000);
+              } else {
+                _this.$message.error(res.msg);
+              }
+            });
         }
       });
     },

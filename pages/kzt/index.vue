@@ -23,7 +23,7 @@
                   <span>进入专题 ></span>
                 </dd>
               </dl>
-              <dl @click="details(1)">
+              <dl @click="details(2)">
                 <dt>
                   <img src="@/static/images/way/zt02.png" alt="" />
                 </dt>
@@ -32,7 +32,7 @@
                   <span>进入专题 ></span>
                 </dd>
               </dl>
-              <dl @click="details(1)">
+              <dl @click="details(3)">
                 <dt>
                   <img src="@/static/images/way/zt03.png" alt="" />
                 </dt>
@@ -82,7 +82,7 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link to="/kzt/zghx">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
                 </div>
@@ -108,7 +108,7 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link to="/kzt/zsh">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
                 </div>
@@ -134,7 +134,7 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link to="/kzt/zsh">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
                 </div>
@@ -155,10 +155,10 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link :to="'/kzt/' + 1">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
-                  <a class="right">立即订阅</a>
+                  <nuxt-link to="/dy/pay" class="right">立即订阅</nuxt-link>
                 </div>
               </dd>
             </dl>
@@ -177,10 +177,10 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link :to="'/kzt/' + 2">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
-                  <a class="right">立即订阅</a>
+                  <nuxt-link to="/dy/pay" class="right">立即订阅</nuxt-link>
                 </div>
               </dd>
             </dl>
@@ -199,10 +199,10 @@
 
                 <div class="dd-base">
                   <div class="left">
-                    <span>进入专题</span>
+                    <nuxt-link :to="'/kzt/' + 1">进入专题</nuxt-link>
                     <img src="@/static/images/arrows-left.png" alt="" />
                   </div>
-                  <a class="right">立即订阅</a>
+                  <nuxt-link to="/dy/pay" class="right">立即订阅</nuxt-link>
                 </div>
               </dd>
             </dl>
@@ -247,6 +247,18 @@ export default {
     // });
   },
   methods: {
+    //点击到详情
+    details(id) {
+      if (id !== 3) {
+        this.$router.push({
+          path: `/kzt/${id}`,
+        });
+      } else {
+        this.$router.push({
+          path: "/kzt/zghx",
+        });
+      }
+    },
     //点击tabs
     onTab(index) {
       // this.pageIndex = 1;

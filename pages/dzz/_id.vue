@@ -540,11 +540,7 @@ export default {
     SwiperSlide,
   },
   async asyncData({ $axios, store, params }) {
-    // let timestamp = Date.parse(new Date());
-    // let sign = md5(timestamp + store.state.secretKey);
     let res = await $axios.notNeedlogin({
-      // sign: sign,
-      // timespan: timestamp,
       className: "MagazineController",
       classMethod: "getMagazineDetails",
       data: {

@@ -123,7 +123,7 @@
           font-size: 14px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.45);
-          line-height: 13px;
+          line-height: 15px;
           padding-bottom: 14px;
           display: flex;
 
@@ -135,9 +135,9 @@
             vertical-align: bottom;
           }
 
-          .jointly {
-            width: 62px;
-          }
+        //  .jointly {
+        //     width: 62px;
+        //   }
 
           .restrict {
             margin: 0px 17px;
@@ -368,7 +368,7 @@
           .map {
             padding: 22px 20px 20px;
 
-            .bm-view {
+            .bm-view1 {
               width: 305px;
               height: 363px;
             }
@@ -382,7 +382,11 @@
               justify-content: space-between;
               align-items: center;
               margin-bottom: 22px;
-
+              &:hover{
+                .li-l{
+                  color: #fa6725;
+                }
+              }
               &:last-child {
                 margin-bottom: 0px;
               }
@@ -498,7 +502,7 @@
 
           /deep/.hot-recommend {
             height: auto;
-            padding: 30px 20px 14px 20px;
+            padding: 30px 20px;
 
             h3 {
               display: none !important;
@@ -507,6 +511,7 @@
 
             ul {
               margin-top: 0px;
+              padding: 0px;
             }
           }
         }

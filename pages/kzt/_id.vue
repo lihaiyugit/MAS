@@ -884,6 +884,7 @@ export default {
     },
     //点击站内热词
     onHotWord(val,id) {
+           this.$store.commit("setSubTabId", -1);
       this.$router.push({
         path: "/search",
         query: { keyword: val, hotWordId: id },

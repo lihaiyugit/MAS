@@ -47,81 +47,6 @@
           <img class="left01" src="@/static/images/way/left01.png" alt="" />
           <img class="left1" src="@/static/images/way/left1.png" alt="" />
         </div>
-        <!-- <div class="type-main">
-          <dl class="active">
-            <div class="mas-tip">推荐订阅</div>
-            <dt>
-              <h5>学案例</h5>
-              <div class="price-box">
-                <span class="icon">¥</span>
-                <span class="price">48.00</span>
-                <span class="icon">/月</span>
-              </div>
-            </dt>
-            <dd>
-              <p>学案例栏目所有付费文章免费阅读</p>
-              <img
-                class="mas-select"
-                src="../../static/images/mas-select.png"
-                alt=""
-              />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <h5>看原创</h5>
-              <div class="price-box">
-                <span class="icon">¥</span>
-                <span class="price">48.00</span>
-                <span class="icon">/月</span>
-              </div>
-            </dt>
-            <dd>
-              <p>MAS全站付费内容免费阅读</p>
-              <img
-                class="mas-select"
-                src="../../static/images/mas-select.png"
-                alt=""
-              />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <h5>见大咖</h5>
-              <div class="price-box">
-                <span class="icon">¥</span>
-                <span class="price">48.00</span>
-                <span class="icon">/月</span>
-              </div>
-            </dt>
-            <dd>
-              <p>见大咖栏目所有付费文章免费阅读</p>
-              <img
-                class="mas-select"
-                src="../../static/images/mas-select.png"
-                alt=""
-              />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <h5>淘资讯</h5>
-              <div class="price-box">
-                <span class="icon">¥</span>
-                <span class="price">48.00</span>
-                <span class="icon">/月</span>
-              </div>
-            </dt>
-            <dd>
-              <p>淘资讯栏目所有付费文章免费阅读</p>
-              <img
-                class="mas-select"
-                src="../../static/images/mas-select.png"
-                alt=""
-              />
-            </dd>
-          </dl>
-        </div> -->
         <swiper :options="swiperOption" ref="mySwiper" class="type-main">
           <swiper-slide>
             <dl :class="activeIndex === 0 ? 'active' : ''" @click="activeFn(0)">
@@ -204,7 +129,7 @@
               </dd>
             </dl>
           </swiper-slide>
-            <swiper-slide>
+          <swiper-slide>
             <dl :class="activeIndex == 4 ? 'active' : ''" @click="activeFn(4)">
               <dt>
                 <h5>淘资讯</h5>
@@ -231,7 +156,7 @@
         </div>
       </div>
       <div class="mas-advert">
-        <a href=""></a>
+        <div @click="isShowSon = true" class="vip-popup"></div>
       </div>
       <div class="dy-main">
         <div class="title">订阅须知</div>
@@ -385,6 +310,8 @@
         </div>
       </div>
     </div>
+    <!-- 开通会员弹框 -->
+    <VipPopup :isVisible="isShowSon" v-if="isShowSon" @close="closeDialog" />
   </div>
 </template>
 <script>
@@ -393,7 +320,7 @@ export default {
   scrollToTop: true,
   data() {
     return {
-      activeIndex:0,//默认选中值
+      activeIndex: 0, //默认选中值
       swiperOption: {
         slidesPerView: 4, // 设置slider容器能够同时显示的slides数量(轮播模式)
         spaceBetween: 24, // 在slide之间设置距离
@@ -405,6 +332,7 @@ export default {
           prevEl: ".btn-left", //上一张标签类名可以自定义
         },
       },
+      isShowSon: false, //是否显示开通会员弹框子组件
     };
   },
   components: {
@@ -423,9 +351,13 @@ export default {
       });
     },
     //点击每一种类型
-    activeFn(val){
-      this.activeIndex=val;
-    }
+    activeFn(val) {
+      this.activeIndex = val;
+    },
+    // 关闭开通会员弹窗
+    closeDialog(val) {
+      this.isShowSon = val;
+    },
   },
 };
 </script>

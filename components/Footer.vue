@@ -39,8 +39,8 @@
       <div class="footer-base">
         <div class="footerB">
           <p>
-            <a href="" class="flsm">法律声明</a
-            ><a href="" class="flsm">隐私政策</a
+            <nuxt-link to="/flsm" class="flsm">法律声明</nuxt-link
+            ><nuxt-link to="/yszc" class="flsm">隐私政策</nuxt-link
             >北京元年诺亚舟咨询有限公司版权所有<a
               style="margin-left: 10px"
               class="record flsm"

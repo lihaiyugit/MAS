@@ -19,7 +19,7 @@
                 {{ item.mas_article_type_name }}
               </li>
             </ul>
-            <div class="content-container-list" v-if="listShowType==1">
+            <div class="content-container-list" v-if="listShowType == 1">
               <dl
                 v-for="(item, index) in listData"
                 :key="index"
@@ -60,7 +60,7 @@
               </dl>
               <div class="more-btn" v-show="!finished">查看更多</div>
             </div>
-            <div class="no-data-box" v-if="listShowType==2">
+            <div class="no-data-box" v-if="listShowType == 2">
               <img src="@/static/images/no-data.png" alt="" />
               <div class="tip">目前还没有内容哦～</div>
             </div>
@@ -100,7 +100,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
         page: 1,
         limit: 6,
       },
@@ -121,6 +121,13 @@ export default {
       };
     }
   },
+  beforeRouteLeave(to, from, next) {
+    //取消二级菜单高亮
+    if (to.name == "activity-id" || to.name == "activity") {
+      this.$store.commit("setSubTabId", "");
+    }
+    next();
+  },
   mounted() {
     // scroll事件并监听
     window.addEventListener("scroll", this.tzxScroll);
@@ -136,7 +143,10 @@ export default {
         document.body.scrollTop; //滚动高度
       //"文档高度"document.body.offsetHeight 327底部高度
       //判断是否滚动到底部
-      if (scrollTop + window.innerHeight + 327*1.5 >= document.body.offsetHeight) {
+      if (
+        scrollTop + window.innerHeight + 327 * 1.5 >=
+        document.body.offsetHeight
+      ) {
         //327 表示距离底部多少的距离的开始触发loadmore效果
         if (!this.showlaoding && !this.finished) {
           //防止多次加载
@@ -148,8 +158,8 @@ export default {
     //点击tabs类型
     onTab(index, typeId) {
       this.pageIndex = 1;
-      this.listShowType=1;
-      this.finished=false;
+      this.listShowType = 1;
+      this.finished = false;
       this.listData = [];
       this.moretype = "list";
       this.tabActive = index;
@@ -173,10 +183,10 @@ export default {
     },
     //公共请求接口
     async commonData(pageIndex) {
-    this.showlaoding = true;
+      this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
-          MenuId: this.$store.state.subTabId,
+          MenuId: this.$route.query.menuId,
           page: pageIndex,
           limit: this.pageSize,
           articleTypeId: this.articleTypeId,
@@ -189,7 +199,7 @@ export default {
         let articleArr = res.data.articleList;
         this.total = res.data.articleCount;
         this.showlaoding = false;
-         this.listShowType = this.total ? 1 : 2;
+        this.listShowType = this.total ? 1 : 2;
         if (this.total / this.pageSize > this.pageIndex) {
           this.pageIndex = pageIndex;
         } else {
@@ -208,5 +218,4 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/static/css/page-css/listCommon.less";
-
 </style>

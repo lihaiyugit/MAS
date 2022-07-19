@@ -130,14 +130,14 @@
           <!-- <router-link target="_blank" :to="{path:'/home',query:{id:'1'}}"> -->
           <nuxt-link
             target="_blank"
-            :to="{ path: `/login?path=${this.$router.currentRoute.fullPath}` }"
+            :to="{ path: `/login?path=${$router.currentRoute.fullPath}` }"
             class="header-info-entry-login"
             >登录</nuxt-link
           >
           <span class="header-info-entry-separator">|</span>
           <nuxt-link
             target="_blank"
-            :to="{ path: `/login?path=${this.$router.currentRoute.fullPath}` }"
+            :to="{ path: `/login?path=${$router.currentRoute.fullPath}` }"
             class="header-info-entry-register"
             >注册</nuxt-link
           >
@@ -231,6 +231,7 @@ export default {
   mounted() {
     // 开启滚动监听
     window.addEventListener("scroll", this.handleScroll);
+    console.log(this.$store.state.token ,this.$store.state.token)
     // console.log(this.$router.currentRoute.fullPath,'this.$router.currentRoute.fullPath')
   },
 
@@ -306,7 +307,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 300000;
+  z-index: 1000;
   transition: all 0.5s ease;
   animation: fadeInDown 0.5s both 0.2s;
 }

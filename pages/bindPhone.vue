@@ -63,8 +63,11 @@
           </el-form>
           <div class="operation register-top">
             <el-checkbox v-model="registerParams.agreement"
-              >我已阅读并同意<span class="agreement"
-                >《服务协议》</span
+              >我已阅读并同意<a
+                target="_blank"
+                href="/protocol"
+                class="agreement"
+                >《服务协议》</a
               ></el-checkbox
             >
           </div>
@@ -177,18 +180,20 @@ export default {
       let _this = this;
       // let timestamp = Date.parse(new Date());
       // let sign = md5(timestamp + _this.$store.state.secretKey);
-      _this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        className: "SendCode",
-        classMethod: "getCaptchaAppId",
-      }).then((res) => {
-        if (res.bol) {
-          _this.verificationCode(res.data);
-        } else {
-          _this.$message.error(res.msg);
-        }
-      });
+      _this.$axios
+        .notNeedlogin({
+          // sign: sign,
+          // timespan: timestamp,
+          className: "SendCode",
+          classMethod: "getCaptchaAppId",
+        })
+        .then((res) => {
+          if (res.bol) {
+            _this.verificationCode(res.data);
+          } else {
+            _this.$message.error(res.msg);
+          }
+        });
     },
 
     //手机号注册腾讯滑块验证
@@ -217,25 +222,27 @@ export default {
       _this.sendState = 1;
       // let timestamp = Date.parse(new Date());
       // let sign = md5(timestamp + _this.$store.state.secretKey);
-      _this.$axios.notNeedlogin({
-        // sign: sign,
-        // timespan: timestamp,
-        data: {
-          phone: _this.registerParams.mobile,
-          Ticket: ticket,
-          Randstr: randstr,
-        },
-        className: "SendCode",
-        classMethod: "sendCode",
-      }).then((res) => {
-        if (res.bol) {
-          _this.sendState = 2;
-          _this.countDownFn();
-        } else {
-          _this.sendState = 3;
-          _this.$message.error(res.msg);
-        }
-      });
+      _this.$axios
+        .notNeedlogin({
+          // sign: sign,
+          // timespan: timestamp,
+          data: {
+            phone: _this.registerParams.mobile,
+            Ticket: ticket,
+            Randstr: randstr,
+          },
+          className: "SendCode",
+          classMethod: "sendCode",
+        })
+        .then((res) => {
+          if (res.bol) {
+            _this.sendState = 2;
+            _this.countDownFn();
+          } else {
+            _this.sendState = 3;
+            _this.$message.error(res.msg);
+          }
+        });
     },
     // 注册
     registerUser() {
@@ -247,39 +254,45 @@ export default {
           }
           // let timestamp = Date.parse(new Date());
           // let sign = md5(timestamp + _this.$store.state.secretKey);
-          _this.$axios.notNeedlogin({
-            // sign: sign,
-            // timespan: timestamp,
-            data: {
-              phone: _this.registerParams.mobile,
-              code: _this.registerParams.code,
-              wxCode: _this.$route.query.wxCode,
-            },
-            className: "UserController",
-            classMethod: "bindingPhone",
-          }).then((res) => {
-            console.log(res, "scrollToTop: true");
-            if (res.bol) {
-              _this.bindType = 1;
-              _this.setToken(res.data.token);
-              _this.$cookies.set("token", res.data.token, config.cookieConfig);
-              _this.setUserInfo(res.data);
-              _this.$cookies.set("userInfo", res.data, config.cookieConfig);
-              _this.$message.success(res.msg);
-              setTimeout(() => {
-                _this.bindType = 2;
-              }, 500);
-              setTimeout(() => {
-                // _this.$router.push("/");
-                let path = _this.$route.query.path || "/";
-                _this.$router.push({
-                  path: _this.$route.query.path ? path : "/",
-                });
-              }, 1000);
-            } else {
-              _this.$message.error(res.msg);
-            }
-          });
+          _this.$axios
+            .notNeedlogin({
+              // sign: sign,
+              // timespan: timestamp,
+              data: {
+                phone: _this.registerParams.mobile,
+                code: _this.registerParams.code,
+                wxCode: _this.$route.query.wxCode,
+              },
+              className: "UserController",
+              classMethod: "bindingPhone",
+            })
+            .then((res) => {
+              console.log(res, "scrollToTop: true");
+              if (res.bol) {
+                _this.bindType = 1;
+                _this.setToken(res.data.token);
+                _this.$cookies.set(
+                  "token",
+                  res.data.token,
+                  config.cookieConfig
+                );
+                _this.setUserInfo(res.data);
+                _this.$cookies.set("userInfo", res.data, config.cookieConfig);
+                _this.$message.success(res.msg);
+                setTimeout(() => {
+                  _this.bindType = 2;
+                }, 500);
+                setTimeout(() => {
+                  // _this.$router.push("/");
+                  let path = _this.$route.query.path || "/";
+                  _this.$router.push({
+                    path: _this.$route.query.path ? path : "/",
+                  });
+                }, 1000);
+              } else {
+                _this.$message.error(res.msg);
+              }
+            });
         } else {
         }
       });

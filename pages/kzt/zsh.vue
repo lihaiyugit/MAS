@@ -45,17 +45,16 @@
               <div class="introduce_main_main_l">
                 <h2>中国石油化工集团有限公司 (简称中国石化)</h2>
                 <p class="english">Sinopec Group</p>
-                <p class="info">
-                  中国石油化工集团有限公司（以下简称中国化学）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，中国化学是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
-                </p>
-                <div class="video-box">
-                  <img src="@/static/images/zsh-img/zsh-in-l.png" alt="" />
+                <div class="introduce-info">
+                  <p>
+                    中国石油化工集团有限公司（以下简称中国化学）的前身是成立于1983年7月的中国石油化工总公司。1998年7月，按照党中央关于实施石油石化行业战略性重组的部署，在原中国石油化工总公司基础上重组成立中国石油化工集团公司，2018年8月，经公司制改制为中国石油化工集团有限公司。目前，中国化学是中国最大的成品油和石化产品供应商、第二大油气生产商，是世界第一大炼油公司、第二大化工公司，加油站总数位居世界第二，在2020年《财富》世界500强企业中排名第2位。
+                  </p>
+                  <p>
+                    拥抱数字化时代变革，树牢大财务观，倡导开放协同共享，统筹财务信息化系统建设，在融合融通中深化智慧智能、灵活高效、深入前瞻的数智化财务应用，在创新创效中打通数据价值链条，激活数据要素潜能，释放数据金矿资源。
+                  </p>
                 </div>
               </div>
               <div class="introduce_main_main_r">
-                <p>
-                  拥抱数字化时代变革，树牢大财务观，倡导开放协同共享，统筹财务信息化系统建设，在融合融通中深化智慧智能、灵活高效、深入前瞻的数智化财务应用，在创新创效中打通数据价值链条，激活数据要素潜能，释放数据金矿资源。
-                </p>
                 <img src="@/static/images/zsh-img/zsh-in-r.png" alt="" />
               </div>
             </div>
@@ -434,9 +433,22 @@ export default {
   text-align: left;
   color: #434447;
   line-height: 18px;
-  padding: 17px 0px 40px 0px;
+  padding: 17px 0px 20px 0px;
 }
-
+.introduce_main_main_l .introduce-info {
+  width: 576px;
+  height: 236px;
+  background-color: #fafafa;
+  padding: 56px 35px 56px 28px;
+}
+.introduce_main_main_l .introduce-info p{
+  font-size: 14px;
+font-weight: 400;
+text-align: justify;
+color: #2a2a39;
+line-height: 24px;
+padding-bottom: 20px;
+}
 .introduce_main_main_l .info {
   width: 100%;
   font-size: 14px;
@@ -476,8 +488,8 @@ export default {
 
 .introduce_main_main_r img {
   width: 100%;
-  height: 345px;
-  margin-top: 54px;
+  height: 350px;
+  margin-top: 7px;
 }
 
 .related_info {

@@ -30,10 +30,7 @@
                 </div>
                 <div class="tip-text">相关信息</div>
               </div>
-              <div
-                class="word-explain"
-                v-show="hotWordId != undefined"
-              >
+              <div class="word-explain" v-show="hotWordId != undefined">
                 <h5>{{ describe.mas_tag_name }}</h5>
                 <p>
                   {{ describe.mas_tag_describe }}
@@ -140,8 +137,8 @@
               <h2>杂志</h2>
               <div class="module-main">
                 <div class="top-line"></div>
-                <nuxt-link
-                  :to="'/dzz/' + magazineLeft.mas_magazine_id"
+                <a
+                  @click="goMagezine(magazineLeft.mas_magazine_id)"
                   class="magazine"
                 >
                   <div class="magazine-img">
@@ -152,7 +149,7 @@
                     {{ magazineLeft.mas_magazine_title_main }}
                   </div>
                   <div class="contribute">马上阅读</div>
-                </nuxt-link>
+                </a>
               </div>
             </div>
           </div>
@@ -264,7 +261,7 @@ export default {
         //327 表示距离底部多少的距离的开始触发loadmore效果
         if (!this.showlaoding && !this.finished) {
           //防止多次加载
-          this.moretype = "list";
+
           this.moreFn();
         }
       }
@@ -290,6 +287,7 @@ export default {
     //公共请求接口
     async commonData(pageIndex) {
       this.showlaoding = true;
+      this.moretype = "list";
       let res = await this.$axios.notNeedlogin({
         data: {
           page: pageIndex,
@@ -318,6 +316,8 @@ export default {
     },
     //点击每个热词
     onItem(val, id, index) {
+      this.$store.commit("setSubTabId", -1);
+      console.log(this.$store.state.subTabId, val, id, index, "---");
       this.current = index;
       this.searchValue = ""; //搜索内容
       this.hotWordId = "";
@@ -328,8 +328,16 @@ export default {
     },
     //点击跳转到文章详情
     goDetail(url, id) {
+      this.$store.commit("setSubTabId", url);
       this.$router.push({
         path: `/${url}/${id}`,
+      });
+    },
+    //点击跳转到杂志详情
+    goMagezine(id) {
+      this.$store.commit("setSubTabId", "dzz");
+      this.$router.push({
+        path: `/dzz/${id}`,
       });
     },
   },
@@ -394,7 +402,7 @@ export default {
           90deg,
           #ff4e5c 0%,
           #ff9261 82%,
-          #fa6725 100%
+          #fe9062 100%
         );
         border-radius: 0px 4px 4px 0px;
         position: absolute;

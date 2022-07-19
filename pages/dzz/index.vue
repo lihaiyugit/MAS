@@ -21,7 +21,7 @@
             <nuxt-link
               :to="{
                 path: `${routerUrl}/list`,
-                query: { typeId: item.mas_magazinetype_id },
+                query: { menuId:$route.query.menuId,typeId: item.mas_magazinetype_id },
               }"
               class="more-btn"
               >查看更多
@@ -69,7 +69,7 @@ export default {
   async asyncData({ $axios, route, store, env, params, query, error }) {
     let res = await $axios.notNeedlogin({
       data: {
-        MenuId: store.state.subTabId,
+        MenuId: query.menuId,
       },
       className: "MagazineController",
       classMethod: "magazineList",
@@ -83,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route.path)
+    // console.log(this.$route.path)
   },
   methods: {
     //点击到详情

@@ -48,7 +48,8 @@ export default {
       className: "MagazineController",
       classMethod: "magazineMore",
       data: {
-        MenuId: store.state.subTabId,
+        // MenuId: store.state.subTabId,
+        MenuId:query.menuId,
         magazineTypeId: parseInt(query.typeId),
       },
     });

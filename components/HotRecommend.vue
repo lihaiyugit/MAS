@@ -43,6 +43,7 @@ export default {
   methods: {
     //跳转到文章详情
     goDetail(url,id) {
+       this.$store.commit("setSubTabId", url);
       this.$router.push({
         path: `/${url}/${id}`,
       });
@@ -52,7 +53,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .hot-recommend {
-  width: 346px;
+  // width: 346px;
   height: 300px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.05);

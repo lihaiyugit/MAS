@@ -114,12 +114,12 @@
               <dl
                 v-for="(item, index) in recommend"
                 :key="index"
-                @click="zzDetails(item.mas_magazine_id)"
+                @click="zzDetails(item.mas_book_id)"
               >
                 <dt>
-                  <img :src="item.mas_magazine_master_img" alt="" />
+                  <img :src="item.mas_book_img" alt="" />
                 </dt>
-                <dd>{{ item.mas_magazine_title_main }}</dd>
+                <dd>{{ item.mas_book_name }}</dd>
               </dl>
               <!-- <dl>
                 <dt>
@@ -493,6 +493,7 @@ export default {
       bookData: "", //书详情数据
       bookComment: [], //书评论数据
       recommend: [], //书推荐
+      meau:{},//菜单信息
     };
   },
   components: {
@@ -515,7 +516,8 @@ export default {
       return {
         bookData: res.data.bookData,
         bookComment: res.data.bookComment,
-        recommend: res.data.recommend,
+        recommend: res.data.recommend.list,
+        meau: res.data.recommend.menu,
       };
     }
   },
@@ -568,6 +570,12 @@ export default {
         }
       }
     },
+    //书详情
+    zzDetails(id){
+       this.$router.push({
+        path: `/${this.meau.mas_menu_url}/${id}`,
+      });
+    }
   },
 };
 </script>
@@ -850,6 +858,7 @@ export default {
           dl {
             width: 100%;
             border-bottom: 1px dashed #e7e7e7;
+            cursor: pointer;
             &:nth-last-child(1) {
               border-bottom: none;
             }

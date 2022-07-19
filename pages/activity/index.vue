@@ -1,7 +1,7 @@
 <template>
   <div class="activity-container banxin">
     <div class="banner">
-      <!-- <img src="../../static/images/hd-banner.png" alt="" /> -->
+      <!-- <img src="@/static/images/hd-banner.png" alt="" /> -->
       <img :src="bannerArr[0].mas_banner_img" alt="" />
     </div>
     <div class="tabbar">
@@ -70,10 +70,16 @@
             <div class="left state-one" v-else>
               {{ item.mas_activity_status }}
             </div>
-            <div class="right">
+            <div class="right" v-if="item.mas_activity_address_type==0">
               <img class="time" src="@/static/images/time.png" alt="" />
               <span>{{ item.mas_activity_starttime }}</span>
-              <img class="online" src="../../static/images/online.png" alt="" />
+              <img class="online" src="@/static/images/online.png" alt="" />
+              <span>线上</span>
+            </div>
+            <div class="right" v-else>
+              <img class="time" src="@/static/images/time.png" alt="" />
+              <span>{{ item.mas_activity_starttime }}</span>
+              <img class="map" src="@/static/images/map.png" alt="" />
               <span>{{ item.mas_activity_address_type }}</span>
             </div>
           </div>
@@ -95,25 +101,8 @@
             </div>
           </div>
         </dd>
-      </dl>
+      </dl>-->
 
-      <dl @click="details(4)">
-        <dt>
-          <img src="../../static/images/hd-rw.png" alt="" />
-        </dt>
-        <dd>
-          <h5>数字化企业与管理会计体系转型研讨会</h5>
-          <div class="dd-base">
-            <div class="left state-two">已结束</div>
-            <div class="right">
-              <img class="time" src="@/static/images/time.png" alt="" />
-              <span>2022-03-14</span>
-              <img class="map" src="../../static/images/map.png" alt="" />
-              <span>北京</span>
-            </div>
-          </div>
-        </dd>
-      </dl> -->
     </div>
     <button class="more" v-show="!finished">查看更多</button>
   </div>

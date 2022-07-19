@@ -200,7 +200,7 @@
                 1.如何在国内和国外权威期刊发表会计学术文章；<br />
                 2.管理会计文章写作要领和技巧。
               </p>
-              <button class="default-btn">学习课程</button>
+              <button class="default-btn" @click="videoPlay">学习课程</button>
             </div>
           </div>
           <div class="frame create-main-right">
@@ -689,11 +689,11 @@ export default {
   }
 }
 .video-visible-box {
-  width: 700px;
+  width: 100%;
   height: 400px;
   position: relative;
   video {
-    width: 96%;
+    width: 100%;
     height: 400px;
     background: radial-gradient(rgba(0, 0, 0, 0), #000000);
     border-radius: 6px;
